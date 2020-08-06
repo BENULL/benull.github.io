@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hadoop,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="BENULL" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="集群环境 Hadoop版本为2.7.4 JDK版本1.8.0_144 安装了三台虚拟机分别设定名称和IP如下      主机名称 IP地址     master 192.168.1.15   slave01 192.168.1.16   slave02 192.168.1.17       服务器上安装hadoop的目录结构为/home/用户名/hadoop software: 存放的是安装的软件">
+<meta name="keywords" content="Hadoop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hadoop2.7.4分布式集群安装配置文件">
+<meta property="og:url" content="http://yoursite.com/2017/11/02/Hadoop2.7.4分布式集群安装配置文件/index.html">
+<meta property="og:site_name" content="BENULL">
+<meta property="og:description" content="集群环境 Hadoop版本为2.7.4 JDK版本1.8.0_144 安装了三台虚拟机分别设定名称和IP如下      主机名称 IP地址     master 192.168.1.15   slave01 192.168.1.16   slave02 192.168.1.17       服务器上安装hadoop的目录结构为/home/用户名/hadoop software: 存放的是安装的软件">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-04-18T05:47:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hadoop2.7.4分布式集群安装配置文件">
+<meta name="twitter:description" content="集群环境 Hadoop版本为2.7.4 JDK版本1.8.0_144 安装了三台虚拟机分别设定名称和IP如下      主机名称 IP地址     master 192.168.1.15   slave01 192.168.1.16   slave02 192.168.1.17       服务器上安装hadoop的目录结构为/home/用户名/hadoop software: 存放的是安装的软件">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/11/02/Hadoop2.7.4分布式集群安装配置文件/">
+
+
+
+
+
+  <title>Hadoop2.7.4分布式集群安装配置文件 | BENULL</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">BENULL</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">tomorrow is another day</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/02/Hadoop2.7.4分布式集群安装配置文件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="BENULL">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BENULL">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Hadoop2.7.4分布式集群安装配置文件</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-02T18:16:29+08:00">
+                2017-11-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/大数据/" itemprop="url" rel="index">
+                    <span itemprop="name">大数据</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,506字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="集群环境"><a href="#集群环境" class="headerlink" title="集群环境"></a><strong>集群环境</strong></h1><ul>
+<li>Hadoop版本为2.7.4</li>
+<li>JDK版本1.8.0_144</li>
+<li>安装了三台虚拟机分别设定名称和IP如下</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>主机名称</th>
+<th style="text-align:center">IP地址</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>master</td>
+<td style="text-align:center">192.168.1.15</td>
+</tr>
+<tr>
+<td>slave01</td>
+<td style="text-align:center">192.168.1.16</td>
+</tr>
+<tr>
+<td>slave02</td>
+<td style="text-align:center">192.168.1.17</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<ul>
+<li><p>服务器上安装hadoop的目录结构为<br>/home/<code>用户名</code>/hadoop<br> software: 存放的是安装的软件包<br> app : 存放的是所有软件的安装目录<br> hadoop2.7.4就在app目录下， 这里我的机器的用户都是null</p>
+</li>
+<li><p>hadoop主要配置文件有core-site.xml,hdfs-site.xml,mapred-site.xml，yarn-site.xml<br>可以浏览官网查看详细的默认的配置，链接如下<br><a href="http://hadoop.apache.org/docs/r2.7.4/hadoop-project-dist/hadoop-common/core-default.xml" target="_blank" rel="noopener">core-default.xml</a><br><a href="http://hadoop.apache.org/docs/r2.7.4/hadoop-project-dist/hadoop-hdfs/hdfs-default.xml" target="_blank" rel="noopener">hdfs-default.xml</a><br><a href="http://hadoop.apache.org/docs/r2.7.4/hadoop-mapreduce-client/hadoop-mapreduce-client-core/mapred-default.xml" target="_blank" rel="noopener">mapred-default.xml</a><br><a href="http://hadoop.apache.org/docs/r2.7.4/hadoop-yarn/hadoop-yarn-common/yarn-default.xml" target="_blank" rel="noopener">yarn-default.xml</a><br>也可以通过下载解压hadoop后在目录下搜索*default.xml,找到这些默认配置</p>
+</li>
+</ul>
+<h1 id="安装Hadoop"><a href="#安装Hadoop" class="headerlink" title="安装Hadoop"></a><strong>安装Hadoop</strong></h1><h2 id="下载hadoop并解压到app目录下"><a href="#下载hadoop并解压到app目录下" class="headerlink" title="下载hadoop并解压到app目录下"></a>下载hadoop并解压到app目录下</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf hadoop-2.7.4.tar.gz -C ~/hadoop/app</span><br></pre></td></tr></table></figure>
+<h2 id="配置Hadoop-环境变量"><a href="#配置Hadoop-环境变量" class="headerlink" title="配置Hadoop 环境变量"></a>配置Hadoop 环境变量</h2><p><code>vim /etc/profile</code>添加<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># Hadoop Env</span><br><span class="line">export HADOOP_HOME=/home/null/hadoop/app/hadoop-2.7.4</span><br><span class="line">export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin</span><br></pre></td></tr></table></figure></p>
+<h2 id="修改-HADOOP-HOME-etc-hadoop下的配置文件"><a href="#修改-HADOOP-HOME-etc-hadoop下的配置文件" class="headerlink" title="修改$HADOOP_HOME/etc/hadoop下的配置文件"></a>修改$HADOOP_HOME/etc/hadoop下的配置文件</h2><p>$HADOOP_HOME就是hadoop安装目录位置<br>这里只是将分布式集群的一些必要的简化了的配置罗列出来了，更个性化的配置还是要参照官方文档进行设置</p>
+<h3 id="修改hadoop-env-sh文件"><a href="#修改hadoop-env-sh文件" class="headerlink" title="修改hadoop-env.sh文件"></a>修改hadoop-env.sh文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//修改JAVA_HOME路径为jdk的安装路径  </span><br><span class="line">export JAVA_HOME=/home/null/hadoop/app/jdk1.8.0_144</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="修改yarn-env-sh文件"><a href="#修改yarn-env-sh文件" class="headerlink" title="修改yarn-env.sh文件"></a>修改yarn-env.sh文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//修改JAVA_HOME路径为jdk的安装路径  </span><br><span class="line">export JAVA_HOME=/home/null/hadoop/app/jdk1.8.0_144</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="修改slaves文件"><a href="#修改slaves文件" class="headerlink" title="修改slaves文件"></a>修改slaves文件</h3><p> master 既作为 NameNode 也作为 DataNode<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">master  </span><br><span class="line">slave01  </span><br><span class="line">slave02</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="修改core-site-xml文件"><a href="#修改core-site-xml文件" class="headerlink" title="修改core-site.xml文件"></a>修改core-site.xml文件</h3><p>该文件可以覆盖一部分用于控制Hadoop核心的默认的关键配置</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:left">默认值</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fs.defaultFS</td>
+<td style="text-align:left">file:///</td>
+<td>namenode RPC交互端口</td>
+</tr>
+<tr>
+<td>fs.default.name</td>
+<td style="text-align:left">file:///</td>
+<td>被弃用，是用fs.defaultFS代替</td>
+</tr>
+<tr>
+<td>hadoop.tmp.dir</td>
+<td style="text-align:left">/tmp/hadoop-${user.name}</td>
+<td>其他临时目录的根地址</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>先在$HADOOP_HOME目录下手动创建tmp文件夹，等下指定hadoop.tmp.dir为它，hadoop.tmp.dir是hadoop文件系统依赖的基础配置，很多路径都依赖它。hdfs-site-xml中默认配置namenode 和datanode的存放位置的地址就是基于此。 LINUX 系统中，在服务重启后，/tmp 下的目录被清空，所以要转到持久化的地址<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;fs.defaultFS&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;hdfs://master:9000&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;hadoop.tmp.dir&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;/home/null/hadoop/app/tmp&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="修改hdfs-site-xml文件"><a href="#修改hdfs-site-xml文件" class="headerlink" title="修改hdfs-site.xml文件"></a>修改hdfs-site.xml文件</h3><p>通过该配置文件可以修改有关的HDFS的默认配置</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:left">默认值</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dfs.replication</td>
+<td style="text-align:left">3</td>
+<td>决定着系统里面的文件块的数据备份个数</td>
+</tr>
+<tr>
+<td>dfs.namenode.secondary.http-address</td>
+<td style="text-align:left">0.0.0.0:50090</td>
+<td>secondary namenode服务地址和端口</td>
+</tr>
+<tr>
+<td>dfs.namenode.name.dir</td>
+<td style="text-align:left">file://${hadoop.tmp.dir}/dfs/name</td>
+<td>决定namenode的fsimage文件在本地文件系统的存储位置，如果是以逗号分割的目录列表，将会复制到所有目录中，冗余</td>
+</tr>
+<tr>
+<td>dfs.datanode.data.dir</td>
+<td style="text-align:left">file://${hadoop.tmp.dir}/dfs/data</td>
+<td>决定datanode的数据块在本地文件系统的存储位置，如果目录不存在将被创建如果权限允许的话</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">	&lt;property&gt;    </span><br><span class="line">        &lt;name&gt;dfs.namenode.secondary.http-address&lt;/name&gt;    </span><br><span class="line">        &lt;value&gt;master:50090&lt;/value&gt;    </span><br><span class="line">	&lt;/property&gt; </span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.replication&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;3&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+<p>副本数目不能大于datanode数目<br>在core-site.中配置了hadoop.tmp.dir，这里保持默认即可</p>
+<hr>
+<h3 id="修改mapred-site-xml文件"><a href="#修改mapred-site-xml文件" class="headerlink" title="修改mapred-site.xml文件"></a>修改mapred-site.xml文件</h3><p>该文件中的属性可以覆盖用于控制MapReduce任务执行的默认属性值</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:left">默认值</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mapreduce.framework.name</td>
+<td style="text-align:left">local</td>
+<td>MapReduce 作业的执行框架</td>
+</tr>
+<tr>
+<td>mapreduce.jobhistory.address</td>
+<td style="text-align:left">0.0.0.0:10020</td>
+<td>MapReduce的历史服务器通信地址</td>
+</tr>
+<tr>
+<td>mapreduce.jobhistory.webapp.address</td>
+<td style="text-align:left">0.0.0.0:19888</td>
+<td>MapReduce的历史服务器web界面地址</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;mapreduce.framework.name&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;yarn&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+<p>默认情况下，Hadoop历史服务器是没有启动的，我们可以通过下面的命令来启动Hadoop历史服务器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sbin/mr-jobhistory-daemon.sh  start historyserver</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="修改yarn-site-xml文件"><a href="#修改yarn-site-xml文件" class="headerlink" title="修改yarn-site.xml文件"></a>修改yarn-site.xml文件</h3><p>该文件中的配置项可以覆盖用于控制YARN组件中的默认属性值</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:left">默认值</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>yarn.nodemanager.aux-services</td>
+<td style="text-align:left">无</td>
+<td>NodeManager上运行的附属服务。需配置成mapreduce_shuffle，才可运行MapReduce程序</td>
+</tr>
+<tr>
+<td>yarn.resourcemanager.hostname</td>
+<td style="text-align:left">0.0.0.0</td>
+<td>ResourceManager的主机名</td>
+</tr>
+<tr>
+<td>yarn.resourcemanager.address</td>
+<td style="text-align:left">${yarn.resourcemanager.hostname}:8032</td>
+<td>ResourceManager 对客户端暴露的地址。客户端通过该地址向RM提交应用程序，杀死应用程序等</td>
+</tr>
+<tr>
+<td>yarn.resourcemanager.scheduler.address</td>
+<td style="text-align:left">${yarn.resourcemanager.hostname}:8030</td>
+<td>ResourceManager 对ApplicationMaster暴露的访问地址。ApplicationMaster通过该地址向RM申请资源、释放资源等</td>
+</tr>
+<tr>
+<td>yarn.resourcemanager.webapp.address</td>
+<td style="text-align:left">${yarn.resourcemanager.hostname}:8088</td>
+<td>ResourceManager对外web ui地址。用户可通过该地址在浏览器中查看集群各类信息</td>
+</tr>
+<tr>
+<td>yarn.nodemanager.resource.memory-mb</td>
+<td style="text-align:left">8192</td>
+<td>NodeManager总的可用物理内存。注意，该参数是不可修改的，一旦设置，整个运行过程中不可动态修改。另外，该参数的默认值是8192MB，即使你的机器内存不够8192MB，YARN也会按照这些内存来使用</td>
+</tr>
+<tr>
+<td>yarn.nodemanager.resource.cpu-vcores</td>
+<td style="text-align:left">8</td>
+<td>NodeManager总的可用虚拟CPU个数</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;mapreduce_shuffle&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;yarn.resourcemanager.hostname&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;master&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">	    &lt;name&gt;yarn.nodemanager.resource.memory-mb&lt;/name&gt;</span><br><span class="line">	    &lt;value&gt;1024&lt;/value&gt;</span><br><span class="line">	&lt;/property&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">	    &lt;name&gt;yarn.nodemanager.resource.cpu-vcores&lt;/name&gt;</span><br><span class="line">	    &lt;value&gt;1&lt;/value&gt;</span><br><span class="line">	 &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+<p>这里我架设的虚拟机是1g内存1CPU1核的 ，没设置最后两个属性时，NodeManager启动报错内存不足<br><a href="http://blog.csdn.net/qq_32815807/article/details/78112890" target="_blank" rel="noopener">相关问题可以参考我的另外一篇博客</a></p>
+<hr>
+<h1 id="启动Hadoop集群"><a href="#启动Hadoop集群" class="headerlink" title="启动Hadoop集群"></a><strong>启动Hadoop集群</strong></h1><h3 id="格式化文件系统"><a href="#格式化文件系统" class="headerlink" title="格式化文件系统"></a>格式化文件系统</h3><p>在master中执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs namenode -format</span><br></pre></td></tr></table></figure></p>
+<h3 id="启动NameNode和DataNode"><a href="#启动NameNode和DataNode" class="headerlink" title="启动NameNode和DataNode"></a>启动NameNode和DataNode</h3><p>在master $HADOOP_HOME下执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sbin/.start-dfs.sh</span><br></pre></td></tr></table></figure></p>
+<p>使用jps命令查看master上的进程如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">DataNode</span><br><span class="line">SecondaryNameNode</span><br><span class="line">NameNode</span><br><span class="line">Jps</span><br></pre></td></tr></table></figure></p>
+<p>使用jps命令分别查看slave01和slave02上的进程如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Jps</span><br><span class="line">DataNode</span><br></pre></td></tr></table></figure></p>
+<h3 id="启动-ResourceManager-和-NodeManager"><a href="#启动-ResourceManager-和-NodeManager" class="headerlink" title="启动 ResourceManager 和 NodeManager"></a>启动 ResourceManager 和 NodeManager</h3><p>在master $HADOOP_HOME下执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sbin/start-yarn.sh</span><br></pre></td></tr></table></figure></p>
+<p>使用jps命令查看master上的进程如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">DataNode</span><br><span class="line">NodeManager</span><br><span class="line">ResourceManager</span><br><span class="line">SecondaryNameNode</span><br><span class="line">NameNode</span><br><span class="line">Jps</span><br></pre></td></tr></table></figure></p>
+<p>使用jps命令分别查看slave01和slave02上的进程如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Jps</span><br><span class="line">NodeManager</span><br><span class="line">DataNode</span><br></pre></td></tr></table></figure></p>
+<p>终于！Hadoop集群成功启动</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Hadoop/" rel="tag"># Hadoop</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/25/动态规划（2）——01背包/" rel="next" title="动态规划(2)——01背包">
+                <i class="fa fa-chevron-left"></i> 动态规划(2)——01背包
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/22/使用Spring Security中遇到的Preflight请求和跨域的问题/" rel="prev" title="使用Spring Security中遇到的Preflight请求和跨域的问题">
+                使用Spring Security中遇到的Preflight请求和跨域的问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMTE2Ny83NzE2"></div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="BENULL">
+            
+              <p class="site-author-name" itemprop="name">BENULL</p>
+              <p class="site-description motion-element" itemprop="description">tomorrow is another day</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/benull" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:ltobenull@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/u/3169828502" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#集群环境"><span class="nav-number">1.</span> <span class="nav-text">集群环境</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装Hadoop"><span class="nav-number">2.</span> <span class="nav-text">安装Hadoop</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#下载hadoop并解压到app目录下"><span class="nav-number">2.1.</span> <span class="nav-text">下载hadoop并解压到app目录下</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置Hadoop-环境变量"><span class="nav-number">2.2.</span> <span class="nav-text">配置Hadoop 环境变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改-HADOOP-HOME-etc-hadoop下的配置文件"><span class="nav-number">2.3.</span> <span class="nav-text">修改$HADOOP_HOME/etc/hadoop下的配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#修改hadoop-env-sh文件"><span class="nav-number">2.3.1.</span> <span class="nav-text">修改hadoop-env.sh文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改yarn-env-sh文件"><span class="nav-number">2.3.2.</span> <span class="nav-text">修改yarn-env.sh文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改slaves文件"><span class="nav-number">2.3.3.</span> <span class="nav-text">修改slaves文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改core-site-xml文件"><span class="nav-number">2.3.4.</span> <span class="nav-text">修改core-site.xml文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改hdfs-site-xml文件"><span class="nav-number">2.3.5.</span> <span class="nav-text">修改hdfs-site.xml文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改mapred-site-xml文件"><span class="nav-number">2.3.6.</span> <span class="nav-text">修改mapred-site.xml文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改yarn-site-xml文件"><span class="nav-number">2.3.7.</span> <span class="nav-text">修改yarn-site.xml文件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#启动Hadoop集群"><span class="nav-number">3.</span> <span class="nav-text">启动Hadoop集群</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#格式化文件系统"><span class="nav-number">3.0.1.</span> <span class="nav-text">格式化文件系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动NameNode和DataNode"><span class="nav-number">3.0.2.</span> <span class="nav-text">启动NameNode和DataNode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动-ResourceManager-和-NodeManager"><span class="nav-number">3.0.3.</span> <span class="nav-text">启动 ResourceManager 和 NodeManager</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">BENULL</span>
+
+  
+</div>
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+<!--
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+
+-->
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

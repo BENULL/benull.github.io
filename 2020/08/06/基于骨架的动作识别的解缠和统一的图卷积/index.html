@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="paper,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="BENULL" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="Disentangling and Unifying Graph Convolutions for Skeleton-Based Action Recognition paper: https://arxiv.org/pdf/2003.14111.pdf​arxiv.orgcode: https://github.com/kenziyuliu/ms-g3d​github.com  基于骨架的动作识">
+<meta name="keywords" content="paper">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Disentangling and Unifying Graph Convolutions for Skeleton-Based Action Recognition">
+<meta property="og:url" content="http://yoursite.com/2020/08/06/基于骨架的动作识别的解缠和统一的图卷积/index.html">
+<meta property="og:site_name" content="BENULL">
+<meta property="og:description" content="Disentangling and Unifying Graph Convolutions for Skeleton-Based Action Recognition paper: https://arxiv.org/pdf/2003.14111.pdf​arxiv.orgcode: https://github.com/kenziyuliu/ms-g3d​github.com  基于骨架的动作识">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly93eDEuc2JpbWcuY24vMjAyMC8wOC8wNi9vUVVsZS5wbmc?x-oss-process=image/format,png">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly93eDIuc2JpbWcuY24vMjAyMC8wOC8wNi9vUW5DRC5wbmc?x-oss-process=image/format,png">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly93eDEuc2JpbWcuY24vMjAyMC8wOC8wNi9vUXhMTi5wbmc?x-oss-process=image/format,png">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly93eDIuc2JpbWcuY24vMjAyMC8wOC8wNi9vQVBqVS5wbmc?x-oss-process=image/format,png">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly93eDIuc2JpbWcuY24vMjAyMC8wOC8wNi9vQW94ZC5wbmc?x-oss-process=image/format,png">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly93eDIuc2JpbWcuY24vMjAyMC8wOC8wNi9vUWJjbi5wbmc?x-oss-process=image/format,png">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly93eDIuc2JpbWcuY24vMjAyMC8wOC8wNi9vUWxZaC5wbmc?x-oss-process=image/format,png">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly93eDIuc2JpbWcuY24vMjAyMC8wOC8wNi9vUVM5YS5wbmc?x-oss-process=image/format,png">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly93eDIuc2JpbWcuY24vMjAyMC8wOC8wNi9vUXJGTS5wbmc?x-oss-process=image/format,png">
+<meta property="og:updated_time" content="2020-08-06T16:05:30.072Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Disentangling and Unifying Graph Convolutions for Skeleton-Based Action Recognition">
+<meta name="twitter:description" content="Disentangling and Unifying Graph Convolutions for Skeleton-Based Action Recognition paper: https://arxiv.org/pdf/2003.14111.pdf​arxiv.orgcode: https://github.com/kenziyuliu/ms-g3d​github.com  基于骨架的动作识">
+<meta name="twitter:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly93eDEuc2JpbWcuY24vMjAyMC8wOC8wNi9vUVVsZS5wbmc?x-oss-process=image/format,png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/08/06/基于骨架的动作识别的解缠和统一的图卷积/">
+
+
+
+
+
+  <title>Disentangling and Unifying Graph Convolutions for Skeleton-Based Action Recognition | BENULL</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">BENULL</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">tomorrow is another day</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/06/基于骨架的动作识别的解缠和统一的图卷积/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="BENULL">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BENULL">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Disentangling and Unifying Graph Convolutions for Skeleton-Based Action Recognition</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-08-06T22:24:32+08:00">
+                2020-08-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/paper/" itemprop="url" rel="index">
+                    <span itemprop="name">paper</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  9,262字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  34 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Disentangling-and-Unifying-Graph-Convolutions-for-Skeleton-Based-Action-Recognition"><a href="#Disentangling-and-Unifying-Graph-Convolutions-for-Skeleton-Based-Action-Recognition" class="headerlink" title="Disentangling and Unifying Graph Convolutions for Skeleton-Based Action Recognition"></a>Disentangling and Unifying Graph Convolutions for Skeleton-Based Action Recognition</h1><blockquote>
+<p><a href="https://arxiv.org/pdf/2003.14111.pdf%E2%80%8Barxiv.org" target="_blank" rel="noopener">paper: https://arxiv.org/pdf/2003.14111.pdf​arxiv.org</a><br><a href="https://github.com/kenziyuliu/ms-g3d%E2%80%8Bgithub.com" target="_blank" rel="noopener">code: https://github.com/kenziyuliu/ms-g3d​github.com</a></p>
+</blockquote>
+<h1 id="基于骨架的动作识别的分离和统一的图卷积"><a href="#基于骨架的动作识别的分离和统一的图卷积" class="headerlink" title="基于骨架的动作识别的分离和统一的图卷积"></a>基于骨架的动作识别的分离和统一的图卷积</h1><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>基于骨架的动作识别算法广泛使用时空图对人体动作动态进行建模。</p>
+<p>为了从这些图中捕获稳健的运动模式，长期和多尺度的上下文聚合与时空依赖建模是一个强大的特征提取器的关键方面。</p>
+<p>然而，现有的方法在实现以下方面存在局限性。</p>
+<p>​    (1)多尺度算子下的无偏差长期关节关系建模</p>
+<p>​    (2)用于捕捉复杂时空依赖的通畅的跨时空信息流</p>
+<p>在这项工作中，我们提出了</p>
+<p>​    (1)一种简单的分解（disentangle）多尺度图卷积的方法和</p>
+<p>​    (2)一种统一的时空图卷积算子G3D。</p>
+<p>所提出的多尺度聚合方法理清了不同邻域中节点对于有效的长期建模的重要性。</p>
+<p>所提出的G3D模块利用密集的跨时空边作为跳跃连接，用于在时空图中直接传播信息。</p>
+<p>通过结合上述提议，我们开发了一个名为MS-G3D的强大的特征提取器，在此基础上，我们的模型在三个大规模数据集NTU RGB+D60，NTU RGB+D120和Kinetics Skeleton 400上的性能优于以前的最先进方法。</p>
+<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly93eDEuc2JpbWcuY24vMjAyMC8wOC8wNi9vUVVsZS5wbmc?x-oss-process=image/format,png" alt="image1"></p>
+<blockquote>
+<p>图1.（a)骨架图序列的空间和时间分解的建模导致间接信息流。 (b)在这项工作中，我们建议用统一的时空图卷积来捕捉跨时空关联。 (c)在不同的时空邻域(在不同距离的黄色、蓝色、红色，为了清晰而部分着色)上的节点特征的分离对于在时空域中进行有效的多尺度学习至关重要</p>
+</blockquote>
+<p>​    人体动作识别是许多实际应用中的重要任务。特别是，基于骨架的人体动作识别涉及从人体的骨架表示而不是原始的RGB视频预测动作，并且在最近的工作中看到了有意义的结果证明了它的优点。对比RGB表征，骨架数据只包含2D 或3D 人体关键关节的位置，提供了高度抽象的信息，并且没有环境噪声（例如背景杂波，光照条件，衣服）使得动作识别算法可以专注于动作的稳健特征。</p>
+<p>​    早期的基于骨架的动作识别方法将人体关节视为一组独立的特征，他们通过手工制作的或学习的这些特征的集合来建模空间和时间上的关节相关性。 然而，这些方法忽略了人体关节之间的内在关系，这种关系最好用人体骨架图来捕捉，人体骨架图中的关节为节点，而它们的自然连接(即“骨头”)为边。为此，最近的研究方法利用骨架时空图建立了动作的关节运动模式的模型，骨架时空图是一系列不相交、同构的不同时间步长的骨架图，承载着空间和时间维度上的信息。</p>
+<p>​    为了从骨架图进行稳健的动作识别，理想的算法应该超越局部关节连接性，提取多尺度结构特征和长期依赖关系，因为结构上分离的关节也可以有很强的相关性。许多现有的方法都是通过使用骨架邻接矩阵的高次幂来实现这一目的: 直观地，邻接矩阵的幂来捕获每对节点之间的路径数，且行走的长度与幂相同；因此，邻接多项式通过使远邻可达来增加图卷积的感受野。然而，这种方法存在有偏权问题，即无向图上环的存在意味着边权重将偏向于更靠近的节点而不是更远的节点。 在骨架图上，这意味着邻接矩阵高次幂只能低效地捕捉远处关节的信息，因为聚集的特征将由局部身体部位的关节主导。 这是限制现有多尺度聚合器可伸缩性的一个严重缺陷。</p>
+<p>​    鲁棒算法的另一个理想特征是利用复杂的跨时空关节关系进行动作识别的能力。 然而，为此，大多数现有的方法部署的仅空间和仅时间交错的的模块(图1(a)) ，类似于分解的3D 卷积。 典型的方法是首先使用图卷积提取每个时间步长的空间关系，然后使用循环神经网络或一维卷积层建立时间动态模型。 虽然这样的分解方法可以有效的长期建模，但它阻碍了跨时空的直接信息流，无法捕获复杂的区域时空关节依赖关系。例如，“站立”动作通常是上身和下身在空间和时间上的共同运动，上身的运动(向前倾)与下身未来的运动(站立)有很强的相关性。 分解方法建模可能无法有效地捕捉到这些用来做预测的有力线索。</p>
+<p>​    在这项工作中，我们从两个方面解决了上述限制。 首先，我们提出了一种新的多尺度聚合方案，通过消除较远和较近邻域间的冗余依赖关系来解决有偏差的权重问题，从而理顺多尺度聚合下的特征(如图2所示)。 这就产生了更强大的多尺度算子，可以建模关节之间的关系，而不用考虑它们之间的距离。 其次，我们提出了 G3D，一个新的统一的时空图卷积模块，可以直接建模跨时空关节依赖关系。 G3D通过引入跨越“3D”时空域的图形边作为无障碍信息流的跳过连接来做到这一点(图1(B))，实质上促进了时空特征学习。值得注意的是，我们提出的解纠缠聚合方案增加了 G3D 的多尺度时空推理(图1(c))而没有受到有偏差权重问题的影响，尽管引入了额外的边。由此产生的功能强大的特征提取器，命名为 MSG3D，构成了我们最终模型架构的基石，在三个大规模骨架动作数据集(NTU rgb + d120、 NTU rgb + d60和 Kinetics Skeleton 400)上的性能优于最先进的方法。</p>
+<p>这项工作的主要贡献概括如下：</p>
+<p>(i)提出了一种解纠缠多尺度聚合方案，该方案消除了不同邻域节点特征之间的冗余依赖关系，使强大的多尺度聚合器能够有效地捕获人体骨架上的图形广义关节关系。<br>(ii)提出了一种统一的时空图卷积(G3D)算子，使得信息在时空中直接流动，从而实现高效的特征学习。<br>(iii)将解纠缠方案与 G3D 相结合，提供了一个强大的特征提取器(MS-G3D) ，具有跨时空的多尺度感受野。 时空特征的直接多尺度聚合进一步提高了模型性能。</p>
+<h2 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h2><h3 id="图神经网络"><a href="#图神经网络" class="headerlink" title="图神经网络"></a>图神经网络</h3><h4 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h4><p>​    为了从任意结构的图中提取特征，图神经网络(GNNs)得到了广泛的发展和探索。最近提出的GNN大致可分为频谱GNN和空域GNN。频谱GNN将输入的图形信号与图傅立叶域中的一组学习滤波器进行卷积。然而，由于特征分解的要求和固定邻接的假设，它们在计算效率和对新图的推广性方面受到限制。相反，空域GNN通常通过(1)选择具有邻域函数的邻居(例如，相邻节点)；(2)将来自所选择的邻居及其自身的特征与聚集函数合并(例如，均值池)；以及(3)将激活的变换应用于合并的特征(例如，MLP)，来执行针对每个节点的层级更新。在不同的GNN变体中，图卷积网络(GCN)最初是作为局部频谱卷积的一阶近似引入的，但它作为平均邻域聚合器的简单性迅速导致许多后续的空域GNN体系结构和涉及图结构数据的各种应用将其视为空域GNN基线。本文采用了GCN中的分层更新规则。</p>
+<h4 id="多尺度图卷积"><a href="#多尺度图卷积" class="headerlink" title="多尺度图卷积"></a>多尺度图卷积</h4><p>​    多尺度空域GNNs也被提出用来捕捉非局部邻域的特征。 使用图邻接矩阵的邻接矩阵高次幂来聚合来自远处邻居节点的特征。Truncated Block Krylov network同样将邻接矩阵提高到更高的幂次，并通过不同隐层的密集特征串联来获得多尺度信息。LanczosNet利用邻接矩阵的低秩近似来加速大型图的幂运算。如第1节所述，我们认为邻接权重可能会因权重偏差而对远程建模产生不利影响，而我们提出的模块旨在通过解缠的多尺度聚合器解决这一问题。</p>
+<h3 id="基于骨架的动作识别"><a href="#基于骨架的动作识别" class="headerlink" title="基于骨架的动作识别"></a>基于骨架的动作识别</h3><p>​    早期的基于骨架的动作识别方法侧重于下游分类器的手工制作特征和关节关系，忽略了人体语义连接的重要性。通过构造时空图和直接用GNNs建模空间关系，最近的方法的性能得到了显著提高，这表明人体骨架的语义对于动作预测的必要性。</p>
+<p>​    图卷积的一个早期应用是ST-GCN，其中空间图卷积与交错时间卷积一起用于时空建模。李等共同的工作提出了一个类似的方法，通过提高骨架邻接矩阵到更高的幂次来引入多尺度模块。AS-GCN也使用邻接矩阵的幂进行多尺度建模，但它还额外生成人体姿势以增强空间图卷积。时空图路由（STGR）网络使用逐帧注意和全局自注意机制为骨架图添加额外的边。类似地，2s-AGCN引入了具有自注意的图形自适应性以及自由学习的图形残差掩码。它还使用具有骨架骨骼特征的双流集成来提高性能。DGNN同样利用了骨骼特征，但是它通过交替的空间聚合方案同时更新关节和骨骼特征。要提出来的是，上述这些方法主要集中在空间建模上；相比之下，我们提出了一种统一的方法，用于直接跨时空捕获复杂的关节相关性。</p>
+<p>​    另一个相关的工作是GR-GCN，它在骨架图序列上每三帧合并一次，并在相邻帧之间添加稀疏边。虽然GR-GCN也应用了跨时空边，但跟我们的G3D模块有几个重要区别：</p>
+<p>​    (1)G3D中的跨时空边遵循语义人体骨架，与GR-GCN中稀疏的、一刀切的图相比，G3D中的跨时空边自然是一种更可解释、更健壮的表示。底层图形也更容易计算。</p>
+<p>（2）GR-GCN仅在相邻帧之间具有跨时空边，这使其无法推理超出三个帧的有限时间范围。</p>
+<p>（3）G3D可以同时利用不同的窗口大小和膨胀从多个时间上下文中学习，这在GR-GCN中没有解决。</p>
+<h2 id="MS-G3D"><a href="#MS-G3D" class="headerlink" title="MS-G3D"></a>MS-G3D</h2><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><h4 id="Notations"><a href="#Notations" class="headerlink" title="Notations"></a>Notations</h4><p>​    人体骨架图被表示为$G=(V，E)$，其中$V={v1，.，vn}$是表示关节的N个节点的集合，E是表示由邻接矩阵$A \in \mathbb{R}^{N \times N}$捕获的骨架的边集，其中如果边从$v<em>i$指向$v_j$初始$A</em>{i,j}=1$否则为0。因为G是无向图所以矩阵A是对称的。作为图序列的动作具有节点特征集$\mathcal{X}=\left{x<em>{t, n} \in \mathbb{R}^{C} \mid t, n \in\right.\mathbb{Z}, 1 \leq t \leq T, 1 \leq n \leq N}$ 表示为特征张量$\mathbf{X} \in \mathbb{R}^{T \times N \times C},$其中 $x</em>{t, n}=\mathbf{X}<em>{t, n,:}$是节点$v_n$总共T帧的第t帧的C维特征向量 。因此，输入动作在结构上由A和在特征上由$\mathbf{X}</em>{t} \in \mathbb{R}^{N \times C}$适当地描述，其中是时间t处的节点特征。  $\Theta^{(l)} \in \mathbb{R}^{C<em>{l} \times C</em>{l+1}}$表示网络第L层的可学习权重矩阵。</p>
+<h4 id="图卷积网络"><a href="#图卷积网络" class="headerlink" title="图卷积网络"></a>图卷积网络</h4><p>在特征向量X和图A定义的骨架输入上，可以将GCN的分层更新规则应用于时间t处的特征，如下所示：</p>
+<script type="math/tex; mode=display">
+\mathbf{X}_{t}^{(l+1)}=\sigma\left(\tilde{\mathbf{D}}^{-\frac{1}{2}} \tilde{\mathbf{A}} \tilde{\mathbf{D}}^{-\frac{1}{2}} \mathbf{X}_{t}^{(l)} \Theta^{(l)}\right)</script><p>式中，$\tilde{\mathbf{A}}=\mathbf{A}+\mathbf{I}$是骨架图，添加了自循环以保持自身特征，$\tilde{\mathbf{D}}$是$\tilde{\mathbf{A}}$的对角度矩阵，$\sigma(\cdot)$ 是激活函数。 公式$\tilde{\mathbf{D}}^{-\frac{1}{2}} \tilde{\mathbf{A}} \tilde{\mathbf{D}}^{-\frac{1}{2}} \mathbf{X}_{t}^{(l)}$可以直观地解释为来自直接邻域的近似空间平均特征聚集，随后是激活的线性层。</p>
+<h3 id="解缠多尺度聚合"><a href="#解缠多尺度聚合" class="headerlink" title="解缠多尺度聚合"></a>解缠多尺度聚合</h3><p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly93eDIuc2JpbWcuY24vMjAyMC8wOC8wNi9vUW5DRC5wbmc?x-oss-process=image/format,png" alt="image2"></p>
+<blockquote>
+<p>Figure2: 图解有偏加权问题和所提出的分离聚合方案。颜色越深，表示对于中心节点的权重越大（红色）。左上角：越近的节点从邻接矩阵获得更高的权重，这会降低远程建模的效率，特别是在聚合多个尺度时。左下：我们提出的解缠结聚合模型在保持自身特征的同时，对每个邻域的关节关系进行建模。右：可视化相应的邻接矩阵。 为了视觉清晰，省略了节点自环</p>
+</blockquote>
+<h4 id="有偏加权问题"><a href="#有偏加权问题" class="headerlink" title="有偏加权问题"></a>有偏加权问题</h4><p>在公式1的空间聚集框架下，现有的方法使用邻接矩阵的高次幂来聚集时间t的多尺度结构信息，如：</p>
+<script type="math/tex; mode=display">\mathbf{X}_{t}^{(l+1)}=\sigma\left(\sum_{k=0}^{K} \widehat{\mathbf{A}}^{k} \mathbf{X}_{t}^{(l)} \Theta_{(k)}^{(l)}\right)</script><p>其中$K$控制要聚合的尺度。在这里, $\widehat{\mathbf{A}}$ 是$\mathbf{A}$ 的归一化形式，例如[19]使用堆成归一化拉普拉斯图 $\widehat{\mathbf{A}}=\mathbf{L}^{\text {norm }}=\mathbf{I}-\mathbf{D}^{\frac{1}{2}} \mathbf{A} \mathbf{D}^{\frac{1}{2}}$；[21] 利用随机游走归一化邻接 $\widehat{\mathbf{A}}=$ $\mathbf{D}^{-1} \mathbf{A} ;$ 更一般的说，可以使用GCNs中的 $\widehat{\mathbf{A}}=\tilde{\mathbf{D}}^{-\frac{1}{2}} \tilde{\mathbf{A}} \tilde{\mathbf{D}}^{-\frac{1}{2}}$。很容易易看出$\mathbf{A}<em>{i, j}^{k}=\mathbf{A}</em>{j, i}^{k}$ ，给出了$v<em>{i}$ 和$v</em>{j}$ 之间长度为k的路径数，因此 $\widehat{\mathbf{A}}^{k} \mathbf{X}_{t}^{(l)}$ 正在根据此类步数执行加权特征平均。然而，很明显，由于循环遍历，到更近的节点的长度为k的路径比到实际的k跳邻居的数量多得多。这会导致权重偏向局部区域以及度较高的节点。GCNS中的节点的自环允许更多可能的路径(因为总是可以在自环上循环)，从而放大偏差。参见图2。因此，在骨架图上进行多尺度聚合时，聚合特征将以局部身体部位的信号为主导，从而使用具有较高次幂无法有效捕获长期关节依赖关系。</p>
+<h4 id="解开邻域关系"><a href="#解开邻域关系" class="headerlink" title="解开邻域关系"></a>解开邻域关系</h4><p>为了解决上述问题，我们首先将k邻接矩阵$\tilde{\mathbf{A}}_{(k)}$定义为</p>
+<script type="math/tex; mode=display">
+\left[\tilde{\mathbf{A}}_{(k)}\right]_{i, j}=\left\{\begin{array}{cl}
+1 & \text { if } d\left(v_{i}, v_{j}\right)=k \\
+1 & \text { if } i=j \\
+0 & \text { otherwise }
+\end{array}\right.</script><p>其中 $d\left(v<em>{i}, v</em>{j}\right)$ 是 $v<em>{i}$ 和$v</em>{j}$之间跳数最短的距离,$ \tilde{\mathbf{A}}<em>{(k)}$ 是 $\tilde{\mathbf{A}}$ 到更远领域的一般化, 其中$\tilde{\mathbf{A}}</em>{(1)}=\tilde{\mathbf{A}}$ and $\tilde{\mathbf{A}}<em>{(0)}=\mathbf{I}$。在式1中的空间聚集下，在$\hat{\mathbf{A}}</em>{(k)}$中包含自循环对于学习当前关节与其k跳邻居之间的关系以及在没有k跳邻居时保持每个关节的自身信息至关重要。考虑到N很小，因此可以很容易地计算出$ \tilde{\mathbf{A}}_{(k)}$ ，例如，使用图幂之差，如</p>
+<script type="math/tex; mode=display">\tilde{\mathbf{A}}_{(k)}=\mathbf{I}+\mathbb{1}\left(\tilde{\mathbf{A}}^{k} \geq 1\right)-\mathbb{1}\left(\tilde{\mathbf{A}}^{k-1} \geq 1\right)</script><p>（将邻接矩阵k次幂得到的矩阵中元素大于1的元素全都变为1）</p>
+<p>将式2中的$\widehat{\mathbf{A}}^{k}$替换为 $\tilde{\mathbf{A}}_{(k)}$，得出：</p>
+<script type="math/tex; mode=display">\mathbf{X}_{t}^{(l+1)}=\sigma\left(\sum_{k=0}^{K} \tilde{\mathbf{D}}_{(k)}^{-\frac{1}{2}} \tilde{\mathbf{A}}_{(k)} \tilde{\mathbf{D}}_{(k)}^{-\frac{1}{2}} \mathbf{X}_{t}^{(l)} \Theta_{(k)}^{(l)}\right)</script><p>其中 $\tilde{\mathbf{D}}<em>{(k)}^{-\frac{1}{2}} \tilde{\mathbf{A}}</em>{(k)} \tilde{\mathbf{D}}_{(k)}^{-\frac{1}{2}}$  是$k$ 邻接矩阵的归一化。</p>
+<p>​    与之前的情况不同，可能的长度k的路径数主要取决于长度k − 1的路径数，在式4提出的分离公式通过去除较远邻域对较近邻域权重的冗余依赖来解决有偏权重问题。 此外，具有较大k的尺度在多尺度算子下以相加的方式聚合，使得具有较大k值的长期建模保持有效。所得的k邻接矩阵也比其对应高次幂的矩阵稀疏（请参见图2），从而可以更有效地表示。</p>
+<h3 id="G3D：统一的时空建模"><a href="#G3D：统一的时空建模" class="headerlink" title="G3D：统一的时空建模"></a>G3D：统一的时空建模</h3><p>​    大多数现有工作将骨架动作视为一系列不相交的图，其中特征是通过仅空间（例如GCN）和仅时间（例如TCN）模块提取的。我们认为，这种分解的方法对于捕获复杂的时空关节关系不太有效。显然，如果一对节点之间存在牢固的连接，则在逐层传播期间，该对节点应包含彼此的显著特征部分以反映这种连接。然而，当信号通过一系列局部聚合器(GCNS和TCNs)在时空中传播时，随着从越来越大的时空感受野聚集冗余信息时，信号会被削弱。如果观察到gcn没有执行加权聚合来区分每个邻居，那么问题就更明显了。</p>
+<h4 id="跨时空跳跃连接"><a href="#跨时空跳跃连接" class="headerlink" title="跨时空跳跃连接"></a>跨时空跳跃连接</h4><p>​    为了解决上述问题，我们提出了一种更合理的方法来允许跨时空跳跃连接，这种连接很容易用时空图中的跨时空边来建模。（参数过大和提取的特征过于泛化）让我们首先考虑输入图序列上一个大小为$\tau$的滑动时间窗口，在每一步中，它都会得到一个时空子图$\mathcal{G}<em>{(\tau)}=\left(\mathcal{V}</em>{(\tau)}, \mathcal{E}<em>{(\tau)}\right)$,其中$\mathcal{V}</em>{(\tau)}=\mathcal{V}<em>{1} \cup \ldots \cup \mathcal{V}</em>{\tau}$是窗口中$\tau$帧的所有节点集的并集。通过将$\tilde{\mathbf{A}}$平铺到块邻接矩阵$\hat{\mathbf{A}}<em>{(\tau)}$来定义初始边集合 $\mathcal{E}</em>{(\tau)}$，其中（每个node都和所有frames的对应邻居节点直接相连）</p>
+<script type="math/tex; mode=display">\tilde{\mathbf{A}}_{(\tau)}=\left[\begin{array}{ccc}
+\tilde{\mathbf{A}} & \cdots & \tilde{\mathbf{A}} \\
+\vdots & \ddots & \vdots \\
+\tilde{\mathbf{A}} & \cdots & \tilde{\mathbf{A}}
+\end{array}\right] \in \mathbb{R}^{\tau N \times \tau N}</script><p>直观地说，每个子矩阵$\left[\tilde{\mathbf{A}}<em>{(\tau)}\right]</em>{i, j}=\tilde{\mathbf{A}}$意味着$\mathcal{V}<em>{i}$ 中的每个节点通过将逐帧的空间连通性（即所有$i$的空间连通性为$\left[\tilde{\mathbf{A}}</em>{(\tau)}\right]<em>{i, i}$）外推到时域，在帧$j$处连接到自身及其1跳的空间邻居。因此，$\mathcal{G}{（\tau）}$内的每个节点都与自身及其跨所有$\tau$帧的1跳空间邻居紧密相连。在$\mathbf{X}$上使用相同的零填充滑动窗口构造$T$个窗口，可以很容易地得到 $\mathbf{X}</em>{(\tau)} \in \mathbb{R}^{T \times \tau N \times C}$ 。利用式1，因此我们得出了用于$t^{\text {th }}$ 时间窗口的统一的时空图卷积算子：</p>
+<script type="math/tex; mode=display">
+\left[\mathbf{X}_{(\tau)}^{(l+1)}\right]_{t}=\sigma\left(\tilde{\mathbf{D}}_{(\tau)}^{-\frac{1}{2}} \tilde{\mathbf{A}}_{(\tau)} \tilde{\mathbf{D}}_{(\tau)}^{-\frac{1}{2}}\left[\mathbf{X}_{(\tau)}^{(l)}\right]_{t} \Theta^{(l)}\right)</script><h4 id="膨胀窗口"><a href="#膨胀窗口" class="headerlink" title="膨胀窗口"></a>膨胀窗口</h4><p>​    上述窗口结构的另一个重要方面是不需要是相邻帧。通过每$d$帧选取一帧并重用相同的时空结构$\mathbf{A}<em>{(\tau)}$，可以构造具有$\tau$帧和$d$膨胀率的膨胀窗口。同样，我们可以获得节点特征$\mathbf{X}</em>{(\tau, d)} \in \mathbb{R}^{T \times \tau N \times C}$（被忽略的话$d=1$ ），执行式6中的逐层更新。膨胀窗口允许更大的时间感受野而不增加$\tilde{\mathbf{A}}_{（\tau）}$的大小，类似于空洞卷积如何保持恒定的复杂性。</p>
+<h4 id="多尺度G3D"><a href="#多尺度G3D" class="headerlink" title="多尺度G3D"></a>多尺度G3D</h4><p>​    我们也可以将所提出的解缠多尺度聚合方案（式4）整合到G3D中，直接在时空域进行多尺度推理。因此，我们从式6推导出MS-G3D模块为：</p>
+<script type="math/tex; mode=display">
+\left[\mathbf{X}_{(\tau)}^{(l+1)}\right]_{t}=\sigma\left(\sum_{k=0}^{K} \tilde{\mathbf{D}}_{(\tau, k)}^{-\frac{1}{2}} \tilde{\mathbf{A}}_{(\tau, k)} \tilde{\mathbf{D}}_{(\tau, k)}^{-\frac{1}{2}}\left[\mathbf{X}_{(\tau)}^{(l)}\right]_{t} \Theta_{(k)}^{(l)}\right)</script><p>其中$\tilde{\mathbf{A}}<em>{(\tau, k)}$和$\tilde{\mathbf{D}}</em>{(\tau, k)}$ 的定义分别类似于$\tilde{\mathbf{A}}<em>{(k)}$ 和 $\tilde{\mathbf{D}}</em>{(k)}$。值得注意的是，我们提出的解缠聚合方案补充了这一统一算子，因为G3D由于时空连通性而增加的节点度数可能会导致有偏权重问题。</p>
+<h4 id="讨论"><a href="#讨论" class="headerlink" title="讨论"></a>讨论</h4><p>​    我们对G3D进行了更深入的分析，如下所示。</p>
+<p>​    （1）它类似于经典的三维卷积块，其时空感受野由$d$,$\tau$和$\tilde{A}$定义。</p>
+<p>​    （2） 与3D卷积不同，G3D的参数由$\Theta<em>{(\cdot)}^{(\cdot)}$得出独立于$\tau$或$\left |\mathcal{E}{（\tau）}\right |，$使得它在大的$\tau$通情况下不太容易过拟合。(3)G3D中密集的跨时空连接需要在$\tau$上进行权衡，因为较大的$\tau$值带来了更大的时间感受野，代价是由于更大的邻域而牺牲了更一般的特征。此外，越大的$\tau$意味着$\tilde{\mathbf{A}}</em>{(\tau)}$平方的扩大，因此多尺度聚合的运算量越大。另一方面，较大的膨胀率$d$以时间分辨率(较低的帧率)为代价带来更大的时间覆盖。因此必须小心地平衡$d$,$\tau$。（4）G3D模块旨在捕获复杂的区域时空关系，而不是由因数分解模块可以更经济地捕获的长期依赖关系。因此，我们观察到，当G3D模块使用长期的因式分解模块增强时，性能最佳，我们将在下一节讨论这一点</p>
+<h3 id="模型架构"><a href="#模型架构" class="headerlink" title="模型架构"></a>模型架构</h3><p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly93eDEuc2JpbWcuY24vMjAyMC8wOC8wNi9vUXhMTi5wbmc?x-oss-process=image/format,png" alt="image-20200708002432414"></p>
+<blockquote>
+<p>Figure 3:架构概述：“TCN”、“GCN”、前缀“MS-”和后缀“-D”分别表示时间卷积块和图卷积块，以及多尺度和解缠聚集(第3.2节)。r个STGC块(b)中的每一个都使用了多分支设计，以同时捕获长期的和区域时空依赖关系。虚线模块：包括额外的G3D分支、1×1卷积层和跨步时间卷积，根据情况权衡模型的性能/复杂性。</p>
+</blockquote>
+<h4 id="整体架构"><a href="#整体架构" class="headerlink" title="整体架构"></a>整体架构</h4><p>​    最终的模型架构如图3所示。在高层次上，它包含r个时空图卷积(STGC)块的堆栈，用于从骨架序列中提取特征，随后是全局均值池化层和Softmax分类器。每个STGC块部署两种类型的路径，以同时捕获复杂的区域时空关节相关性以及长期的时空依赖性：（1） G3D路径首先构造时空窗口，对其进行解纠缠的多尺度图卷积，然后用一个全连接层对其进行折叠将窗口特征读出。额外的虚线G3D分支(图3(B))表明该模型可以同时从不同的$\tau$和$d$的多个时空上下文中学习；（2） 因式分解路径通过长期、仅空间和仅时间的模块增强了G3D分支：第一层是一个多尺度的图卷积层，能够用最大K（最长关节间距离）对整个骨架图进行建模；随后是两个多尺度时间卷积层，以捕获扩展的时间上下文(下面讨论)。来自所有分支的输出被聚集为STGC块输出，该STGC块输出在典型的r=3块体系结构中分别具有96、192和384个特征通道。批归一化和ReLU添加到除了最后一层以外的每一层末尾。除第一个块外，所有STGC块均使用步幅为2的时间卷积和滑动窗口在时间维度上进行下采样。</p>
+<h4 id="多尺度时间建模"><a href="#多尺度时间建模" class="headerlink" title="多尺度时间建模"></a>多尺度时间建模</h4><p>​    G3D所使用的时空窗口$\mathcal{G}{(\tau)}$本身是一个封闭的结构，这意味着G3D必须伴随时间模块进行跨窗口信息交换。许多现有工作在整个架构中使用具有固定大小为$k_t\times1$的卷积核的时间卷积对时间建模。我们用多尺度学习增强香草时间卷积层，如图3（c）所示。为了降低额外分支所带来的计算成本，我们采用了瓶颈设计，将卷积核大小固定为3×1，并使用不同的膨胀率，而不是更大的卷积核来获得更大的感受野。我们还使用残差连接来促进训练。</p>
+<h4 id="自适应图"><a href="#自适应图" class="headerlink" title="自适应图"></a>自适应图</h4><p>​    为了提高执行同类邻域平均化的图卷积层的灵活性，我们给每个$\tilde{\mathbf{A}}<em>{(K)}$和$\tilde{\mathbf{A}}</em>{(\tau, k)}$添加一个受[33，32]启发的简单的、可学习的、无约束的残缺掩码图$\mathbf{A}^{\text{res}}$，以动态地加强、削弱、添加或删除边。例如，公式4更新为</p>
+<script type="math/tex; mode=display">\mathbf{X}_{t}^{(l+1)}=\sigma\left(\sum_{k=0}^{K} \tilde{\mathbf{D}}_{(k)}^{-\frac{1}{2}}\left(\tilde{\mathbf{A}}_{(k)}+\mathbf{A}_{(k)}^{\mathrm{res}}\right) \tilde{\mathbf{D}}_{(k)}^{-\frac{1}{2}} \mathbf{X}_{t}^{(l)} \Theta_{(k)}^{(l)}\right)</script><p>$\mathbf{A}^{\text{res}}$被初始化为0左右的随机值，并且对于每个$k$和$\tau$是不同的，使得每个多尺度上下文（空间或时空）选择最适合的掩码。还要注意的是，由于$\mathbf{A}^{\text{res}}$针对所有可能的动作进行了优化，这些动作可能具有不同的用于特征传播的最佳边集，因此预计它会给出较小的边校正，并且当图结构具有重大缺陷时可能是不够的。特别是，$\mathbf{A}^{\text{res}}$仅部分缓解了偏向加权问题(参见第4.3节)。</p>
+<h4 id="关节-骨骼双流融合"><a href="#关节-骨骼双流融合" class="headerlink" title="关节-骨骼双流融合"></a>关节-骨骼双流融合</h4><p>​    受到[33，32，34]中的双流方法的启发，以及可视化骨骼和关节可以帮助人类识别骨骼动作的直观，我们使用了一个双流框架，其中具有相同架构的单独模型使用被初始化为远离身体中心的相邻关节矢量差的骨骼特征来训练。来自关节/骨骼模型的softmax得分相加以获得最终预测得分。由于骨架图是树，我们在身体中心添加一个零骨骼向量，以从N个关节获得N个骨骼，并重用A来定义连通性。</p>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><h3 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h3><h4 id="NTU-RGB-D-60-和-NTU-RGB-D-120"><a href="#NTU-RGB-D-60-和-NTU-RGB-D-120" class="headerlink" title="NTU RGB+D 60 和 NTU RGB+D 120."></a>NTU RGB+D 60 和 NTU RGB+D 120.</h4><p>​    NTU RGB+D60[31]是一个大规模的动作识别数据集，包含56,578个骨骼序列，超过60个动作类别，采集自40个不同的对象和3个不同的摄像机视角。每个骨架图包含N=25个身体关节作为节点，其在空间中的3D位置作为初始特征。动作的每一帧包含1到2个对象。作者建议报告两种情况下的分类准确性：(1)交叉对象(X-Sub)，将40名对象分为训练组和测试组，分别产生40,091个和16,487个训练和测试样本。(2)交叉视图(X-View)，从1号摄像机收集的18,932个样本全部用于测试，其余37,646个样本用于训练。</p>
+<p>NTU RGB+D120扩展了NTU RGB+D 60，在60个额外的动作类别中增加了57,367个骨骼序列，总计113,945个样本，超过120个类别，来自106个不同的对象和32个不同的摄像机设备。作者现在建议将交叉视图的设置替换为交叉设备(X-Set)设置，其中从一半相机设备中收集的54,468个样本用于训练，其余59,477个样本用于测试。 在交叉对象方面，从53名受试者中挑选出63,026个样本用于训练，其余50,919个样本用于测试。</p>
+<h4 id="Kinetics-Skeleton-400"><a href="#Kinetics-Skeleton-400" class="headerlink" title="Kinetics Skeleton 400"></a>Kinetics Skeleton 400</h4><p>​    Kinetics Skeleton 400数据集是由OpenPose姿态估计工具箱从Kinetics 400视频数据集改编而来。 它包含总计400个类别的240,436个训练骨架序列和19,796个测试骨架序列，其中每个骨架图包含18个身体关节，以及它们的2D空间坐标和来自OpenPose的预测置信度分数作为初始关节特征[50]。 在每个时间步长，骨架数量上限为2，总体置信度分数较低的骨架将被丢弃。 按照[15，50]中的会议，报告了Top-1和Top-5的精确度。</p>
+<h3 id="实现细节"><a href="#实现细节" class="headerlink" title="实现细节"></a>实现细节</h3><p>​    除非另有说明，否则所有模型的r = 3并以SGD进行训练，其动量为0.9，批大小为32，初始学习率为0.05（可以按批量大小线性扩展）对于50、60和65个训练迭代， 对于NTU RGB + D 60、120和Kinetics Skeleton 400，分别在{30，40}，{30，50}和{45，55}个时期，受到LR衰减的0.1个学习率减少。最终模型的“权重衰减”设置为0.0005，并在组件研究期间进行相应调整。通过重放动作将所有骨架序列填充到T=300帧。 在之后，使用归一化和转化对输入进行预处理。不使用数据增强来进行公平的性能比较。</p>
+<h3 id="组件研究"><a href="#组件研究" class="headerlink" title="组件研究"></a>组件研究</h3><p>​    我们在最终的架构中分析各个组件及其配置。除非另有说明，性能报告为仅使用关节数据的NTU RGB+D 60交叉对象设置的分类精度。</p>
+<h4 id="解缠的多尺度聚合"><a href="#解缠的多尺度聚合" class="headerlink" title="解缠的多尺度聚合"></a>解缠的多尺度聚合</h4><p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly93eDIuc2JpbWcuY24vMjAyMC8wOC8wNi9vQVBqVS5wbmc?x-oss-process=image/format,png" alt="image-20200709001329657"></p>
+<blockquote>
+<p>表1：具有不同K的STGC块的单个路径上的多尺度聚集的准确性(%)。 “掩码”是指残缺掩码$\mathbf{A}^{\text{res}}$。 如果K&gt;1，则GCN/G3D为多尺度(MS-)。</p>
+</blockquote>
+<p>​    我们首先通过在稀疏和稠密图上验证其在不同尺度数下的有效性来证明提出的解缠多尺度聚集方案的有效性。在表1中，我们使用STGC块（图3（b））的单独路径，分别称为“GCN”和“G3D”，后缀“-E”和“-D”表示邻接矩阵高次幂和解缠。这里，最大$K=12$是来自NTU RGB+d60的骨架图的直径，对于G3D模块，我们设置$\tau=5$。为了保持一致的归一化，我们在公式2 $\widehat{\mathbf{A}}=\tilde{\mathbf{D}}^{-\frac{1}{2}} \tilde{\mathbf{A}} \tilde{\mathbf{D}}^{-\frac{1}{2}}$中为GCN-E和G3D-E设置了。我们首先观察到，分解的因式分解 比简单邻接矩阵幂在K=4时可带来高达1.4%的增益，支持邻域分解的必要性。在这种情况下，残缺掩码$\mathbf{A}^\text{res}$部分校正了权重不平衡，将最大差距缩小到0.4%。然而，在G3D路径上的同一组实验中，窗口图$\mathcal{G}{(\tau)}$比空间图$\mathcal{G}$的密度更大，显示G3D-E和G3D-D之间的精度差距更大，这表明存在更严重的有偏加权问题。具体地说，即使添加残缺掩码，我们在K=12时也会看到0.8%的性能差距。这些结果验证了所提出的解缠聚合方案在多尺度学习中的有效性；它不仅在空间域中提高了不同数字尺度上的性能，而且在时空域中更是如此，它补充了所提出的G3D模块。一般来说，空间GCN比时空G3D模块从大K中获益更多；对于最终的体系结构，我们分别为MS-GCN和MS-G3D块分别设置$K \in{12,5}$。 </p>
+<h4 id="G3D的有效性"><a href="#G3D的有效性" class="headerlink" title="G3D的有效性"></a>G3D的有效性</h4><p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly93eDIuc2JpbWcuY24vMjAyMC8wOC8wNi9vQW94ZC5wbmc?x-oss-process=image/format,png" alt="image-20200709001552265"></p>
+<blockquote>
+<p>表2：各种设置下的模型精度。 MS-GCN和MS-G3D分别使用$K\in{12，5}$。 $†$输出通道在折叠窗口层(图3(D)，$C<em>{mid}$到$C</em>{out}$)加倍，而不是在图形卷积($C<em>{in}$到$C</em>{mid}$)，以维持相似的预算。</p>
+</blockquote>
+<p>​    为了验证G3D模块捕获复杂时空特征的有效性，我们使用其单独的组件逐步构建模型，并在表2中显示其性能。我们使用来自2S-AGCN的关节流作为控制实验的基线，并且为了公平比较，我们用MS-TCN层替换其规则的时间卷积层，得到了参数量变少的改进。首先，我们观察到，由于MS-GCN中强大的分离聚集作用，因式分解途径本身就可以优于基线。然而，如果我们简单地将因式分解的路径放大到更大的容量(更深和更宽)，或者复制因式分解的路径以从不同的特征子空间中学习并模仿STGC块中的多路径设计，我们观察到的收益是有限的。相反,当添加G3D路径时，我们在相似或更少的参数下观察到一致更好的结果，验证了G3D提取复杂的区域时空相关性的能力，这些相关性以前通过以因式分解的方式建模空间和时间依赖而被忽略。</p>
+<h4 id="探索G3D配置"><a href="#探索G3D配置" class="headerlink" title="探索G3D配置"></a>探索G3D配置</h4><p>​    表2还比较了各种G3D设置，包括不同的$\tau$，$d$值和STGC块中G3D路径的数量。首先，我们观察到所有的配置一致地优于基线，证实了MS-G3D作为一个健壮的特征提取器的稳定性。我们还发现$\tau$=5的结果稍好一些，但在$\tau$=7时，由于局部时空邻域过大，聚集的特征变得过于通用，因此抵消了较大时间覆盖的好处。扩张率d具有不同的影响：(1)当$\tau=3$时，$d=1$的性能低于$d \in {2,3}$，证明需要更大的时间上下文；(2)更大的d具有边际效益，因为其更大的时间覆盖以时间分辨率为代价(从而使骨骼运动粗糙)。因此，当$d=(1，2)$的两条G3D路径组合时，我们观察到更好的结果,不出所料，当时间分辨率通过设置$\tau=(3，5)$保持不变时，我们获得了最好的结果。</p>
+<h4 id="跨时空连接"><a href="#跨时空连接" class="headerlink" title="跨时空连接"></a>跨时空连接</h4><p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly93eDIuc2JpbWcuY24vMjAyMC8wOC8wNi9vUWJjbi5wbmc?x-oss-process=image/format,png" alt="image-20200709002127999"></p>
+<blockquote>
+<p>表3：比较图连接性设置$(\tau=3，d=2)$。</p>
+</blockquote>
+<p>​    为了证明在公式5中定义的$\mathcal{G}{(\tau)}$中需要跨时空边，而不是简单的、类似网格的时间自边（G3D也适用于此），我们对比了表3中的不同连接方案，同时固定了架构的其他部分。前两个设置指的是修改块邻接矩阵$\tilde{A}_{(\tau)}$，使得（1） 保留主对角线上的块$\tilde{A}$，将超对角线对角线上的块设置为$I$，其余设置为$0$；</p>
+<script type="math/tex; mode=display">\tilde{\mathbf{A}}_{(\tau)}=\left[\begin{array}{ccc}
+\tilde{\mathbf{A}} & \cdots & I \\
+\vdots & \ddots & \vdots \\
+O & \cdots & \tilde{\mathbf{A}}
+\end{array}\right] \in \mathbb{R}^{\tau N \times \tau N}</script><script type="math/tex; mode=display">
+\left[\begin{array}{cccc}
+\tilde{\mathbf{A}} & I & I& \cdots I \\
+O & \tilde{\mathbf{A}} & I& \cdots I \\
+O & O & \tilde{\mathbf{A}}&  \cdots I \\
+\cdots& \cdots&\cdots&\cdots I\\
+O & O & O & \cdots  \tilde{\mathbf{A}}
+\end{array}\right]</script><p>(2)除主对角线的$\tilde{A}$的外的所有块均设置为I。直观地说，第一种方法生成“3D网格”图形，第二种方法在帧上包含额外密集的自边。 显然，虽然所有的设置都允许统一的时空图形卷积，但作为跳过连接的跨时空边对于有效的信息流是必不可少的。</p>
+<script type="math/tex; mode=display">\tilde{\mathbf{A}}_{(\tau)}=\left[\begin{array}{ccc}
+\tilde{\mathbf{A}} & \cdots & I \\
+\vdots & \ddots & \vdots \\
+I & \cdots & \tilde{\mathbf{A}}
+\end{array}\right] \in \mathbb{R}^{\tau N \times \tau N}</script><script type="math/tex; mode=display">
+\left[\begin{array}{cccc}\tilde{\mathbf{A}} & I & I& \cdots I \\I & \tilde{\mathbf{A}} & I& \cdots I \\I & I & \tilde{\mathbf{A}}&  \cdots I \\\cdots& \cdots&\cdots&\cdots I\\I & I & I & \cdots  \tilde{\mathbf{A}}\end{array}\right]</script><p>​<br>​<br>​                        </p>
+<h4 id="关节-骨骼双流融合-1"><a href="#关节-骨骼双流融合-1" class="headerlink" title="关节-骨骼双流融合"></a>关节-骨骼双流融合</h4><p>​    我们在NTU RGB+D60数据集上验证了我们在关节骨骼融合框架下的方法（表5中）。与[33]相似，我们在融合关节和骨骼特征时获得了最佳性能，这表明我们的方法可以推广到其他输入模式。</p>
+<h3 id="与最新技术相比"><a href="#与最新技术相比" class="headerlink" title="与最新技术相比"></a>与最新技术相比</h3><p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly93eDIuc2JpbWcuY24vMjAyMC8wOC8wNi9vUWxZaC5wbmc?x-oss-process=image/format,png" alt="image-20200709002241972"></p>
+<blockquote>
+<p>表4：在NTU RGB+D 120骨骼数据集上的分类精度与最新方法的比较。</p>
+</blockquote>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly93eDIuc2JpbWcuY24vMjAyMC8wOC8wNi9vUVM5YS5wbmc?x-oss-process=image/format,png" alt="image-20200709002353026"></p>
+<blockquote>
+<p>NTU RGB+D60骨架数据集分类精度与最新方法的比较。</p>
+</blockquote>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly93eDIuc2JpbWcuY24vMjAyMC8wOC8wNi9vUXJGTS5wbmc?x-oss-process=image/format,png" alt="image-20200709002414727">    </p>
+<blockquote>
+<p>表6：Kinetics Skeleton 400数据集上的分类精度与最新方法的比较。</p>
+</blockquote>
+<p>​    我们将我们的完整模型(图3(A))与表4、5和6中的最新水平进行比较。表4比较了非图和基于图的方法。 表5比较了非图方法、具有空间边和具有时空边[8]的基于图的方法。 表6比较了单流和多流方法。在所有三个大型数据集上，我们的方法在所有评估设置下都优于所有现有的方法。 值得注意的是，我们的方法首次应用多路径设计从骨架序列中学习远程时空相关性和复杂的区域时空相关性，结果验证了我们方法的有效性。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>​    在这项工作中，我们提出了两种改进基于骨架的动作识别的方法：一种是去除不同邻域之间冗余依赖的解缠多尺度图卷积聚集方案；另一种是G3D，它是一种统一的时空图卷积算子，它直接从骨架图序列中建模时空依赖关系。 通过耦合这些方法，我们得到了MS-G3D，这是一个功能强大的特征提取器，它捕获了以前被因式分解方法建模忽视的多尺度时空特征。 在三个大规模数据集上的实验表明，我们的模型相比现有的方法有相当大的优势。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/paper/" rel="tag"># paper</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/07/02/使用Dockerfile创建Ubuntu+Pytorch+CUDA 镜像/" rel="next" title="使用Dockerfile创建Ubuntu+Pytorch+CUDA 镜像">
+                <i class="fa fa-chevron-left"></i> 使用Dockerfile创建Ubuntu+Pytorch+CUDA 镜像
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMTE2Ny83NzE2"></div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="BENULL">
+            
+              <p class="site-author-name" itemprop="name">BENULL</p>
+              <p class="site-description motion-element" itemprop="description">tomorrow is another day</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/benull" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:ltobenull@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/u/3169828502" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Disentangling-and-Unifying-Graph-Convolutions-for-Skeleton-Based-Action-Recognition"><span class="nav-number">1.</span> <span class="nav-text">Disentangling and Unifying Graph Convolutions for Skeleton-Based Action Recognition</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基于骨架的动作识别的分离和统一的图卷积"><span class="nav-number">2.</span> <span class="nav-text">基于骨架的动作识别的分离和统一的图卷积</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#摘要"><span class="nav-number">2.1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引言"><span class="nav-number">2.2.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相关工作"><span class="nav-number">2.3.</span> <span class="nav-text">相关工作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#图神经网络"><span class="nav-number">2.3.1.</span> <span class="nav-text">图神经网络</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#架构"><span class="nav-number">2.3.1.1.</span> <span class="nav-text">架构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多尺度图卷积"><span class="nav-number">2.3.1.2.</span> <span class="nav-text">多尺度图卷积</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于骨架的动作识别"><span class="nav-number">2.3.2.</span> <span class="nav-text">基于骨架的动作识别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MS-G3D"><span class="nav-number">2.4.</span> <span class="nav-text">MS-G3D</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">2.4.1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Notations"><span class="nav-number">2.4.1.1.</span> <span class="nav-text">Notations</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#图卷积网络"><span class="nav-number">2.4.1.2.</span> <span class="nav-text">图卷积网络</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解缠多尺度聚合"><span class="nav-number">2.4.2.</span> <span class="nav-text">解缠多尺度聚合</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#有偏加权问题"><span class="nav-number">2.4.2.1.</span> <span class="nav-text">有偏加权问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解开邻域关系"><span class="nav-number">2.4.2.2.</span> <span class="nav-text">解开邻域关系</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#G3D：统一的时空建模"><span class="nav-number">2.4.3.</span> <span class="nav-text">G3D：统一的时空建模</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#跨时空跳跃连接"><span class="nav-number">2.4.3.1.</span> <span class="nav-text">跨时空跳跃连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#膨胀窗口"><span class="nav-number">2.4.3.2.</span> <span class="nav-text">膨胀窗口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多尺度G3D"><span class="nav-number">2.4.3.3.</span> <span class="nav-text">多尺度G3D</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#讨论"><span class="nav-number">2.4.3.4.</span> <span class="nav-text">讨论</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模型架构"><span class="nav-number">2.4.4.</span> <span class="nav-text">模型架构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#整体架构"><span class="nav-number">2.4.4.1.</span> <span class="nav-text">整体架构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多尺度时间建模"><span class="nav-number">2.4.4.2.</span> <span class="nav-text">多尺度时间建模</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自适应图"><span class="nav-number">2.4.4.3.</span> <span class="nav-text">自适应图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关节-骨骼双流融合"><span class="nav-number">2.4.4.4.</span> <span class="nav-text">关节-骨骼双流融合</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验"><span class="nav-number">2.5.</span> <span class="nav-text">实验</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据集"><span class="nav-number">2.5.1.</span> <span class="nav-text">数据集</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#NTU-RGB-D-60-和-NTU-RGB-D-120"><span class="nav-number">2.5.1.1.</span> <span class="nav-text">NTU RGB+D 60 和 NTU RGB+D 120.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Kinetics-Skeleton-400"><span class="nav-number">2.5.1.2.</span> <span class="nav-text">Kinetics Skeleton 400</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现细节"><span class="nav-number">2.5.2.</span> <span class="nav-text">实现细节</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组件研究"><span class="nav-number">2.5.3.</span> <span class="nav-text">组件研究</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#解缠的多尺度聚合"><span class="nav-number">2.5.3.1.</span> <span class="nav-text">解缠的多尺度聚合</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#G3D的有效性"><span class="nav-number">2.5.3.2.</span> <span class="nav-text">G3D的有效性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#探索G3D配置"><span class="nav-number">2.5.3.3.</span> <span class="nav-text">探索G3D配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#跨时空连接"><span class="nav-number">2.5.3.4.</span> <span class="nav-text">跨时空连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关节-骨骼双流融合-1"><span class="nav-number">2.5.3.5.</span> <span class="nav-text">关节-骨骼双流融合</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#与最新技术相比"><span class="nav-number">2.5.4.</span> <span class="nav-text">与最新技术相比</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">2.6.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">BENULL</span>
+
+  
+</div>
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+<!--
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+
+-->
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

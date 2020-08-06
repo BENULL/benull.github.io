@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Python,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="BENULL" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="Python中的可变与不可变对象Python中的所有东西都是一个对象。每个Python新手都应该学习的是，Python中的所有对象都可以是可变的或不可变的。让我们更深入地了解它的细节…因为Python中的所有东西都是对象，所以每个变量都包含一个对象实例。当一个对象被初始化时，它被分配一个唯一的对象ID。它的类型是在运行时定义的，一旦设置永远不会改变，但是如果它是可变类型它的状态是可以被改变的。简单">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python中的可变与不可变对象">
+<meta property="og:url" content="http://yoursite.com/2018/06/06/Python中的可变与不可变对象/index.html">
+<meta property="og:site_name" content="BENULL">
+<meta property="og:description" content="Python中的可变与不可变对象Python中的所有东西都是一个对象。每个Python新手都应该学习的是，Python中的所有对象都可以是可变的或不可变的。让我们更深入地了解它的细节…因为Python中的所有东西都是对象，所以每个变量都包含一个对象实例。当一个对象被初始化时，它被分配一个唯一的对象ID。它的类型是在运行时定义的，一旦设置永远不会改变，但是如果它是可变类型它的状态是可以被改变的。简单">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://img-blog.csdn.net/20180606124943654?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180606124959268?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:updated_time" content="2018-06-06T04:52:11.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python中的可变与不可变对象">
+<meta name="twitter:description" content="Python中的可变与不可变对象Python中的所有东西都是一个对象。每个Python新手都应该学习的是，Python中的所有对象都可以是可变的或不可变的。让我们更深入地了解它的细节…因为Python中的所有东西都是对象，所以每个变量都包含一个对象实例。当一个对象被初始化时，它被分配一个唯一的对象ID。它的类型是在运行时定义的，一旦设置永远不会改变，但是如果它是可变类型它的状态是可以被改变的。简单">
+<meta name="twitter:image" content="https://img-blog.csdn.net/20180606124943654?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/06/06/Python中的可变与不可变对象/">
+
+
+
+
+
+  <title>Python中的可变与不可变对象 | BENULL</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">BENULL</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">tomorrow is another day</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/06/Python中的可变与不可变对象/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="BENULL">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BENULL">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python中的可变与不可变对象</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-06T12:35:22+08:00">
+                2018-06-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,654字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Python中的可变与不可变对象"><a href="#Python中的可变与不可变对象" class="headerlink" title="Python中的可变与不可变对象"></a>Python中的可变与不可变对象</h1><p>Python中的所有东西都是一个对象。每个Python新手都应该学习的是，Python中的所有对象都可以是可变的或不可变的。<br><img src="https://img-blog.csdn.net/20180606124943654?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>让我们更深入地了解它的细节…因为Python中的所有东西都是对象，所以每个变量都包含一个对象实例。当一个对象被初始化时，它被分配一个唯一的对象ID。它的类型是在运行时定义的，一旦设置永远不会改变，但是如果它是可变类型它的状态是可以被改变的。简单地说，一个可变对象可以在创建之后被改变，一个不可变对象不能。</p>
+<blockquote>
+<p>诸如（int，float，bool，str，tuple，unicode）等内置类型的对象是不可变的。像（list，set，dict）这样的内置类型的对象是可变的。自定义类通常是可变的。要模拟类中的不变性，应该覆盖属性设置和删除以引发异常。<br><img src="https://img-blog.csdn.net/20180606124959268?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>现在出现这个问题，我们如何确定我们的变量是一个可变对象还是不可变对象。为此，我们应该了解“ID”和“TYPE”函数的用途。</p>
+<h1 id="ID和TYPE"><a href="#ID和TYPE" class="headerlink" title="ID和TYPE"></a>ID和TYPE</h1><p>内置函数id（）以整数形式返回对象的标识。这个整数通常对应于对象在内存中的位置，虽然这是针对Python的实现和正在使用的平台而言。is运算符用来比较两个对象的标识。</p>
+</blockquote>
+<p>内置函数type（）返回一个对象的类型。让我们看一个简单的例子<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''示例1'''</span> </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x =“Holberton” </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>y =“Holberton” </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>id（x）</span><br><span class="line"><span class="number">140135852055856</span> </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>id（y）</span><br><span class="line"><span class="number">140135852055856</span> </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">print</span>（x <span class="keyword">is</span> y）<span class="string">' '</span><span class="string">'比较类型'</span><span class="string">''</span> </span><br><span class="line">真的</span><br><span class="line"><span class="string">'''示例2'''</span> </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = <span class="number">50</span> </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>type（a）</span><br><span class="line">&lt;<span class="class"><span class="keyword">class</span>：'<span class="title">int</span>'&gt; </span></span><br><span class="line">&gt;&gt;&gt; b =“Holberton” </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>type（b）</span><br><span class="line">&lt;<span class="class"><span class="keyword">class</span>：'<span class="title">string</span>'&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>现在我们已经看到了如何比较两个简单的字符串变量来找出类型和ID。因此，使用这两个函数，我们可以检查不同类型的对象是如何与变量相关联以及如何更改对象的。</p>
+<h1 id="可变和不可变的对象"><a href="#可变和不可变的对象" class="headerlink" title="可变和不可变的对象"></a>可变和不可变的对象</h1><p>正如我们前面所讨论的，一个可变对象可以改变它的状态或内容，不可变对象不能。</p>
+<ul>
+<li><p>可变对象<br>  列表，字典，集，字节数组</p>
+</li>
+<li><p>不可变对象<br>  int，float，complex，string，tuple，frozen set [注：set的不可变版本]，bytes</p>
+</li>
+</ul>
+<p>一个实用的例子来找出对象类型的可变性<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">10</span></span><br><span class="line">x = y</span><br></pre></td></tr></table></figure></p>
+<p>我们正在创建一个int类型的对象。标识符x和y指向同一个对象。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">id（x）== id（y）</span><br><span class="line">id（y）== id（<span class="number">10</span>）</span><br></pre></td></tr></table></figure></p>
+<p>如果我们做一个简单的操作。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x = x + <span class="number">1</span></span><br></pre></td></tr></table></figure></p>
+<p>现在<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">id（x）！= id（y）</span><br><span class="line">id（x）！= id（<span class="number">10</span>）</span><br></pre></td></tr></table></figure></p>
+<p>x被标记的对象被改变。对象10从未被修改过。不可变对象在创建后不允许修改</p>
+<p>在可变对象的情况下<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">m = list（[<span class="number">1</span>，<span class="number">2</span>，<span class="number">3</span>]）</span><br><span class="line">n = m</span><br></pre></td></tr></table></figure></p>
+<p>我们正在创建一个类型列表的对象。标识符m和n被标记为同一个列表对象，它是3个不可变的int对象的集合。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id（m）== id（n）</span><br></pre></td></tr></table></figure></p>
+<p>现在从列表对象中弹出一个元素确实会改变对象，<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">m.pop（）</span><br></pre></td></tr></table></figure></p>
+<p>对象ID不会被更改<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id（m）== id（n）</span><br></pre></td></tr></table></figure></p>
+<p>m和n将在修改后指向同一个列表对象。列表对象现在将包含[1，2]。</p>
+<p>那么从上面的例子中我们看到了什么？</p>
+<p>Python以不同方式处理可变对象和不可变对象。<br>不可变的访问比可变对象更快。<br>当你需要改变对象的大小，例如列表，字典等等时，可变对象是很好用的。当你需要确保你创建的对象始终保持不变时，使用不可变对象。<br>不可变对象对于“更改”而言基本上是昂贵的，因为这样做涉及到创建副本。更改可变对象很便宜。</p>
+<h1 id="不可变的例外"><a href="#不可变的例外" class="headerlink" title="不可变的例外.."></a>不可变的例外..</h1><p>并非所有的不可变对象都是不可变的。</p>
+<p>如前所述，Python容器比如元组，是不可变的。这意味着一个tuple的值在创建后无法更改。但是元组的“值”实际上是一系列名称，它们与对象的绑定是不可改变的。关键点是要注意绑定是不可改变的，而不是它们绑定的对象。</p>
+<p>让我们考虑一个元组t =（’holberton’，[1，2，3]）</p>
+<p>上面的元组t包含不同数据类型的元素，第一个元素是一个不可变的字符串，第二个元素是一个可变列表。元组本身不可变。即它没有任何改变其内容的方法。同样，字符串是不可变的，因为字符串没有任何可变方法。但是列表对象确实有可变方法，所以可以改变它。这是一个微妙的点，但是非常重要：不可变对象的“值” 不能改变，但它的组成对象是能做到改变的。</p>
+<h1 id="对象如何传递给函数"><a href="#对象如何传递给函数" class="headerlink" title="对象如何传递给函数"></a>对象如何传递给函数</h1><p>对于我们来说，了解可变类型和不可变类型之间的区别以及将它们传递到函数时如何处理是非常重要的。当使用正确的对象时，存储效率会受到很大影响。</p>
+<p>例如，如果一个可变对象在函数中被引用调用，它可以改变原来的变量本身。因此为了避免这种情况，需要将原始变量复制到另一个变量中。不可变的对象可以通过引用来调用，因为它的值不能被改变。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">updateList</span>（<span class="title">list1</span>）：</span></span><br><span class="line">    list1 + = [10]</span><br><span class="line">n = [<span class="number">5</span>，<span class="number">6</span>] </span><br><span class="line"><span class="keyword">print</span>（id（n））＃<span class="number">140312184155336</span></span><br><span class="line">updateList（n）</span><br><span class="line"><span class="keyword">print</span>（n）＃[ </span><br><span class="line"><span class="number">5</span>,<span class="number">6</span>,<span class="number">10</span> ] <span class="keyword">print</span>（id（n））＃<span class="number">140312184155336</span></span><br></pre></td></tr></table></figure></p>
+<p>从上面的例子我们可以看到，我们通过引用调用了列表，因此对原始列表本身进行了更改。</p>
+<p>让我们看看另一个例子：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">updateNumber</span>（<span class="title">n</span>）：</span></span><br><span class="line"><span class="function">    <span class="title">print</span>（<span class="title">id</span>（<span class="title">n</span>））</span></span><br><span class="line">    n + = 10</span><br><span class="line">b = <span class="number">5</span> </span><br><span class="line"><span class="keyword">print</span>（id（b））＃<span class="number">10055680</span> </span><br><span class="line">updateNumber（b）＃<span class="number">10055680</span> </span><br><span class="line"><span class="keyword">print</span>（b）＃<span class="number">5</span></span><br></pre></td></tr></table></figure></p>
+<p>在上面的例子中，同一个对象被传递给函数，但即使对象是相同的，变量值也不会改变。这被称为按价值传递 。那么到底发生了什么？当函数调用该值时，只传递该变量的值，而不传递该对象本身。所以引用该对象的变量不会改变，但对象本身正在改变，但仅在函数范围内。因此，这种变化没有体现出来。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/18/Spark编译/" rel="next" title="Spark编译">
+                <i class="fa fa-chevron-left"></i> Spark编译
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/02/14/python爬取全国城市历史天气数据/" rel="prev" title="python爬取全国城市历史天气数据">
+                python爬取全国城市历史天气数据 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMTE2Ny83NzE2"></div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="BENULL">
+            
+              <p class="site-author-name" itemprop="name">BENULL</p>
+              <p class="site-description motion-element" itemprop="description">tomorrow is another day</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/benull" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:ltobenull@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/u/3169828502" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Python中的可变与不可变对象"><span class="nav-number">1.</span> <span class="nav-text">Python中的可变与不可变对象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ID和TYPE"><span class="nav-number">2.</span> <span class="nav-text">ID和TYPE</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#可变和不可变的对象"><span class="nav-number">3.</span> <span class="nav-text">可变和不可变的对象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#不可变的例外"><span class="nav-number">4.</span> <span class="nav-text">不可变的例外..</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对象如何传递给函数"><span class="nav-number">5.</span> <span class="nav-text">对象如何传递给函数</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">BENULL</span>
+
+  
+</div>
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+<!--
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+
+-->
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

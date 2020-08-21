@@ -100,7 +100,7 @@
 <meta property="og:image" content="https://wx2.sbimg.cn/2020/08/11/oYxMT.png">
 <meta property="og:image" content="https://wx2.sbimg.cn/2020/08/11/oYEYo.png">
 <meta property="og:image" content="https://wx1.sbimg.cn/2020/08/11/oZ5FA.png">
-<meta property="og:updated_time" content="2020-08-21T07:52:02.373Z">
+<meta property="og:updated_time" content="2020-08-21T07:55:50.434Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spatio-Temporal Graph Routing for Skeleton-Based Action Recognition">
 <meta name="twitter:description" content="Spatio-Temporal Graph Routing for Skeleton-Based Action Recognition paper: https://www.aaai.org/ojs/index.php/AAAI/article/view/4875/4748  基于骨架的动作识别时空图路由方法摘要​    基于骨架的人体动作识别由于其表征的有效性，受到了相当多的研究关注，并具有广泛">
@@ -362,7 +362,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  6,975字
+                  6,928字
                 </span>
               
 
@@ -429,7 +429,7 @@
 <h4 id="空域"><a href="#空域" class="headerlink" title="空域"></a>空域</h4><p>另一方面，学习迭代地聚合每个节点的邻域作为其新的隐藏表示。提出了一种一阶近似成功地应用于半监督分类。与此同时，一些文献探索了将图快速转换为序列并利用一维卷积网络的方法。</p>
 <p>​    最近，有一些工作试图用任一度量学习或跳跃知识网络来揭示GCNS的机制。 然而，目前的方法主要集中在半监督分类问题上。 在这项工作中，我们首先借助图上的感受野对基于骨架的动作识别进行了分析。</p>
 <h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>​    在这一部分中，我们首先阐述我们的问题，然后通过描述两个子网络SGR和TGR来介绍我们的时空图路由（STGR）方案。稍后我们将描述总体架构和优化。最后，我们在图上讨论感受野，进一步验证STGR的必要性。</p>
-<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>​    三维人体骨架表示为 $X=\left{x <em> {n}^{t}\right} \in {\mathbb{R}^{C</em>{\text {in }} \times T \times N}}$ 其中有 $T$ 帧 和$N$ 个关节点。 在第$t$个时间步的第$n$个关节，每个个体表示为 $xyz$-坐标特征向量 ，因此 $C<em>{\mathrm{in}}=3$。为了更加方便，我们将单个帧骨架表示为 $X^{t} \in \mathbb{R}^{C</em>{\text {in}} \times N } $ 对于第 $t$  帧和关节轨迹表示为  $X<em>{n} \in \mathbb{R}^{C</em>{\text {in }} \times T}$ 对于第 $n$ 个关节。</p>
+<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>​    三维人体骨架表示为 <script type="math/tex">X=\left\{x _ {n}^{t}\right\} \in {\mathbb{R}^{C_{\text {in }} \times T \times N}}</script> 其中有 <script type="math/tex">T</script> 帧 和<script type="math/tex">N</script> 个关节点。 在第<script type="math/tex">t</script>个时间步的第<script type="math/tex">n</script>个关节，每个个体表示为 <script type="math/tex">xyz</script>-坐标特征向量 ，因此 <script type="math/tex">C_{\mathrm{in}}=3</script>。为了更加方便，我们将单个帧骨架表示为 <script type="math/tex">X^{t} \in \mathbb{R}^{C_{\text {in}} \times N }</script> 对于第 <script type="math/tex">t</script>  帧和关节轨迹表示为  <script type="math/tex">X_{n} \in \mathbb{R}^{C_{\text {in }} \times T}</script> 对于第 <script type="math/tex">n</script> 个关节。</p>
 <p>​    $A \in \mathbb{R}^{N \times N}$ 是简单的领接矩阵， $A_{i j}$ 表示关节 $i$ 和 关节 $j$ 是相连的。$D$ 是相应的度矩阵。默认的图由胰以下表示:</p>
 <script type="math/tex; mode=display">\mathcal{G}^{\text {default }}=\tilde{D}^{-\frac{1}{2}}\tilde{A}\tilde{D}^{-\frac{1}{2}}</script><p>其中 $\tilde{A}=A+I$ 是包括节点自环的广义邻接矩阵。 $\tilde{D}$ 是$\tilde{A}$ 相应的度矩阵。因此， $\mathcal{G}^{\text {default }}$ 是$\tilde{A}$的对角规范化矩阵。 如前所述，固定的人体骨架不足以模拟复杂场景中多变的人体结构。我们的目标是学习从原始骨架到图拓扑表示的映射 $X \rightarrow \mathcal{G}$ 在多个视图中，例如姿势和运动。因此，我们有：</p>
 <script type="math/tex; mode=display">\left\{\mathcal{G}^{\text {spat }}, \mathcal{G}^{\text {temp }}\right\}=f_{\text {STGR }}\left(X ; \theta^{\text {spat }}, \theta^{\text {temp }}\right)</script><p>其中$\mathcal{G}^{\text {spat }}$ 和 $\mathcal{G}^{\text {temp }}$是时空图拓扑表示。 $\theta^{\text {spat }}$ 和 $\theta^{\text {temp }}$代表相应的参数。 $\mathcal{G}^{\text {spat }}$ 和 $\mathcal{G}^{\text {temp }}$ 将与默认图 $\mathcal{G}^{\text {default }}$ 连接，形成一个图集 $\mathcal{S}=\left{\mathcal{G}^{\text {default }}, \mathcal{G}^{\text {spat }}, \mathcal{G}^{\text {temp }}\right}$ 。在下面的部分中，我们将对两个子网进行详细的描述。</p>

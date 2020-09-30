@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Python,project,Qt,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="BENULL" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="PyQt5 画图板主要技术 PyQt5 qtDesigner openCV  主要功能 绘画 画笔 油漆桶 直线 矩形 椭圆 橡皮擦   图片处理 旋转、翻转 亮度、饱和度、对比度、色调调节 灰度化 二值化 反相（反色） 浮雕 边缘检测 模糊 锐化    详细代码github仓库 实现过程遇到的问题在pycharm上使用qtDesigner配置qtDesigner 配置UIC 参考 Mac下pyc">
+<meta name="keywords" content="Python,project,Qt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PyQt5 画图板">
+<meta property="og:url" content="http://yoursite.com/2020/09/29/PyQt5画图板/index.html">
+<meta property="og:site_name" content="BENULL">
+<meta property="og:description" content="PyQt5 画图板主要技术 PyQt5 qtDesigner openCV  主要功能 绘画 画笔 油漆桶 直线 矩形 椭圆 橡皮擦   图片处理 旋转、翻转 亮度、饱和度、对比度、色调调节 灰度化 二值化 反相（反色） 浮雕 边缘检测 模糊 锐化    详细代码github仓库 实现过程遇到的问题在pycharm上使用qtDesigner配置qtDesigner 配置UIC 参考 Mac下pyc">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://b1.sbimg.org/file/chevereto-jia/2020/09/30/GZ6Oo.png">
+<meta property="og:image" content="https://sbimg.cn/images/2020/09/30/GZpxa.png">
+<meta property="og:image" content="https://b1.sbimg.org/file/chevereto-jia/2020/09/30/GZGDl.png">
+<meta property="og:image" content="https://b1.sbimg.org/file/chevereto-jia/2020/09/30/GZ3zw.png">
+<meta property="og:image" content="https://sbimg.cn/images/2020/09/30/GZmuM.png">
+<meta property="og:image" content="https://b1.sbimg.org/file/chevereto-jia/2020/09/30/GZoGT.png">
+<meta property="og:image" content="https://sbimg.cn/images/2020/09/30/GZ0mR.png">
+<meta property="og:image" content="https://sbimg.cn/images/2020/09/30/GZ2dI.png">
+<meta property="og:image" content="https://sbimg.cn/images/2020/09/30/GZCZK.png">
+<meta property="og:updated_time" content="2020-09-30T06:18:28.373Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PyQt5 画图板">
+<meta name="twitter:description" content="PyQt5 画图板主要技术 PyQt5 qtDesigner openCV  主要功能 绘画 画笔 油漆桶 直线 矩形 椭圆 橡皮擦   图片处理 旋转、翻转 亮度、饱和度、对比度、色调调节 灰度化 二值化 反相（反色） 浮雕 边缘检测 模糊 锐化    详细代码github仓库 实现过程遇到的问题在pycharm上使用qtDesigner配置qtDesigner 配置UIC 参考 Mac下pyc">
+<meta name="twitter:image" content="https://b1.sbimg.org/file/chevereto-jia/2020/09/30/GZ6Oo.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/09/29/PyQt5画图板/">
+
+
+
+
+
+  <title>PyQt5 画图板 | BENULL</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">BENULL</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">tomorrow is another day</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/29/PyQt5画图板/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="BENULL">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BENULL">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">PyQt5 画图板</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-29T20:15:32+08:00">
+                2020-09-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/project/" itemprop="url" rel="index">
+                    <span itemprop="name">project</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  800字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  4 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="PyQt5-画图板"><a href="#PyQt5-画图板" class="headerlink" title="PyQt5 画图板"></a>PyQt5 画图板</h1><h2 id="主要技术"><a href="#主要技术" class="headerlink" title="主要技术"></a>主要技术</h2><ul>
+<li>PyQt5</li>
+<li>qtDesigner</li>
+<li>openCV</li>
+</ul>
+<h2 id="主要功能"><a href="#主要功能" class="headerlink" title="主要功能"></a>主要功能</h2><ul>
+<li>绘画<ul>
+<li>画笔</li>
+<li>油漆桶</li>
+<li>直线</li>
+<li>矩形</li>
+<li>椭圆</li>
+<li>橡皮擦</li>
+</ul>
+</li>
+<li>图片处理<ul>
+<li>旋转、翻转</li>
+<li>亮度、饱和度、对比度、色调调节</li>
+<li>灰度化</li>
+<li>二值化</li>
+<li>反相（反色）</li>
+<li>浮雕</li>
+<li>边缘检测</li>
+<li>模糊</li>
+<li>锐化</li>
+</ul>
+</li>
+</ul>
+<h2 id="详细代码"><a href="#详细代码" class="headerlink" title="详细代码"></a>详细代码</h2><p><a href="https://github.com/BENULL/Paint" target="_blank" rel="noopener">github仓库</a></p>
+<h2 id="实现过程遇到的问题"><a href="#实现过程遇到的问题" class="headerlink" title="实现过程遇到的问题"></a>实现过程遇到的问题</h2><h3 id="在pycharm上使用qtDesigner"><a href="#在pycharm上使用qtDesigner" class="headerlink" title="在pycharm上使用qtDesigner"></a>在pycharm上使用qtDesigner</h3><p>配置qtDesigner</p>
+<p>配置UIC</p>
+<p>参考 <a href="https://blog.csdn.net/u013667527/article/details/97657621" target="_blank" rel="noopener">Mac下pycharm+qtdesigner环境搭建</a></p>
+<h3 id="绘图时图像不能留存或重影问题"><a href="#绘图时图像不能留存或重影问题" class="headerlink" title="绘图时图像不能留存或重影问题"></a>绘图时图像不能留存或重影问题</h3><p>采取双缓冲绘图方法</p>
+<p>我们再添加一个辅助画布，如果正在绘图，也就是鼠标按键还没有释放的时候，就在这个辅助画布上绘图，只有当鼠标按键释放的时候，才在真正的画布上绘图</p>
+<p>参考<a href="http://shouce.jb51.net/qt-beginning/22.html" target="_blank" rel="noopener">2D绘图（八）双缓冲绘图</a></p>
+<h3 id="油漆桶Flood-Fill算法问题"><a href="#油漆桶Flood-Fill算法问题" class="headerlink" title="油漆桶Flood Fill算法问题"></a>油漆桶Flood Fill算法问题</h3><p>泛洪算法—Flood Fill，用于确定连接到多维数组中给定节点的区域。</p>
+<p>基本原理就是从一个像素点出发，以此向周边的像素点扩充着色，直到图形的边界。</p>
+<p>实现方法包括传统递归方式dfs、bfs和描绘线算法(Scanline Fill)等</p>
+<p>在QImage上实现效率很低，因为getPixel操作很慢，可以进一步优化</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getPixel</span><span class="params">(x,y,pixels,w)</span>:</span></span><br><span class="line">    i = (x + (y * w)) * <span class="number">4</span></span><br><span class="line">    <span class="keyword">return</span> pixels[i:i + <span class="number">3</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 油漆桶</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">floodFill</span><span class="params">(image,pos)</span>:</span></span><br><span class="line">    fillPositions = []</span><br><span class="line">    w, h = image.width(), image.height()</span><br><span class="line">    pixels = image.bits().asstring(w * h * <span class="number">4</span>)</span><br><span class="line">    targetColor = getPixel(pos.x(), pos.y(), pixels, w)</span><br><span class="line"></span><br><span class="line">    haveSeen = set()</span><br><span class="line">    queue = [(pos.x(), pos.y())]</span><br><span class="line">    <span class="keyword">while</span> queue:</span><br><span class="line">        x, y = queue.pop()</span><br><span class="line">        <span class="keyword">if</span> getPixel(x, y,pixels,w) == targetColor:</span><br><span class="line">            fillPositions.append((x,y))</span><br><span class="line">            queue.extend(getCardinalPoints(haveSeen, (x, y),w,h))</span><br><span class="line">    <span class="keyword">return</span> fillPositions</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getCardinalPoints</span><span class="params">(haveSeen, centerPos,w,h)</span>:</span></span><br><span class="line">    points = []</span><br><span class="line">    cx, cy = centerPos</span><br><span class="line">    <span class="keyword">for</span> x, y <span class="keyword">in</span> [(<span class="number">1</span>, <span class="number">0</span>), (<span class="number">0</span>, <span class="number">1</span>), (<span class="number">-1</span>, <span class="number">0</span>), (<span class="number">0</span>, <span class="number">-1</span>)]:</span><br><span class="line">        xx, yy = cx + x, cy + y</span><br><span class="line">        <span class="keyword">if</span> (xx &gt;= <span class="number">0</span> <span class="keyword">and</span> xx &lt; w <span class="keyword">and</span> yy &gt;= <span class="number">0</span> <span class="keyword">and</span> yy &lt; h <span class="keyword">and</span> (xx, yy) <span class="keyword">not</span> <span class="keyword">in</span> haveSeen):</span><br><span class="line">            points.append((xx, yy))</span><br><span class="line">            haveSeen.add((xx, yy))</span><br><span class="line">    <span class="keyword">return</span> points</span><br></pre></td></tr></table></figure>
+<p>参考<a href="https://www.learnpyqt.com/blog/implementing-qpainter-flood-fill-pyqt5pyside/" target="_blank" rel="noopener">Implementing QPainter flood fill in PyQt5/PySide</a></p>
+<p><a href="https://www.pianshen.com/article/172962944/" target="_blank" rel="noopener">图像分割经典算法—《泛洪算法》（Flood Fill)</a></p>
+<h3 id="Mac上pyqt5-与-cv库冲突问题"><a href="#Mac上pyqt5-与-cv库冲突问题" class="headerlink" title="Mac上pyqt5 与 cv库冲突问题"></a>Mac上pyqt5 与 cv库冲突问题</h3><p>问题<code>You might be loading **two sets of Qt binaries** into the same process</code></p>
+<p>删除原有的opencv       </p>
+<p><code>pip3 uninstall opencv-python</code></p>
+<p>安装opencv–headless版本</p>
+<p><code>pip3 install opencv-contrib-python-headless</code></p>
+<p>参考<a href="https://blog.csdn.net/qq_43444349/article/details/106602543" target="_blank" rel="noopener">Mac下使用opencv与pyqt发生冲突</a></p>
+<h3 id="pyqt-QImage-与opencv-MAT格式转化问题"><a href="#pyqt-QImage-与opencv-MAT格式转化问题" class="headerlink" title="pyqt QImage 与opencv MAT格式转化问题"></a>pyqt QImage 与opencv MAT格式转化问题</h3><p>在使用opencv过程中需要传入QImage对象进行处理</p>
+<p>QImage转化成opencv下的 MAT(numpy ndarray) 对象</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">CvMatToQImage</span><span class="params">(cvMat)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> len(cvMat.shape) == <span class="number">2</span>:</span><br><span class="line">        rows, columns = cvMat.shape</span><br><span class="line">        bytesPerLine = columns</span><br><span class="line">        <span class="keyword">return</span> QImage(cvMat.data, columns, rows, bytesPerLine, QImage.Format_Indexed8)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        rows, columns, channels = cvMat.shape</span><br><span class="line">        bytesPerLine = channels * columns</span><br><span class="line">        <span class="keyword">return</span> QImage(cvMat.data, columns, rows, bytesPerLine, QImage.Format_RGBA8888)</span><br></pre></td></tr></table></figure>
+<p>MAT(numpy ndarray) 转QImage</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">QImageToCvMat</span><span class="params">(incomingImage)</span>:</span></span><br><span class="line">    incomingImage = incomingImage.convertToFormat(QImage.Format_RGBA8888)</span><br><span class="line">    width = incomingImage.width()</span><br><span class="line">    height = incomingImage.height()</span><br><span class="line">    ptr = incomingImage.bits()</span><br><span class="line">    ptr.setsize(height * width * <span class="number">4</span>)</span><br><span class="line">    arr = np.frombuffer(ptr, np.uint8).reshape((height, width, <span class="number">4</span>))</span><br><span class="line">    <span class="keyword">return</span> arr</span><br></pre></td></tr></table></figure>
+<p>参考<a href="https://blog.csdn.net/lch551218/article/details/104882183/" target="_blank" rel="noopener">Python 中如何将 Pyqt5 下的 QImage 对象转换成 PIL image 或 opencv MAT (numpy ndarray) 对象</a></p>
+<h2 id="效果预览"><a href="#效果预览" class="headerlink" title="效果预览"></a>效果预览</h2><h3 id="绘画"><a href="#绘画" class="headerlink" title="绘画"></a>绘画</h3><p><img src="https://b1.sbimg.org/file/chevereto-jia/2020/09/30/GZ6Oo.png" alt></p>
+<h3 id="油漆桶效果"><a href="#油漆桶效果" class="headerlink" title="油漆桶效果"></a>油漆桶效果</h3><p><img src="https://sbimg.cn/images/2020/09/30/GZpxa.png" alt></p>
+<h3 id="图像处理部分展示"><a href="#图像处理部分展示" class="headerlink" title="图像处理部分展示"></a>图像处理部分展示</h3><h3 id="原图"><a href="#原图" class="headerlink" title="原图"></a>原图</h3><p><img src="https://b1.sbimg.org/file/chevereto-jia/2020/09/30/GZGDl.png" alt></p>
+<h3 id="亮度调节"><a href="#亮度调节" class="headerlink" title="亮度调节"></a>亮度调节</h3><p><img src="https://b1.sbimg.org/file/chevereto-jia/2020/09/30/GZ3zw.png" alt></p>
+<h3 id="色调调节"><a href="#色调调节" class="headerlink" title="色调调节"></a>色调调节</h3><p><img src="https://sbimg.cn/images/2020/09/30/GZmuM.png" alt></p>
+<h3 id="反相"><a href="#反相" class="headerlink" title="反相"></a>反相</h3><p><img src="https://b1.sbimg.org/file/chevereto-jia/2020/09/30/GZoGT.png" alt></p>
+<h3 id="灰度化"><a href="#灰度化" class="headerlink" title="灰度化"></a>灰度化</h3><p><img src="https://sbimg.cn/images/2020/09/30/GZ0mR.png" alt></p>
+<h3 id="二值化"><a href="#二值化" class="headerlink" title="二值化"></a>二值化</h3><p><img src="https://sbimg.cn/images/2020/09/30/GZ2dI.png" alt></p>
+<h3 id="边缘检测"><a href="#边缘检测" class="headerlink" title="边缘检测"></a>边缘检测</h3><p><img src="https://sbimg.cn/images/2020/09/30/GZCZK.png" alt></p>
+<h2 id="部分参考"><a href="#部分参考" class="headerlink" title="部分参考"></a>部分参考</h2><p><a href="https://www.cnblogs.com/lfri/p/10599420.html" target="_blank" rel="noopener">https://www.cnblogs.com/lfri/p/10599420.html</a><a href="https://blog.csdn.net/qq_43444349/article/details/106602543" target="_blank" rel="noopener">https://blog.csdn.net/qq_43444349/article/details/106602543</a><br><a href="https://www.pianshen.com/article/172962944/" target="_blank" rel="noopener">https://www.pianshen.com/article/172962944/</a><br><a href="https://blog.csdn.net/lzwarhang/article/details/93209166" target="_blank" rel="noopener">https://blog.csdn.net/lzwarhang/article/details/93209166</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+            <a href="/tags/project/" rel="tag"># project</a>
+          
+            <a href="/tags/Qt/" rel="tag"># Qt</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/08/21/基于骨架的动作识别时空图路由方法/" rel="next" title="Spatio-Temporal Graph Routing for Skeleton-Based Action Recognition">
+                <i class="fa fa-chevron-left"></i> Spatio-Temporal Graph Routing for Skeleton-Based Action Recognition
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMTE2Ny83NzE2"></div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="BENULL">
+            
+              <p class="site-author-name" itemprop="name">BENULL</p>
+              <p class="site-description motion-element" itemprop="description">tomorrow is another day</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/benull" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:ltobenull@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/u/3169828502" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#PyQt5-画图板"><span class="nav-number">1.</span> <span class="nav-text">PyQt5 画图板</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#主要技术"><span class="nav-number">1.1.</span> <span class="nav-text">主要技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主要功能"><span class="nav-number">1.2.</span> <span class="nav-text">主要功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#详细代码"><span class="nav-number">1.3.</span> <span class="nav-text">详细代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现过程遇到的问题"><span class="nav-number">1.4.</span> <span class="nav-text">实现过程遇到的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在pycharm上使用qtDesigner"><span class="nav-number">1.4.1.</span> <span class="nav-text">在pycharm上使用qtDesigner</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#绘图时图像不能留存或重影问题"><span class="nav-number">1.4.2.</span> <span class="nav-text">绘图时图像不能留存或重影问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#油漆桶Flood-Fill算法问题"><span class="nav-number">1.4.3.</span> <span class="nav-text">油漆桶Flood Fill算法问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mac上pyqt5-与-cv库冲突问题"><span class="nav-number">1.4.4.</span> <span class="nav-text">Mac上pyqt5 与 cv库冲突问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pyqt-QImage-与opencv-MAT格式转化问题"><span class="nav-number">1.4.5.</span> <span class="nav-text">pyqt QImage 与opencv MAT格式转化问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#效果预览"><span class="nav-number">1.5.</span> <span class="nav-text">效果预览</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#绘画"><span class="nav-number">1.5.1.</span> <span class="nav-text">绘画</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#油漆桶效果"><span class="nav-number">1.5.2.</span> <span class="nav-text">油漆桶效果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图像处理部分展示"><span class="nav-number">1.5.3.</span> <span class="nav-text">图像处理部分展示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原图"><span class="nav-number">1.5.4.</span> <span class="nav-text">原图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#亮度调节"><span class="nav-number">1.5.5.</span> <span class="nav-text">亮度调节</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#色调调节"><span class="nav-number">1.5.6.</span> <span class="nav-text">色调调节</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反相"><span class="nav-number">1.5.7.</span> <span class="nav-text">反相</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#灰度化"><span class="nav-number">1.5.8.</span> <span class="nav-text">灰度化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二值化"><span class="nav-number">1.5.9.</span> <span class="nav-text">二值化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#边缘检测"><span class="nav-number">1.5.10.</span> <span class="nav-text">边缘检测</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部分参考"><span class="nav-number">1.6.</span> <span class="nav-text">部分参考</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">BENULL</span>
+
+  
+</div>
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+<!--
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+
+-->
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

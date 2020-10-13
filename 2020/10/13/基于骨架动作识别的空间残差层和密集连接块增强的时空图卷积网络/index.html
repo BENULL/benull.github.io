@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="paper,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="BENULL" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="Spatial Residual Layer and Dense Connection Block Enhanced Spatial Temporal Graph Convolutional Network for Skeleton-Based Action Recognition基于骨架动作识别的空间残差层和密集连接块增强的时空图卷积网络来源    作者单位 会议 论文地址 代码     江南大">
+<meta name="keywords" content="paper">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spatial Residual Layer and Dense Connection Block Enhanced Spatial Temporal Graph Convolutional Network for Skeleton-Based Action Recognition">
+<meta property="og:url" content="http://yoursite.com/2020/10/13/基于骨架动作识别的空间残差层和密集连接块增强的时空图卷积网络/index.html">
+<meta property="og:site_name" content="BENULL">
+<meta property="og:description" content="Spatial Residual Layer and Dense Connection Block Enhanced Spatial Temporal Graph Convolutional Network for Skeleton-Based Action Recognition基于骨架动作识别的空间残差层和密集连接块增强的时空图卷积网络来源    作者单位 会议 论文地址 代码     江南大">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://pic3.zhimg.com/80/v2-d226e3e1c29a4dcce46c3bb947bd51ee_1440w.jpg">
+<meta property="og:image" content="https://pic3.zhimg.com/80/v2-e3a662c73a31025e27f3dd0e1607462d_1440w.jpg">
+<meta property="og:image" content="https://pic2.zhimg.com/80/v2-e536267e21d4c87281fd0a36521bc12a_1440w.jpg">
+<meta property="og:image" content="https://pic2.zhimg.com/80/v2-680b3f6df425460d7b2562e65b59d784_1440w.jpg">
+<meta property="og:image" content="https://pic2.zhimg.com/80/v2-8ef7b0719590ec00a1b813e71ea54f11_1440w.jpg">
+<meta property="og:image" content="https://pic2.zhimg.com/80/v2-4a022227b16f1873c12a12c5a722e186_1440w.jpg">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-86a0945703f3e4cf63505c7d98460068_1440w.jpg">
+<meta property="og:updated_time" content="2020-10-13T11:27:58.560Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spatial Residual Layer and Dense Connection Block Enhanced Spatial Temporal Graph Convolutional Network for Skeleton-Based Action Recognition">
+<meta name="twitter:description" content="Spatial Residual Layer and Dense Connection Block Enhanced Spatial Temporal Graph Convolutional Network for Skeleton-Based Action Recognition基于骨架动作识别的空间残差层和密集连接块增强的时空图卷积网络来源    作者单位 会议 论文地址 代码     江南大">
+<meta name="twitter:image" content="https://pic3.zhimg.com/80/v2-d226e3e1c29a4dcce46c3bb947bd51ee_1440w.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/10/13/基于骨架动作识别的空间残差层和密集连接块增强的时空图卷积网络/">
+
+
+
+
+
+  <title>Spatial Residual Layer and Dense Connection Block Enhanced Spatial Temporal Graph Convolutional Network for Skeleton-Based Action Recognition | BENULL</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">BENULL</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">tomorrow is another day</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/13/基于骨架动作识别的空间残差层和密集连接块增强的时空图卷积网络/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="BENULL">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BENULL">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Spatial Residual Layer and Dense Connection Block Enhanced Spatial Temporal Graph Convolutional Network for Skeleton-Based Action Recognition</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-10-13T19:23:35+08:00">
+                2020-10-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/paper/" itemprop="url" rel="index">
+                    <span itemprop="name">paper</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,995字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  7 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Spatial-Residual-Layer-and-Dense-Connection-Block-Enhanced-Spatial-Temporal-Graph-Convolutional-Network-for-Skeleton-Based-Action-Recognition"><a href="#Spatial-Residual-Layer-and-Dense-Connection-Block-Enhanced-Spatial-Temporal-Graph-Convolutional-Network-for-Skeleton-Based-Action-Recognition" class="headerlink" title="Spatial Residual Layer and Dense Connection Block Enhanced Spatial Temporal Graph Convolutional Network for Skeleton-Based Action Recognition"></a>Spatial Residual Layer and Dense Connection Block Enhanced Spatial Temporal Graph Convolutional Network for Skeleton-Based Action Recognition</h1><h2 id="基于骨架动作识别的空间残差层和密集连接块增强的时空图卷积网络"><a href="#基于骨架动作识别的空间残差层和密集连接块增强的时空图卷积网络" class="headerlink" title="基于骨架动作识别的空间残差层和密集连接块增强的时空图卷积网络"></a>基于骨架动作识别的空间残差层和密集连接块增强的时空图卷积网络</h2><h2 id="来源"><a href="#来源" class="headerlink" title="来源"></a>来源</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>作者单位</th>
+<th>会议</th>
+<th>论文地址</th>
+<th>代码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>江南大学</td>
+<td>ICCV 2019</td>
+<td><a href="https://openaccess.thecvf.com/content_ICCVW_2019/papers/SGRL/Wu_Spatial_Residual_Layer_and_Dense_Connection_Block_Enhanced_Spatial_Temporal_ICCVW_2019_paper.pdf" target="_blank" rel="noopener">论文地址</a></td>
+<td>暂无</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="创新点"><a href="#创新点" class="headerlink" title="创新点"></a>创新点</h2><p>引入了空间残差层来捕获和融合时空特征<br>在先前的工作中，时空层包括空间图卷积和时间卷积。但是不同卷积的序列叠加会混合不同域的信息，从而导致识别不准确。通过引入跨域空间残差卷积，可以增强时空信息</p>
+<p>此外，提出了一个密集连接块来提取全局信息</p>
+<p>它由多个空间残差层组成。在这些层中，可以通过密集连接来传递信息。</p>
+<p>结合上面提到的两个组件来创建了一个时空图卷积网络(ST-GCN),称为SDGCN</p>
+<p><img src="https://pic3.zhimg.com/80/v2-d226e3e1c29a4dcce46c3bb947bd51ee_1440w.jpg" alt="img"></p>
+<blockquote>
+<p>图1.该方法将2D空间卷积与1D时间卷积集成在一起，用于时空特征表示，用于基于骨骼的动作识别。 蓝色方块代表空间图卷积，黄色代表时间卷积。</p>
+</blockquote>
+<h2 id="网络结构"><a href="#网络结构" class="headerlink" title="网络结构"></a>网络结构</h2><p>主要工作：空间残差层和密集连接块增强的时空图卷积网络</p>
+<h3 id="空间残差层Spatial-Residual-Layer-SRL"><a href="#空间残差层Spatial-Residual-Layer-SRL" class="headerlink" title="空间残差层Spatial Residual Layer (SRL)"></a>空间残差层Spatial Residual Layer (SRL)</h3><p>​    ResNet 首先通过引入残差结构来提出残差连接的概念，其中输入节点信息通过恒等映射传递。残差映射的想法是删除相同的主要部分，从而突出显示较小的更改。通过引入残差映射，整个结构对输出的变化更加敏感。残差层可以看作是一个放大器，经过合理的设置，敏感信息会被放大，因此残差连接只需要关心它需要学习的内容即可。</p>
+<p><img src="https://pic3.zhimg.com/80/v2-e3a662c73a31025e27f3dd0e1607462d_1440w.jpg" alt="img"></p>
+<blockquote>
+<p>图2.空间残差ST-GCN层。 下部是ST-GCN层，由空间图卷积和时间卷积组成，上部是空间图卷积。 就像在ResNet中一样，残差连接的输入与ST-GCN层相同，然后将从残差连接获得的输出添加到ST-GCN层的输出中，相加的结果是最终的输出。</p>
+</blockquote>
+<p>​    这里的空间残差连接是跨域的。时空融合网络由空间图卷积分支和时空卷积分支组成。恒等映射是图中的下流。与原始的ResNet不同，此处的恒等映射由图卷积组成，该图卷积也可以视为特殊的双流结构，其中一个流学习静态特征，而另一个流学习时空特征。通过2D空间图卷积，可以提取静态空间特征。由于残差连接，残差图将注意静态空间信息。原始层只需要重视时空信息。这种设计使GCN可以更有效地从视频中学习重要信息。</p>
+<h3 id="密集连接块Dense-Connection-Block-DCB"><a href="#密集连接块Dense-Connection-Block-DCB" class="headerlink" title="密集连接块Dense Connection Block (DCB)"></a>密集连接块Dense Connection Block (DCB)</h3><p>它的结构非常简单，由几个密集的连接块组成。在每个块中，每个图层的特征图都与相同尺度的所有先前特征连接在一起。通过引入密集连接，将重用每一层的特征。一方面，使用少量的计算，可以获得更丰富的特征图。另一方面，重用特征更强大，因此减少了不同层之间的依赖性。</p>
+<p><img src="https://pic2.zhimg.com/80/v2-e536267e21d4c87281fd0a36521bc12a_1440w.jpg" alt="img"></p>
+<blockquote>
+<p>图3.每个密集的连接块都包含几个空间残差层。 在这里，除了第一层或最后一层，每层输入特征的大小与上一层的输出大小完全相同。 </p>
+</blockquote>
+<p>​    在每个密集连接块中，每一层都已连接到所有后续层。 <strong>在通道中将它们全部串联</strong>在一起。 这样，可以在以后的层中重用先前层所提取的大多数信息。 就像DenseNet一样，此块允许整个网络充分利用全局信息。 最重要的是，从特征的角度来看，通过特征重用和旁路设置，可以大大减少网络参数的数量，并在一定程度上缓解了梯度消失的问题。 另一方面，每一层的输入不仅包括前一层的输出，而且还包括其他先前的层。 这也提高了网络的健壮性。</p>
+<h3 id="总体结构"><a href="#总体结构" class="headerlink" title="总体结构"></a>总体结构</h3><p>在这里，将空间残差层和密集连接块组合在一起，以形成最终的体系结构，称为SDGCN。注意，几个空间残差层构成一个块。引入密集连接来连接每个块中的这些层。整个网络结构由3个密集连接块组成。在每个块中，通道大小的设置可以充分利用密集连接。采用原始ST-GCN的设置，这确保了所提出的方法可以应用于常用的ST-GCN结构。</p>
+<p><img src="https://pic2.zhimg.com/80/v2-680b3f6df425460d7b2562e65b59d784_1440w.jpg" alt="img"></p>
+<blockquote>
+<p>图4.左：基于DCB1的SDGCN。 遵循标准的ST-GCN模型来设计模型。右：基于DCB2的SDGCN。 与左图相比，为了充分探讨密集连接的作用，引入了更多的层和密集连接。空心圆表示SRL。</p>
+</blockquote>
+<h2 id="实验部分"><a href="#实验部分" class="headerlink" title="实验部分"></a>实验部分</h2><h3 id="消融实验"><a href="#消融实验" class="headerlink" title="消融实验"></a>消融实验</h3><p><img src="https://pic2.zhimg.com/80/v2-8ef7b0719590ec00a1b813e71ea54f11_1440w.jpg" alt="img"></p>
+<blockquote>
+<p>表1.在Kinetics数据集上的消融实验。 SRL表示空间残差层，DCB表示密集连接块(DCB1和DCB2)，如图4所示。 报告了在Kinetics数据集上的TOP-1和TOP-5准确率。</p>
+<p>表2.在NTU-RGB+D数据集的消融实验。 我们报告交叉对象和交叉视图数据上的准确性。 其他符号与Tab相同。 只上报TOP-1准确率。</p>
+</blockquote>
+<p>对Kinetics和NTU-RGB + D进行详细的实验比较</p>
+<h4 id="空间残差层"><a href="#空间残差层" class="headerlink" title="空间残差层"></a>空间残差层</h4><p>首先以STGCN 为基准，探索跨域空间残差层的有效性</p>
+<p>与原始结构相比，对于由空间图卷积运算和时间卷积串联组成的每个时空结构，我们向原始网络引入空间残差连接，简称为SRL，并保留其他条件不变</p>
+<p>发现与基线方法相比，带有SRL的ST-GCN表现出明显的改进</p>
+<p>在Kinetics上，性能提高了2.61％</p>
+<p>对于NTU-RGB + D，Cross-Subject和Cross-View的性能分别提高了1.75％和2.76％</p>
+<h4 id="密集连接块"><a href="#密集连接块" class="headerlink" title="密集连接块"></a>密集连接块</h4><p>DCB1基于原始结构，包含10层。为了演示密集连接的作用，设计了DCB2，它包含12层</p>
+<p>具有DCB1的ST-GCN的性能提高了1.51％，具有DCB2的ST-GCN的性能提高了2.48％</p>
+<p>显然，密集的连接为我们的网络做出了很大的贡献，但是，随着密集连接的增加，网络参数的数量迅速增加。此外，盲目的累积网络复杂性可能导致某些数据集的模型过度拟合。</p>
+<h3 id="结果比较"><a href="#结果比较" class="headerlink" title="结果比较"></a>结果比较</h3><p>为了进行全面的比较，选择将我们的方法与两个重要的基线相比：ST-GCN 和2s-AGCN 。第一个基准是基于骨骼的动作识别方面的开创性工作，而2s-AGCN是最新的最佳方法。将SRL和DCB合并在一起以报告最终结果。最终模型表示为SDGCN。</p>
+<p>与基于ST-GCN的方法相比，在Kinetics上的准确性提高到34.06％，在Cross-Subject和Cross-View测试中分别提高到84.04％和91.43％。</p>
+<p>当2s-AGCN作为基准时，在Kinetics上，所提出的方法达到了37.35％的精度。在NTU-RGB + D上，Cross-Subject和Cross-View数据的准确度分别为89.58％和95.74％</p>
+<p><img src="https://pic2.zhimg.com/80/v2-4a022227b16f1873c12a12c5a722e186_1440w.jpg" alt="img"></p>
+<blockquote>
+<p>表3 与目前最先进的方法在Kinetics数据集上的比较</p>
+</blockquote>
+<p><img src="https://pic1.zhimg.com/80/v2-86a0945703f3e4cf63505c7d98460068_1440w.jpg" alt="img"></p>
+<blockquote>
+<p>表4.在NTURGB+D上与现有方法的比较</p>
+</blockquote>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>​    提出了一个统一的时空图卷积网络框架，称为SDGCN，以提高基于骨架的动作识别的性能。通过引入跨域空间图残差层和密集连接块，充分利用了时空信息，提高了时空信息处理的效率。可以很容易地将其合并到主流的时空图网络中。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/paper/" rel="tag"># paper</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/09/29/PyQt5画图板/" rel="next" title="PyQt5 画图板">
+                <i class="fa fa-chevron-left"></i> PyQt5 画图板
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMTE2Ny83NzE2"></div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="BENULL">
+            
+              <p class="site-author-name" itemprop="name">BENULL</p>
+              <p class="site-description motion-element" itemprop="description">tomorrow is another day</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/benull" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:ltobenull@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/u/3169828502" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Spatial-Residual-Layer-and-Dense-Connection-Block-Enhanced-Spatial-Temporal-Graph-Convolutional-Network-for-Skeleton-Based-Action-Recognition"><span class="nav-number">1.</span> <span class="nav-text">Spatial Residual Layer and Dense Connection Block Enhanced Spatial Temporal Graph Convolutional Network for Skeleton-Based Action Recognition</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基于骨架动作识别的空间残差层和密集连接块增强的时空图卷积网络"><span class="nav-number">1.1.</span> <span class="nav-text">基于骨架动作识别的空间残差层和密集连接块增强的时空图卷积网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#来源"><span class="nav-number">1.2.</span> <span class="nav-text">来源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创新点"><span class="nav-number">1.3.</span> <span class="nav-text">创新点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络结构"><span class="nav-number">1.4.</span> <span class="nav-text">网络结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#空间残差层Spatial-Residual-Layer-SRL"><span class="nav-number">1.4.1.</span> <span class="nav-text">空间残差层Spatial Residual Layer (SRL)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#密集连接块Dense-Connection-Block-DCB"><span class="nav-number">1.4.2.</span> <span class="nav-text">密集连接块Dense Connection Block (DCB)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总体结构"><span class="nav-number">1.4.3.</span> <span class="nav-text">总体结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验部分"><span class="nav-number">1.5.</span> <span class="nav-text">实验部分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#消融实验"><span class="nav-number">1.5.1.</span> <span class="nav-text">消融实验</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#空间残差层"><span class="nav-number">1.5.1.1.</span> <span class="nav-text">空间残差层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#密集连接块"><span class="nav-number">1.5.1.2.</span> <span class="nav-text">密集连接块</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结果比较"><span class="nav-number">1.5.2.</span> <span class="nav-text">结果比较</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">1.6.</span> <span class="nav-text">小结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">BENULL</span>
+
+  
+</div>
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+<!--
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+
+-->
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

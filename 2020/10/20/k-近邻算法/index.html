@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="BENULL">
 <meta property="og:description" content="k-近邻算法k$$ 近邻( $$k$$ -Nearest Neighbor,  $$k$$NN)是一种监督学习  优点:精度高、对异常值不敏感、无数据输入假定 缺点:计算复杂度高、空间复杂度高  ## 工作原理  给定测试样本, 基于某种距离度量找出训练集中与其最靠近的 $$k$$ 个训练样本, 然后基于这 $$k$$ 个邻居的信息来进行预测  一般流程包括：  1. 计算已知类别数据集中的点与当">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-10-19T16:39:58.239Z">
+<meta property="og:updated_time" content="2020-10-19T16:41:11.165Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="k-近邻算法(KNN)">
 <meta name="twitter:description" content="k-近邻算法k$$ 近邻( $$k$$ -Nearest Neighbor,  $$k$$NN)是一种监督学习  优点:精度高、对异常值不敏感、无数据输入假定 缺点:计算复杂度高、空间复杂度高  ## 工作原理  给定测试样本, 基于某种距离度量找出训练集中与其最靠近的 $$k$$ 个训练样本, 然后基于这 $$k$$ 个邻居的信息来进行预测  一般流程包括：  1. 计算已知类别数据集中的点与当">
@@ -857,6 +857,26 @@ $$p=1$$ 时, 闵可夫斯基距离即曼哈顿距离(Manhattan distance)
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 

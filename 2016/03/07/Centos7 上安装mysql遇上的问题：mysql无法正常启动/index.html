@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Linux,mysql,">
+  <meta name="keywords" content="Linux,MySQL,">
 
 
 
@@ -82,7 +82,7 @@
 
 
 <meta name="description" content="第一次在Centos上安装mysql遇到的一些问题。 第一步就遇到问题，安装mysql-server报错没有可用包。 【解决方法】先要安装mysql 12# wget http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm # rpm -ivh mysql-community-release-el7-5.noarch.rpm 之">
-<meta name="keywords" content="Linux,mysql">
+<meta name="keywords" content="Linux,MySQL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Centos7 mysql无法正常启动">
 <meta property="og:url" content="http://yoursite.com/2016/03/07/Centos7 上安装mysql遇上的问题：mysql无法正常启动/index.html">
@@ -90,7 +90,7 @@
 <meta property="og:description" content="第一次在Centos上安装mysql遇到的一些问题。 第一步就遇到问题，安装mysql-server报错没有可用包。 【解决方法】先要安装mysql 12# wget http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm # rpm -ivh mysql-community-release-el7-5.noarch.rpm 之">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://img.blog.csdn.net/20170515181943733?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzI4MTU4MDc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2018-03-16T07:19:40.000Z">
+<meta property="og:updated_time" content="2020-10-19T16:26:37.382Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Centos7 mysql无法正常启动">
 <meta name="twitter:description" content="第一次在Centos上安装mysql遇到的一些问题。 第一步就遇到问题，安装mysql-server报错没有可用包。 【解决方法】先要安装mysql 12# wget http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm # rpm -ivh mysql-community-release-el7-5.noarch.rpm 之">
@@ -352,7 +352,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  959字
+                  953字
                 </span>
               
 
@@ -396,7 +396,9 @@
 <p>之后再安装mysql-server</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># yum -y install mysql-server</span><br></pre></td></tr></table></figure>
 <p>然后<code>systemctl enable mysqld</code>设置mysql自启动<br>之后<code>systemctl start mysqld</code>这时候出问题了，运行之后一直卡着没有反应，如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# systemctl start mysqld</span><br><span class="line">Redirecting to /bin/systemctl start mysql.service</span><br><span class="line">``` </span><br><span class="line">`systemctl status mysqld`查看mysql服务的状态如下</span><br><span class="line"></span><br><span class="line">```linux</span><br><span class="line"> [root@localhost sbin]# systemctl status mysqld</span><br><span class="line">● mysqld.service - MySQL Community Server</span><br><span class="line">   Loaded: loaded (/usr/lib/systemd/system/mysqld.service; enabled; vendor preset: disabled)</span><br><span class="line">   Active: activating (start-post) since 一 2017-05-15 17:04:12 CST; 5min ago</span><br><span class="line">  Process: 981 ExecStart=/usr/bin/mysqld_safe --basedir=/usr (code=exited, status=0/SUCCESS)</span><br><span class="line">  Process: 938 ExecStartPre=/usr/bin/mysql-systemd-start pre (code=exited, status=0/SUCCESS)</span><br><span class="line"> Main PID: 981 (code=exited, status=0/SUCCESS);         : 982 (mysql-systemd-s)</span><br><span class="line">   CGroup: /system.slice/mysqld.service</span><br><span class="line">           └─control</span><br><span class="line">             ├─ 982 /bin/bash /usr/bin/mysql-systemd-start post</span><br><span class="line">             └─2315 sleep 1</span><br><span class="line"></span><br><span class="line">5月 15 17:04:12 localhost.localdomain systemd[1]: Starting MySQL Community Server...</span><br><span class="line">5月 15 17:04:15 localhost.localdomain mysqld_safe[981]: 170515 17:04:15 mysqld_safe Logging to &apos;/var/lo...g&apos;.</span><br><span class="line">5月 15 17:04:15 localhost.localdomain mysqld_safe[981]: 170515 17:04:15 mysqld_safe Starting mysqld dae...sql</span><br><span class="line">Hint: Some lines were ellipsized, use -l to show in full.</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# systemctl start mysqld</span><br><span class="line">Redirecting to /bin/systemctl start mysql.service</span><br></pre></td></tr></table></figure>
+<p><code>systemctl status mysqld</code>查看mysql服务的状态如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"> [root@localhost sbin]# systemctl status mysqld</span><br><span class="line">● mysqld.service - MySQL Community Server</span><br><span class="line">   Loaded: loaded (/usr/lib/systemd/system/mysqld.service; enabled; vendor preset: disabled)</span><br><span class="line">   Active: activating (start-post) since 一 2017-05-15 17:04:12 CST; 5min ago</span><br><span class="line">  Process: 981 ExecStart=/usr/bin/mysqld_safe --basedir=/usr (code=exited, status=0/SUCCESS)</span><br><span class="line">  Process: 938 ExecStartPre=/usr/bin/mysql-systemd-start pre (code=exited, status=0/SUCCESS)</span><br><span class="line"> Main PID: 981 (code=exited, status=0/SUCCESS);         : 982 (mysql-systemd-s)</span><br><span class="line">   CGroup: /system.slice/mysqld.service</span><br><span class="line">           └─control</span><br><span class="line">             ├─ 982 /bin/bash /usr/bin/mysql-systemd-start post</span><br><span class="line">             └─2315 sleep 1</span><br><span class="line"></span><br><span class="line">5月 15 17:04:12 localhost.localdomain systemd[1]: Starting MySQL Community Server...</span><br><span class="line">5月 15 17:04:15 localhost.localdomain mysqld_safe[981]: 170515 17:04:15 mysqld_safe Logging to &apos;/var/lo...g&apos;.</span><br><span class="line">5月 15 17:04:15 localhost.localdomain mysqld_safe[981]: 170515 17:04:15 mysqld_safe Starting mysqld dae...sql</span><br><span class="line">Hint: Some lines were ellipsized, use -l to show in full.</span><br></pre></td></tr></table></figure>
 <p>看不出问题，查看mysql的日志终于找到问题<code>vim /var/log/mysqld.log</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">2017-05-14 16:40:16 0 [Note] Binlog end</span><br><span class="line">170514 16:40:16 mysqld_safe mysqld from pid file /var/run/mysqld/mysqld.pid ended</span><br><span class="line">170515 17:04:15 mysqld_safe Logging to &apos;/var/log/mysqld.log&apos;.</span><br><span class="line">170515 17:04:15 mysqld_safe Starting mysqld daemon with databases from /var/lib/mysql</span><br><span class="line">2017-05-15 17:04:18 0 [ERROR] /usr/sbin/mysqld: ambiguous option &apos;--character-set=utf8&apos; (character-set-client-handshake, character_sets_dir)</span><br><span class="line">2017-05-15 17:04:18 0 [ERROR] Aborting</span><br></pre></td></tr></table></figure></p>
 <p>原来是my.cnf文件中设置默认字符编码我写成<code>character-set=ut8</code>而centos7版本中应该设置为<code>default-character-set=utf8</code></p>
 <p>之后继续启动mysql仍然无法启动，查看日志如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">2017-05-15 17:14:21 1195 [Warning] Buffered warning: Changed limits: table_open_cache: 431 (requested 2000)</span><br><span class="line"></span><br><span class="line">2017-05-15 17:14:21 1195 [Note] Plugin &apos;FEDERATED&apos; is disabled.</span><br><span class="line">/usr/sbin/mysqld: Table &apos;mysql.plugin&apos; doesn&apos;t exist</span><br><span class="line">2017-05-15 17:14:21 1195 [ERROR] Can&apos;t open the mysql.plugin table. Please run mysql_upgrade to create it.</span><br><span class="line">2017-05-15 17:14:21 1195 [Note] InnoDB: Using atomics to ref count buffer pool pages</span><br><span class="line">2017-05-15 17:14:21 1195 [Note] InnoDB: The InnoDB memory heap is disabled</span><br><span class="line">2017-05-15 17:14:21 1195 [Note] InnoDB: Mutexes and rw_locks use GCC atomic builtins</span><br><span class="line">2017-05-15 17:14:21 1195 [Note] InnoDB: Memory barrier is not used</span><br><span class="line">2017-05-15 17:14:21 1195 [Note] InnoDB: Compressed tables use zlib 1.2.3</span><br><span class="line">2017-05-15 17:14:21 1195 [Note] InnoDB: Using Linux native AIO</span><br><span class="line">2017-05-15 17:14:21 1195 [Note] InnoDB: Not using CPU crc32 instructions</span><br><span class="line">2017-05-15 17:14:21 1195 [Note] InnoDB: Initializing buffer pool, size = 128.0M</span><br><span class="line">170515 17:04:18 mysqld_safe mysqld from pid file /var/run/mysqld/mysqld.pid ended</span><br></pre></td></tr></table></figure></p>
@@ -426,7 +428,7 @@
           
             <a href="/tags/Linux/" rel="tag"># Linux</a>
           
-            <a href="/tags/mysql/" rel="tag"># mysql</a>
+            <a href="/tags/MySQL/" rel="tag"># MySQL</a>
           
         </div>
       
@@ -523,7 +525,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">27</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -534,7 +536,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -545,7 +547,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">39</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

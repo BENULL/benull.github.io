@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Algorithms,AI,KNN,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="BENULL" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="k-近邻算法k$$ 近邻( $$k$$ -Nearest Neighbor, $$k \mathrm{NN}$$)是一种监督学习  优点:精度高、对异常值不敏感、无数据输入假定  缺点:计算复杂度高、空间复杂度高  ## 工作原理  给定测试样本, 基于某种距离度量找出训练集中与其最靠近的 $$k$$ 个训练样本, 然后基于这 $$k$$ 个邻居的信息来进行预测  一般流程包括：  1. 计算已知">
+<meta name="keywords" content="Algorithms,AI,KNN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="k-近邻算法(KNN)">
+<meta property="og:url" content="http://yoursite.com/2020/10/20/k-近邻算法/index.html">
+<meta property="og:site_name" content="BENULL">
+<meta property="og:description" content="k-近邻算法k$$ 近邻( $$k$$ -Nearest Neighbor, $$k \mathrm{NN}$$)是一种监督学习  优点:精度高、对异常值不敏感、无数据输入假定  缺点:计算复杂度高、空间复杂度高  ## 工作原理  给定测试样本, 基于某种距离度量找出训练集中与其最靠近的 $$k$$ 个训练样本, 然后基于这 $$k$$ 个邻居的信息来进行预测  一般流程包括：  1. 计算已知">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-10-19T16:35:29.018Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="k-近邻算法(KNN)">
+<meta name="twitter:description" content="k-近邻算法k$$ 近邻( $$k$$ -Nearest Neighbor, $$k \mathrm{NN}$$)是一种监督学习  优点:精度高、对异常值不敏感、无数据输入假定  缺点:计算复杂度高、空间复杂度高  ## 工作原理  给定测试样本, 基于某种距离度量找出训练集中与其最靠近的 $$k$$ 个训练样本, 然后基于这 $$k$$ 个邻居的信息来进行预测  一般流程包括：  1. 计算已知">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/10/20/k-近邻算法/">
+
+
+
+
+
+  <title>k-近邻算法(KNN) | BENULL</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">BENULL</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">tomorrow is another day</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/20/k-近邻算法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="BENULL">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BENULL">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">k-近邻算法(KNN)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-10-20T00:25:29+08:00">
+                2020-10-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AI/" itemprop="url" rel="index">
+                    <span itemprop="name">AI</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  652字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  4 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="k-近邻算法"><a href="#k-近邻算法" class="headerlink" title="k-近邻算法"></a><script type="math/tex">k</script>-近邻算法</h1><script type="math/tex; mode=display">k$$ 近邻( $$k$$ -Nearest Neighbor, $$k \mathrm{NN}$$)是一种监督学习
+
+优点:精度高、对异常值不敏感、无数据输入假定
+
+缺点:计算复杂度高、空间复杂度高
+
+## 工作原理
+
+给定测试样本, 基于某种距离度量找出训练集中与其最靠近的 $$k$$ 个训练样本, 然后基于这 $$k$$ 个邻居的信息来进行预测
+
+一般流程包括：
+
+1. 计算已知类别数据集中的点与当前点之间的距离
+2. 按照距离递增次序排序
+3. 选取与当前点距离最小的k个点
+4. 确定前k个点所在类别的出现频率
+5. 返回前k个点出现频率最高的类别作为当前点的预测分类
+
+分类任务中可选择这 $$k$$ 个样本中出现最多的类别标记作为预测结果
+
+回归任务中可将这 $$k$$ 个样本的实值输出标记的平均值作为预测结果
+
+## $$k$$值的选择
+
+当 $$k$$取不同值时, 分类结果会有显著不同
+
+K值过小：特征空间被划分为更多子空间，整体模型变复杂，预测结果会对近邻点十分敏感，预测就会出错容易发生过拟合
+K值过大：近邻误差会偏大，距离较远的点也会同样对预测结果产生影响，使得预测结果产生较大偏差，此时模型容易发生欠拟合
+
+## 距离度量
+
+ 若采用不同的距离计算方式也会导致分类结果有显著不同
+
+对函数 $$\operatorname{dist}(\cdot, \cdot),$$ 若它是一个距离度量， 则需满足一些基本性质</script><p>非负性:\operatorname{dist}\left(\boldsymbol{x}<em>{i}, \boldsymbol{x}</em>{j}\right) \geqslant 0</p>
+<script type="math/tex; mode=display">
+</script><p>\text { 同一性: } \operatorname{dist}\left(\boldsymbol{x}<em>{i}, \boldsymbol{x}</em>{j}\right)=0 \text { 当且仅当 } \boldsymbol{x}<em>{i}=\boldsymbol{x}</em>{j}</p>
+<script type="math/tex; mode=display">
+</script><p>\begin{aligned}<br>&amp;\text { 对称性: } \operatorname{dist}\left(\boldsymbol{x}<em>{i}, \boldsymbol{x}</em>{j}\right)=\operatorname{dist}\left(\boldsymbol{x}<em>{j}, \boldsymbol{x}</em>{i}\right)\<br>&amp;\text { 直递性: } \operatorname{dist}\left(\boldsymbol{x}<em>{i}, \boldsymbol{x}</em>{j}\right) \leqslant \operatorname{dist}\left(\boldsymbol{x}<em>{i}, \boldsymbol{x}</em>{k}\right)+\operatorname{dist}\left(\boldsymbol{x}<em>{k}, \boldsymbol{x}</em>{j}\right)<br>\end{aligned}</p>
+<script type="math/tex; mode=display">
+给定样本 $$\boldsymbol{x}_{i}=\left(x_{i 1} ; x_{i 2} ; \ldots ; x_{i n}\right)$$ 与 $$\boldsymbol{x}_{j}=\left(x_{j 1} ; x_{j 2} ; \ldots ; x_{j n}\right),$$ 最常用的是闵可夫斯基距离(Minkowski distance）</script><p>\operatorname{dist}<em>{\mathrm{mk}}\left(\boldsymbol{x}</em>{i}, \boldsymbol{x}<em>{j}\right)=\left(\sum</em>{u=1}^{n}\left|x<em>{i u}-x</em>{j u}\right|^{p}\right)^{\frac{1}{p}}</p>
+<script type="math/tex; mode=display">
+$$p=2$$ 时, 闵可夫斯基距离即欧氏距离 (Euclidean distance) 即两点之间的直线距离
+
+欧几里得空间中两点间直线距离、真实距离或者向量的自然长度</script><p>\operatorname{dist}<em>{\mathrm{ed}}\left(\boldsymbol{x}</em>{i}, \boldsymbol{x}<em>{j}\right)=\left|\boldsymbol{x}</em>{i}-\boldsymbol{x}<em>{j}\right|</em>{2}=\sqrt{\sum<em>{u=1}^{n}\left|x</em>{i u}-x_{j u}\right|^{2}}</p>
+<script type="math/tex; mode=display">
+$$p=1$$ 时, 闵可夫斯基距离即曼哈顿距离(Manhattan distance)
+
+在欧几里德空间的固定直角坐标系上两点所形成的线段对轴产生的投影的距离总和，也称街区距离</script><p>\operatorname{dist}<em>{\operatorname{man}}\left(\boldsymbol{x}</em>{i}, \boldsymbol{x}<em>{j}\right)=\left|\boldsymbol{x}</em>{i}-\boldsymbol{x}<em>{j}\right|</em>{1}=\sum<em>{u=1}^{n}\left|x</em>{i u}-x_{j u}\right|</p>
+<p>$$</p>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><p>FROM <a href="https://coding.imooc.com/class/169.html" target="_blank" rel="noopener">IMOOC机器学习</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> sqrt</span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">KNNClassifier</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, k)</span>:</span></span><br><span class="line">        <span class="string">"""初始化kNN分类器"""</span></span><br><span class="line">        <span class="keyword">assert</span> k &gt;= <span class="number">1</span>, <span class="string">"k must be valid"</span></span><br><span class="line">        self.k = k</span><br><span class="line">        self._X_train = <span class="literal">None</span></span><br><span class="line">        self._y_train = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">fit</span><span class="params">(self, X_train, y_train)</span>:</span></span><br><span class="line">        <span class="string">"""根据训练数据集X_train和y_train训练kNN分类器"""</span></span><br><span class="line">        <span class="keyword">assert</span> X_train.shape[<span class="number">0</span>] == y_train.shape[<span class="number">0</span>], \</span><br><span class="line">            <span class="string">"the size of X_train must be equal to the size of y_train"</span></span><br><span class="line">        <span class="keyword">assert</span> self.k &lt;= X_train.shape[<span class="number">0</span>], \</span><br><span class="line">            <span class="string">"the size of X_train must be at least k."</span></span><br><span class="line"></span><br><span class="line">        self._X_train = X_train</span><br><span class="line">        self._y_train = y_train</span><br><span class="line">        <span class="keyword">return</span> self</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(self, X_predict)</span>:</span></span><br><span class="line">        <span class="string">"""给定待预测数据集X_predict，返回表示X_predict的结果向量"""</span></span><br><span class="line">        <span class="keyword">assert</span> self._X_train <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span> <span class="keyword">and</span> self._y_train <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>, \</span><br><span class="line">                <span class="string">"must fit before predict!"</span></span><br><span class="line">        <span class="keyword">assert</span> X_predict.shape[<span class="number">1</span>] == self._X_train.shape[<span class="number">1</span>], \</span><br><span class="line">                <span class="string">"the feature number of X_predict must be equal to X_train"</span></span><br><span class="line"></span><br><span class="line">        y_predict = [self._predict(x) <span class="keyword">for</span> x <span class="keyword">in</span> X_predict]</span><br><span class="line">        <span class="keyword">return</span> np.array(y_predict)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_predict</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        <span class="string">"""给定单个待预测数据x，返回x的预测结果值"""</span></span><br><span class="line">        <span class="keyword">assert</span> x.shape[<span class="number">0</span>] == self._X_train.shape[<span class="number">1</span>], \</span><br><span class="line">            <span class="string">"the feature number of x must be equal to X_train"</span></span><br><span class="line"></span><br><span class="line">        distances = [sqrt(np.sum((x_train - x) ** <span class="number">2</span>))</span><br><span class="line">                     <span class="keyword">for</span> x_train <span class="keyword">in</span> self._X_train]</span><br><span class="line">        nearest = np.argsort(distances)</span><br><span class="line"></span><br><span class="line">        topK_y = [self._y_train[i] <span class="keyword">for</span> i <span class="keyword">in</span> nearest[:self.k]]</span><br><span class="line">        votes = Counter(topK_y)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> votes.most_common(<span class="number">1</span>)[<span class="number">0</span>][<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">score</span><span class="params">(self, X_test, y_test)</span>:</span></span><br><span class="line">        <span class="string">"""根据测试数据集 X_test 和 y_test 确定当前模型的准确度"""</span></span><br><span class="line"></span><br><span class="line">        y_predict = self.predict(X_test)</span><br><span class="line">        <span class="keyword">return</span> self.accuracy_score(y_test, y_predict)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">"KNN(k=%d)"</span> % self.k</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">accuracy_score</span><span class="params">(y_true, y_predict)</span>:</span></span><br><span class="line">        <span class="string">"""计算y_true和y_predict之间的准确率"""</span></span><br><span class="line">        <span class="keyword">assert</span> len(y_true) == len(y_predict), \</span><br><span class="line">            <span class="string">"the size of y_true must be equal to the size of y_predict"</span></span><br><span class="line">    </span><br><span class="line">        <span class="keyword">return</span> np.sum(y_true == y_predict) / len(y_true)</span><br></pre></td></tr></table></figure>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://blog.csdn.net/pxhdky/article/details/85067808" target="_blank" rel="noopener">LP距离、欧式距离、曼哈顿距离、切比雪夫距离</a></p>
+<p><a href="https://blog.csdn.net/hajk2017/article/details/82862788" target="_blank" rel="noopener">什么是KNN算法？</a></p>
+<p><a href="https://coding.imooc.com/class/169.html" target="_blank" rel="noopener">IMOOC机器学习</a></p>
+<p>机器学习-周志华</p>
+<p>Machine Learning in Action by Peter Harrington</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Algorithms/" rel="tag"># Algorithms</a>
+          
+            <a href="/tags/AI/" rel="tag"># AI</a>
+          
+            <a href="/tags/KNN/" rel="tag"># KNN</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/10/13/基于骨架动作识别的空间残差层和密集连接块增强的时空图卷积网络/" rel="next" title="Spatial Residual Layer and Dense Connection Block Enhanced Spatial Temporal Graph Convolutional Network for Skeleton-Based Action Recognition">
+                <i class="fa fa-chevron-left"></i> Spatial Residual Layer and Dense Connection Block Enhanced Spatial Temporal Graph Convolutional Network for Skeleton-Based Action Recognition
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMTE2Ny83NzE2"></div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="BENULL">
+            
+              <p class="site-author-name" itemprop="name">BENULL</p>
+              <p class="site-description motion-element" itemprop="description">tomorrow is another day</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/benull" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:ltobenull@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/u/3169828502" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#k-近邻算法"><span class="nav-number">1.</span> <span class="nav-text">k-近邻算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#代码实现"><span class="nav-number">1.1.</span> <span class="nav-text">代码实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">1.2.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">BENULL</span>
+
+  
+</div>
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+<!--
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+
+-->
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

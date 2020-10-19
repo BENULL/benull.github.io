@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="BENULL">
 <meta property="og:description" content="k近邻算法k近邻算法( k-Nearest Neighbor)是一种监督学习优点:精度高、对异常值不敏感、无数据输入假定缺点:计算复杂度高、空间复杂度高 工作原理给定测试样本, 基于某种距离度量找出训练集中与其最靠近的 k 个训练样本, 然后基于这 k 个邻居的信息来进行预测 一般流程包括：  计算已知类别数据集中的点与当前点之间的距离 按照距离递增次序排序 选取与当前点距离最小的k个点 确定前k">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-10-19T17:07:28.286Z">
+<meta property="og:updated_time" content="2020-10-19T17:09:06.638Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="k近邻算法(KNN)">
 <meta name="twitter:description" content="k近邻算法k近邻算法( k-Nearest Neighbor)是一种监督学习优点:精度高、对异常值不敏感、无数据输入假定缺点:计算复杂度高、空间复杂度高 工作原理给定测试样本, 基于某种距离度量找出训练集中与其最靠近的 k 个训练样本, 然后基于这 k 个邻居的信息来进行预测 一般流程包括：  计算已知类别数据集中的点与当前点之间的距离 按照距离递增次序排序 选取与当前点距离最小的k个点 确定前k">
@@ -411,10 +411,10 @@
 &\text { 直递性: } \operatorname{dist}\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right) \leqslant \operatorname{dist}\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{k}\right)+\operatorname{dist}\left(\boldsymbol{x}_{k}, \boldsymbol{x}_{j}\right)
 \end{aligned}</script><p>给定样本 <script type="math/tex">\boldsymbol{x}_{i}=\left(x_{i 1} ; x_{i 2} ; \ldots ; x_{i n}\right)</script> 与 <script type="math/tex">\boldsymbol{x}_{j}=\left(x_{j 1} ; x_{j 2} ; \ldots ; x_{j n}\right)</script><br>最常用的是闵可夫斯基距离(Minkowski distance）</p>
 <script type="math/tex; mode=display">
-\operatorname{dist}_{\mathrm{mk}}\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right)=\left(\sum_{u=1}^{n}\left|x_{i u}-x_{j u}\right|^{p}\right)^{\frac{1}{p}}</script><p>当<script type="math/tex">p=2</script> 时, 闵可夫斯基距离即欧氏距离 (Euclidean distance)</p>
+\operatorname{dist}_{\mathrm{mk}}\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right)=\left(\sum_{u=1}^{n}\left|x_{i u}-x_{j u}\right|^{p}\right)^{\frac{1}{p}}</script><p>当 <script type="math/tex">p=2</script> 时, 闵可夫斯基距离即欧氏距离 (Euclidean distance)</p>
 <p>欧几里得空间中两点间直线距离、真实距离或者向量的自然长度</p>
 <script type="math/tex; mode=display">
-\operatorname{dist}_{\mathrm{ed}}\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right)=\left\|\boldsymbol{x}_{i}-\boldsymbol{x}_{j}\right\|_{2}=\sqrt{\sum_{u=1}^{n}\left|x_{i u}-x_{j u}\right|^{2}}</script><p>当<script type="math/tex">p=1</script> 时, 闵可夫斯基距离即曼哈顿距离(Manhattan distance)</p>
+\operatorname{dist}_{\mathrm{ed}}\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right)=\left\|\boldsymbol{x}_{i}-\boldsymbol{x}_{j}\right\|_{2}=\sqrt{\sum_{u=1}^{n}\left|x_{i u}-x_{j u}\right|^{2}}</script><p>当 <script type="math/tex">p=1</script> 时, 闵可夫斯基距离即曼哈顿距离(Manhattan distance)</p>
 <p>在欧几里德空间的固定直角坐标系上两点所形成的线段对轴产生的投影的距离总和，也称街区距离</p>
 <script type="math/tex; mode=display">
 \operatorname{dist}_{\operatorname{man}}\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right)=\left\|\boldsymbol{x}_{i}-\boldsymbol{x}_{j}\right\|_{1}=\sum_{u=1}^{n}\left|x_{i u}-x_{j u}\right|</script><h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><p>FROM <a href="https://coding.imooc.com/class/169.html" target="_blank" rel="noopener">IMOOC机器学习</a></p>

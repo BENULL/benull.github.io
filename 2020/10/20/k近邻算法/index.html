@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="k-近邻算法k$$ 近邻( k-Nearest Neighbor,  kNN)是一种监督学习  优点:精度高、对异常值不敏感、无数据输入假定 缺点:计算复杂度高、空间复杂度高  ## 工作原理  给定测试样本, 基于某种距离度量找出训练集中与其最靠近的 $$k$$ 个训练样本, 然后基于这 $$k$$ 个邻居的信息来进行预测  一般流程包括：  1. 计算已知类别数据集中的点与当前点之间的距离 2">
+<meta name="description" content="k-近邻算法k近邻算法( k-Nearest Neighbor,  kNN)是一种监督学习 优点:精度高、对异常值不敏感、无数据输入假定缺点:计算复杂度高、空间复杂度高 工作原理给定测试样本, 基于某种距离度量找出训练集中与其最靠近的 k 个训练样本, 然后基于这 k 个邻居的信息来进行预测 一般流程包括：  计算已知类别数据集中的点与当前点之间的距离 按照距离递增次序排序 选取与当前点距离最小的">
 <meta name="keywords" content="Algorithms,AI,KNN">
 <meta property="og:type" content="article">
 <meta property="og:title" content="k近邻算法(KNN)">
-<meta property="og:url" content="http://yoursite.com/2020/10/20/k-近邻算法/index.html">
+<meta property="og:url" content="http://yoursite.com/2020/10/20/k近邻算法/index.html">
 <meta property="og:site_name" content="BENULL">
-<meta property="og:description" content="k-近邻算法k$$ 近邻( k-Nearest Neighbor,  kNN)是一种监督学习  优点:精度高、对异常值不敏感、无数据输入假定 缺点:计算复杂度高、空间复杂度高  ## 工作原理  给定测试样本, 基于某种距离度量找出训练集中与其最靠近的 $$k$$ 个训练样本, 然后基于这 $$k$$ 个邻居的信息来进行预测  一般流程包括：  1. 计算已知类别数据集中的点与当前点之间的距离 2">
+<meta property="og:description" content="k-近邻算法k近邻算法( k-Nearest Neighbor,  kNN)是一种监督学习 优点:精度高、对异常值不敏感、无数据输入假定缺点:计算复杂度高、空间复杂度高 工作原理给定测试样本, 基于某种距离度量找出训练集中与其最靠近的 k 个训练样本, 然后基于这 k 个邻居的信息来进行预测 一般流程包括：  计算已知类别数据集中的点与当前点之间的距离 按照距离递增次序排序 选取与当前点距离最小的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-10-19T16:52:32.291Z">
+<meta property="og:updated_time" content="2020-10-19T16:54:09.168Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="k近邻算法(KNN)">
-<meta name="twitter:description" content="k-近邻算法k$$ 近邻( k-Nearest Neighbor,  kNN)是一种监督学习  优点:精度高、对异常值不敏感、无数据输入假定 缺点:计算复杂度高、空间复杂度高  ## 工作原理  给定测试样本, 基于某种距离度量找出训练集中与其最靠近的 $$k$$ 个训练样本, 然后基于这 $$k$$ 个邻居的信息来进行预测  一般流程包括：  1. 计算已知类别数据集中的点与当前点之间的距离 2">
+<meta name="twitter:description" content="k-近邻算法k近邻算法( k-Nearest Neighbor,  kNN)是一种监督学习 优点:精度高、对异常值不敏感、无数据输入假定缺点:计算复杂度高、空间复杂度高 工作原理给定测试样本, 基于某种距离度量找出训练集中与其最靠近的 k 个训练样本, 然后基于这 k 个邻居的信息来进行预测 一般流程包括：  计算已知类别数据集中的点与当前点之间的距离 按照距离递增次序排序 选取与当前点距离最小的">
 
 
 
@@ -122,7 +122,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/10/20/k-近邻算法/">
+  <link rel="canonical" href="http://yoursite.com/2020/10/20/k近邻算法/">
 
 
 
@@ -265,7 +265,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/20/k-近邻算法/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/20/k近邻算法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="BENULL">
@@ -350,7 +350,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  470字
+                  897字
                 </span>
               
 
@@ -366,7 +366,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3 分钟
+                  4 分钟
                 </span>
               
             </div>
@@ -387,41 +387,24 @@
       
 
       
-        <h1 id="k-近邻算法"><a href="#k-近邻算法" class="headerlink" title="k-近邻算法"></a>k-近邻算法</h1><script type="math/tex; mode=display">k$$ 近邻( k-Nearest Neighbor,  kNN)是一种监督学习
-
-优点:精度高、对异常值不敏感、无数据输入假定
-缺点:计算复杂度高、空间复杂度高
-
-## 工作原理
-
-给定测试样本, 基于某种距离度量找出训练集中与其最靠近的 $$k$$ 个训练样本, 然后基于这 $$k$$ 个邻居的信息来进行预测
-
-一般流程包括：
-
-1. 计算已知类别数据集中的点与当前点之间的距离
-2. 按照距离递增次序排序
-3. 选取与当前点距离最小的k个点
-4. 确定前k个点所在类别的出现频率
-5. 返回前k个点出现频率最高的类别作为当前点的预测分类
-
-分类任务中可选择这 $$k$$ 个样本中出现最多的类别标记作为预测结果
-
-回归任务中可将这 $$k$$ 个样本的实值输出标记的平均值作为预测结果
-
-## k值的选择
-
-当 $$k$$取不同值时, 分类结果会有显著不同
-
-K值过小：特征空间被划分为更多子空间，整体模型变复杂，预测结果会对近邻点十分敏感，预测就会出错容易发生过拟合
-K值过大：近邻误差会偏大，距离较远的点也会同样对预测结果产生影响，使得预测结果产生较大偏差，此时模型容易发生欠拟合
-
-## 距离度量
-
- 若采用不同的距离计算方式也会导致分类结果有显著不同
-
-对函数 $$\operatorname{dist}(\cdot, \cdot)$$，若它是一个距离度量，则需满足一些基本性质
-
-$$非负性:\operatorname{dist}\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right) \geqslant 0</script><script type="math/tex; mode=display">\text { 同一性: } \operatorname{dist}\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right)=0 \text { 当且仅当 } \boldsymbol{x}_{i}=\boldsymbol{x}_{j}</script><script type="math/tex; mode=display">\begin{aligned}
+        <h1 id="k-近邻算法"><a href="#k-近邻算法" class="headerlink" title="k-近邻算法"></a>k-近邻算法</h1><p>k近邻算法( k-Nearest Neighbor,  kNN)是一种监督学习</p>
+<p>优点:精度高、对异常值不敏感、无数据输入假定<br>缺点:计算复杂度高、空间复杂度高</p>
+<h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h2><p>给定测试样本, 基于某种距离度量找出训练集中与其最靠近的 <script type="math/tex">k</script> 个训练样本, 然后基于这 <script type="math/tex">k</script> 个邻居的信息来进行预测</p>
+<p>一般流程包括：</p>
+<ol>
+<li>计算已知类别数据集中的点与当前点之间的距离</li>
+<li>按照距离递增次序排序</li>
+<li>选取与当前点距离最小的k个点</li>
+<li>确定前k个点所在类别的出现频率</li>
+<li>返回前k个点出现频率最高的类别作为当前点的预测分类</li>
+</ol>
+<p>分类任务中可选择这 <script type="math/tex">k</script> 个样本中出现最多的类别标记作为预测结果</p>
+<p>回归任务中可将这 <script type="math/tex">k</script> 个样本的实值输出标记的平均值作为预测结果</p>
+<h2 id="k值的选择"><a href="#k值的选择" class="headerlink" title="k值的选择"></a>k值的选择</h2><p>当 <script type="math/tex">k</script>取不同值时, 分类结果会有显著不同</p>
+<p>K值过小：特征空间被划分为更多子空间，整体模型变复杂，预测结果会对近邻点十分敏感，预测就会出错容易发生过拟合<br>K值过大：近邻误差会偏大，距离较远的点也会同样对预测结果产生影响，使得预测结果产生较大偏差，此时模型容易发生欠拟合</p>
+<h2 id="距离度量"><a href="#距离度量" class="headerlink" title="距离度量"></a>距离度量</h2><p> 若采用不同的距离计算方式也会导致分类结果有显著不同</p>
+<p>对函数 <script type="math/tex">\operatorname{dist}(\cdot, \cdot)</script>，若它是一个距离度量，则需满足一些基本性质</p>
+<script type="math/tex; mode=display">非负性:\operatorname{dist}\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right) \geqslant 0</script><script type="math/tex; mode=display">\text { 同一性: } \operatorname{dist}\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right)=0 \text { 当且仅当 } \boldsymbol{x}_{i}=\boldsymbol{x}_{j}</script><script type="math/tex; mode=display">\begin{aligned}
 &\text { 对称性: } \operatorname{dist}\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right)=\operatorname{dist}\left(\boldsymbol{x}_{j}, \boldsymbol{x}_{i}\right)\\
 &\text { 直递性: } \operatorname{dist}\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right) \leqslant \operatorname{dist}\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{k}\right)+\operatorname{dist}\left(\boldsymbol{x}_{k}, \boldsymbol{x}_{j}\right)
 \end{aligned}</script><p>给定样本 <script type="math/tex">\boldsymbol{x}_{i}=\left(x_{i 1} ; x_{i 2} ; \ldots ; x_{i n}\right)</script> 与 <script type="math/tex">\boldsymbol{x}_{j}=\left(x_{j 1} ; x_{j 2} ; \ldots ; x_{j n}\right)</script>, 最常用的是闵可夫斯基距离(Minkowski distance）</p>
@@ -644,7 +627,7 @@ $$\operatorname{dist}_{\operatorname{man}}\left(\boldsymbol{x}_{i}, \boldsymbol{
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#k-近邻算法"><span class="nav-number">1.</span> <span class="nav-text">k-近邻算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#代码实现"><span class="nav-number">1.1.</span> <span class="nav-text">代码实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">1.2.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#k-近邻算法"><span class="nav-number">1.</span> <span class="nav-text">k-近邻算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#工作原理"><span class="nav-number">1.1.</span> <span class="nav-text">工作原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#k值的选择"><span class="nav-number">1.2.</span> <span class="nav-text">k值的选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#距离度量"><span class="nav-number">1.3.</span> <span class="nav-text">距离度量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码实现"><span class="nav-number">1.4.</span> <span class="nav-text">代码实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">1.5.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></div>
             
 
           </div>

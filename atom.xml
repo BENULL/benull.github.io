@@ -122,11 +122,11 @@
       <category term="Project" scheme="http://yoursite.com/categories/Project/"/>
     
     
+      <category term="Python" scheme="http://yoursite.com/tags/Python/"/>
+    
       <category term="Project" scheme="http://yoursite.com/tags/Project/"/>
     
       <category term="Qt" scheme="http://yoursite.com/tags/Qt/"/>
-    
-      <category term="Python" scheme="http://yoursite.com/tags/Python/"/>
     
   </entry>
   
@@ -584,9 +584,9 @@
       <category term="BigData" scheme="http://yoursite.com/categories/BigData/"/>
     
     
-      <category term="BigData" scheme="http://yoursite.com/tags/BigData/"/>
-    
       <category term="Hadoop" scheme="http://yoursite.com/tags/Hadoop/"/>
+    
+      <category term="BigData" scheme="http://yoursite.com/tags/BigData/"/>
     
   </entry>
   

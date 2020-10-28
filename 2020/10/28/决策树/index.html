@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Algorithms,AI,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="BENULL" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="决策树决策树学习采用的是自顶向下的递归方法，其基本思想是以信息熵为度量构造一颗熵值下降最快的树，到叶子节点处，熵值为0 具有非常好的可解释性、分类速度快的优点，是一种有监督学习 最早提及决策树思想的是Quinlan在1986年提出的ID3算法和1993年提出的C4.5算法，以及Breiman等人在1984年提出的CART算法 工作原理一般的，一颗决策树包含一个根结点、若干个内部节点和若干个叶节点">
+<meta name="keywords" content="Algorithms,AI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="决策树">
+<meta property="og:url" content="http://yoursite.com/2020/10/28/决策树/index.html">
+<meta property="og:site_name" content="BENULL">
+<meta property="og:description" content="决策树决策树学习采用的是自顶向下的递归方法，其基本思想是以信息熵为度量构造一颗熵值下降最快的树，到叶子节点处，熵值为0 具有非常好的可解释性、分类速度快的优点，是一种有监督学习 最早提及决策树思想的是Quinlan在1986年提出的ID3算法和1993年提出的C4.5算法，以及Breiman等人在1984年提出的CART算法 工作原理一般的，一颗决策树包含一个根结点、若干个内部节点和若干个叶节点">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-10-28T15:21:24.176Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="决策树">
+<meta name="twitter:description" content="决策树决策树学习采用的是自顶向下的递归方法，其基本思想是以信息熵为度量构造一颗熵值下降最快的树，到叶子节点处，熵值为0 具有非常好的可解释性、分类速度快的优点，是一种有监督学习 最早提及决策树思想的是Quinlan在1986年提出的ID3算法和1993年提出的C4.5算法，以及Breiman等人在1984年提出的CART算法 工作原理一般的，一颗决策树包含一个根结点、若干个内部节点和若干个叶节点">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/10/28/决策树/">
+
+
+
+
+
+  <title>决策树 | BENULL</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">BENULL</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">tomorrow is another day</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/28/决策树/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="BENULL">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BENULL">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">决策树</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-10-28T23:20:29+08:00">
+                2020-10-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AI/" itemprop="url" rel="index">
+                    <span itemprop="name">AI</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,741字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  7 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h1><p>决策树学习采用的是自顶向下的递归方法，其基本思想是以信息熵为度量构造一颗熵值下降最快的树，到叶子节点处，熵值为0</p>
+<p>具有非常好的可解释性、分类速度快的优点，是一种有监督学习</p>
+<p>最早提及决策树思想的是Quinlan在1986年提出的ID3算法和1993年提出的C4.5算法，以及Breiman等人在1984年提出的CART算法</p>
+<h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h2><p>一般的，一颗决策树包含一个根结点、若干个内部节点和若干个叶节点</p>
+<h3 id="构造"><a href="#构造" class="headerlink" title="构造"></a>构造</h3><p>构造就是生成一棵完整的决策树。简单来说，构造的过程就是选择什么属性作为节点的过程</p>
+<p>叶结点对应于决策结果, 其他每个结点则对应于一个属性测试，每个结点包含的样本集合根据属性测试的结果被划分到子结点中; </p>
+<p>根结点包含样本全集，从根结点到每个叶结点的路径对应了一个判定测试序列. 决策树学习的目的是为了产生一棵泛化能力强, 即处理未见示例能力强的决策树，其基本流程遵循简单且直观的分而治之策略</p>
+<p>显然, 决策树的生成是一个递归过程. 在决策树基本算法中, 有三种情形会导致递归返回:</p>
+<ol>
+<li>当前结点包含的样本全属于同一类别, 无需划分</li>
+<li>当前属性集为空, 或是所有样本在所有属性上取值相同, 无法划分</li>
+<li>当前结点包含的样本集合为空, 不能划分</li>
+</ol>
+<h3 id="划分选择"><a href="#划分选择" class="headerlink" title="划分选择"></a>划分选择</h3><p>决策树学习的关键是如何选择最优划分属性</p>
+<p>随着划分过程不断进行, 我们希望决策树的分支结点所包含的样本尽可能属于同一类别, 即结点的“纯度”越来越高</p>
+<h4 id="信息熵"><a href="#信息熵" class="headerlink" title="信息熵"></a>信息熵</h4><p>信息熵在信息论中代表随机变量不确定度的度量</p>
+<p>熵越大，数据的不确定性越高，纯度越低</p>
+<p>熵越小，数据的不确定性越低，纯度越高</p>
+<p>假定当前样本集合 <script type="math/tex">D</script> 中第 <script type="math/tex">k</script> 类样本所占的比例为 <script type="math/tex">p_{k}(k=1,2, \ldots,|\mathcal{Y}|),</script> 则<script type="math/tex">D</script>的信息嫡定义为</p>
+<script type="math/tex; mode=display">\operatorname{Ent}(D)=-\sum_{k=1}^{|\mathcal{Y}|} p_{k} \log _{2} p_{k}</script><h4 id="信息增益"><a href="#信息增益" class="headerlink" title="信息增益"></a>信息增益</h4><p>假定离散属性 <script type="math/tex">a</script> 有 <script type="math/tex">V</script> 个可能的取值 <script type="math/tex">\left\{a^{1}, a^{2}, \ldots, a^{V}\right\},</script> 若使用 <script type="math/tex">a</script> 来对样本集 <script type="math/tex">D</script> 进行划分, 则会产生 <script type="math/tex">V</script> 个分支结点, 其中第 <script type="math/tex">v</script> 个分支结点包含了 <script type="math/tex">D</script> 中所有在 属性 <script type="math/tex">a</script> 上取值为 <script type="math/tex">a^{v}</script> 的样本, 记为 <script type="math/tex">D^{v} .</script> 我们可根据式 (4.1) 计算出 <script type="math/tex">D^{v}</script> 的信息嫡, 再考虑到不同的分支结点所包含的样本数不同, 给分支结点赋予权重 <script type="math/tex">\left|D^{v}\right| /|D|,</script> 即样本数越多的分支结点的影响越大, 于是可计算出用属性 <script type="math/tex">a</script> 对样本集 <script type="math/tex">D</script> 进行 划分所获得的“信息增益” </p>
+<script type="math/tex; mode=display">\operatorname{Gain}(D, a)=\operatorname{Ent}(D)-\sum_{v=1}^{V} \frac{\left|D^{v}\right|}{|D|} \operatorname{Ent}\left(D^{v}\right)</script><p>一般而言, 信息增益越大, 则意味着使用属性 <script type="math/tex">a</script> 来进行划分所获得的“纯度提升”越大. 因此, 我们可用信息增益来进行决策树的划分属性选择,  著名的 ID3 决策树学习算法就是以信息增益为准则来选择划分属性</p>
+<p>ID3 算法的优点是方法简单，缺点是对噪声敏感。训练数据如果有少量错误，可能会产生决策树分类错误</p>
+<h4 id="信息增益率"><a href="#信息增益率" class="headerlink" title="信息增益率"></a>信息增益率</h4><script type="math/tex; mode=display">
+\text {GainRatio}(D, a)=\frac{\operatorname{Gain}(D, a)}{Ent(D)}</script><p>C4.5 在 IID3 的基础上，用信息增益率代替了信息增益，解决了噪声敏感的问题，并且可以对构造树进行剪枝、处理连续数值以及数值缺失等情况，但是由于 C4.5 需要对数据集进行多次扫描，算法效率相对较低</p>
+<h4 id="基尼指数"><a href="#基尼指数" class="headerlink" title="基尼指数"></a>基尼指数</h4><p>基尼指数是经典决策树CART用于分类问题时选择最优特征的指标</p>
+<p>假设有<script type="math/tex">K</script>个类，样本点属于第<script type="math/tex">k</script>类的概率为<script type="math/tex">p_k</script>，则概率分布的基尼指数定义为</p>
+<script type="math/tex; mode=display">
+G(p)=\sum_{k=1}^{K} p_{k}\left(1-p_{k}\right)=1-\sum_{k=1}^{K} p_{k}^{2}</script><p>在信息增益、增益率、基尼指数之外, 人们还设计了许多其他的准则用于决策树划分选择</p>
+<p>然而有实验研究表明这些准则虽然对决策树的尺寸有较大影响, 但对泛化性能的影响很有限</p>
+<h3 id="剪枝"><a href="#剪枝" class="headerlink" title="剪枝"></a>剪枝</h3><p>决策树的缺点包括对未知的测试数据未必有好的分类、泛化能力，即可能发生过拟合现象，此时可采用剪枝或随机森林</p>
+<p>剪枝是决策树学习算法对付“过拟合”的主要手段</p>
+<p>在决策树学习中, 为了尽可能正确分类训练样本, 结点划分过程将不断重复, 有时会造成决 策树分支过多, 这时就可能因训练样本学得太好了, 以致于把训练集自身 的一些特点当作所有数据都具有的一般性质而导致过拟合</p>
+<h2 id="ID3-决策树代码"><a href="#ID3-决策树代码" class="headerlink" title="ID3 决策树代码"></a>ID3 决策树代码</h2><p>参考 Machine Learning in Action by Peter Harrington</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># coding = utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> log</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DecisionTree</span>:</span></span><br><span class="line">    <span class="string">"""ID3 DecisionTree</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.decisionTree = <span class="literal">None</span></span><br><span class="line">        self._X = <span class="literal">None</span></span><br><span class="line">        self._y = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 计算信息熵</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">calcShannonEnt</span><span class="params">(self,y)</span>:</span></span><br><span class="line">        lablesCounter = Counter(y)</span><br><span class="line">        shannonEnt = <span class="number">0.0</span></span><br><span class="line">        <span class="keyword">for</span> num <span class="keyword">in</span> lablesCounter.values():</span><br><span class="line">            p = num / len(y)</span><br><span class="line">            shannonEnt += -p * log(p,<span class="number">2</span>)</span><br><span class="line">        <span class="keyword">return</span> shannonEnt</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">fit</span><span class="params">(self, X, y)</span>:</span></span><br><span class="line">        self._X = X</span><br><span class="line">        self._y = y</span><br><span class="line">        self.decisionTree = self.createTree(self._X,self._y)</span><br><span class="line">        <span class="keyword">return</span> self</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">splitDataset</span><span class="params">(self,X,y,d,value)</span>:</span></span><br><span class="line">        features = X[X[:,d]==value]</span><br><span class="line">        labels = y[X[:,d]==value]</span><br><span class="line">        <span class="keyword">return</span> np.concatenate((features[:,:d],features[:,d+<span class="number">1</span>:]),axis=<span class="number">1</span>), labels</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">chooseBestFeatureToSplit</span><span class="params">(self,X,y)</span>:</span></span><br><span class="line">        numFeatures = X.shape[<span class="number">1</span>]</span><br><span class="line">        baseEntropy = self.calcShannonEnt(y)</span><br><span class="line">        bestInfoGain, bestFeature = <span class="number">0.0</span>, <span class="number">-1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(numFeatures):</span><br><span class="line">            <span class="comment"># 创建唯一的分类标签列表</span></span><br><span class="line">            uniqueVals = np.unique(X[:,i])</span><br><span class="line">            newEntropy =<span class="number">0.0</span></span><br><span class="line">            <span class="comment"># 计算每种划分方式的信息熵</span></span><br><span class="line">            <span class="keyword">for</span> value <span class="keyword">in</span> uniqueVals:</span><br><span class="line">                _x, _y = self.splitDataset(X,y,i,value)</span><br><span class="line">                prob = len(_x)/len(X)</span><br><span class="line">                newEntropy += prob * self.calcShannonEnt(_y)</span><br><span class="line">            infoGain = baseEntropy - newEntropy</span><br><span class="line">            <span class="keyword">if</span> infoGain&gt;bestInfoGain:</span><br><span class="line">                bestInfoGain = infoGain</span><br><span class="line">                bestFeature = i</span><br><span class="line">            <span class="keyword">return</span> bestFeature</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">majorityCnt</span><span class="params">(self,y)</span>:</span></span><br><span class="line">        lablesCounter = Counter(y)</span><br><span class="line">        <span class="keyword">return</span> lablesCounter.most_common(<span class="number">1</span>)[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">createTree</span><span class="params">(self,X,y)</span>:</span></span><br><span class="line">        <span class="comment"># 类别完全相同则停止继续划分</span></span><br><span class="line">        <span class="keyword">if</span> y[y == y[<span class="number">0</span>]].size == y.size :</span><br><span class="line">            <span class="keyword">return</span> y[<span class="number">0</span>]</span><br><span class="line">        <span class="comment"># 遍历完所有特征时返回出现次数最多的类别</span></span><br><span class="line">        <span class="keyword">if</span> X.shape[<span class="number">1</span>] == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> self.majorityCnt(y)</span><br><span class="line">        bestFeat = self.chooseBestFeatureToSplit(X,y)</span><br><span class="line">        decisionTree = &#123;bestFeat: &#123;&#125;&#125;</span><br><span class="line">        <span class="keyword">for</span> value <span class="keyword">in</span> np.unique(X[:,bestFeat]):</span><br><span class="line">            decisionTree[bestFeat][value] = self.createTree(*self.splitDataset(X,y,bestFeat, value))</span><br><span class="line">        <span class="keyword">return</span> decisionTree</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line"></span><br><span class="line">    dataSet = np.array([[<span class="number">1</span>, <span class="number">1</span>, <span class="string">'yes'</span>],</span><br><span class="line">               [<span class="number">1</span>, <span class="number">1</span>, <span class="string">'yes'</span>],</span><br><span class="line">               [<span class="number">1</span>, <span class="number">0</span>, <span class="string">'no'</span>],</span><br><span class="line">               [<span class="number">0</span>, <span class="number">1</span>, <span class="string">'no'</span>],</span><br><span class="line">               [<span class="number">0</span>, <span class="number">1</span>, <span class="string">'no'</span>]])</span><br><span class="line">    labels = [<span class="string">'no surfacing'</span>, <span class="string">'flippers'</span>]</span><br><span class="line">    dt = DecisionTree()</span><br><span class="line">    X = dataSet[:, :<span class="number">2</span>]</span><br><span class="line">    X = X.astype(np.int)</span><br><span class="line">    y = dataSet[:,<span class="number">-1</span>]</span><br><span class="line">    dt.fit(X,y)</span><br><span class="line">    print(dt.decisionTree)</span><br></pre></td></tr></table></figure>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://shuwoom.com/?p=1452" target="_blank" rel="noopener">机器学习之-常见决策树算法(ID3、C4.5、CART)</a></p>
+<p><a href="https://www.cnblogs.com/molieren/articles/10664954.html" target="_blank" rel="noopener">决策树</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/30059442" target="_blank" rel="noopener">决策树(Decision Tree)：通俗易懂之介绍</a></p>
+<p>机器学习-周志华</p>
+<p>Machine Learning in Action by Peter Harrington</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Algorithms/" rel="tag"># Algorithms</a>
+          
+            <a href="/tags/AI/" rel="tag"># AI</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/10/22/ubuntu设置时区/" rel="next" title="ubuntu设置时区">
+                <i class="fa fa-chevron-left"></i> ubuntu设置时区
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMTE2Ny83NzE2"></div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="BENULL">
+            
+              <p class="site-author-name" itemprop="name">BENULL</p>
+              <p class="site-description motion-element" itemprop="description">tomorrow is another day</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/benull" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:ltobenull@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/u/3169828502" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#决策树"><span class="nav-number">1.</span> <span class="nav-text">决策树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#工作原理"><span class="nav-number">1.1.</span> <span class="nav-text">工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#构造"><span class="nav-number">1.1.1.</span> <span class="nav-text">构造</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#划分选择"><span class="nav-number">1.1.2.</span> <span class="nav-text">划分选择</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#信息熵"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">信息熵</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#信息增益"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">信息增益</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#信息增益率"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">信息增益率</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基尼指数"><span class="nav-number">1.1.2.4.</span> <span class="nav-text">基尼指数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#剪枝"><span class="nav-number">1.1.3.</span> <span class="nav-text">剪枝</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ID3-决策树代码"><span class="nav-number">1.2.</span> <span class="nav-text">ID3 决策树代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">1.3.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">BENULL</span>
+
+  
+</div>
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+<!--
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+
+-->
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

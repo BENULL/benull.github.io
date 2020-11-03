@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-10-30T04:58:22.550Z</updated>
+  <updated>2020-11-03T12:44:55.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Fashion Image Retrieval Based on Regional Representation for Design Protection</title>
+    <link href="http://yoursite.com/2020/11/03/PsNet/"/>
+    <id>http://yoursite.com/2020/11/03/PsNet/</id>
+    <published>2020-11-03T13:20:32.000Z</published>
+    <updated>2020-11-03T12:44:55.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Which-Is-Plagiarism-Fashion-Image-Retrieval-Based-on-Regional-Representation-for-Design-Protection"><a href="#Which-Is-Plagiarism-Fashion-Image-Retrieval-Based-on-Regional-Representation-for-Design-Protection" class="headerlink" title="Which Is Plagiarism: Fashion Image Retrieval Based on Regional Representation for Design Protection"></a>Which Is Plagiarism: Fashion Image Retrieval Based on Regional Representation for Design Protection</h1><blockquote><p>作者 | Yining Lang, Yuan He, Fan Yang, Jianfeng Dong, Hui Xue</p><p>单位 | 阿里；浙江工商大学；AZFT</p><p>会议｜CVPR2020</p><p><a href="https://openaccess.thecvf.com/content_CVPR_2020/papers/Lang_Which_Is_Plagiarism_Fashion_Image_Retrieval_Based_on_Regional_Representation_CVPR_2020_paper.pdf" target="_blank" rel="noopener">paper地址</a></p></blockquote><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>在服装领域，虽然打假一直不断，但盗版抄袭问题依旧普遍存在，而且从线上线下，抄袭手段越来越刁钻。目前来看，服装领域的抄袭有以下三类</p><p>•<strong>图片盗用</strong></p><p>​    抄袭成本很低，很容易被平台的图片检索系统锁定</p><p>•<strong>创意盗版</strong>  </p><p>​    抄袭成本稍高，但基于相似度度量的算法，可以对它们进行召回和治理</p><p>•<strong>对服装的某些区域进行修改</strong></p><p>   抄袭成本高，需要人工审核发现，打假成本也高</p><p><img src="https://github.com/benull/Resource/raw/master/psnet1.png" alt="pic1"></p><blockquote><p>两组盗版示例，其中每组中左图为正版服装，右图为盗版服装</p></blockquote><h3 id="盗版服装检索的难点"><a href="#盗版服装检索的难点" class="headerlink" title="盗版服装检索的难点"></a>盗版服装检索的难点</h3><p>盗版服装的形式层出不穷，有些盗版服装跟原图比较相似，但是有些并不相似</p><p>而且有些盗版服装与原创服装属于不同的类型，提高了网络训练时的要求</p><p><img src="https://github.com/benull/Resource/raw/master/psnet2.png" alt="pic2"></p><h3 id="盗版服装的定义"><a href="#盗版服装的定义" class="headerlink" title="盗版服装的定义"></a>盗版服装的定义</h3><p>作为盗版服装检索领域的首次工作，作者对盗版服装的定义是整体上抄袭原版服装设计和风格，服装修改的局部区域数小于等于2</p><p><img src="https://github.com/benull/Resource/raw/master/psnet3.png" alt="pic3"></p><blockquote><p>将图像中的服装分为五个区域，包括领子、胸部、腰部和两个袖子区域</p></blockquote><h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><h3 id="基于三元组的损失函数（for-相似性检索）"><a href="#基于三元组的损失函数（for-相似性检索）" class="headerlink" title="基于三元组的损失函数（for 相似性检索）"></a>基于三元组的损失函数（for 相似性检索）</h3><script type="math/tex; mode=display">\begin{array}{c}\mathcal{L}_{t r i}\left(I, I^{+}, I^{-}\right)=\sum_{r=1}^{R} \max \left(D_{r}^{I, I^{+}}-D_{r}^{I, I^{-}}+m, 0\right) \\\mathcal{L}_{t r a}=\sum_{n=1}^{N} \mathcal{L}_{t r i}\left(I, I^{+}, I^{-}\right)\end{array}</script><h3 id="基于三元组的损失函数（for-盗版检索）"><a href="#基于三元组的损失函数（for-盗版检索）" class="headerlink" title="基于三元组的损失函数（for 盗版检索）"></a>基于三元组的损失函数（for 盗版检索）</h3><script type="math/tex; mode=display">\begin{array}{c}\mathcal{L}_{t r i}^{\prime}\left(I, I^{+}, I^{-}\right)=\sum_{r=1}^{R} \max \left(D_{r}^{I, I^{+}}-D_{r}^{I, I^{-}}+m, 0\right) \cdot \lambda_{r} \\\alpha_{t r i}=\frac{\operatorname{avg}\left\{\left\|f_{r}(I)-f_{r}\left(I^{+}\right)\right\|_{2} ; r=1,2, \ldots R\right\}}{\max \left\{\left\|f_{r}(I)-f_{r}\left(I^{+}\right)\right\|_{2} ; r=1,2, \ldots R\right\}} \\\mathcal{L}_{p l a}=\sum_{n=1}^{N}\left[\mathcal{L}_{t r i}^{\prime}\left(I, I^{+}, I^{-}\right) \cdot \alpha_{t r i}\right]\end{array}</script><h2 id="网络框架"><a href="#网络框架" class="headerlink" title="网络框架"></a>网络框架</h2><h3 id="PS-Net总体框架"><a href="#PS-Net总体框架" class="headerlink" title="PS-Net总体框架"></a>PS-Net总体框架</h3><p><img src="https://github.com/benull/Resource/raw/master/psnet4.png" alt="pic4"></p><h3 id="Network-Backbone"><a href="#Network-Backbone" class="headerlink" title="Network Backbone"></a>Network Backbone</h3><p><strong>HR-Net提取图片的特征</strong></p><p>​    HR-Net 的多分辨率子网并行连接，使得每一个高分辨率到低分辨率的表征都从其它并行表示中反复接受信息，从而得到丰富的高分辨率表征</p><p>​    但HR-Net不是必须的，可以用ResNet、VGG-Net 等替代</p><h3 id="Landmark-Branch"><a href="#Landmark-Branch" class="headerlink" title="Landmark Branch"></a>Landmark Branch</h3><p>关键点估计分支，为划分区域做准备，通过反卷积进行上采样</p><h3 id="Retrieval-Branch"><a href="#Retrieval-Branch" class="headerlink" title="Retrieval Branch"></a>Retrieval Branch</h3><p>聚合局部区域的特征进行检索</p><p>根据 Landmark Branch 得到的关键点预测和 输出的热力图，得到特定局部区域在特征图上的位置</p><p>再根据特定区域在特征图上的位置，通过ROI pooling得到 Retrieval Branch 的特征图中该区域相应的局部特征图</p><h3 id="Plagiarized-Fashion-数据集"><a href="#Plagiarized-Fashion-数据集" class="headerlink" title="Plagiarized Fashion 数据集"></a>Plagiarized Fashion 数据集</h3><p>•总共60,000张图片,其中40,000用于训练 20,000用于测试</p><p>•包括4类服装：短袖T恤、长袖上衣、外套以及连衣裙</p><p>•图片从淘宝网爬取并经过专家标注</p><p><img src="https://github.com/benull/Resource/raw/master/psnet5.png" alt="pic5"></p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>•提出了一个新的抄袭服装检索问题</p><p>•建立了新的用于抄袭服装检索的数据集Plagiarism  Fashion</p><p>•提出了一种基于区域表示的多任务网络PS-Net且达到了SOTA</p><p>•PS-Net还可以用于传统的服装检索和关键点估计任务</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Which-Is-Plagiarism-Fashion-Image-Retrieval-Based-on-Regional-Representation-for-Design-Protection&quot;&gt;&lt;a href=&quot;#Which-Is-Plagiarism-Fa
+      
+    
+    </summary>
+    
+    
+      <category term="Paper" scheme="http://yoursite.com/categories/Paper/"/>
+    
+    
+      <category term="Paper" scheme="http://yoursite.com/tags/Paper/"/>
+    
+      <category term="Retrieval" scheme="http://yoursite.com/tags/Retrieval/"/>
+    
+  </entry>
   
   <entry>
     <title>集成学习</title>
@@ -551,36 +579,6 @@
       <category term="BigData" scheme="http://yoursite.com/tags/BigData/"/>
     
       <category term="Spark" scheme="http://yoursite.com/tags/Spark/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Flume + Kafka学习——整合Demo</title>
-    <link href="http://yoursite.com/2018/03/08/Flume+Kafca%E6%95%B4%E5%90%88Demo/"/>
-    <id>http://yoursite.com/2018/03/08/Flume+Kafca%E6%95%B4%E5%90%88Demo/</id>
-    <published>2018-03-08T01:55:29.000Z</published>
-    <updated>2020-10-19T16:28:03.928Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Flume-Kafka学习——整合Demo"><a href="#Flume-Kafka学习——整合Demo" class="headerlink" title="Flume + Kafka学习——整合Demo"></a>Flume + Kafka学习——整合Demo</h1><h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ol><li>Flume 1.6.0-cdh5.7.0</li><li>Kafka 0.9.0.0</li></ol><p><strong>FLume官方文档</strong><br><a href="http://archive.cloudera.com/cdh5/cdh/5/flume-ng-1.6.0-cdh5.7.0/FlumeUserGuide.html#memory-channel" target="_blank" rel="noopener">Flume1.6.0 User Guide</a><br><strong>Kafka官网文档</strong><br><a href="http://kafka.apache.org/090/documentation.html#introduction" target="_blank" rel="noopener">Kafka Documentation</a></p><h2 id="Flume"><a href="#Flume" class="headerlink" title="Flume"></a>Flume</h2><blockquote><p>Apache Flume is a distributed, reliable, and available system for efficiently collecting, aggregating and moving large amounts of log data from many different sources to a centralized data store.</p></blockquote><p>Flume是分布式的日志收集系统，它将各个服务器中的数据收集起来并送到目的地</p><h3 id="Flume数据流模型"><a href="#Flume数据流模型" class="headerlink" title="Flume数据流模型"></a>Flume数据流模型</h3><p>Flume就是将数据从数据源(source)收集过来，Flume会先缓存数据(channel),再将收集到的数据送到指定的目的地(sink)，最后Flume在删除自己缓存的数据</p><p>这样就是一个Event ，被定义为具有字节数组和可选字符串属性的数据流单元。包括 event headers、event body、event信息<br><img src="http://archive.cloudera.com/cdh5/cdh/5/flume-ng-1.6.0-cdh5.7.0/_images/UserGuide_image00.png" alt="数据流模型"></p><p>Flume Agent 是一个（JVM）进程，用于承载Event从外部源流向下一个目标</p><p>Agent 由三个核心组成</p><ol><li>Source  source组件是专门用来收集数据的,类似生产者。消耗由外部源（如Web服务器）传递给它的Event。外部源以Flume源能识别的格式向Flume发送Event</li><li>Channel source组件把数据收集来以后临时存放在channel中，类似仓库</li><li>Sink    sink组件是用于把数据发送到目的地，类似消费者</li></ol><h2 id="Kafka"><a href="#Kafka" class="headerlink" title="Kafka"></a>Kafka</h2><blockquote><p>Kafka® is a distributed, partitioned, replicated commit log service. It provides the functionality of a messaging system, but with a unique design.</p></blockquote><p>Kafka是最初由Linkedin公司开发，是一个分布式、支持分区的（partition）、多副本的（replica），基于zookeeper协调的分布式消息系统，它的最大的特性就是可以实时的处理大量数据以满足各种需求场景</p><ol><li>producer：消息生产者，发布消息到 kafka 集群的终端或服务。</li><li>broker：kafka 集群中包含的服务器。</li><li>topic：每条发布到 kafka 集群的消息属于的类别，即 kafka 是面向 topic 的。</li><li>partition：partition 是物理上的概念，每个 topic 包含一个或多个 partition。kafka 分配的单位是 partition。</li><li>consumer：从 kafka 集群中消费消息的终端或服务。</li><li>consumer group：high-level consumer API 中，每个 consumer 都属于一个 consumer group，每条消息只能被 consumer group 中的一个 Consumer 消费，但可以被多个 consumer group 消费。</li><li>replica：partition 的副本，保障 partition 的高可用。</li><li>leader：replica 中的一个角色， producer 和 consumer 只跟 leader 交互。</li><li>follower：replica 中的一个角色，从 leader 中复制数据。</li><li>controller：kafka 集群中的其中一个服务器，用来进行 leader election 以及 各种 failover。</li><li>zookeeper：kafka 通过 zookeeper 来存储集群的 meta 信息。</li></ol><h3 id="Kafka原理"><a href="#Kafka原理" class="headerlink" title="Kafka原理"></a>Kafka原理</h3><p>通常来讲，消息模型可以分为两种：队列和发布-订阅式。队列的处理方式是一组消费者从服务器读取消息，一条消息只有其中的一个消费者来处理。在发布-订阅模型中，消息被广播给所有的消费者，接收到消息的消费者都可以处理此消息。Kafka为这两种模型提供了单一的消费者抽象模型： 消费者组(consumer group)。消费者用一个消费者组名标记自己。</p><p>一个发布在Topic上消息被分发给此消费者组中的一个消费者。假如所有的消费者都在一个组中，那么这就变成了queue模型。假如所有的消费者都在不同的组中，那么就完全变成了发布-订阅模型。更通用的， 我们可以创建一些消费者组作为逻辑上的订阅者。每个组包含数目不等的消费者，一个组内多个消费者可以用来扩展性能和容错。       </p><p>并且，kafka能够保证生产者发送到一个特定的Topic的分区上，消息将会按照它们发送的顺序依次加入，也就是说，如果一个消息M1和M2使用相同的producer发送，M1先发送，那么M1将比M2的offset低，并且优先的出现在日志中。消费者收到的消息也是此顺序。如果一个Topic配置了复制因子（replication facto）为N,那么可以允许N-1服务器宕机而不丢失任何已经提交（committed）的消息。此特性说明kafka有比传统的消息系统更强的顺序保证。但是，相同的消费者组中不能有比分区更多的消费者，否则多出的消费者一直处于空等待，不会收到消息。</p><h2 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h2><p>监控一个文件实时采集新增的数据输出到Kafka<br>FLume采用 exec source + memory channel+ kafka sink</p><p><img src="https://github.com/benull/Resource/raw/master/FLUME_KAFKA.png" alt></p><ol><li>设置agent</li></ol><p>Flume agent配置存储在本地配置文件中。配置文件包含代理中每个source，sink和channel的属性以及它们如何连接在一起以形成数据流</p><p>下文$FLUME_HOME，$KAFKA_HOME指FLUME,KAFKA安装目录，</p><p>进入$FLUME_HOME/conf 创建exec-memory-kafca.conf并配置</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"># 给agent命名</span><br><span class="line">a1.sources = r1</span><br><span class="line">a1.sinks = k1</span><br><span class="line">a1.channels = c1</span><br><span class="line"></span><br><span class="line"># 配置source</span><br><span class="line">a1.sources.r1.type = exec</span><br><span class="line">a1.sources.r1.command = tail -F /Users/null/data/flume-test.log</span><br><span class="line">a1.sources.r1.channels = c1</span><br><span class="line"></span><br><span class="line"># 配置sink</span><br><span class="line">a1.sinks.k1.type = org.apache.flume.sink.kafca.KafkaSink</span><br><span class="line">a1.sinks.k1.topic = kafka-test</span><br><span class="line">a1.sinks.k1.brokerList = localhost:9092</span><br><span class="line">a1.sinks.k1.requiredAcks = 1</span><br><span class="line">a1.sinks.k1.batchSize = 2</span><br><span class="line">a1.sinks.k1.channel = c1</span><br><span class="line"># 配置memory channel</span><br><span class="line">a1.channels.c1.type = memory</span><br><span class="line">a1.channels.c1.capacity = 1000</span><br><span class="line">a1.channels.c1.transactionCapacity = 100</span><br></pre></td></tr></table></figure><ol><li><p>启动zookeeper<br> Kafka需要zookeeper环境</p> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/zkServer.sh start</span><br></pre></td></tr></table></figure></li><li><p>启动Kafka</p> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-server-start.sh config/server.properties</span><br></pre></td></tr></table></figure></li><li><p>创建话题</p> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kafka-topics.sh --list --zookeeper localhost:2181 kafka-test</span><br></pre></td></tr></table></figure></li><li><p>启动一个Consumer</p> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kafka-console-consumer.sh --zookeeper localhost:2181 --topic kafka-test --from-beginning</span><br></pre></td></tr></table></figure></li><li><p>启动FLume</p> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flume-ng agent --conf $FLUME_HOME/conf --conf-file $FLUME_HOME/conf/exec-memory-kafca.conf --name a1 -Dflume.root.logger=INFO,console</span><br></pre></td></tr></table></figure></li><li><p>在监控的文件中添加内容，可以查看到kafka发出并消费</p></li></ol><p>参考：<br>1.<a href="https://www.cnblogs.com/yangxiaoyi/p/7359236.html" target="_blank" rel="noopener">Kafka基本知识整理</a><br>2.<a href="http://blog.csdn.net/a2011480169/article/details/51544664" target="_blank" rel="noopener">FLume架构以及应用</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;Flume-Kafka学习——整合Demo&quot;&gt;&lt;a href=&quot;#Flume-Kafka学习——整合Demo&quot; class=&quot;headerlink&quot; title=&quot;Flume + Kafka学习——整合Demo&quot;&gt;&lt;/a&gt;Flume + Kafka学习——整合De
-      
-    
-    </summary>
-    
-    
-      <category term="BigData" scheme="http://yoursite.com/categories/BigData/"/>
-    
-    
-      <category term="BigData" scheme="http://yoursite.com/tags/BigData/"/>
-    
-      <category term="Flume" scheme="http://yoursite.com/tags/Flume/"/>
-    
-      <category term="Kafka" scheme="http://yoursite.com/tags/Kafka/"/>
     
   </entry>
   

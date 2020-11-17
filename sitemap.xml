@@ -284,13 +284,6 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/MIX/</loc>
-    <lastmod>2020-11-17</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/tags/Algorithms/</loc>
     <lastmod>2020-11-17</lastmod>
     <changefreq>daily</changefreq>
@@ -306,6 +299,27 @@
   
   <url>
     <loc>http://yoursite.com/tags/TOP-K%E9%97%AE%E9%A2%98/</loc>
+    <lastmod>2020-11-17</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/tags/MIX/</loc>
+    <lastmod>2020-11-17</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/tags/Paper/</loc>
+    <lastmod>2020-11-17</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/tags/ActionRecognition/</loc>
     <lastmod>2020-11-17</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -368,13 +382,6 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/Paper/</loc>
-    <lastmod>2020-11-17</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/tags/Retrieval/</loc>
     <lastmod>2020-11-17</lastmod>
     <changefreq>daily</changefreq>
@@ -396,13 +403,6 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/Spark/</loc>
-    <lastmod>2020-11-17</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/tags/AI/</loc>
     <lastmod>2020-11-17</lastmod>
     <changefreq>daily</changefreq>
@@ -411,6 +411,13 @@
   
   <url>
     <loc>http://yoursite.com/tags/KNN/</loc>
+    <lastmod>2020-11-17</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/tags/Spark/</loc>
     <lastmod>2020-11-17</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -494,13 +501,6 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/PyTorch/</loc>
-    <lastmod>2020-11-17</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/tags/%E5%93%88%E5%A4%AB%E6%9B%BC%E7%BC%96%E7%A0%81/</loc>
     <lastmod>2020-11-17</lastmod>
     <changefreq>daily</changefreq>
@@ -508,7 +508,7 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/ActionRecognition/</loc>
+    <loc>http://yoursite.com/tags/PyTorch/</loc>
     <lastmod>2020-11-17</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -566,6 +566,13 @@
   </url>
   
   <url>
+    <loc>http://yoursite.com/categories/Algorithms/</loc>
+    <lastmod>2020-11-17</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/categories/MIX/</loc>
     <lastmod>2020-11-17</lastmod>
     <changefreq>daily</changefreq>
@@ -573,7 +580,7 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/categories/Algorithms/</loc>
+    <loc>http://yoursite.com/categories/Paper/</loc>
     <lastmod>2020-11-17</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -595,13 +602,6 @@
   
   <url>
     <loc>http://yoursite.com/categories/Web/</loc>
-    <lastmod>2020-11-17</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/categories/Paper/</loc>
     <lastmod>2020-11-17</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

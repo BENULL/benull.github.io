@@ -95,7 +95,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20201117213008955.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20201117212959696.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20201117213022474.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:updated_time" content="2020-11-17T13:36:11.224Z">
+<meta property="og:updated_time" content="2020-11-17T13:38:59.245Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="A Dynamic Directed Graph Convolutional Network for Action Recognition(DDGCN)">
 <meta name="twitter:description" content="DDGCN: A Dynamic Directed Graph Convolutional Network for Action Recognition 作者 | Matthew Korban, Xin Li单位 | 路易斯安那州立大学论文地址 | https://www.ecva.net/papers/eccv_2020/papers_ECCV/papers/123650749.pdf会议 |">
@@ -357,7 +357,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  857字
+                  865字
                 </span>
               
 
@@ -429,11 +429,19 @@ f_{S T}\left(v_{i}\right)=\sum_{v_{j} \in B\left(v_{i}\right)} w\left(v_{i}\righ
 <script type="math/tex; mode=display">P_v$$中的第一列定义了W中元素的排序索引，第二列表示所选元素及其在$$B(V)$$中的顺序
 
 ## 有向时空图(DSTG)特征
+
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20201117212858577.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center)
 
 
-骨骼特征 $$f_{i}^{B}=\overline{f_{i-1} f_{i}}=f_{i-1}-f_{i}</script><p>时间特征 <script type="math/tex">f_{i}^{T}=f_{i}^{t}-f_{i}^{t-1}</script></p>
-<p>串联得到节点v<em>i的特征向量 $$F</em>{i}=\left{f<em>{i}^{J}, f</em>{i}^{B}, f_{i}^{T}\right}$$</p>
+骨骼特征</script><p>f<em>{i}^{B}=\overline{f</em>{i-1} f<em>{i}}=f</em>{i-1}-f_{i}</p>
+<script type="math/tex; mode=display">
+
+
+时间特征</script><p>f<em>{i}^{T}=f</em>{i}^{t}-f_{i}^{t-1}</p>
+<script type="math/tex; mode=display">
+
+串联得到节点v_i的特征向量</script><p>F<em>{i}=\left{f</em>{i}^{J}, f<em>{i}^{B}, f</em>{i}^{T}\right}</p>
+<p>$$</p>
 <h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>在NTURGB-D 60和Kinetics数据集上性能均优于其他方法<br><img src="https://img-blog.csdnimg.cn/20201117213008955.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
 <h3 id="消融实验"><a href="#消融实验" class="headerlink" title="消融实验"></a>消融实验</h3><p>DSTG模块对于性能提升最大，完整的DDC模块可得到最高的准确率</p>
 <p><img src="https://img-blog.csdnimg.cn/20201117212959696.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>

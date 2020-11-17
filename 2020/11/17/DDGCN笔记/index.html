@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Linux,AI,Pytorch,Docker,">
+  <meta name="keywords" content="Paper,ActionRecognition,">
 
 
 
@@ -81,18 +81,25 @@
 
 
 
-<meta name="description" content="使用Dockerfile创建Ubuntu+Pytorch+CUDA 镜像过程 安装Docker     参考ubuntu安装docker 安装NVIDIA Container Toolkit   参考NVIDIA/nvidia-docker 准备好Python-3.6.9.tar.xz 从nvidia/cuda:10.0-cudnn7-devel-ubuntu16.04 镜像基础上搭建 安装ope">
-<meta name="keywords" content="Linux,AI,Pytorch,Docker">
+<meta name="description" content="DDGCN: A Dynamic Directed Graph Convolutional Network for Action Recognition 作者 | Matthew Korban, Xin Li单位 | 路易斯安那州立大学论文地址 | https://www.ecva.net/papers/eccv_2020/papers_ECCV/papers/123650749.pdf会议 |">
+<meta name="keywords" content="Paper,ActionRecognition">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用Dockerfile创建Ubuntu+Pytorch+CUDA 镜像">
-<meta property="og:url" content="http://yoursite.com/2020/07/02/使用Dockerfile创建Ubuntu+Pytorch+CUDA 镜像/index.html">
+<meta property="og:title" content="A Dynamic Directed Graph Convolutional Network for Action Recognition(DDGCN)">
+<meta property="og:url" content="http://yoursite.com/2020/11/17/DDGCN笔记/index.html">
 <meta property="og:site_name" content="BENULL">
-<meta property="og:description" content="使用Dockerfile创建Ubuntu+Pytorch+CUDA 镜像过程 安装Docker     参考ubuntu安装docker 安装NVIDIA Container Toolkit   参考NVIDIA/nvidia-docker 准备好Python-3.6.9.tar.xz 从nvidia/cuda:10.0-cudnn7-devel-ubuntu16.04 镜像基础上搭建 安装ope">
+<meta property="og:description" content="DDGCN: A Dynamic Directed Graph Convolutional Network for Action Recognition 作者 | Matthew Korban, Xin Li单位 | 路易斯安那州立大学论文地址 | https://www.ecva.net/papers/eccv_2020/papers_ECCV/papers/123650749.pdf会议 |">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-10-19T16:34:58.068Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201117212723550.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201117212757212.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201117212842409.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201117213008955.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201117212959696.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201117213022474.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:updated_time" content="2020-11-17T13:36:11.224Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用Dockerfile创建Ubuntu+Pytorch+CUDA 镜像">
-<meta name="twitter:description" content="使用Dockerfile创建Ubuntu+Pytorch+CUDA 镜像过程 安装Docker     参考ubuntu安装docker 安装NVIDIA Container Toolkit   参考NVIDIA/nvidia-docker 准备好Python-3.6.9.tar.xz 从nvidia/cuda:10.0-cudnn7-devel-ubuntu16.04 镜像基础上搭建 安装ope">
+<meta name="twitter:title" content="A Dynamic Directed Graph Convolutional Network for Action Recognition(DDGCN)">
+<meta name="twitter:description" content="DDGCN: A Dynamic Directed Graph Convolutional Network for Action Recognition 作者 | Matthew Korban, Xin Li单位 | 路易斯安那州立大学论文地址 | https://www.ecva.net/papers/eccv_2020/papers_ECCV/papers/123650749.pdf会议 |">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20201117212723550.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center">
 
 
 
@@ -122,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/07/02/使用Dockerfile创建Ubuntu+Pytorch+CUDA 镜像/">
+  <link rel="canonical" href="http://yoursite.com/2020/11/17/DDGCN笔记/">
 
 
 
 
 
-  <title>使用Dockerfile创建Ubuntu+Pytorch+CUDA 镜像 | BENULL</title>
+  <title>A Dynamic Directed Graph Convolutional Network for Action Recognition(DDGCN) | BENULL</title>
   
 
 
@@ -265,7 +272,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/02/使用Dockerfile创建Ubuntu+Pytorch+CUDA 镜像/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/17/DDGCN笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="BENULL">
@@ -282,7 +289,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">使用Dockerfile创建Ubuntu+Pytorch+CUDA 镜像</h1>
+          <h1 class="post-title" itemprop="name headline">A Dynamic Directed Graph Convolutional Network for Action Recognition(DDGCN)</h1>
         
 
         <div class="post-meta">
@@ -294,8 +301,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-02T23:50:32+08:00">
-                2020-07-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-11-17T21:12:35+08:00">
+                2020-11-17
               </time>
             
 
@@ -317,8 +324,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/Paper/" itemprop="url" rel="index">
+                    <span itemprop="name">Paper</span>
                   </a>
                 </span>
 
@@ -350,7 +357,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  388字
+                  857字
                 </span>
               
 
@@ -366,7 +373,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2 分钟
+                  3 分钟
                 </span>
               
             </div>
@@ -387,15 +394,62 @@
       
 
       
-        <h1 id="使用Dockerfile创建Ubuntu-Pytorch-CUDA-镜像"><a href="#使用Dockerfile创建Ubuntu-Pytorch-CUDA-镜像" class="headerlink" title="使用Dockerfile创建Ubuntu+Pytorch+CUDA 镜像"></a>使用Dockerfile创建Ubuntu+Pytorch+CUDA 镜像</h1><h2 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h2><ol>
-<li>安装Docker     参考<a href="https://blog.csdn.net/LuffysMan/article/details/89393965" target="_blank" rel="noopener">ubuntu安装docker</a></li>
-<li>安装NVIDIA Container Toolkit   参考<a href="https://github.com/NVIDIA/nvidia-docker" target="_blank" rel="noopener">NVIDIA/nvidia-docker</a></li>
-<li>准备好Python-3.6.9.tar.xz</li>
-<li>从nvidia/cuda:10.0-cudnn7-devel-ubuntu16.04 镜像基础上搭建</li>
-<li>安装openssh-server、python、pytorch</li>
-<li>run镜像时加上参数—gpus all —ipc=host<h2 id="Dockerfile"><a href="#Dockerfile" class="headerlink" title="Dockerfile"></a>Dockerfile</h2><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># BASE IMAGE</span></span><br><span class="line"><span class="keyword">FROM</span> nvidia/cuda:<span class="number">10.0</span>-cudnn7-devel-ubuntu16.<span class="number">04</span> </span><br><span class="line"></span><br><span class="line"><span class="comment"># LABEL MAINTAINER</span></span><br><span class="line"><span class="keyword">LABEL</span><span class="bash"> maintainer=<span class="string">"ltobenull@gmail.com"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SHELL</span><span class="bash"> [<span class="string">"/bin/bash"</span>,<span class="string">"-c"</span>]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="bash"> /tmp</span></span><br><span class="line"><span class="comment"># copy安装文件</span></span><br><span class="line"><span class="keyword">COPY</span><span class="bash"> Python-3.6.9.tar.xz /tmp</span></span><br><span class="line"><span class="comment"># 设置 root 密码</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> <span class="string">'root:password'</span> | chpasswd \</span></span><br><span class="line"><span class="bash"><span class="comment"># 安装openssh-server 并配置</span></span></span><br><span class="line">  &amp;&amp; apt-get update &amp;&amp; apt-get -y install openssh-server \</span><br><span class="line">  &amp;&amp; sed -i <span class="string">'s/UsePAM yes/UsePAM no/g'</span> /etc/ssh/sshd_config \ </span><br><span class="line">  &amp;&amp; sed -i <span class="string">'s/PermitRootLogin prohibit-password/PermitRootLogin yes/g'</span> /etc/ssh/sshd_config \</span><br><span class="line">  &amp;&amp; mkdir /var/<span class="keyword">run</span><span class="bash">/sshd \</span></span><br><span class="line"><span class="bash"><span class="comment"># 安装python依赖包</span></span></span><br><span class="line">  &amp;&amp; apt-get -y install build-essential python-dev python-setuptools python-pip python-smbus \</span><br><span class="line">  &amp;&amp; apt-get -y install build-essential libncursesw5-dev libgdbm-dev libc6-dev \</span><br><span class="line">  &amp;&amp; apt-get -y install zlib1g-dev libsqlite3-dev tk-dev \</span><br><span class="line">  &amp;&amp; apt-get -y install libssl-dev openssl \</span><br><span class="line">  &amp;&amp; apt-get -y install libffi-dev \</span><br><span class="line"><span class="comment"># 安装python 3.6.9</span></span><br><span class="line">  &amp;&amp; mkdir -p /usr/local/python3.<span class="number">6</span> \</span><br><span class="line">  &amp;&amp; tar xvf Python-<span class="number">3.6</span>.<span class="number">9</span>.tar.xz \</span><br><span class="line">  &amp;&amp; cd Python-<span class="number">3.6</span>.<span class="number">9</span> \</span><br><span class="line">  &amp;&amp; ./configure --prefix=/usr/local/python3.<span class="number">6</span> \</span><br><span class="line">  &amp;&amp; make altinstall \</span><br><span class="line"><span class="comment"># 建立软链接</span></span><br><span class="line">  &amp;&amp; ln -snf /usr/local/python3.<span class="number">6</span>/bin/python3.<span class="number">6</span> /usr/bin/python3 \</span><br><span class="line">  &amp;&amp; ln -snf /usr/local/python3.<span class="number">6</span>/bin/pip3.<span class="number">6</span> /usr/bin/pip3\</span><br><span class="line"><span class="comment"># 安装pytorch</span></span><br><span class="line">  &amp;&amp; mkdir ~/.pip &amp;&amp; echo -e <span class="string">'[global] \nindex-url = https://mirrors.aliyun.com/pypi/simple/'</span> &gt;&gt; ~/.pip/pip.conf \</span><br><span class="line">  &amp;&amp; pip3 install torch===<span class="number">1.2</span>.<span class="number">0</span> torchvision===<span class="number">0.4</span>.<span class="number">0</span> -f https://download.pytorch.org/whl/torch_stable.html \</span><br><span class="line"><span class="comment"># 清理copy的安装文件</span></span><br><span class="line">  &amp;&amp; apt-get clean \</span><br><span class="line">  &amp;&amp; rm -rf /tmp/* /var/tmp/*</span><br><span class="line"></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">22</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">CMD</span><span class="bash"> [<span class="string">"/usr/sbin/sshd"</span>, <span class="string">"-D"</span>]</span></span><br></pre></td></tr></table></figure>
+        <h1 id="DDGCN-A-Dynamic-Directed-Graph-Convolutional-Network-for-Action-Recognition"><a href="#DDGCN-A-Dynamic-Directed-Graph-Convolutional-Network-for-Action-Recognition" class="headerlink" title="DDGCN: A Dynamic Directed Graph Convolutional Network for Action Recognition"></a>DDGCN: A Dynamic Directed Graph Convolutional Network for Action Recognition</h1><blockquote>
+<p>作者 | Matthew Korban, Xin Li<br>单位 | 路易斯安那州立大学<br>论文地址 | <a href="https://link.zhihu.com/?target=https%3A//www.ecva.net/papers/eccv_2020/papers_ECCV/papers/123650749.pdf" target="_blank" rel="noopener">https://www.ecva.net/papers/eccv_2020/papers_ECCV/papers/123650749.pdf</a><br>会议 | ECCV 2020</p>
+</blockquote>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>提出了一种动态有向图卷积网络(DDGCN)，从人体行为的骨架表示出发，对人体行为的时空特征进行建模</p>
+<p>DDGCN由三个新的特征建模模块组成：</p>
+<ol>
+<li>动态卷积采样(DCS)</li>
+<li>动态卷积权重(DCW)</li>
+<li>有向图时空(DGST)特征提取</li>
+</ol>
+<p>DCS和DCW模块可以有效地捕捉动态的非相邻关节之间的时空相关性</p>
+<p>DSTG特征提取模块，通过包含时空的有序信息来增强动作的特征</p>
+<h2 id="网络架构"><a href="#网络架构" class="headerlink" title="网络架构"></a>网络架构<img src="https://img-blog.csdnimg.cn/20201117212723550.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></h2><h2 id="动态卷积采样-DCS"><a href="#动态卷积采样-DCS" class="headerlink" title="动态卷积采样(DCS)"></a>动态卷积采样(DCS)</h2><p>人体非相邻的子部分在人类行为中往往是相互关联的，且这种关联是动态的<br><img src="https://img-blog.csdnimg.cn/20201117212757212.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p>DCS算法可以总结如下</p>
+<ol>
+<li><p>按照骨架模板初始化静态图<script type="math/tex">G_S</script>，并相应地初始化所有节点的索引</p>
+</li>
+<li><p>初始化邻居采样：对于∀vi∈GS，分两步创建其初始有序近邻集合pi(B(Vi))</p>
+<ul>
+<li>创建包括图中所有其他节点的有序节点集合Oi，该有序节点集合Oi包括根据图到vi的图距离排序的图中的所有其他节点。 当两个节点Vj和Vr具有相同的图距离(例如，都离Vi有r跳距离)时，则根据它们的初始化索引对它们进行排序</li>
+<li>给定核大小r，从Oi中选取前r个节点，这些节点在此步骤pi(B(Vi))中形成有序的邻集</li>
+</ul>
+</li>
+<li><p>更新采样邻域：∀vi，通过学习减少识别损失的最优偏移量∆pi来更新索引偏移量和邻域采样</p>
 </li>
 </ol>
+<p>最后，在<script type="math/tex">G_{ST}</script>上，通过如下公式(1)的图形卷积计算特征图<script type="math/tex">f_{ST}</script></p>
+<script type="math/tex; mode=display">
+f_{S T}\left(v_{i}\right)=\sum_{v_{j} \in B\left(v_{i}\right)} w\left(v_{i}\right) \cdot\left(p_{i}\left(v_{j}\right)+\Delta p_{i}\left(v_{j}\right)\right)</script><p>其中i和j分别是中心采样节点和相邻采样节点的索引，B是动态相邻采样节点集合，w是动态权重函数，pi是动态相邻采样函数，∆pi是偏移采样函数</p>
+<h2 id="动态卷积权重-DCW"><a href="#动态卷积权重-DCW" class="headerlink" title="动态卷积权重(DCW)"></a>动态卷积权重(DCW)</h2><p>DCW权重分配模块动态地将权重<script type="math/tex">w_i</script>分配给<script type="math/tex">v_i</script>的相邻节点</p>
+<p>使用动态时间规整(DTW)算法来计算<script type="math/tex">P_v=DTW_{path} (W,B(v))</script></p>
+<p><img src="https://img-blog.csdnimg.cn/20201117212842409.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<script type="math/tex; mode=display">P_v$$中的第一列定义了W中元素的排序索引，第二列表示所选元素及其在$$B(V)$$中的顺序
+
+## 有向时空图(DSTG)特征
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20201117212858577.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center)
+
+
+骨骼特征 $$f_{i}^{B}=\overline{f_{i-1} f_{i}}=f_{i-1}-f_{i}</script><p>时间特征 <script type="math/tex">f_{i}^{T}=f_{i}^{t}-f_{i}^{t-1}</script></p>
+<p>串联得到节点v<em>i的特征向量 $$F</em>{i}=\left{f<em>{i}^{J}, f</em>{i}^{B}, f_{i}^{T}\right}$$</p>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>在NTURGB-D 60和Kinetics数据集上性能均优于其他方法<br><img src="https://img-blog.csdnimg.cn/20201117213008955.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<h3 id="消融实验"><a href="#消融实验" class="headerlink" title="消融实验"></a>消融实验</h3><p>DSTG模块对于性能提升最大，完整的DDC模块可得到最高的准确率</p>
+<p><img src="https://img-blog.csdnimg.cn/20201117212959696.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<h3 id="识别不完整的动作"><a href="#识别不完整的动作" class="headerlink" title="识别不完整的动作"></a>识别不完整的动作</h3><p>对丢失帧的动作识别进行的实验，分为以下3中情况</p>
+<ul>
+<li><p>运动开始时丢失帧</p>
+</li>
+<li><p>运动结束时丢失帧</p>
+</li>
+<li><p>序列中随机丢失的帧</p>
+</li>
+</ul>
+<p>结论是<strong>运动开始时的序列存在大部分特征</strong><br><img src="https://img-blog.csdnimg.cn/20201117213022474.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>提出了一种基于骨架图的动态有向图卷积网络(DDGCN)动作识别算法</p>
+<p>DDGCN由三个新模块组成，动态卷积抽样(DCS)、动态卷积权重分配(DCW)和有向图时空(DGST)特征提取</p>
+<p>这些新模块有助于更好地捕捉时空依赖关系，骨架的层次结构和时序特征。 实验表明，DDGCN在多个公共数据集上的动作识别准确率优于最先进的算法</p>
 
       
     </div>
@@ -413,13 +467,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Linux/" rel="tag"># Linux</a>
+            <a href="/tags/Paper/" rel="tag"># Paper</a>
           
-            <a href="/tags/AI/" rel="tag"># AI</a>
-          
-            <a href="/tags/Pytorch/" rel="tag"># Pytorch</a>
-          
-            <a href="/tags/Docker/" rel="tag"># Docker</a>
+            <a href="/tags/ActionRecognition/" rel="tag"># ActionRecognition</a>
           
         </div>
       
@@ -432,8 +482,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/06/20/[python]微信公众号文章爬取/" rel="next" title="python 微信公众号文章爬取">
-                <i class="fa fa-chevron-left"></i> python 微信公众号文章爬取
+              <a href="/2020/11/06/支持向量机(SVM)/" rel="next" title="支持向量机(SVM)">
+                <i class="fa fa-chevron-left"></i> 支持向量机(SVM)
               </a>
             
           </div>
@@ -441,10 +491,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/08/06/基于骨架的动作识别的解缠和统一的图卷积/" rel="prev" title="Disentangling and Unifying Graph Convolutions for Skeleton-Based Action Recognition">
-                Disentangling and Unifying Graph Convolutions for Skeleton-Based Action Recognition <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -609,7 +655,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#使用Dockerfile创建Ubuntu-Pytorch-CUDA-镜像"><span class="nav-number">1.</span> <span class="nav-text">使用Dockerfile创建Ubuntu+Pytorch+CUDA 镜像</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#过程"><span class="nav-number">1.1.</span> <span class="nav-text">过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dockerfile"><span class="nav-number">1.2.</span> <span class="nav-text">Dockerfile</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#DDGCN-A-Dynamic-Directed-Graph-Convolutional-Network-for-Action-Recognition"><span class="nav-number">1.</span> <span class="nav-text">DDGCN: A Dynamic Directed Graph Convolutional Network for Action Recognition</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#摘要"><span class="nav-number">1.1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络架构"><span class="nav-number">1.2.</span> <span class="nav-text">网络架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态卷积采样-DCS"><span class="nav-number">1.3.</span> <span class="nav-text">动态卷积采样(DCS)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态卷积权重-DCW"><span class="nav-number">1.4.</span> <span class="nav-text">动态卷积权重(DCW)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验"><span class="nav-number">1.5.</span> <span class="nav-text">实验</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#消融实验"><span class="nav-number">1.5.1.</span> <span class="nav-text">消融实验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#识别不完整的动作"><span class="nav-number">1.5.2.</span> <span class="nav-text">识别不完整的动作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.6.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -817,6 +863,26 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 

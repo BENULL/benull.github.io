@@ -91,10 +91,12 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20201117212723550.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20201117212757212.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201117212842409.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201117212858577.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20201117213008955.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20201117212959696.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20201117213022474.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:updated_time" content="2020-11-17T13:44:26.823Z">
+<meta property="og:updated_time" content="2020-11-17T13:46:10.773Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="A Dynamic Directed Graph Convolutional Network for Action Recognition(DDGCN)">
 <meta name="twitter:description" content="DDGCN: A Dynamic Directed Graph Convolutional Network for Action Recognition 作者 | Matthew Korban, Xin Li单位 | 路易斯安那州立大学论文地址 | https://www.ecva.net/papers/eccv_2020/papers_ECCV/papers/123650749.pdf会议 |">
@@ -356,7 +358,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  857字
+                  904字
                 </span>
               
 
@@ -423,18 +425,11 @@
 <script type="math/tex; mode=display">
 f_{S T}\left(v_{i}\right)=\sum_{v_{j} \in B\left(v_{i}\right)} w\left(v_{i}\right) \cdot\left(p_{i}\left(v_{j}\right)+\Delta p_{i}\left(v_{j}\right)\right)</script><p>其中i和j分别是中心采样节点和相邻采样节点的索引，B是动态相邻采样节点集合，w是动态权重函数，pi是动态相邻采样函数，∆pi是偏移采样函数</p>
 <h2 id="动态卷积权重-DCW"><a href="#动态卷积权重-DCW" class="headerlink" title="动态卷积权重(DCW)"></a>动态卷积权重(DCW)</h2><p>DCW权重分配模块动态地将权重<script type="math/tex">w_i</script>分配给<script type="math/tex">v_i</script>的相邻节点</p>
-<p>使用动态时间规整(DTW)算法来计算<script type="math/tex">P_v=DTW_{path} (W,B(v))</script></p>
-<script type="math/tex; mode=display">P_v$$中的第一列定义了W中元素的排序索引，第二列表示所选元素及其在$$B(V)$$中的顺序
-
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20201117212842409.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center)
-
-
-## 有向时空图特征(DSTG)
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20201117212858577.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center)
-
-骨骼特征 $$f_{i}^{B}=\overline{f_{i-1} f_{i}}=f_{i-1}-f_{i}</script><p>时间特征 <script type="math/tex">f_{i}^{T}=f_{i}^{t}-f_{i}^{t-1}</script><br>串联得到节点v<em>i的特征向量 $$F</em>{i}=\left{f<em>{i}^{J}, f</em>{i}^{B}, f_{i}^{T}\right}$$</p>
+<p>使用动态时间规整(DTW)算法来计算 <script type="math/tex">P_v=DTW_{path} (W,B(v))</script></p>
+<p>其中<script type="math/tex">P_v</script>中的第一列定义了W中元素的排序索引，第二列表示所选元素及其在<script type="math/tex">B(V)</script>中的顺序</p>
+<p><img src="https://img-blog.csdnimg.cn/20201117212842409.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="有向时空图特征-DSTG"><a href="#有向时空图特征-DSTG" class="headerlink" title="有向时空图特征(DSTG)"></a>有向时空图特征(DSTG)</h2><p><img src="https://img-blog.csdnimg.cn/20201117212858577.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p>骨骼特征 <script type="math/tex">f_{i}^{B}=\overline{f_{i-1} f_{i}}=f_{i-1}-f_{i}</script><br>时间特征 <script type="math/tex">f_{i}^{T}=f_{i}^{t}-f_{i}^{t-1}</script><br>串联得到节点v<em>i的特征向量 $$F</em>{i}=\left{f<em>{i}^{J}, f</em>{i}^{B}, f_{i}^{T}\right}$$</p>
 <h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>在NTURGB-D 60和Kinetics数据集上性能均优于其他方法<br><img src="https://img-blog.csdnimg.cn/20201117213008955.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
 <h3 id="消融实验"><a href="#消融实验" class="headerlink" title="消融实验"></a>消融实验</h3><p>DSTG模块对于性能提升最大，完整的DDC模块可得到最高的准确率</p>
 <p><img src="https://img-blog.csdnimg.cn/20201117212959696.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
@@ -656,7 +651,7 @@ f_{S T}\left(v_{i}\right)=\sum_{v_{j} \in B\left(v_{i}\right)} w\left(v_{i}\righ
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#DDGCN-A-Dynamic-Directed-Graph-Convolutional-Network-for-Action-Recognition"><span class="nav-number">1.</span> <span class="nav-text">DDGCN: A Dynamic Directed Graph Convolutional Network for Action Recognition</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#摘要"><span class="nav-number">1.1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络架构"><span class="nav-number">1.2.</span> <span class="nav-text">网络架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态卷积采样-DCS"><span class="nav-number">1.3.</span> <span class="nav-text">动态卷积采样(DCS)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态卷积权重-DCW"><span class="nav-number">1.4.</span> <span class="nav-text">动态卷积权重(DCW)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验"><span class="nav-number">1.5.</span> <span class="nav-text">实验</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#消融实验"><span class="nav-number">1.5.1.</span> <span class="nav-text">消融实验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#识别不完整的动作"><span class="nav-number">1.5.2.</span> <span class="nav-text">识别不完整的动作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.6.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#DDGCN-A-Dynamic-Directed-Graph-Convolutional-Network-for-Action-Recognition"><span class="nav-number">1.</span> <span class="nav-text">DDGCN: A Dynamic Directed Graph Convolutional Network for Action Recognition</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#摘要"><span class="nav-number">1.1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络架构"><span class="nav-number">1.2.</span> <span class="nav-text">网络架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态卷积采样-DCS"><span class="nav-number">1.3.</span> <span class="nav-text">动态卷积采样(DCS)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态卷积权重-DCW"><span class="nav-number">1.4.</span> <span class="nav-text">动态卷积权重(DCW)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有向时空图特征-DSTG"><span class="nav-number">1.5.</span> <span class="nav-text">有向时空图特征(DSTG)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验"><span class="nav-number">1.6.</span> <span class="nav-text">实验</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#消融实验"><span class="nav-number">1.6.1.</span> <span class="nav-text">消融实验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#识别不完整的动作"><span class="nav-number">1.6.2.</span> <span class="nav-text">识别不完整的动作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.7.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
             
 
           </div>

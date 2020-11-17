@@ -91,11 +91,10 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20201117212723550.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20201117212757212.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201117212842409.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20201117213008955.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20201117212959696.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20201117213022474.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:updated_time" content="2020-11-17T13:40:23.481Z">
+<meta property="og:updated_time" content="2020-11-17T13:42:44.114Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="A Dynamic Directed Graph Convolutional Network for Action Recognition(DDGCN)">
 <meta name="twitter:description" content="DDGCN: A Dynamic Directed Graph Convolutional Network for Action Recognition 作者 | Matthew Korban, Xin Li单位 | 路易斯安那州立大学论文地址 | https://www.ecva.net/papers/eccv_2020/papers_ECCV/papers/123650749.pdf会议 |">
@@ -357,7 +356,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  865字
+                  844字
                 </span>
               
 
@@ -425,24 +424,20 @@
 f_{S T}\left(v_{i}\right)=\sum_{v_{j} \in B\left(v_{i}\right)} w\left(v_{i}\right) \cdot\left(p_{i}\left(v_{j}\right)+\Delta p_{i}\left(v_{j}\right)\right)</script><p>其中i和j分别是中心采样节点和相邻采样节点的索引，B是动态相邻采样节点集合，w是动态权重函数，pi是动态相邻采样函数，∆pi是偏移采样函数</p>
 <h2 id="动态卷积权重-DCW"><a href="#动态卷积权重-DCW" class="headerlink" title="动态卷积权重(DCW)"></a>动态卷积权重(DCW)</h2><p>DCW权重分配模块动态地将权重<script type="math/tex">w_i</script>分配给<script type="math/tex">v_i</script>的相邻节点</p>
 <p>使用动态时间规整(DTW)算法来计算<script type="math/tex">P_v=DTW_{path} (W,B(v))</script></p>
-<p><img src="https://img-blog.csdnimg.cn/20201117212842409.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
 <script type="math/tex; mode=display">P_v$$中的第一列定义了W中元素的排序索引，第二列表示所选元素及其在$$B(V)$$中的顺序
 
-## 有向时空图(DSTG)特征
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20201117212842409.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center)
+
+
+## 有向时空图特征(DSTG)
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20201117212858577.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center)
 
-
-骨骼特征</script><p>f<em>{i}^{B}=\overline{f</em>{i-1} f<em>{i}}=f</em>{i-1}-f_{i}</p>
-<script type="math/tex; mode=display">
-
-
-时间特征</script><p>f<em>{i}^{T}=f</em>{i}^{t}-f_{i}^{t-1}</p>
-<script type="math/tex; mode=display">
-
-串联得到节点v_i的特征向量</script><p>F<em>{i}=\left{f</em>{i}^{J}, f<em>{i}^{B}, f</em>{i}^{T}\right}</p>
-<p>$$</p>
-<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>在NTURGB-D 60和Kinetics数据集上性能均优于其他方法<br><img src="https://img-blog.csdnimg.cn/20201117213008955.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+骨骼特征 
+$$f_{i}^{B}=\overline{f_{i-1} f_{i}}=f_{i-1}-f_{i}</script><p>时间特征 </p>
+<script type="math/tex; mode=display">f_{i}^{T}=f_{i}^{t}-f_{i}^{t-1}</script><p>串联得到节点v_i的特征向量</p>
+<script type="math/tex; mode=display">F_{i}=\left\{f_{i}^{J}, f_{i}^{B}, f_{i}^{T}\right\}</script><h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>在NTURGB-D 60和Kinetics数据集上性能均优于其他方法<br><img src="https://img-blog.csdnimg.cn/20201117213008955.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
 <h3 id="消融实验"><a href="#消融实验" class="headerlink" title="消融实验"></a>消融实验</h3><p>DSTG模块对于性能提升最大，完整的DDC模块可得到最高的准确率</p>
 <p><img src="https://img-blog.csdnimg.cn/20201117212959696.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
 <h3 id="识别不完整的动作"><a href="#识别不完整的动作" class="headerlink" title="识别不完整的动作"></a>识别不完整的动作</h3><p>对丢失帧的动作识别进行的实验，分为以下3中情况</p>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-12-09T10:02:22.948Z</updated>
+  <updated>2020-12-09T22:35:28.561Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Temporal Extension Module for Skeleton-Based Action Recognition</title>
+    <link href="http://yoursite.com/2020/12/10/TEM/"/>
+    <id>http://yoursite.com/2020/12/10/TEM/</id>
+    <published>2020-12-09T22:42:22.000Z</published>
+    <updated>2020-12-09T22:35:28.561Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Temporal-Extension-Module-for-Skeleton-Based-Action-Recognition"><a href="#Temporal-Extension-Module-for-Skeleton-Based-Action-Recognition" class="headerlink" title="Temporal Extension Module for Skeleton-Based Action Recognition"></a>Temporal Extension Module for Skeleton-Based Action Recognition</h1><blockquote><p>作者 | Yuya Obinata and Takuma Yamamoto<br>单位         | FUJITSU LABORATORIES LTD<br>论文地址｜<a href="https://arxiv.org/abs/2003.08951" target="_blank" rel="noopener">https://arxiv.org/abs/2003.08951</a><br>ICPR2020</p></blockquote><p>在st-gcn的基础上开发了一个模块，在帧与帧之间相邻的关节点之间也添加连接，好处在于和其他网络结合起来很方便，对于性能也有一定的提高</p><p>但其实很多sota的模型都已经考虑过帧间关节点的链接，同时扩展到了多个尺度，不仅仅是帧间邻居关节点相连</p><h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>提出了一个用于基于骨架的动作识别的的时域扩展模块</p><p><strong>现有的方法试图在帧内表示更合适的空间图，但忽略了帧间时间图的优化</strong></p><p>具体来说，这些方法只连接帧间同一关节对应的顶点。在这篇论文中，着重于在帧间添加与相邻多个顶点的连接</p><p>是提取人体运动中多个关节的相关特征的一种简单而有效的方法</p><p>主要贡献如下</p><ul><li>提出了一个时间扩展模块，用于帧间时态图的扩展。该模块在提取人体运动中连接的多个相邻关节的相关特征时简单而有效。</li><li>在消融实验中的展示了TEM有效性</li><li>达到了SOTA</li></ul><h2 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h2><p>时空图卷积网络（ST-GCN）是第一个使用GCN对骨架序列进行动作识别的方法</p><p><img src="https://img-blog.csdnimg.cn/2020121006314185.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><p>ST-GCN包括一个空间图和一个时间图，直接输入一个骨架序列，并从帧内和帧间的关节处提取特征</p><p>在这项工作中，着重于扩展时间图，连接相邻的多个顶点以及帧间（右）上的同一个顶点。在帧内提出了更合适的空间图，性能得到了显著提高。然而，这些方法忽略了帧间时间图的优化</p><p>传统的GCN方法将只对应于同一关节的顶点之间的时间维连接起来，该方法对于提取同一关节轨迹特征具有一定的效果，然而，由于过于简单不太能够提取帧间各关节间相关运动的特征</p><p><strong>研究目标</strong><br>优化空间图和时间图，以进一步提高性能<br>TEM模块不仅直接将边添加到同一个顶点，而且还直接向相邻的多个顶点添加边，并基于帧间相同的多个顶点计算卷积</p><h2 id="时间扩展模块"><a href="#时间扩展模块" class="headerlink" title="时间扩展模块"></a>时间扩展模块<img src="https://img-blog.csdnimg.cn/20201210063210320.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></h2><p>在ST-GCN中加入了这个方法的模块，ST-GCN包括多层时空图卷积操作，将TEM放在空间卷积和时间卷积层中</p><p>以同样的方式很容易地TEM模块实现到基于时空图卷积的网络中</p><h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验<img src="https://img-blog.csdnimg.cn/20201210063232136.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></h2><p>加上这个模块后有一定的性能提升</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Temporal-Extension-Module-for-Skeleton-Based-Action-Recognition&quot;&gt;&lt;a href=&quot;#Temporal-Extension-Module-for-Skeleton-Based-Action-Recog
+      
+    
+    </summary>
+    
+    
+      <category term="Paper" scheme="http://yoursite.com/categories/Paper/"/>
+    
+    
+      <category term="Paper" scheme="http://yoursite.com/tags/Paper/"/>
+    
+      <category term="ActionRecognition" scheme="http://yoursite.com/tags/ActionRecognition/"/>
+    
+  </entry>
   
   <entry>
     <title>Contextual Residual Aggregation for Ultra High-Resolution Image Inpainting</title>
@@ -559,34 +587,6 @@
       <category term="Python" scheme="http://yoursite.com/tags/Python/"/>
     
       <category term="crawler" scheme="http://yoursite.com/tags/crawler/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>在docker中使用PyTorch时共享内存问题</title>
-    <link href="http://yoursite.com/2020/06/16/%E5%9C%A8docker%E4%B8%AD%E4%BD%BF%E7%94%A8pytorch%E6%97%B6%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/"/>
-    <id>http://yoursite.com/2020/06/16/%E5%9C%A8docker%E4%B8%AD%E4%BD%BF%E7%94%A8pytorch%E6%97%B6%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/</id>
-    <published>2020-06-16T01:10:32.000Z</published>
-    <updated>2020-10-19T16:32:51.954Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="ERROR-Unexpected-bus-error-encountered-in-worker-This-might-be-caused-by-insufficient-shared-memory-shm"><a href="#ERROR-Unexpected-bus-error-encountered-in-worker-This-might-be-caused-by-insufficient-shared-memory-shm" class="headerlink" title="ERROR: Unexpected bus error encountered in worker. This might be caused by insufficient shared memory (shm)"></a>ERROR: Unexpected bus error encountered in worker. This might be caused by insufficient shared memory (shm)</h1><h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ERROR: Unexpected bus error encountered in worker. This might be caused by insufficient shared memory (shm)</span><br></pre></td></tr></table></figure><p>出现这个错误的情况是,在服务器上的docker中运行训练代码时,batch size设置得过大,shared memory不够(因为docker限制了shm).</p><p>根据PyTorch README：</p><blockquote><p>Please note that PyTorch uses shared memory to share data between processes, so if torch multiprocessing is used (e.g. for multithreaded data loaders) the default shared memory segment size that container runs with is not enough, and you should increase shared memory size either with —ipc=host or —shm-size command line options to nvidia-docker run.</p></blockquote><h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><ol><li>这里说明了,PyTorch的IPC会利用共享内存,所以共享内存必须足够大,可以通过<code>docker run --shm-size</code>进行修改</li><li>通过设置 <code>--ipc=host</code></li><li>将Dataloader的num_workers设置为0.但训练会变慢</li></ol><p><a href="https://github.com/ultralytics/yolov3/issues/283" target="_blank" rel="noopener">yolov3 issue#283</a></p><p><a href="https://www.jianshu.com/p/091fca7d9647" target="_blank" rel="noopener">PyTorch On K8S 共享内存问题定位</a></p><p><a href="https://zhuanlan.zhihu.com/p/91485607" target="_blank" rel="noopener">Pytorch的12个坑</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;ERROR-Unexpected-bus-error-encountered-in-worker-This-might-be-caused-by-insufficient-shared-memory-shm&quot;&gt;&lt;a href=&quot;#ERROR-Unexpected-
-      
-    
-    </summary>
-    
-    
-      <category term="AI" scheme="http://yoursite.com/categories/AI/"/>
-    
-    
-      <category term="Docker" scheme="http://yoursite.com/tags/Docker/"/>
-    
-      <category term="PyTorch" scheme="http://yoursite.com/tags/PyTorch/"/>
     
   </entry>
   

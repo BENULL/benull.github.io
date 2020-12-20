@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Linux,Ubuntu,">
+  <meta name="keywords" content="Scala,">
 
 
 
@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="ubuntu设置时区查看现在时区 12benull@37c7dedb7a13:~# date -RWed, 21 Oct 2020 23:46:05 +0800 执行tzselect查看时区(只能查看不能修改） 遇到tzselect报错如下     123benull@37c7dedb7a13:~# tzselect/usr/bin/tzselect: line 180: /usr/share/z">
-<meta name="keywords" content="Linux,Ubuntu">
+<meta name="description" content="Scala 的几种group集合操作scala的集合中有如下几种group操作  groupBy 按特定条件对集合元素进行分类  grouped 将集合拆分成指定长度的子集合  groupMap 使用方法按特定条件对集合的元素进行分类并处理每个元素  groupMapReduce 使用方法按特定条件对集合中的元素进行分类，分别进行处理，最后将它们reduce  这些方法在scala.collect">
+<meta name="keywords" content="Scala">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ubuntu设置时区">
-<meta property="og:url" content="http://yoursite.com/2020/10/22/ubuntu设置时区/index.html">
+<meta property="og:title" content="Scala 的几种group集合操作">
+<meta property="og:url" content="http://yoursite.com/2020/12/20/Scala的几种group集合操作/index.html">
 <meta property="og:site_name" content="BENULL">
-<meta property="og:description" content="ubuntu设置时区查看现在时区 12benull@37c7dedb7a13:~# date -RWed, 21 Oct 2020 23:46:05 +0800 执行tzselect查看时区(只能查看不能修改） 遇到tzselect报错如下     123benull@37c7dedb7a13:~# tzselect/usr/bin/tzselect: line 180: /usr/share/z">
+<meta property="og:description" content="Scala 的几种group集合操作scala的集合中有如下几种group操作  groupBy 按特定条件对集合元素进行分类  grouped 将集合拆分成指定长度的子集合  groupMap 使用方法按特定条件对集合的元素进行分类并处理每个元素  groupMapReduce 使用方法按特定条件对集合中的元素进行分类，分别进行处理，最后将它们reduce  这些方法在scala.collect">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-10-21T16:09:11.108Z">
+<meta property="og:updated_time" content="2020-12-20T15:33:10.284Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ubuntu设置时区">
-<meta name="twitter:description" content="ubuntu设置时区查看现在时区 12benull@37c7dedb7a13:~# date -RWed, 21 Oct 2020 23:46:05 +0800 执行tzselect查看时区(只能查看不能修改） 遇到tzselect报错如下     123benull@37c7dedb7a13:~# tzselect/usr/bin/tzselect: line 180: /usr/share/z">
+<meta name="twitter:title" content="Scala 的几种group集合操作">
+<meta name="twitter:description" content="Scala 的几种group集合操作scala的集合中有如下几种group操作  groupBy 按特定条件对集合元素进行分类  grouped 将集合拆分成指定长度的子集合  groupMap 使用方法按特定条件对集合的元素进行分类并处理每个元素  groupMapReduce 使用方法按特定条件对集合中的元素进行分类，分别进行处理，最后将它们reduce  这些方法在scala.collect">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/10/22/ubuntu设置时区/">
+  <link rel="canonical" href="http://yoursite.com/2020/12/20/Scala的几种group集合操作/">
 
 
 
 
 
-  <title>ubuntu设置时区 | BENULL</title>
+  <title>Scala 的几种group集合操作 | BENULL</title>
   
 
 
@@ -265,7 +265,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/22/ubuntu设置时区/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/20/Scala的几种group集合操作/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="BENULL">
@@ -282,7 +282,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">ubuntu设置时区</h1>
+          <h1 class="post-title" itemprop="name headline">Scala 的几种group集合操作</h1>
         
 
         <div class="post-meta">
@@ -294,8 +294,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-10-22T00:12:39+08:00">
-                2020-10-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-20T23:33:29+08:00">
+                2020-12-20
               </time>
             
 
@@ -317,8 +317,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/BigData/" itemprop="url" rel="index">
+                    <span itemprop="name">BigData</span>
                   </a>
                 </span>
 
@@ -350,7 +350,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  538字
+                  657字
                 </span>
               
 
@@ -387,22 +387,36 @@
       
 
       
-        <h1 id="ubuntu设置时区"><a href="#ubuntu设置时区" class="headerlink" title="ubuntu设置时区"></a>ubuntu设置时区</h1><p>查看现在时区</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">benull@37c7dedb7a13:~<span class="comment"># date -R</span></span><br><span class="line">Wed, 21 Oct 2020 23:46:05 +0800</span><br></pre></td></tr></table></figure>
-<p>执行<code>tzselect</code>查看时区(只能查看不能修改）</p>
-<p>遇到tzselect报错如下    </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">benull@37c7dedb7a13:~<span class="comment"># tzselect</span></span><br><span class="line">/usr/bin/tzselect: line 180: /usr/share/zoneinfo/iso3166.tab: No such file or directory</span><br><span class="line">/usr/bin/tzselect: time zone files are not <span class="built_in">set</span> up correctly</span><br></pre></td></tr></table></figure>
-<p>解决方案一：安装tzdata</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install tzdata</span><br></pre></td></tr></table></figure>
-<p>解决方案二：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vim /usr/bin/tzselect</span><br><span class="line">将</span><br><span class="line"><span class="variable">$&#123;TZDIR=pwd&#125;</span></span><br><span class="line">改为</span><br><span class="line"><span class="variable">$&#123;TZDIR=/usr/share/zoneinfo&#125;</span></span><br></pre></td></tr></table></figure>
-<p>继续执行 tzselect</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">benull@37c7dedb7a13:~# tzselect</span><br><span class="line">Please identify a location so that time zone rules can be set correctly.</span><br><span class="line">Please select a continent, ocean, &quot;coord&quot;, or &quot;TZ&quot;.</span><br><span class="line"> 1) Africa</span><br><span class="line"> 2) Americas</span><br><span class="line"> 3) Antarctica</span><br><span class="line"> 4) Asia</span><br><span class="line"> 5) Atlantic Ocean</span><br><span class="line"> 6) Australia</span><br><span class="line"> 7) Europe</span><br><span class="line"> 8) Indian Ocean</span><br><span class="line"> 9) Pacific Ocean</span><br><span class="line">10) coord - I want to use geographical coordinates.</span><br><span class="line">11) TZ - I want to specify the time zone using the Posix TZ format.</span><br><span class="line">#? 4</span><br><span class="line">Please select a country whose clocks agree with yours.</span><br><span class="line"> 1) Afghanistan		  18) Israel		    35) Palestine</span><br><span class="line"> 2) Armenia		  19) Japan		    36) Philippines</span><br><span class="line"> 3) Azerbaijan		  20) Jordan		    37) Qatar</span><br><span class="line"> 4) Bahrain		  21) Kazakhstan	    38) Russia</span><br><span class="line"> 5) Bangladesh		  22) Korea (North)	    39) Saudi Arabia</span><br><span class="line"> 6) Bhutan		  23) Korea (South)	    40) Singapore</span><br><span class="line"> 7) Brunei		  24) Kuwait		    41) Sri Lanka</span><br><span class="line"> 8) Cambodia		  25) Kyrgyzstan	    42) Syria</span><br><span class="line"> 9) China		  26) Laos		    43) Taiwan</span><br><span class="line">10) Cyprus		  27) Lebanon		    44) Tajikistan</span><br><span class="line">11) East Timor		  28) Macau		    45) Thailand</span><br><span class="line">12) Georgia		  29) Malaysia		    46) Turkmenistan</span><br><span class="line">13) Hong Kong		  30) Mongolia		    47) United Arab Emirates</span><br><span class="line">14) India		  31) Myanmar (Burma)	    48) Uzbekistan</span><br><span class="line">15) Indonesia		  32) Nepal		    49) Vietnam</span><br><span class="line">16) Iran		  33) Oman		    50) Yemen</span><br><span class="line">17) Iraq		  34) Pakistan</span><br><span class="line">#? 9</span><br><span class="line">Please select one of the following time zone regions.</span><br><span class="line">1) Beijing Time</span><br><span class="line">2) Xinjiang Time</span><br><span class="line">#? 1</span><br><span class="line"></span><br><span class="line">The following information has been given:</span><br><span class="line"></span><br><span class="line">	China</span><br><span class="line">	Beijing Time</span><br><span class="line"></span><br><span class="line">Therefore TZ=&apos;Asia/Shanghai&apos; will be used.</span><br><span class="line">Local time is now:	Thu Oct 22 00:02:14 CST 2020.</span><br><span class="line">Universal Time is now:	Wed Oct 21 16:02:14 UTC 2020.</span><br><span class="line">Is the above information OK?</span><br><span class="line">1) Yes</span><br><span class="line">2) No</span><br><span class="line">#? 1</span><br><span class="line"></span><br><span class="line">You can make this change permanent for yourself by appending the line</span><br><span class="line">	TZ=&apos;Asia/Shanghai&apos;; export TZ</span><br><span class="line">to the file &apos;.profile&apos; in your home directory; then log out and log in again.</span><br><span class="line"></span><br><span class="line">Here is that TZ value again, this time on standard output so that you</span><br><span class="line">can use the /usr/bin/tzselect command in shell scripts:</span><br><span class="line">Asia/Shanghai</span><br></pre></td></tr></table></figure>
-<p>复制文件到 <code>/etc/localtime</code></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br></pre></td></tr></table></figure>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.cnblogs.com/TonyZhao/p/11169840.html" target="_blank" rel="noopener">Ubuntu设置时区和更新时间</a></p>
-<p><a href="https://my.oschina.net/u/914655/blog/3078043" target="_blank" rel="noopener">ubuntu设置时区</a></p>
-<p><a href="https://blog.csdn.net/mashuai720/article/details/78662607" target="_blank" rel="noopener">ubuntu 时区 修改时间 保存 重启 变化等</a></p>
+        <h1 id="Scala-的几种group集合操作"><a href="#Scala-的几种group集合操作" class="headerlink" title="Scala 的几种group集合操作"></a>Scala 的几种group集合操作</h1><p>scala的集合中有如下几种group操作</p>
+<ul>
+<li><p><code>groupBy</code> 按特定条件对集合元素进行分类</p>
+</li>
+<li><p><code>grouped</code> 将集合拆分成指定长度的子集合</p>
+</li>
+<li><p><code>groupMap</code> 使用方法按特定条件对集合的元素进行分类并处理每个元素</p>
+</li>
+<li><code>groupMapReduce</code> 使用方法按特定条件对集合中的元素进行分类，分别进行处理，最后将它们reduce</li>
+</ul>
+<p>这些方法在<a href="https://www.scala-lang.org/api/current/scala/collection/IterableOps.html" target="_blank" rel="noopener">scala.collection.IterableOps</a>中定义</p>
+<h2 id="groupBy"><a href="#groupBy" class="headerlink" title="groupBy"></a>groupBy</h2><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">groupBy</span></span>[<span class="type">K</span>](f: (<span class="type">A</span>) =&gt; <span class="type">K</span>): immutable.<span class="type">Map</span>[<span class="type">K</span>, <span class="type">C</span>]</span><br></pre></td></tr></table></figure>
+<p>返回immutable Map，每个Map由一个键和一个原始类型的值的集合组成</p>
+<p>为了在生成的Map中处理这个值的集合，Scala提供了mapValues方法</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mapValues</span></span>[<span class="type">W</span>](f: (<span class="type">V</span>) =&gt; <span class="type">W</span>): <span class="type">Map</span>[<span class="type">K</span>, <span class="type">W</span>]</span><br></pre></td></tr></table></figure>
+<p>这个groupBy / mapValues组合对于处理从分组生成的Map的值非常方便</p>
+<p>但是从Scala 2.13开始，方法mapValues不再可用</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Example: groupBy</span></span><br><span class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">class</span> <span class="title">Pet</span>(<span class="params">species: <span class="type">String</span>, name: <span class="type">String</span>, age: <span class="type">Int</span></span>)</span></span><br><span class="line"><span class="class"> </span></span><br><span class="line"><span class="class"><span class="title">val</span> <span class="title">pets</span> </span>= <span class="type">List</span>(</span><br><span class="line">  <span class="type">Pet</span>(<span class="string">"cat"</span>, <span class="string">"sassy"</span>, <span class="number">2</span>), <span class="type">Pet</span>(<span class="string">"cat"</span>, <span class="string">"bella"</span>, <span class="number">3</span>), </span><br><span class="line">  <span class="type">Pet</span>(<span class="string">"dog"</span>, <span class="string">"poppy"</span>, <span class="number">3</span>), <span class="type">Pet</span>(<span class="string">"dog"</span>, <span class="string">"bodie"</span>, <span class="number">4</span>), <span class="type">Pet</span>(<span class="string">"dog"</span>, <span class="string">"poppy"</span>, <span class="number">2</span>), </span><br><span class="line">  <span class="type">Pet</span>(<span class="string">"bird"</span>, <span class="string">"coco"</span>, <span class="number">2</span>), <span class="type">Pet</span>(<span class="string">"bird"</span>, <span class="string">"kiwi"</span>, <span class="number">1</span>)</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">pets.groupBy(_.species)</span><br><span class="line"></span><br><span class="line"><span class="comment">// res5: scala.collection.immutable.Map[String,List[Pet]] = HashMap(</span></span><br><span class="line"><span class="comment">//	bird -&gt; List(Pet(bird,coco,2), Pet(bird,kiwi,1)), </span></span><br><span class="line"><span class="comment">//	dog -&gt; List(Pet(dog,poppy,3), Pet(dog,bodie,4), Pet(dog,poppy,2)), </span></span><br><span class="line"><span class="comment">//	cat -&gt; List(Pet(cat,sassy,2), Pet(cat,bella,3)))</span></span><br></pre></td></tr></table></figure>
+<p>groupBy / mapValues组合</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Example: groupBy and mapValues</span></span><br><span class="line">pets.groupBy(_.species).mapValues(_.map(_.name)).toMap</span><br><span class="line"></span><br><span class="line"><span class="comment">// warning: method mapValues in trait MapOps is deprecated (since 2.13.0): Use .view.mapValues(f). A future // // version will include a strict version of this method (for now, .view.mapValues(f).toMap).</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// val res7: scala.collection.immutable.Map[String,List[String]] = Map(</span></span><br><span class="line"><span class="comment">// 	bird -&gt; List(coco, kiwi), </span></span><br><span class="line"><span class="comment">//	dog -&gt; List(poppy, bodie, poppy), </span></span><br><span class="line"><span class="comment">//	cat -&gt; List(sassy, bella))</span></span><br></pre></td></tr></table></figure>
+<h2 id="groupMap"><a href="#groupMap" class="headerlink" title="groupMap"></a>groupMap</h2><p>出现了一种新方法groupMap，按特定条件对集合的元素进行分类并处理每个元素</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">groupMap</span></span>[<span class="type">K</span>, <span class="type">B</span>](key: (<span class="type">A</span>) =&gt; <span class="type">K</span>)(f: (<span class="type">A</span>) =&gt; <span class="type">B</span>): immutable.<span class="type">Map</span>[<span class="type">K</span>, <span class="type">CC</span>[<span class="type">B</span>]]</span><br></pre></td></tr></table></figure>
+<p>对比上面的mapValues方法<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Example: groupMap</span></span><br><span class="line">pets.groupMap(_.species)(_.name)</span><br><span class="line"></span><br><span class="line"><span class="comment">// val res8: scala.collection.immutable.Map[String,List[String]] = Map(</span></span><br><span class="line"><span class="comment">//	cat -&gt; List(sassy, bella), </span></span><br><span class="line"><span class="comment">//	bird -&gt; List(coco, kiwi), </span></span><br><span class="line"><span class="comment">//	dog -&gt; List(poppy, bodie, poppy))</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="groupMapReduce"><a href="#groupMapReduce" class="headerlink" title="groupMapReduce"></a>groupMapReduce</h2><p>有时，我们需要在对集合进行分组后对Map值进行reduce</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">groupMapReduce</span></span>[<span class="type">K</span>, <span class="type">B</span>](key: (<span class="type">A</span>) =&gt; <span class="type">K</span>)(f: (<span class="type">A</span>) =&gt; <span class="type">B</span>)(reduce: (<span class="type">B</span>, <span class="type">B</span>) =&gt; <span class="type">B</span>): immutable.<span class="type">Map</span>[<span class="type">K</span>, <span class="type">B</span>]</span><br></pre></td></tr></table></figure>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Example groupMapReduce</span></span><br><span class="line">pets.groupMapReduce(_.species)(_ =&gt; <span class="number">1</span>)(_ + _)</span><br><span class="line"></span><br><span class="line"><span class="comment">//val res9: scala.collection.immutable.Map[String,Int] = Map(</span></span><br><span class="line"><span class="comment">//	cat -&gt; 2, </span></span><br><span class="line"><span class="comment">//	bird -&gt; 2, </span></span><br><span class="line"><span class="comment">//	dog -&gt; 3)</span></span><br></pre></td></tr></table></figure>
+<h2 id="grouped"><a href="#grouped" class="headerlink" title="grouped"></a>grouped</h2><p>集合拆分成指定长度的子集合</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">grouped</span></span>(size: <span class="type">Int</span>): <span class="type">Iterator</span>[<span class="type">C</span>]</span><br></pre></td></tr></table></figure>
+<p>尝试将一个长度为9的集合进行切分</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> list = <span class="type">List</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>)</span><br><span class="line"></span><br><span class="line">list.grouped(<span class="number">4</span>).toList</span><br><span class="line"></span><br><span class="line"><span class="comment">// val res11: List[List[Int]] = List(List(1, 2, 3, 4), List(5, 6, 7, 8), List(9))</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -420,9 +434,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Linux/" rel="tag"># Linux</a>
-          
-            <a href="/tags/Ubuntu/" rel="tag"># Ubuntu</a>
+            <a href="/tags/Scala/" rel="tag"># Scala</a>
           
         </div>
       
@@ -435,8 +447,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/10/21/'ascii' codec can't encode characters in position/" rel="next" title="ascii codec can't encode characters in position">
-                <i class="fa fa-chevron-left"></i> ascii codec can't encode characters in position
+              <a href="/2020/12/16/FGCN/" rel="next" title="Feedback Graph Convolutional Network for Skeleton-based Action Recognition">
+                <i class="fa fa-chevron-left"></i> Feedback Graph Convolutional Network for Skeleton-based Action Recognition
               </a>
             
           </div>
@@ -444,10 +456,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/10/28/决策树/" rel="prev" title="决策树">
-                决策树 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -626,7 +634,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ubuntu设置时区"><span class="nav-number">1.</span> <span class="nav-text">ubuntu设置时区</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">1.1.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Scala-的几种group集合操作"><span class="nav-number">1.</span> <span class="nav-text">Scala 的几种group集合操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#groupBy"><span class="nav-number">1.1.</span> <span class="nav-text">groupBy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#groupMap"><span class="nav-number">1.2.</span> <span class="nav-text">groupMap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#groupMapReduce"><span class="nav-number">1.3.</span> <span class="nav-text">groupMapReduce</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#grouped"><span class="nav-number">1.4.</span> <span class="nav-text">grouped</span></a></li></ol></li></ol></div>
             
 
           </div>

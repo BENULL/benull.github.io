@@ -93,7 +93,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20201227022859486.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20201227023447177.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20201227023548880.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2020-12-26T18:40:28.048Z">
+<meta property="og:updated_time" content="2020-12-26T18:43:52.594Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="强化学习简介">
 <meta name="twitter:description" content="强化学习简介强化学习(Reinforcement Learning，RL)是机器学习中的一个领域，是学习做什么（即如何把当前的情景映射成动作）才能使得数值化的收益最大化,学习者不会被告知应该采取什么动作，而是必须自己通过尝试去发现哪些动作会产生最丰厚的收益 强化学习同机器学习领域中的有监督学习和无监督学习不同，有监督学习是从外部监督者提供的带标注训练集中进行学习（任务驱动型），无监督学习是一个典型">
@@ -355,7 +355,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2,359字
+                  2,377字
                 </span>
               
 
@@ -409,7 +409,8 @@
 <p>策略有两种表示方法:</p>
 <p>一种是将策略表示为函数 <script type="math/tex">\pi: X \mapsto A,</script> 确定性策略常用这种表示</p>
 <p>另一种是概率表示 <script type="math/tex">\pi: X \times A \mapsto \mathbb{R},</script> 随机性策略常用这种表示</p>
-<script type="math/tex; mode=display">\pi(x, a)$$ 为状态 $$x$$ 下选择动作 $$a$$ 的概率, 这里必须有 $$\sum_{a} \pi(x, a)=1</script><h3 id="确定性策略"><a href="#确定性策略" class="headerlink" title="确定性策略"></a>确定性策略</h3><p>确定性策略，在相同的状态下，其输出的动作是确定的</p>
+<p>其中 <script type="math/tex">\pi(x, a)</script> 为状态 <script type="math/tex">x</script> 下选择动作 <script type="math/tex">a</script> 的概率, 这里必须有 <script type="math/tex">\sum_{a} \pi(x, a)=1</script></p>
+<h3 id="确定性策略"><a href="#确定性策略" class="headerlink" title="确定性策略"></a>确定性策略</h3><p>确定性策略，在相同的状态下，其输出的动作是确定的</p>
 <p><strong>优缺点</strong></p>
 <ul>
 <li>能够利用确定性梯度优化策略，所以不需要太多的采样数据，计算效率也很快</li>

@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="旋转矩阵计算角度差根据旋转矩阵的估计值和真值计算角度误差论文 Benchmarking 6DOF Outdoor Visual Localization in Changing Conditions中公式 $R{gt}$真值   $R{est}$估计值  二维矩阵形式 2 \cos (|\alpha|)=\operatorname{trace}\left(\mathrm{R}_{\mathrm{g">
+<meta name="description" content="旋转矩阵计算角度差根据旋转矩阵的估计值和真值计算角度误差论文 Benchmarking 6DOF Outdoor Visual Localization in Changing Conditions中公式 R_{gt}$$真值   $$R_{est}$$估计值  二维矩阵形式  $$2 \cos (|\alpha|)=\operatorname{trace}\left(\mathrm{R}_{\m">
 <meta name="keywords" content="Python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="旋转矩阵计算角度差">
 <meta property="og:url" content="http://yoursite.com/2021/04/01/旋转矩阵计算角度差/index.html">
 <meta property="og:site_name" content="BENULL">
-<meta property="og:description" content="旋转矩阵计算角度差根据旋转矩阵的估计值和真值计算角度误差论文 Benchmarking 6DOF Outdoor Visual Localization in Changing Conditions中公式 $R{gt}$真值   $R{est}$估计值  二维矩阵形式 2 \cos (|\alpha|)=\operatorname{trace}\left(\mathrm{R}_{\mathrm{g">
+<meta property="og:description" content="旋转矩阵计算角度差根据旋转矩阵的估计值和真值计算角度误差论文 Benchmarking 6DOF Outdoor Visual Localization in Changing Conditions中公式 R_{gt}$$真值   $$R_{est}$$估计值  二维矩阵形式  $$2 \cos (|\alpha|)=\operatorname{trace}\left(\mathrm{R}_{\m">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-04-01T11:31:31.258Z">
+<meta property="og:updated_time" content="2021-04-01T11:33:44.976Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="旋转矩阵计算角度差">
-<meta name="twitter:description" content="旋转矩阵计算角度差根据旋转矩阵的估计值和真值计算角度误差论文 Benchmarking 6DOF Outdoor Visual Localization in Changing Conditions中公式 $R{gt}$真值   $R{est}$估计值  二维矩阵形式 2 \cos (|\alpha|)=\operatorname{trace}\left(\mathrm{R}_{\mathrm{g">
+<meta name="twitter:description" content="旋转矩阵计算角度差根据旋转矩阵的估计值和真值计算角度误差论文 Benchmarking 6DOF Outdoor Visual Localization in Changing Conditions中公式 R_{gt}$$真值   $$R_{est}$$估计值  二维矩阵形式  $$2 \cos (|\alpha|)=\operatorname{trace}\left(\mathrm{R}_{\m">
 
 
 
@@ -350,7 +350,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  277字
+                  262字
                 </span>
               
 
@@ -388,8 +388,9 @@
 
       
         <h1 id="旋转矩阵计算角度差"><a href="#旋转矩阵计算角度差" class="headerlink" title="旋转矩阵计算角度差"></a>旋转矩阵计算角度差</h1><h2 id="根据旋转矩阵的估计值和真值计算角度误差"><a href="#根据旋转矩阵的估计值和真值计算角度误差" class="headerlink" title="根据旋转矩阵的估计值和真值计算角度误差"></a>根据旋转矩阵的估计值和真值计算角度误差</h2><p>论文 Benchmarking 6DOF Outdoor Visual Localization in Changing Conditions中公式</p>
-<p>$R<em>{gt}$真值   $R</em>{est}$估计值  二维矩阵形式</p>
-<script type="math/tex; mode=display">2 \cos (|\alpha|)=\operatorname{trace}\left(\mathrm{R}_{\mathrm{gt}}^{-1} \mathrm{R}_{\mathrm{est}}\right)-1</script><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rot_error</span><span class="params">(r_gt,r_est)</span>:</span></span><br><span class="line">    dis = abs(math.acos((np.trace(np.dot(np.linalg.inv(r_gt),r_est))<span class="number">-1</span>)/<span class="number">2</span>)) </span><br><span class="line">    <span class="comment">#公式计算结果单位为弧度，转成角度返回</span></span><br><span class="line">    <span class="keyword">return</span> dis*<span class="number">180</span>/math.pi</span><br></pre></td></tr></table></figure>
+<script type="math/tex; mode=display">R_{gt}$$真值   $$R_{est}$$估计值  二维矩阵形式
+
+$$2 \cos (|\alpha|)=\operatorname{trace}\left(\mathrm{R}_{\mathrm{gt}}^{-1} \mathrm{R}_{\mathrm{est}}\right)-1</script><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rot_error</span><span class="params">(r_gt,r_est)</span>:</span></span><br><span class="line">    dis = abs(math.acos((np.trace(np.dot(np.linalg.inv(r_gt),r_est))<span class="number">-1</span>)/<span class="number">2</span>)) </span><br><span class="line">    <span class="comment">#公式计算结果单位为弧度，转成角度返回</span></span><br><span class="line">    <span class="keyword">return</span> dis*<span class="number">180</span>/math.pi</span><br></pre></td></tr></table></figure>
 <hr>
 <p>3维旋转矩阵计算角度差得到角度差矩阵</p>
 <p>r_gt_matrix,r_est_matrix 3维矩阵</p>

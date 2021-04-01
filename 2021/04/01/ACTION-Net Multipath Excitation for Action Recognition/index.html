@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Paper,ActionRecognition,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="BENULL" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="ACTION-Net: Multipath Excitation for Action Recognition 单位 都柏林圣三一大学、字节跳动 会议 CVPR 2021 论文地址 arxiv 代码地址 github  摘要1**时空特征、通道特征和运动特征是视频动作识别中三种重要信息**。传统的二维CNN计算成本低，但无法捕捉时间关系；三维CNN可以很好捕捉时间关系，但计算量大。在这项工作中，通">
+<meta name="keywords" content="Paper,ActionRecognition">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Multipath Excitation for Action Recognition(ACTION-Net)">
+<meta property="og:url" content="http://yoursite.com/2021/04/01/ACTION-Net Multipath Excitation for Action Recognition/index.html">
+<meta property="og:site_name" content="BENULL">
+<meta property="og:description" content="ACTION-Net: Multipath Excitation for Action Recognition 单位 都柏林圣三一大学、字节跳动 会议 CVPR 2021 论文地址 arxiv 代码地址 github  摘要1**时空特征、通道特征和运动特征是视频动作识别中三种重要信息**。传统的二维CNN计算成本低，但无法捕捉时间关系；三维CNN可以很好捕捉时间关系，但计算量大。在这项工作中，通">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210401161639523.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210401161733270.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210401161748591.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210401161801914.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210401161829638.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210401161842989.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210401161852833.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2021-04-01T08:23:40.229Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Multipath Excitation for Action Recognition(ACTION-Net)">
+<meta name="twitter:description" content="ACTION-Net: Multipath Excitation for Action Recognition 单位 都柏林圣三一大学、字节跳动 会议 CVPR 2021 论文地址 arxiv 代码地址 github  摘要1**时空特征、通道特征和运动特征是视频动作识别中三种重要信息**。传统的二维CNN计算成本低，但无法捕捉时间关系；三维CNN可以很好捕捉时间关系，但计算量大。在这项工作中，通">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210401161639523.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2021/04/01/ACTION-Net Multipath Excitation for Action Recognition/">
+
+
+
+
+
+  <title>Multipath Excitation for Action Recognition(ACTION-Net) | BENULL</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">BENULL</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">tomorrow is another day</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/04/01/ACTION-Net Multipath Excitation for Action Recognition/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="BENULL">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BENULL">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Multipath Excitation for Action Recognition(ACTION-Net)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-01T16:22:22+08:00">
+                2021-04-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Paper/" itemprop="url" rel="index">
+                    <span itemprop="name">Paper</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,691字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  10 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="ACTION-Net-Multipath-Excitation-for-Action-Recognition"><a href="#ACTION-Net-Multipath-Excitation-for-Action-Recognition" class="headerlink" title="ACTION-Net: Multipath Excitation for Action Recognition"></a>ACTION-Net: Multipath Excitation for Action Recognition</h1><blockquote>
+<p>单位 都柏林圣三一大学、字节跳动</p>
+<p>会议 CVPR 2021</p>
+<p>论文地址 <a href="https://arxiv.org/abs/2103.07372" target="_blank" rel="noopener">arxiv</a></p>
+<p>代码地址 <a href="https://github.com/V-Sense/ACTION-Net" target="_blank" rel="noopener">github</a></p>
+</blockquote>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">**时空特征、通道特征和运动特征是视频动作识别中三种重要信息**。传统的二维CNN计算成本低，但无法捕捉时间关系；三维CNN可以很好捕捉时间关系，但计算量大。在这项工作中，通过设计一个通用且有效的模块来解决这个难题，该模块可以嵌入到二维CNN中。为此，提出了一种时空、通道和运动激励（ACTION）模块，包括三条路径：时空激励（STE）路径、通道激励（CE）路径和运动激励（ME）路径</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>STE路径采用单通道3D卷积来表征时空表示</p>
+</li>
+<li><p>CE路径通过在时间方面显式地建模通道之间的相互依赖性来自适应地重新校准通道特征响应</p>
+</li>
+<li><p>ME路径计算特征级的时间差，然后利用这些时间差来激励运动敏感通道</p>
+</li>
+</ul>
+<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p><strong>视频中的复杂动作通常是时间相关的，它不仅包含每一帧的空间信息，而且还包含一段时间内的时间信息</strong>。传统的动作识别更多的是场景相关的，其中的动作没有时间依赖性，例如，“上眼妆”，“走路”，“跑步”。随着技术的飞速发展，如虚拟现实（VR）等需要利用特征与环境进行交互的技术，时间相关的动作识别近年来成为研究的热点。</p>
+<p>现有方法的主流是基于三维CNN和基于二维CNN。3D CNN已被证明在时空建模方面是有效的，但时空建模无法捕获视频中包含的足够信息。提出的双流体系结构将时空信息和光流纳入计算，<strong>与单流体系结构相比显著提高了性能。然而，光流的计算非常昂贵，这给实际应用带来了挑战。三维CNN存在过拟合和收敛速度慢等问题</strong>。</p>
+<p>随着更多大规模数据集的发布，如Kinetics、Moments in Time和ActivityNet，优化3D CNN变得更加容易和普及。<strong>然而，基于3D CNN固有的繁重计算导致推断速度缓慢，这将限制它们在实际应用中的部署，例如依靠在线视频识别的虚拟现实。当前基于2D CNN的方法有着轻量级和快速推理的优势</strong>。这些方法基于从整个视频中稀疏采样的一系列短片段（称为片段），最初在TSN中引入。原始的二维cnn缺乏时间建模能力，这导致在某些操作中丢失了必要的序列信息，例如“打开一个盒子”与“关闭一个盒子”。<strong>TSM通过在时间轴上移动一部分通道，将时间信息引入到基于2D CNN的框架中，这显著改善了基于2D CNN的框架的基线。然而，TSM仍然缺乏明确的动作时间模型，例如运动信息</strong>。</p>
+<p>最近的工作根据ResNet架构将嵌入式模块引入到2d cnns中，具有运动建模的能力。为了捕捉视频中包含的多种类型的信息，以前的工作通常在输入级帧上进行。例如，SlowFast网络以多种速率对原始视频进行采样，以描述慢动作和快动作；双流网络利用预先计算的光流来推理运动信息。这种方法通常需要多分支网络，这需要昂贵的计算。</p>
+<p>受上述观察结果的启发，提出了一种新的即插即用、轻量级的时空、通道和运动激励（ACTION）模块，<strong>通过采用多径激励在单个网络中有效地处理特征层上的多种类型信息。时空特征和运动特征的组合可以类似地理解为双流结构，但是基于特征级别对网络内部的运动进行建模，而不是生成另一种类型的输入（例如，光流）来训练网络，这大大减少了计算量</strong>。受SENet的启发，基于时域提取通道特征来表征网络的通道相关性。相应地，配备了这样一个模块的新体系结构被称为ActionNet。</p>
+<h2 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h2><h3 id="基于-3D-CNN"><a href="#基于-3D-CNN" class="headerlink" title="基于 3D CNN"></a>基于 3D CNN</h3><p>基于3D CNN的框架具有时空建模能力，提高了视频动作识别的模型性能。I3D将ImageNet预先训练的2D核膨胀为3D核，用于捕获时空信息。为了更好地表示运动模式，I3D利用了预先计算的光流和RGB（也称为双流结构）。SlowFast 网络被提出用于处理视频中动作的不稳定速度，例如跑步和步行，它分别涉及一个慢分支和一个快分支来模拟慢动作和快动作。尽管基于3D CNN的方法在多个基准数据集上取得了令人兴奋的结果，但它们包含大量参数。</p>
+<p><strong>在这种情况下，会产生各种各样的问题，例如容易过度拟合和难以收敛，这带来了挑战，包括在真实应用中在线流视频的低效率的推断。尽管最近的工作已经证明三维卷积可以分解以在一定程度上减少计算，但是与基于二维CNN的框架相比，计算仍然是一个更大的负担。</strong></p>
+<h3 id="基于2D-CNN"><a href="#基于2D-CNN" class="headerlink" title="基于2D CNN"></a>基于2D CNN</h3><p>TSN是第一个提出的将2D CNN应用于视频动作识别的框架，该框架引入了“片段”的概念来处理视频，即使用单一形式的稀疏采样方案在长视频序列上提取短片段。然而，直接使用2dcnns缺乏对视频序列的时域建模。TSM首先将时态建模引入到基于二维CNN的框架中，将一部分通道的移位操作嵌入到二维CNN中。然而，TSM缺乏明确的动作时间建模，例如相邻帧之间的差异。最近，有几项工作建议将模块嵌入到二维CNNs中。这些模块能够模拟运动和节奏信息。例如，MFNet、TEINet和TEA引入了这种类型的模块，它们在ResNet架构上被证明是有效的。STM提出了一种用于时空和运动信息建模的块，而不是普通的残差块。GSM利用组空间选通来控制时空分解中的交互。</p>
+<h3 id="SENet-和改进"><a href="#SENet-和改进" class="headerlink" title="SENet 和改进"></a>SENet 和改进</h3><p>Hu等人介绍了一种SENet体系结构。提出在二维CNN中嵌入squeeze-and-excitation（SE）块。在这种情况下，通过显式地建模通道相互依赖性，可以增强有关图像识别任务的通道特征的学习。为了解决这个问题，SE块以squeeze-and-unsqueeze方式利用两个全连接的层，然后应用Sigmoid激活函数来激发基本的通道特性。但是，它独立地处理每个图像，而不考虑关键信息，如视频的时间特性。为了解决这个问题，TEA引入了运动激励（ME）和多重时间聚集（MTA）来捕捉短期和长期的时间演化。需要注意的是，MTA是专门为Res2Net设计的，这意味着TEA只能嵌入Res2Net中。<strong>受前两个工作的启发，提出了STE和CE模块，解决时空和通道在时间维度上的相互依赖性。Action模块由STE、CE和ME并行组装而成，可以激活视频中的多种类型信息。</strong></p>
+<h2 id="ACTION的设计"><a href="#ACTION的设计" class="headerlink" title="ACTION的设计"></a>ACTION的设计</h2><p>ACTION模块由时空激励（STE）、通道激励（CE）和运动激励（ME）三个子模块组成</p>
+<p>整体ACTION模块分别对STE、CE和ME生成的三个激励特征进行元素级的相加。通过这样做ACTION模块的输出可以获得时空信息、通道间依赖信息和运动信息。图3显示了ResNet-50的ACTION-Net架构，其中ACTION模块插入到每个残差块的开头。它不需要对块中的原始组件进行任何修改。</p>
+<p><img src="https://img-blog.csdnimg.cn/20210401161639523.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="时空激励-STE"><a href="#时空激励-STE" class="headerlink" title="时空激励 (STE)"></a>时空激励 (STE)</h3><p><img src="https://img-blog.csdnimg.cn/20210401161733270.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<ul>
+<li><p>对输入X (N×T×C×H×W)通道平均池化得到F(N×T×1×H×W)</p>
+</li>
+<li><p>改变F维度为N×1×T×H×W</p>
+</li>
+<li><p>经过3×3×3的3D卷积中得到$F^∗ (N×1×T×H×W)$</p>
+</li>
+<li><p>将$F^∗$ 改变维度得到$F_o (N×T×1×H×W)$</p>
+</li>
+<li><p>$F_o$ 经过Sigmoid激活得到mask M(N×T×1×H×W)</p>
+</li>
+<li><p>输入X经过M⨀X+X激励得到输出</p>
+</li>
+</ul>
+<h3 id="通道激励-CE"><a href="#通道激励-CE" class="headerlink" title="通道激励(CE)"></a>通道激励(CE)</h3><p><img src="https://img-blog.csdnimg.cn/20210401161748591.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<ul>
+<li><p>对输入X (N×T×C×H×W)在空间平均池化得到F(N×T×C×1×1)</p>
+</li>
+<li><p>使用1×1卷积来压缩 F的通道数得到特征 $F_r (N×T×C/r×1×1)$</p>
+</li>
+<li><p>改变 $F_r$ 维度得到$F_r^∗ (N×C/r×T×1×1)$</p>
+</li>
+<li><p>经过卷积核为3的一维卷积后得到 $F_{temp}^∗ (N×C/r×T×1×1)$</p>
+</li>
+<li><p>改变$ F<em>{temp}^∗$ 维度为$F</em>{temp} (N×T×C/r×1×1)$</p>
+</li>
+<li><p>经过1×1卷积得到$ F_o (N ×T ×C ×1 ×1) $</p>
+</li>
+<li><p>$F_o$经过Sigmoid激活,得到mask M(N ×T ×C×1×1)</p>
+</li>
+<li><p>输入X经过M⨀X+X激励得到输出</p>
+</li>
+</ul>
+<h3 id="运动激励-ME"><a href="#运动激励-ME" class="headerlink" title="运动激励(ME)"></a>运动激励(ME)</h3><p><img src="https://img-blog.csdnimg.cn/20210401161801914.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<ul>
+<li><p>输入X (N×T×C×H×W)经过1×1卷积压缩得到 $F_r (N×T×C/r×H×W)$</p>
+</li>
+<li><p>计算各帧的运动特征 K是3×3卷积</p>
+</li>
+</ul>
+<p>$F_m=K∗F_r [:,t+1,:,:,:]-F_r [:,t,:,:,:]$</p>
+<ul>
+<li><p>根据时间维度将运动特征串联得到$F_M (N×T×C/r×H×W)$</p>
+<p>$F_M=[F_m (1),⋯,F_m (t-1), 0]$</p>
+</li>
+<li><p>$F_M$经过空间平均池化得到$F_o (N ×T ×C/r×1 ×1) $</p>
+</li>
+<li><p>再经过1×1卷积， Sigmoid激活后得到mask M</p>
+</li>
+<li><p>输入X经过M⨀X+X激励得到输出</p>
+</li>
+</ul>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><h3 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th><strong>数据集</strong></th>
+<th><strong>介绍</strong></th>
+<th><strong>行为数</strong></th>
+<th><strong>训练集</strong></th>
+<th><strong>验证集</strong></th>
+<th><strong>测试集</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Something-Something  V2</td>
+<td>人与日常生活中物体交互的动作数据集</td>
+<td>174</td>
+<td>168,913</td>
+<td>24,777</td>
+<td>27,157</td>
+</tr>
+<tr>
+<td>Jester</td>
+<td>第三人称视角的手势数据集</td>
+<td>27</td>
+<td>118,562</td>
+<td>14,787</td>
+<td>14,743</td>
+</tr>
+<tr>
+<td>EgoGesture</td>
+<td>头戴式摄像机记录的手势数据集</td>
+<td>83</td>
+<td>14,416</td>
+<td>4768</td>
+<td>4977</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<ul>
+<li><p>在Jester和EgoGesture上取得了SOTA</p>
+</li>
+<li><p>在Something V2上相比较STM和TEA也取得了接近的效果</p>
+</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20210401161829638.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<h3 id="消融实验"><a href="#消融实验" class="headerlink" title="消融实验"></a>消融实验</h3><ul>
+<li><p>动作激励相比时空激励和通道激励对性能提升最大</p>
+</li>
+<li><p>时空激励在更小的计算量和参数量下性能提升和通道激励相当</p>
+</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20210401161842989.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<p><strong>ACTION-Net在不同主干网络都带来了性能提升，具有良好的通用性</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/20210401161852833.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li><strong>提出了一个即插即用、轻量级的时空、通道和运动激励模块（ACTION）</strong></li>
+<li><strong>采用了多路径激励的方法有效地捕获时空特征、通道特征和运动特征</strong></li>
+<li><strong>提出的ACTION模块可以被任何二维卷积模型用来构建视频动作识别网络</strong></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Paper/" rel="tag"># Paper</a>
+          
+            <a href="/tags/ActionRecognition/" rel="tag"># ActionRecognition</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/03/03/知识图谱内容调研/" rel="next" title="知识图谱内容调研">
+                <i class="fa fa-chevron-left"></i> 知识图谱内容调研
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMTE2Ny83NzE2"></div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="BENULL">
+            
+              <p class="site-author-name" itemprop="name">BENULL</p>
+              <p class="site-description motion-element" itemprop="description">tomorrow is another day</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/benull" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:ltobenull@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/u/3169828502" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://haoyue.pro" title="皓月的BLOG" target="_blank">皓月的BLOG</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.jianshu.com/u/4b8da0db00bf" title="HaloZhang" target="_blank">HaloZhang</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ACTION-Net-Multipath-Excitation-for-Action-Recognition"><span class="nav-number">1.</span> <span class="nav-text">ACTION-Net: Multipath Excitation for Action Recognition</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#摘要"><span class="nav-number">1.1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引言"><span class="nav-number">1.2.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相关工作"><span class="nav-number">1.3.</span> <span class="nav-text">相关工作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于-3D-CNN"><span class="nav-number">1.3.1.</span> <span class="nav-text">基于 3D CNN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于2D-CNN"><span class="nav-number">1.3.2.</span> <span class="nav-text">基于2D CNN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SENet-和改进"><span class="nav-number">1.3.3.</span> <span class="nav-text">SENet 和改进</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ACTION的设计"><span class="nav-number">1.4.</span> <span class="nav-text">ACTION的设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#时空激励-STE"><span class="nav-number">1.4.1.</span> <span class="nav-text">时空激励 (STE)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通道激励-CE"><span class="nav-number">1.4.2.</span> <span class="nav-text">通道激励(CE)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运动激励-ME"><span class="nav-number">1.4.3.</span> <span class="nav-text">运动激励(ME)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验"><span class="nav-number">1.5.</span> <span class="nav-text">实验</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据集"><span class="nav-number">1.5.1.</span> <span class="nav-text">数据集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消融实验"><span class="nav-number">1.5.2.</span> <span class="nav-text">消融实验</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.6.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">BENULL</span>
+</div>
+<div class="powered-by">
+</div>
+<!--
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+
+-->
+
+
+  <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+  <span class="post-meta-divider">|</span>
+  <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

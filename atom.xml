@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-04-12T15:51:49.048Z</updated>
+  <updated>2021-04-12T15:54:44.584Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://yoursite.com/2021/04/12/MacOS%E4%B8%8BOpenCV+Python+PyQt5%E5%A4%9A%E8%BF%9B%E7%A8%8BBug/"/>
     <id>http://yoursite.com/2021/04/12/MacOS%E4%B8%8BOpenCV+Python+PyQt5%E5%A4%9A%E8%BF%9B%E7%A8%8BBug/</id>
     <published>2021-04-12T15:52:25.000Z</published>
-    <updated>2021-04-12T15:51:49.048Z</updated>
+    <updated>2021-04-12T15:54:44.584Z</updated>
     
     <content type="html"><![CDATA[<h1 id="MacOS下OpenCV-Python-PyQt5-多进程Bug"><a href="#MacOS下OpenCV-Python-PyQt5-多进程Bug" class="headerlink" title="MacOS下OpenCV + Python+PyQt5 多进程Bug"></a>MacOS下OpenCV + Python+PyQt5 多进程Bug</h1><h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ul><li>macOS  Catalina 10.15.7</li><li>pyqt5</li><li>opencv</li></ul><h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><ul><li>多进程情况下<code>cv2.resize</code>或者<code>cv2.cvtColor</code>引发程序崩溃</li><li>使用PyQt5与opencv的冲突</li></ul><h2 id="可能的解决方案"><a href="#可能的解决方案" class="headerlink" title="可能的解决方案"></a>可能的解决方案</h2><ol><li>安装<code>opencv-python-headless</code>替换<code>opencv-python</code></li><li>设置 <code>cv2.setNumThreads(0)</code></li></ol><blockquote><p>OpenCV will try to set the number of threads for the next parallel region. If <code>threads == 0</code>, OpenCV will disable threading optimizations and run all its functions sequentially. Passing <code>threads &lt; 0</code> will reset threads number to system default. This function must be called outside of parallel region.</p></blockquote><ol><li><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> multiprocessing <span class="keyword">as</span> mp</span><br><span class="line">mp.set_start_method(<span class="string">'spawn'</span>)</span><br></pre></td></tr></table></figure></li></ol><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://blog.csdn.net/qq_32815807?spm=1010.2135.3001.5343" target="_blank" rel="noopener">OpenCV + Python multiprocessing breaks on OSX</a></p><p><a href="https://stackoverflow.com/questions/54013846/pytorch-dataloader-stucked-if-using-opencv-resize-method" target="_blank" rel="noopener">pytorch dataloader stucked if using opencv resize method</a></p><p><a href="https://github.com/opencv/opencv/issues/18416" target="_blank" rel="noopener">OpenCV 4.4.0.44 macOS Catalina - Hang/Frozen</a></p><h1 id><a href="#" class="headerlink" title=" "></a> </h1>]]></content>
     

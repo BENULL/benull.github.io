@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-04-01T11:36:58.677Z</updated>
+  <updated>2021-04-12T15:51:49.048Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>MacOS下OpenCV + Python+PyQt5多进程Bug</title>
+    <link href="http://yoursite.com/2021/04/12/MacOS%E4%B8%8BOpenCV+Python+PyQt5%E5%A4%9A%E8%BF%9B%E7%A8%8BBug/"/>
+    <id>http://yoursite.com/2021/04/12/MacOS%E4%B8%8BOpenCV+Python+PyQt5%E5%A4%9A%E8%BF%9B%E7%A8%8BBug/</id>
+    <published>2021-04-12T15:52:25.000Z</published>
+    <updated>2021-04-12T15:51:49.048Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="MacOS下OpenCV-Python-PyQt5-多进程Bug"><a href="#MacOS下OpenCV-Python-PyQt5-多进程Bug" class="headerlink" title="MacOS下OpenCV + Python+PyQt5 多进程Bug"></a>MacOS下OpenCV + Python+PyQt5 多进程Bug</h1><h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ul><li>macOS  Catalina 10.15.7</li><li>pyqt5</li><li>opencv</li></ul><h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><ul><li>多进程情况下<code>cv2.resize</code>或者<code>cv2.cvtColor</code>引发程序崩溃</li><li>使用PyQt5与opencv的冲突</li></ul><h2 id="可能的解决方案"><a href="#可能的解决方案" class="headerlink" title="可能的解决方案"></a>可能的解决方案</h2><ol><li>安装<code>opencv-python-headless</code>替换<code>opencv-python</code></li><li>设置 <code>cv2.setNumThreads(0)</code></li></ol><blockquote><p>OpenCV will try to set the number of threads for the next parallel region. If <code>threads == 0</code>, OpenCV will disable threading optimizations and run all its functions sequentially. Passing <code>threads &lt; 0</code> will reset threads number to system default. This function must be called outside of parallel region.</p></blockquote><ol><li><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> multiprocessing <span class="keyword">as</span> mp</span><br><span class="line">mp.set_start_method(<span class="string">'spawn'</span>)</span><br></pre></td></tr></table></figure></li></ol><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://blog.csdn.net/qq_32815807?spm=1010.2135.3001.5343" target="_blank" rel="noopener">OpenCV + Python multiprocessing breaks on OSX</a></p><p><a href="https://stackoverflow.com/questions/54013846/pytorch-dataloader-stucked-if-using-opencv-resize-method" target="_blank" rel="noopener">pytorch dataloader stucked if using opencv resize method</a></p><p><a href="https://github.com/opencv/opencv/issues/18416" target="_blank" rel="noopener">OpenCV 4.4.0.44 macOS Catalina - Hang/Frozen</a></p><h1 id><a href="#" class="headerlink" title=" "></a> </h1>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;MacOS下OpenCV-Python-PyQt5-多进程Bug&quot;&gt;&lt;a href=&quot;#MacOS下OpenCV-Python-PyQt5-多进程Bug&quot; class=&quot;headerlink&quot; title=&quot;MacOS下OpenCV + Python+PyQt5 
+      
+    
+    </summary>
+    
+    
+      <category term="Python" scheme="http://yoursite.com/categories/Python/"/>
+    
+    
+      <category term="Python" scheme="http://yoursite.com/tags/Python/"/>
+    
+  </entry>
   
   <entry>
     <title>旋转矩阵计算角度差</title>
@@ -546,32 +572,6 @@
       <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
     
       <category term="Ubuntu" scheme="http://yoursite.com/tags/Ubuntu/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ascii codec can&#39;t encode characters in position</title>
-    <link href="http://yoursite.com/2020/10/21/&#39;ascii&#39;%20codec%20can&#39;t%20encode%20characters%20in%20position/"/>
-    <id>http://yoursite.com/2020/10/21/&#39;ascii&#39;%20codec%20can&#39;t%20encode%20characters%20in%20position/</id>
-    <published>2020-10-21T15:45:32.000Z</published>
-    <updated>2020-10-21T15:42:28.769Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="‘ascii’-codec-can’t-encode-characters-in-position"><a href="#‘ascii’-codec-can’t-encode-characters-in-position" class="headerlink" title="‘ascii’ codec can’t encode characters in position"></a>‘ascii’ codec can’t encode characters in position</h1><h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>在ubuntu中运行python3脚本输出到命令行出错</p><h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><ol><li><p>将<code>LANG</code> 或 <code>LC_ALL</code> 设置为 <code>en_US.utf8</code> 或 <code>zh_CN.utf8</code></p><ul><li>列出当前设置</li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">benull@37c7dedb7a13:~<span class="comment"># locale</span></span><br><span class="line">LANG=zh_CN.UTF-8</span><br><span class="line">LANGUAGE=</span><br><span class="line">LC_CTYPE=<span class="string">"en_US.UTF-8"</span></span><br><span class="line">LC_NUMERIC=<span class="string">"en_US.UTF-8"</span></span><br><span class="line">LC_TIME=<span class="string">"en_US.UTF-8"</span></span><br><span class="line">LC_COLLATE=<span class="string">"en_US.UTF-8"</span></span><br><span class="line">LC_MONETARY=<span class="string">"en_US.UTF-8"</span></span><br><span class="line">LC_MESSAGES=<span class="string">"en_US.UTF-8"</span></span><br><span class="line">LC_PAPER=<span class="string">"en_US.UTF-8"</span></span><br><span class="line">LC_NAME=<span class="string">"en_US.UTF-8"</span></span><br><span class="line">LC_ADDRESS=<span class="string">"en_US.UTF-8"</span></span><br><span class="line">LC_TELEPHONE=<span class="string">"en_US.UTF-8"</span></span><br><span class="line">LC_MEASUREMENT=<span class="string">"en_US.UTF-8"</span></span><br><span class="line">LC_IDENTIFICATION=<span class="string">"en_US.UTF-8"</span></span><br><span class="line">LC_ALL=en_US.UTF-8</span><br></pre></td></tr></table></figure><ul><li>列出已安装的语言环境</li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">benull@37c7dedb7a13:~<span class="comment"># locale -a</span></span><br><span class="line">C</span><br><span class="line">C.UTF-8</span><br><span class="line">en_US.utf8</span><br><span class="line">POSIX</span><br><span class="line">zh_CN.utf8</span><br></pre></td></tr></table></figure></li><li><p>如果不存在上述的 <code>locale</code>，先用 <code>locale-gen</code> 生成</p></li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">apt-get install locales</span><br><span class="line">locale-gen <span class="string">'zh_CN.UTF-8'</span></span><br><span class="line">update-locale LC_ALL=<span class="string">"zh_CN.UTF-8"</span></span><br></pre></td></tr></table></figure><ol><li>将<code>export LC_ALL=zh_CN.UTF-8&quot;</code> 加到的<code>~/.bashrc</code></li></ol><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.v2ex.com/amp/t/422301" target="_blank" rel="noopener">关于’ascii’ codec can’t encode characters in position 的问题</a></p><p><a href="https://blog.csdn.net/wangzhenling/article/details/104781048" target="_blank" rel="noopener">ubuntu locales 设置中文</a></p><p><a href="https://help.ubuntu.com/community/Locale" target="_blank" rel="noopener">Locale</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;‘ascii’-codec-can’t-encode-characters-in-position&quot;&gt;&lt;a href=&quot;#‘ascii’-codec-can’t-encode-characters-in-position&quot; class=&quot;headerlink&quot; t
-      
-    
-    </summary>
-    
-    
-      <category term="Python" scheme="http://yoursite.com/categories/Python/"/>
-    
-    
-      <category term="Python" scheme="http://yoursite.com/tags/Python/"/>
     
   </entry>
   

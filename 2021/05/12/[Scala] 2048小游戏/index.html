@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Scala,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="BENULL" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="[Scala] 2048小游戏 很长一段时间没有用过Scala，重新学习了下顺便写个小游戏练练手   规则  相同数字的两个格子，相撞时数字会相加。 每次滑动时，空白处会随机刷新出一个数字的格子。 当界面全部被数字填满时游戏结束；当界面中最大数字是2048时，游戏胜利  代码 1234567891011121314151617181920212223242526272829303132333435">
+<meta name="keywords" content="Scala">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scala练手 2048">
+<meta property="og:url" content="http://yoursite.com/2021/05/12/[Scala] 2048小游戏/index.html">
+<meta property="og:site_name" content="BENULL">
+<meta property="og:description" content="[Scala] 2048小游戏 很长一段时间没有用过Scala，重新学习了下顺便写个小游戏练练手   规则  相同数字的两个格子，相撞时数字会相加。 每次滑动时，空白处会随机刷新出一个数字的格子。 当界面全部被数字填满时游戏结束；当界面中最大数字是2048时，游戏胜利  代码 1234567891011121314151617181920212223242526272829303132333435">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210512183822186.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2021-05-12T10:55:57.154Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Scala练手 2048">
+<meta name="twitter:description" content="[Scala] 2048小游戏 很长一段时间没有用过Scala，重新学习了下顺便写个小游戏练练手   规则  相同数字的两个格子，相撞时数字会相加。 每次滑动时，空白处会随机刷新出一个数字的格子。 当界面全部被数字填满时游戏结束；当界面中最大数字是2048时，游戏胜利  代码 1234567891011121314151617181920212223242526272829303132333435">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210512183822186.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2021/05/12/[Scala] 2048小游戏/">
+
+
+
+
+
+  <title>Scala练手 2048 | BENULL</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">BENULL</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">tomorrow is another day</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/05/12/[Scala] 2048小游戏/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="BENULL">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BENULL">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Scala练手 2048</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-05-12T18:54:38+08:00">
+                2021-05-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Project/" itemprop="url" rel="index">
+                    <span itemprop="name">Project</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,024字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Scala-2048小游戏"><a href="#Scala-2048小游戏" class="headerlink" title="[Scala] 2048小游戏"></a>[Scala] 2048小游戏</h1><blockquote>
+<p>很长一段时间没有用过Scala，重新学习了下顺便写个小游戏练练手</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210512183822186.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><strong>规则</strong></p>
+<ul>
+<li>相同数字的两个格子，相撞时数字会相加。</li>
+<li>每次滑动时，空白处会随机刷新出一个数字的格子。</li>
+<li>当界面全部被数字填满时游戏结束；当界面中最大数字是2048时，游戏胜利</li>
+</ul>
+<p><strong>代码</strong></p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">Game2048</span> </span>&#123;</span><br><span class="line">  <span class="keyword">val</span> target = <span class="number">2048</span></span><br><span class="line">  <span class="keyword">var</span> highest = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args: <span class="type">Array</span>[<span class="type">String</span>]): <span class="type">Unit</span> = &#123;</span><br><span class="line">    <span class="type">SwingUtilities</span>.invokeLater(() =&gt; &#123;</span><br><span class="line">      <span class="keyword">val</span> f = <span class="keyword">new</span> <span class="type">JFrame</span></span><br><span class="line">      f.setDefaultCloseOperation(<span class="number">3</span>)</span><br><span class="line">      f.setTitle(<span class="string">"2048"</span>)</span><br><span class="line">      f.add(<span class="keyword">new</span> <span class="type">Game</span>, <span class="type">BorderLayout</span>.<span class="type">CENTER</span>)</span><br><span class="line">      f.pack()</span><br><span class="line">      f.setLocationRelativeTo(<span class="literal">null</span>)</span><br><span class="line">      f.setVisible(<span class="literal">true</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">Game</span> <span class="keyword">extends</span> <span class="title">JPanel</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> (rand, side) = (<span class="keyword">new</span> <span class="type">Random</span>, <span class="number">4</span>)</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> (tiles, game) = (<span class="type">Array</span>.ofDim[<span class="type">Tile</span>](side, side), <span class="type">State</span>.start)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">private</span> <span class="keyword">val</span> colorTable =</span><br><span class="line">      <span class="type">Seq</span>(<span class="keyword">new</span> <span class="type">Color</span>(<span class="number">0x701710</span>), <span class="keyword">new</span> <span class="type">Color</span>(<span class="number">0xFFE4C3</span>), <span class="keyword">new</span> <span class="type">Color</span>(<span class="number">0xfff4d3</span>), <span class="keyword">new</span> <span class="type">Color</span>(<span class="number">0xffdac3</span>), <span class="keyword">new</span> <span class="type">Color</span>(<span class="number">0xe7b08e</span>), <span class="keyword">new</span> <span class="type">Color</span>(<span class="number">0xe7bf8e</span>),</span><br><span class="line">        <span class="keyword">new</span> <span class="type">Color</span>(<span class="number">0xffc4c3</span>), <span class="keyword">new</span> <span class="type">Color</span>(<span class="number">0xE7948e</span>), <span class="keyword">new</span> <span class="type">Color</span>(<span class="number">0xbe7e56</span>), <span class="keyword">new</span> <span class="type">Color</span>(<span class="number">0xbe5e56</span>), <span class="keyword">new</span> <span class="type">Color</span>(<span class="number">0x9c3931</span>), <span class="keyword">new</span> <span class="type">Color</span>(<span class="number">0x701710</span>))</span><br><span class="line"></span><br><span class="line">    setPreferredSize(<span class="keyword">new</span> <span class="type">Dimension</span>(<span class="number">900</span>, <span class="number">700</span>))</span><br><span class="line">    setBackground(<span class="keyword">new</span> <span class="type">Color</span>(<span class="number">0xFAF8EF</span>))</span><br><span class="line">    setFont(<span class="keyword">new</span> <span class="type">Font</span>(<span class="string">"SansSerif"</span>, <span class="type">Font</span>.<span class="type">BOLD</span>, <span class="number">48</span>))</span><br><span class="line">    setFocusable(<span class="literal">true</span>)</span><br><span class="line">    addMouseListener(<span class="keyword">new</span> <span class="type">MouseAdapter</span>() &#123;</span><br><span class="line">      <span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">mousePressed</span></span>(e: <span class="type">MouseEvent</span>): <span class="type">Unit</span> = &#123;</span><br><span class="line">        startGame()</span><br><span class="line">        repaint()</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    addKeyListener(<span class="keyword">new</span> <span class="type">KeyAdapter</span>() &#123;</span><br><span class="line">      <span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">keyPressed</span></span>(e: <span class="type">KeyEvent</span>): <span class="type">Unit</span> = &#123;</span><br><span class="line">        e.getKeyCode <span class="keyword">match</span> &#123;</span><br><span class="line">          <span class="keyword">case</span> <span class="type">KeyEvent</span>.<span class="type">VK_UP</span> =&gt; moveUp()</span><br><span class="line">          <span class="keyword">case</span> <span class="type">KeyEvent</span>.<span class="type">VK_DOWN</span> =&gt; moveDown()</span><br><span class="line">          <span class="keyword">case</span> <span class="type">KeyEvent</span>.<span class="type">VK_LEFT</span> =&gt; moveLeft()</span><br><span class="line">          <span class="keyword">case</span> <span class="type">KeyEvent</span>.<span class="type">VK_RIGHT</span> =&gt; moveRight()</span><br><span class="line">          <span class="keyword">case</span> _ =&gt;</span><br><span class="line">        &#125;</span><br><span class="line">        repaint()</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">paintComponent</span></span>(gg: <span class="type">Graphics</span>): <span class="type">Unit</span> = &#123;</span><br><span class="line">      <span class="keyword">super</span>.paintComponent(gg)</span><br><span class="line">      <span class="keyword">val</span> g = gg.asInstanceOf[<span class="type">Graphics2D</span>]</span><br><span class="line">      g.setRenderingHint(<span class="type">RenderingHints</span>.<span class="type">KEY_ANTIALIASING</span>, <span class="type">RenderingHints</span>.<span class="type">VALUE_ANTIALIAS_ON</span>)</span><br><span class="line">      drawGrid(g)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">def</span> <span class="title">drawGrid</span></span>(g: <span class="type">Graphics2D</span>): <span class="type">Unit</span> = &#123;</span><br><span class="line">      <span class="keyword">val</span> (gridColor, emptyColor, startColor) = (<span class="keyword">new</span> <span class="type">Color</span>(<span class="number">0xBBADA0</span>), <span class="keyword">new</span> <span class="type">Color</span>(<span class="number">0xCDC1B4</span>), <span class="keyword">new</span> <span class="type">Color</span>(<span class="number">0xFFEBCD</span>))</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (game == <span class="type">State</span>.running) &#123;</span><br><span class="line">        g.setColor(gridColor)</span><br><span class="line">        g.fillRoundRect(<span class="number">200</span>, <span class="number">100</span>, <span class="number">499</span>, <span class="number">499</span>, <span class="number">15</span>, <span class="number">15</span>)</span><br><span class="line">        <span class="keyword">for</span> (</span><br><span class="line">          r &lt;- <span class="number">0</span> until side;</span><br><span class="line">          c &lt;- <span class="number">0</span> until side</span><br><span class="line">        ) <span class="keyword">if</span> (<span class="type">Option</span>(tiles(r)(c)).isEmpty) &#123;</span><br><span class="line">          g.setColor(emptyColor)</span><br><span class="line">          g.fillRoundRect(<span class="number">215</span> + c * <span class="number">121</span>, <span class="number">115</span> + r * <span class="number">121</span>, <span class="number">106</span>, <span class="number">106</span>, <span class="number">7</span>, <span class="number">7</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> drawTile(g, r, c)</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        g.setColor(startColor)</span><br><span class="line">        g.fillRoundRect(<span class="number">215</span>, <span class="number">115</span>, <span class="number">469</span>, <span class="number">469</span>, <span class="number">7</span>, <span class="number">7</span>)</span><br><span class="line">        g.setColor(gridColor.darker)</span><br><span class="line">        g.setFont(<span class="keyword">new</span> <span class="type">Font</span>(<span class="string">"SansSerif"</span>, <span class="type">Font</span>.<span class="type">BOLD</span>, <span class="number">128</span>))</span><br><span class="line">        g.drawString(<span class="string">"2048"</span>, <span class="number">310</span>, <span class="number">270</span>)</span><br><span class="line">        g.setFont(<span class="keyword">new</span> <span class="type">Font</span>(<span class="string">"SansSerif"</span>, <span class="type">Font</span>.<span class="type">BOLD</span>, <span class="number">20</span>))</span><br><span class="line">        <span class="keyword">if</span> (game == <span class="type">State</span>.won) g.drawString(<span class="string">"you made it!"</span>, <span class="number">390</span>, <span class="number">350</span>)</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (game == <span class="type">State</span>.over) g.drawString(<span class="string">"game over"</span>, <span class="number">400</span>, <span class="number">350</span>)</span><br><span class="line">        g.setColor(gridColor)</span><br><span class="line">        g.drawString(<span class="string">"click to start a new game"</span>, <span class="number">330</span>, <span class="number">470</span>)</span><br><span class="line">        g.drawString(<span class="string">"(use arrow keys to move tiles)"</span>, <span class="number">310</span>, <span class="number">530</span>)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">def</span> <span class="title">drawTile</span></span>(g: <span class="type">Graphics2D</span>, r: <span class="type">Int</span>, c: <span class="type">Int</span>): <span class="type">Unit</span> = &#123;</span><br><span class="line">      <span class="keyword">val</span> value = tiles(r)(c).value</span><br><span class="line">      g.setColor(colorTable((math.log(value) / math.log(<span class="number">2</span>)).toInt + <span class="number">1</span>))</span><br><span class="line">      g.fillRoundRect(<span class="number">215</span> + c * <span class="number">121</span>, <span class="number">115</span> + r * <span class="number">121</span>, <span class="number">106</span>, <span class="number">106</span>, <span class="number">7</span>, <span class="number">7</span>)</span><br><span class="line">      g.setColor(<span class="keyword">if</span> (value &lt; <span class="number">128</span>) colorTable.head <span class="keyword">else</span> colorTable(<span class="number">1</span>))</span><br><span class="line">      <span class="keyword">val</span> (s, fm) = (value.toString, g.getFontMetrics)</span><br><span class="line">      <span class="keyword">val</span> asc = fm.getAscent</span><br><span class="line">      <span class="keyword">val</span> (x, y) = (<span class="number">215</span> + c * <span class="number">121</span> + (<span class="number">106</span> - fm.stringWidth(s)) / <span class="number">2</span>, <span class="number">115</span> + r * <span class="number">121</span> + (asc + (<span class="number">106</span> - (asc + fm.getDescent)) / <span class="number">2</span>))</span><br><span class="line">      g.drawString(s, x, y)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">def</span> <span class="title">moveUp</span></span>(checkingAvailableMoves: <span class="type">Boolean</span> = <span class="literal">false</span>) = move(<span class="number">-1</span>, <span class="number">0</span>, checkingAvailableMoves)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">def</span> <span class="title">moveDown</span></span>(checkingAvailableMoves: <span class="type">Boolean</span> = <span class="literal">false</span>) = move(<span class="number">1</span>, <span class="number">0</span>, checkingAvailableMoves)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">def</span> <span class="title">moveLeft</span></span>(checkingAvailableMoves: <span class="type">Boolean</span> = <span class="literal">false</span>) = move(<span class="number">0</span>, <span class="number">-1</span>, checkingAvailableMoves)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">def</span> <span class="title">moveRight</span></span>(checkingAvailableMoves: <span class="type">Boolean</span> = <span class="literal">false</span>) = move(<span class="number">0</span>, <span class="number">1</span>, checkingAvailableMoves)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">def</span> <span class="title">clearMerged</span></span>(): <span class="type">Unit</span> = <span class="keyword">for</span> (row &lt;- tiles; tile &lt;- row) <span class="keyword">if</span> (<span class="type">Option</span>(tile).isDefined) tile.setMerged()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">def</span> <span class="title">movesAvailable</span></span>() = moveUp(<span class="literal">true</span>) || moveDown(<span class="literal">true</span>) || moveLeft(<span class="literal">true</span>) || moveRight(<span class="literal">true</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">move</span></span>(yIncr: <span class="type">Int</span>, xIncr: <span class="type">Int</span>, checkingAvailableMoves: <span class="type">Boolean</span>): <span class="type">Boolean</span> = &#123;</span><br><span class="line">      <span class="keyword">var</span> moved = <span class="literal">false</span></span><br><span class="line">      <span class="keyword">for</span> (i &lt;- <span class="number">0</span> until side;</span><br><span class="line">           j &lt;- <span class="number">0</span> until side) <span class="keyword">if</span> (<span class="type">Option</span>(tiles(i)(j)).isDefined) &#123;</span><br><span class="line">        <span class="keyword">var</span> (r, c) = (i, j)</span><br><span class="line">        <span class="keyword">var</span> (nextR, nextC, breek) = (i + yIncr, j + xIncr, <span class="literal">false</span>)</span><br><span class="line">        <span class="keyword">while</span> ((nextR &gt;= <span class="number">0</span> &amp;&amp; nextR &lt; side &amp;&amp; nextC &gt;= <span class="number">0</span> &amp;&amp; nextC &lt; side) &amp;&amp; !breek) &#123;</span><br><span class="line">          <span class="keyword">val</span> (next, curr) = (tiles(nextR)(nextC), tiles(r)(c))</span><br><span class="line"></span><br><span class="line">          <span class="keyword">if</span> (<span class="type">Option</span>(next).isEmpty)</span><br><span class="line">            <span class="keyword">if</span> (checkingAvailableMoves) <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">              tiles(nextR)(nextC) = curr</span><br><span class="line">              tiles(r)(c) = <span class="literal">null</span></span><br><span class="line">              r = nextR</span><br><span class="line">              c = nextC</span><br><span class="line">              nextR += yIncr</span><br><span class="line">              nextC += xIncr</span><br><span class="line">              moved = <span class="literal">true</span></span><br><span class="line">            &#125;</span><br><span class="line">          <span class="keyword">else</span> <span class="keyword">if</span> (next.canMergeWith(curr)) &#123;</span><br><span class="line">            <span class="keyword">if</span> (checkingAvailableMoves) <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">            highest = math.max(next.mergeWith(curr), highest)</span><br><span class="line">            tiles(r)(c) = <span class="literal">null</span></span><br><span class="line">            breek = <span class="literal">true</span></span><br><span class="line">            moved = <span class="literal">true</span></span><br><span class="line">          &#125; <span class="keyword">else</span> breek = <span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      updateState(moved)</span><br><span class="line">      moved</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">def</span> <span class="title">updateState</span></span>(moved: <span class="type">Boolean</span>): <span class="type">Unit</span> = &#123;</span><br><span class="line">      <span class="keyword">if</span> (moved &amp;&amp; highest &lt; target) &#123;</span><br><span class="line">        clearMerged()</span><br><span class="line">        addRandomTile()</span><br><span class="line">        <span class="keyword">if</span> (!movesAvailable) game = <span class="type">State</span>.over</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span> <span class="keyword">if</span> (highest == target) game = <span class="type">State</span>.won</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">def</span> <span class="title">startGame</span></span>(): <span class="type">Unit</span> = <span class="keyword">if</span> (game ne <span class="type">State</span>.running) &#123;</span><br><span class="line">      highest = <span class="number">0</span></span><br><span class="line">      game = <span class="type">State</span>.running</span><br><span class="line">      tiles = <span class="type">Array</span>.ofDim[<span class="type">Tile</span>](side, side)</span><br><span class="line">      addRandomTile()</span><br><span class="line">      addRandomTile()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">def</span> <span class="title">addRandomTile</span></span>(): <span class="type">Unit</span> = &#123;</span><br><span class="line">      <span class="keyword">var</span> pos = rand.nextInt(side * side)</span><br><span class="line">      <span class="keyword">var</span> (row, col) = (<span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">      do &#123;</span><br><span class="line">        pos = (pos + <span class="number">1</span>) % (side * side)</span><br><span class="line">        row = pos / side</span><br><span class="line">        col = pos % side</span><br><span class="line">      &#125; <span class="keyword">while</span> (<span class="type">Option</span>(tiles(row)(col)).isDefined)</span><br><span class="line">      tiles(row)(col) = <span class="type">Tile</span>(<span class="keyword">if</span> (rand.nextInt(<span class="number">10</span>) == <span class="number">0</span>) <span class="number">4</span> <span class="keyword">else</span> <span class="number">2</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong><a href="https://github.com/BENULL/2048" target="_blank" rel="noopener">完整代码</a></strong></p>
+<p><strong>后面可以考虑加上AI，尝试基于规则或强化学习的方法</strong></p>
+<ul>
+<li><a href="http://blog.codinglabs.org/articles/2048-ai-analysis.html" target="_blank" rel="noopener">2048-AI程序算法分析</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/150248976" target="_blank" rel="noopener">你玩《2048》能拿多少分？AI的最高分纪录：401912</a></li>
+<li><a href="https://blog.csdn.net/qq_32767041/article/details/80634244" target="_blank" rel="noopener">2048AI设计与实现</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Scala/" rel="tag"># Scala</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/04/22/关于Python Decorator你应该知道的一切/" rel="next" title="关于Python Decorator你应该知道的一切">
+                <i class="fa fa-chevron-left"></i> 关于Python Decorator你应该知道的一切
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMTE2Ny83NzE2"></div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="BENULL">
+            
+              <p class="site-author-name" itemprop="name">BENULL</p>
+              <p class="site-description motion-element" itemprop="description">tomorrow is another day</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/benull" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:ltobenull@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/u/3169828502" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://haoyue.pro" title="皓月的BLOG" target="_blank">皓月的BLOG</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.jianshu.com/u/4b8da0db00bf" title="HaloZhang" target="_blank">HaloZhang</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Scala-2048小游戏"><span class="nav-number">1.</span> <span class="nav-text">[Scala] 2048小游戏</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">BENULL</span>
+</div>
+<div class="powered-by">
+</div>
+<!--
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+
+-->
+
+
+  <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+  <span class="post-meta-divider">|</span>
+  <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

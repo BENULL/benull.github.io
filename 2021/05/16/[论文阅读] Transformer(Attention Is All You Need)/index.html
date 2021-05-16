@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Paper,Transformer,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="BENULL" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="[论文阅读] Transformer(Attention Is All You Need) 单位: Google 会议: NeurIPS 2017 论文地址: arxiv 代码: tensorflow/tensor2tensor official   Seq2Se Encoder和Decoder在早期一般是RNN模块，后来引入了LSTM或者GRU模块，核心思想都是通过Encoder编码成一个表示向">
+<meta name="keywords" content="Paper,Transformer">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Transformer(Attention Is All You Need)">
+<meta property="og:url" content="http://yoursite.com/2021/05/16/[论文阅读] Transformer(Attention Is All You Need)/index.html">
+<meta property="og:site_name" content="BENULL">
+<meta property="og:description" content="[论文阅读] Transformer(Attention Is All You Need) 单位: Google 会议: NeurIPS 2017 论文地址: arxiv 代码: tensorflow/tensor2tensor official   Seq2Se Encoder和Decoder在早期一般是RNN模块，后来引入了LSTM或者GRU模块，核心思想都是通过Encoder编码成一个表示向">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210516114517723.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2021051611451353.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210516114513298.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210516114512905.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210516114514447.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210516114512994.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210516114512671.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210516114513198.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2021051611451387.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210516114512866.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:updated_time" content="2021-05-16T03:55:04.999Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Transformer(Attention Is All You Need)">
+<meta name="twitter:description" content="[论文阅读] Transformer(Attention Is All You Need) 单位: Google 会议: NeurIPS 2017 论文地址: arxiv 代码: tensorflow/tensor2tensor official   Seq2Se Encoder和Decoder在早期一般是RNN模块，后来引入了LSTM或者GRU模块，核心思想都是通过Encoder编码成一个表示向">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210516114517723.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2021/05/16/[论文阅读] Transformer(Attention Is All You Need)/">
+
+
+
+
+
+  <title>Transformer(Attention Is All You Need) | BENULL</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">BENULL</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">tomorrow is another day</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/05/16/[论文阅读] Transformer(Attention Is All You Need)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="BENULL">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BENULL">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Transformer(Attention Is All You Need)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-05-16T11:54:54+08:00">
+                2021-05-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Paper/" itemprop="url" rel="index">
+                    <span itemprop="name">Paper</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,763字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="论文阅读-Transformer-Attention-Is-All-You-Need"><a href="#论文阅读-Transformer-Attention-Is-All-You-Need" class="headerlink" title="[论文阅读] Transformer(Attention Is All You Need)"></a>[论文阅读] Transformer(Attention Is All You Need)</h1><blockquote>
+<p>单位: Google</p>
+<p>会议: NeurIPS 2017</p>
+<p>论文地址: <a href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener">arxiv</a></p>
+<p>代码: <a href="https://github.com/tensorflow/tensor2tensor" target="_blank" rel="noopener">tensorflow/tensor2tensor official</a></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210516114517723.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="Seq2Se"><a href="#Seq2Se" class="headerlink" title="Seq2Se"></a>Seq2Se</h2><p><img src="https://img-blog.csdnimg.cn/2021051611451353.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p>Encoder和Decoder在早期一般是RNN模块，后来引入了LSTM或者GRU模块，核心思想都是通过Encoder编码成一个表示向量，即上下文编码向量，然后交给Decoder来进行解码，翻译成目标语言</p>
+<p><strong>RNN的局限</strong></p>
+<ul>
+<li><p>对于不同输入和输出长度，中间的上下文编码向量长度固定的，仅仅靠一个固定长度的上下文编码向量包含的信息有限</p>
+</li>
+<li><p>RNN 本质是一个马尔科夫决策过程无法很好地学习到全局的结构信息</p>
+</li>
+<li><p>难以并行化，速度慢</p>
+</li>
+</ul>
+<p><strong>CNN</strong></p>
+<p>在 FaceBook 的论文(Convolutional Sequence to Sequence Learning）中纯粹使用CNN也完成了 Seq2Seq 的学习</p>
+<p><strong>CNN 方便并行，而且容易捕捉到一些全局的结构信息</strong></p>
+<p>但CNN 事实上只能获取局部信息，是通过层叠来增大感受野</p>
+<p><img src="https://img-blog.csdnimg.cn/20210516114513298.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p><strong>在Transformer中，完全抛弃了RNN和CNN等网络结构，仅仅采用Attention机制就取得了很好的效果，具有更好的质量，同时具有更高的并行性和更少的训练时间</strong></p>
+<p>这篇主要贡献之一是<strong>它表明了内部注意力在机器翻译（甚至是一般的 Seq2Seq 任务）的序列编码上是相当重要的</strong>，而之前关于 Seq2Seq 的研究基本都只是把注意力机制用在解码端。</p>
+<h2 id="Transformer-Architecture"><a href="#Transformer-Architecture" class="headerlink" title="Transformer Architecture"></a>Transformer Architecture</h2><p><img src="https://img-blog.csdnimg.cn/20210516114512905.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>Transformer结构可以表示为Encoder和Decoder两个部分</p>
+<p>Encoder和Decoder主要由Self-Attention和Feed-Forward Network两个组件构成</p>
+<p>Self-Attention由Scaled Dot-Product Attention和Multi-Head Attention两个组件构成。</p>
+<h2 id="Self-Attention"><a href="#Self-Attention" class="headerlink" title="Self-Attention"></a>Self-Attention</h2><p><strong>Attention</strong> <strong>机制来自于人类视觉注意力机制</strong>,人们视觉在感知东西的时候一般不会是一个场景从到头看到尾每次全部都看，而往往是根据需求观察注意特定的一部分</p>
+<p><img src="https://img-blog.csdnimg.cn/20210516114514447.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">注意力函数的本质可以被描述为一个查询（query）到一系列（键key-value值)对的映射</p>
+<p>给定一个和任务相关的查询查询向量 <strong>q</strong>，通过计算与<strong>Key</strong>的注意力分布并附加在<strong>Value</strong>上，从而计算<strong>Attention Value</strong></p>
+<p><strong>引入attention的好处</strong></p>
+<ul>
+<li><p>注意力允许解码器以不同程度的权重利用到编码器的所有信息</p>
+</li>
+<li><p>通过检查注意力分布，可以看到解码器在关注什么，可解释性</p>
+</li>
+</ul>
+<p>Self-Attention的QKV来自同一个输入，也就是说在序列内部做 Attention，寻找序列内部的联系，故称为自注意力层</p>
+<h3 id="Scaled-Dot-Product-Attention"><a href="#Scaled-Dot-Product-Attention" class="headerlink" title="Scaled Dot-Product Attention"></a>Scaled Dot-Product Attention</h3><p><img src="https://img-blog.csdnimg.cn/20210516114512994.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<script type="math/tex; mode=display">
+\operatorname{Attention}(\boldsymbol{Q}, \boldsymbol{K}, \boldsymbol{V})=\operatorname{softmax}\left(\frac{\boldsymbol{Q} \boldsymbol{K}^{\top}}{\sqrt{d_{k}}}\right) \boldsymbol{V}</script><p>计算过程</p>
+<ol>
+<li>对每个输入单词$x^1,x^2,x^3$转化成嵌入向量</li>
+<li>根据嵌入向量分别得到$q$，$k$，$v$三个向量</li>
+<li>然后将$q$和所有$k$进行点乘计算得$\alpha$</li>
+<li>通过SoftMax转换为概率分布$\hat{\alpha}$</li>
+<li>将概率分布和所有$v$进行加权求和得到输出$b$</li>
+</ol>
+<p><img src="https://img-blog.csdnimg.cn/20210516114512671.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p><strong>为什么scaled?</strong></p>
+<p>可参考<a href="https://www.zhihu.com/question/339723385" target="_blank" rel="noopener">transformer中的attention为什么scaled?</a></p>
+<h3 id="Multi-Head-Attention"><a href="#Multi-Head-Attention" class="headerlink" title="Multi-Head Attention"></a>Multi-Head Attention</h3><p><img src="https://img-blog.csdnimg.cn/20210516114513198.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<script type="math/tex; mode=display">
+\text { head }_{\mathrm{i}}=\operatorname{Attention}\left(Q W_{i}^{Q}, K W_{i}^{K}, V W_{i}^{V}\right)</script><script type="math/tex; mode=display">
+\left.\operatorname{MultiHead}(Q, K, V)=\text { Concat(head }_{1}, \ldots, \text { head }_{\mathrm{h}}\right) W^{O}</script><p>Multi-Head Attention相当于多个不同Scaled Dot-Product Attention的集成，以8为例子，Multi-Head Attention步骤如下：</p>
+<ol>
+<li><p>将数据$X$分别输入到8个不同的Scaled Dot-Product Attention中，得到8个加权后的特征矩阵$Z_{i}, i \in{1,2, \ldots, 8}$ </p>
+</li>
+<li><p>将8个$Z$按列拼成一个大的特征矩阵</p>
+</li>
+<li><p>特征矩阵经过一层全连接得到输出$Z$</p>
+</li>
+</ol>
+<p>可以类比CNN中同时使用多个卷积核的作用，多头的注意力有助于网络捕捉到更丰富的信息，每个head关注的点可能不一样，可以处理不同的任务</p>
+<h2 id="Positional-Encoding"><a href="#Positional-Encoding" class="headerlink" title="Positional  Encoding"></a>Positional  Encoding</h2><p>transformer内部没有类似RNN的循环结构，没有捕捉顺序序列的能力，无论句子结构怎么打乱，transformer都会得到类似的结果</p>
+<p>为了解决这个问题，在编码词向量时会额外引入了位置编码向量</p>
+<p>将每个位置编号，然后每个编号对应一个向量，通过结合位置向量和词向量，就给每个词都引入了一定的位置信息，这样 Attention 就可以分辨出不同位置的词了</p>
+<p><img src="https://img-blog.csdnimg.cn/2021051611451387.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<ul>
+<li>将向量的512维度切分为奇数行和偶数行</li>
+<li>偶数行采用sin函数编码，奇数行采用cos函数编码</li>
+<li>然后按照原始行号拼接</li>
+</ul>
+<p>由于有</p>
+<script type="math/tex; mode=display">
+\sin (a+\beta)=\sin \alpha \cos \beta+\cos a \sin \beta \\
+\cos (\alpha+\beta)=\cos a \cos \beta-\sin \alpha \sin \beta</script><p>所有的$PE<em>{pos+k}$可以用$PE</em>{pos}$线性表出，表达了相对位置信息</p>
+<p>同样的也可以训练得到位置编码向量，但是试验结果表明相差不大，因此论文选择了直接定义，这样直接计算而不需要训练，减少了训练参数，同时允许模型将位置编码向量扩展到超过了训练集中最长序列长度的位置编码</p>
+<h2 id="Feed-Forward-Networds"><a href="#Feed-Forward-Networds" class="headerlink" title="Feed-Forward Networds"></a>Feed-Forward Networds</h2><p>在每个子层中，Multi-Head Attention层都接了一个FFN层，先线性变换，然后ReLU非线性，再线性变换</p>
+<script type="math/tex; mode=display">
+F F N(x)=\max \left(0, x W_{1}+b_{1}\right) W_{2}+b_{2}</script><p>作用将Attention结果映射到一个更大维度的特征空间</p>
+<p>在抛弃了 LSTM 结构后，FFN 中的 ReLU成为了一个主要的能<strong>提供非线性变换的单元</strong></p>
+<h2 id="Layer-Norm"><a href="#Layer-Norm" class="headerlink" title="Layer Norm"></a>Layer Norm</h2><p>主要的几种归一化方法</p>
+<ul>
+<li><p>Batch Normalization</p>
+</li>
+<li><p>Layer Normalization</p>
+</li>
+<li><p>Instance Normalization</p>
+</li>
+<li><p>Group Normalization</p>
+</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20210516114512866.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>将输入的图像shape记为<code>[N, C, H, W]</code>，这几个方法主要的区别</p>
+<p>BatchNorm是在batch上，对NHW做归一化，对小batchsize效果不好<br>LayerNorm在通道方向上，对CHW归一化，主要对RNN作用明显<br>InstanceNorm在图像像素上，对HW做归一化，用在风格化迁移<br>GroupNorm将channel分组，然后再做归一化</p>
+<p><strong>Transformer为什么选用Layer Normalization呢？</strong></p>
+<p>看了知乎上一些关于使用BN效果不好的讨论</p>
+<p>比较同意是因为NLP数据和CV数据特性不同带来的影响，<strong>数据的相关性表现在哪个维度，决定了采用何种信息抽取方式</strong></p>
+<p>BN是对不同样本的同一特征做操作而LN是对单个样本的不同特征做操作</p>
+<blockquote>
+<p>在NLP中不同batch样本的信息关联性不大，而且由于不同的句子长度不同，强行归一化会损失不同样本间的差异信息，所以就没在batch维度进行归一化，而是选择LN，只考虑的句子内部维度的归一化。</p>
+</blockquote>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><p><a href="https://zhuanlan.zhihu.com/p/308301901?utm_source=wechat_session&amp;utm_medium=social&amp;utm_oi=765637550864871424" target="_blank" rel="noopener">3W字长文带你轻松入门视觉transformer - 知乎</a></p>
+</li>
+<li><p><a href="https://mp.weixin.qq.com/s?__biz=MzIwMTc4ODE0Mw==&amp;mid=2247486960&amp;idx=1&amp;sn=1b4b9d7ec7a9f40fa8a9df6b6f53bbfb&amp;chksm=96e9d270a19e5b668875392da1d1aaa28ffd0af17d44f7ee81c2754c78cc35edf2e35be2c6a1&amp;scene=21#wechat_redirect" target="_blank" rel="noopener">一文读懂「Attention is All You Need」| 附代码实现</a></p>
+</li>
+<li><p><a href="https://zhuanlan.zhihu.com/p/105493618" target="_blank" rel="noopener">深度学习-图解Transformer (变形金刚) - 知乎</a></p>
+</li>
+<li><p><a href="https://blog.csdn.net/c9Yv2cf9I06K2A9E/article/details/79739287?utm_source=blogxgwz0" target="_blank" rel="noopener">自然语言处理中的自注意力机制（Self-Attention Mechanism）_Paper weekly-CSDN博客</a></p>
+</li>
+<li><p><a href="https://www.zhihu.com/question/68482809" target="_blank" rel="noopener">目前主流的attention方法都有哪些？ - 知乎</a></p>
+</li>
+<li><p><a href="https://www.zhihu.com/search?type=content&amp;q=transformer位置编码" target="_blank" rel="noopener">transformer 位置编码</a></p>
+</li>
+<li><p><a href="https://www.zhihu.com/search?type=content&amp;q=transformer多头的好处" target="_blank" rel="noopener">transformer 多头的好处</a></p>
+</li>
+<li><p><a href="https://www.zhihu.com/question/395811291" target="_blank" rel="noopener">transformer 为什么使用 layer normalization，而不是其他的归一化方法</a></p>
+</li>
+<li><p><a href="https://zhuanlan.zhihu.com/p/266069794" target="_blank" rel="noopener">计算机视觉”新”范式: Transforme</a></p>
+</li>
+<li><p>Transformer课程——李宏毅</p>
+</li>
+<li><p><a href="https://www.zhihu.com/question/347678607/answer/864217252" target="_blank" rel="noopener">如何理解<em>Transformer</em>论文中的positional encoding，和三角函数有什么关系？</a></p>
+</li>
+<li><p><a href="https://blog.csdn.net/liuxiao214/article/details/81037416" target="_blank" rel="noopener">BatchNormalization、LayerNormalization、InstanceNorm、GroupNorm、SwitchableNorm总结</a></p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Paper/" rel="tag"># Paper</a>
+          
+            <a href="/tags/Transformer/" rel="tag"># Transformer</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/05/12/[Scala] 2048小游戏/" rel="next" title="Scala练手 2048">
+                <i class="fa fa-chevron-left"></i> Scala练手 2048
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMTE2Ny83NzE2"></div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="BENULL">
+            
+              <p class="site-author-name" itemprop="name">BENULL</p>
+              <p class="site-description motion-element" itemprop="description">tomorrow is another day</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/benull" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:ltobenull@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/u/3169828502" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="ltobenull" target="_blank" title="WeChat">
+                    
+                      <i class="fa fa-fw fa-wechat"></i>WeChat</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://haoyue.pro" title="皓月的BLOG" target="_blank">皓月的BLOG</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.jianshu.com/u/4b8da0db00bf" title="HaloZhang" target="_blank">HaloZhang</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://xz8090.com/" title="xz8090" target="_blank">xz8090</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blog.csdn.net/qq_37054755" title="小鑫-Chen" target="_blank">小鑫-Chen</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#论文阅读-Transformer-Attention-Is-All-You-Need"><span class="nav-number">1.</span> <span class="nav-text">[论文阅读] Transformer(Attention Is All You Need)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Seq2Se"><span class="nav-number">1.1.</span> <span class="nav-text">Seq2Se</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Transformer-Architecture"><span class="nav-number">1.2.</span> <span class="nav-text">Transformer Architecture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Self-Attention"><span class="nav-number">1.3.</span> <span class="nav-text">Self-Attention</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Scaled-Dot-Product-Attention"><span class="nav-number">1.3.1.</span> <span class="nav-text">Scaled Dot-Product Attention</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Multi-Head-Attention"><span class="nav-number">1.3.2.</span> <span class="nav-text">Multi-Head Attention</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Positional-Encoding"><span class="nav-number">1.4.</span> <span class="nav-text">Positional  Encoding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Feed-Forward-Networds"><span class="nav-number">1.5.</span> <span class="nav-text">Feed-Forward Networds</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Layer-Norm"><span class="nav-number">1.6.</span> <span class="nav-text">Layer Norm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">1.7.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">BENULL</span>
+</div>
+<div class="powered-by">
+</div>
+<!--
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+
+-->
+
+
+  <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+  <span class="post-meta-divider">|</span>
+  <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

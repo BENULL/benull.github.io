@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2021/05/16/[%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB]%20Transformer(Attention%20Is%20All%20You%20Need)/</loc>
+    
+    <lastmod>2021-05-16</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2021/05/12/[Scala]%202048%E5%B0%8F%E6%B8%B8%E6%88%8F/</loc>
     
     <lastmod>2021-05-12</lastmod>
@@ -705,6 +712,13 @@
   
   <url>
     <loc>http://yoursite.com/tags/CNN/</loc>
+    <lastmod>2021-05-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/tags/Transformer/</loc>
     <lastmod>2021-05-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

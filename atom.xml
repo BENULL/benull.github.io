@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-05-16T03:59:49.369Z</updated>
+  <updated>2021-06-30T13:38:01.693Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>记一次大数据挑战赛</title>
+    <link href="http://yoursite.com/2021/06/30/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8C%91%E6%88%98%E8%B5%9B/"/>
+    <id>http://yoursite.com/2021/06/30/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8C%91%E6%88%98%E8%B5%9B/</id>
+    <published>2021-06-30T13:38:29.000Z</published>
+    <updated>2021-06-30T13:38:01.693Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="记一次大数据挑战赛"><a href="#记一次大数据挑战赛" class="headerlink" title="记一次大数据挑战赛"></a>记一次大数据挑战赛</h1><blockquote><p>对于给定的一定数量到访过微信视频号“热门推荐”的用户， 根据这些用户在视频号内的历史n天的行为数据，通过算法在测试集上预测出这些用户对于不同视频内容的互动行为（包括点赞、点击头像、收藏、转发等）的发生概率。 本次比赛以多个行为预测结果的加权uAUC值进行评分</p></blockquote><p><a href="https://algo.weixin.qq.com/" target="_blank" rel="noopener">2021微信大数据挑战赛</a></p><p>第一次接触这类比赛，成绩不大行，记录一下自己实验到的东西，并不一定对</p><p>因为第一次，对于什么特征在这类任务中比较重要也不清楚，造的特征主要参考了大佬的分享<a href="https://mp.weixin.qq.com/s/yE5yThqZ8R9v4EIxlr3bsA" target="_blank" rel="noopener">微信视频号推荐算法解题思路</a></p><p>nn模型用的是deepctr的deepfm模型，树模型用的lightgbm</p><ul><li>对nn尝试过各类采样方法都没有全量训练效果好</li><li>deepfm的dnn层数[128,128,128]好像就够用了</li><li>使用adam比adagrad好</li><li>deepfm、xdeepfm、autoint效果差不多</li><li>batchsize尝试中1024结果比较好</li><li>deepfm中统计特征的作用不大，加上feed embedding后有很大的提升</li><li>对tags和keyword使用word2vec好像没有multilable降维后好用</li><li>user相关的特征比较好用，feed的特征作用不是很明显</li><li><p>nn多折融合有明显的提升，融合树模型和nn也有大的提升</p></li><li><p>没有利用到任务间的相关性，没来的急试试mmoe</p></li></ul><p>想看看大佬是怎么做的，等着大佬分享</p><p><strong>数据集下载</strong></p><p>链接: <a href="https://pan.baidu.com/s/1SPmyv7zoHhDVm57N0OgUzA" target="_blank" rel="noopener">https://pan.baidu.com/s/1SPmyv7zoHhDVm57N0OgUzA</a></p><p>提取码: 8g95 </p><p><a href="https://github.com/BENULL/WeChatBigDataChallenge2021" target="_blank" rel="noopener"><strong>代码地址</strong></a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;记一次大数据挑战赛&quot;&gt;&lt;a href=&quot;#记一次大数据挑战赛&quot; class=&quot;headerlink&quot; title=&quot;记一次大数据挑战赛&quot;&gt;&lt;/a&gt;记一次大数据挑战赛&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;对于给定的一定数量到访过微信视频号“热门推荐”的用户， 根
+      
+    
+    </summary>
+    
+    
+      <category term="BigData" scheme="http://yoursite.com/categories/BigData/"/>
+    
+    
+      <category term="Python" scheme="http://yoursite.com/tags/Python/"/>
+    
+      <category term="MIX" scheme="http://yoursite.com/tags/MIX/"/>
+    
+      <category term="BigData" scheme="http://yoursite.com/tags/BigData/"/>
+    
+  </entry>
   
   <entry>
     <title>Transformer(Attention Is All You Need)</title>
@@ -537,34 +568,6 @@
       <category term="AI" scheme="http://yoursite.com/tags/AI/"/>
     
       <category term="机器学习" scheme="http://yoursite.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Fashion Image Retrieval Based on Regional Representation for Design Protection</title>
-    <link href="http://yoursite.com/2020/11/03/PsNet/"/>
-    <id>http://yoursite.com/2020/11/03/PsNet/</id>
-    <published>2020-11-03T13:20:32.000Z</published>
-    <updated>2020-11-04T16:24:33.842Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Which-Is-Plagiarism-Fashion-Image-Retrieval-Based-on-Regional-Representation-for-Design-Protection"><a href="#Which-Is-Plagiarism-Fashion-Image-Retrieval-Based-on-Regional-Representation-for-Design-Protection" class="headerlink" title="Which Is Plagiarism: Fashion Image Retrieval Based on Regional Representation for Design Protection"></a>Which Is Plagiarism: Fashion Image Retrieval Based on Regional Representation for Design Protection</h1><blockquote><p>作者 | Yining Lang, Yuan He, Fan Yang, Jianfeng Dong, Hui Xue</p><p>单位 | 阿里；浙江工商大学；AZFT</p><p>会议｜CVPR2020</p><p><a href="https://openaccess.thecvf.com/content_CVPR_2020/papers/Lang_Which_Is_Plagiarism_Fashion_Image_Retrieval_Based_on_Regional_Representation_CVPR_2020_paper.pdf" target="_blank" rel="noopener">paper地址</a></p></blockquote><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>在服装领域，虽然打假一直不断，但盗版抄袭问题依旧普遍存在，而且从线上线下，抄袭手段越来越刁钻。目前来看，服装领域的抄袭有以下三类</p><p>•<strong>图片盗用</strong></p><p>​    抄袭成本很低，很容易被平台的图片检索系统锁定</p><p>•<strong>创意盗版</strong>  </p><p>​    抄袭成本稍高，但基于相似度度量的算法，可以对它们进行召回和治理</p><p>•<strong>对服装的某些区域进行修改</strong></p><p>   抄袭成本高，需要人工审核发现，打假成本也高</p><p><img src="https://github.com/benull/Resource/raw/master/psnet1.png" alt="pic1"></p><blockquote><p>两组盗版示例，其中每组中左图为正版服装，右图为盗版服装</p></blockquote><h3 id="盗版服装检索的难点"><a href="#盗版服装检索的难点" class="headerlink" title="盗版服装检索的难点"></a>盗版服装检索的难点</h3><p>盗版服装的形式层出不穷，有些盗版服装跟原图比较相似，但是有些并不相似</p><p>而且有些盗版服装与原创服装属于不同的类型，提高了网络训练时的要求</p><p><img src="https://github.com/benull/Resource/raw/master/psnet2.png" alt="pic2"></p><h3 id="盗版服装的定义"><a href="#盗版服装的定义" class="headerlink" title="盗版服装的定义"></a>盗版服装的定义</h3><p>作为盗版服装检索领域的首次工作，作者对盗版服装的定义是整体上抄袭原版服装设计和风格，服装修改的局部区域数小于等于2</p><p><img src="https://github.com/benull/Resource/raw/master/psnet3.png" alt="pic3"></p><blockquote><p>将图像中的服装分为五个区域，包括领子、胸部、腰部和两个袖子区域</p></blockquote><h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><h3 id="基于三元组的损失函数（for-相似性检索）"><a href="#基于三元组的损失函数（for-相似性检索）" class="headerlink" title="基于三元组的损失函数（for 相似性检索）"></a>基于三元组的损失函数（for 相似性检索）</h3><script type="math/tex; mode=display">\begin{array}{c}\mathcal{L}_{t r i}\left(I, I^{+}, I^{-}\right)=\sum_{r=1}^{R} \max \left(D_{r}^{I, I^{+}}-D_{r}^{I, I^{-}}+m, 0\right) \\\mathcal{L}_{t r a}=\sum_{n=1}^{N} \mathcal{L}_{t r i}\left(I, I^{+}, I^{-}\right)\end{array}</script><h3 id="基于三元组的损失函数（for-盗版检索）"><a href="#基于三元组的损失函数（for-盗版检索）" class="headerlink" title="基于三元组的损失函数（for 盗版检索）"></a>基于三元组的损失函数（for 盗版检索）</h3><script type="math/tex; mode=display">\begin{array}{c}\mathcal{L}_{t r i}^{\prime}\left(I, I^{+}, I^{-}\right)=\sum_{r=1}^{R} \max \left(D_{r}^{I, I^{+}}-D_{r}^{I, I^{-}}+m, 0\right) \cdot \lambda_{r} \\\alpha_{t r i}=\frac{\operatorname{avg}\left\{\left\|f_{r}(I)-f_{r}\left(I^{+}\right)\right\|_{2} ; r=1,2, \ldots R\right\}}{\max \left\{\left\|f_{r}(I)-f_{r}\left(I^{+}\right)\right\|_{2} ; r=1,2, \ldots R\right\}} \\\mathcal{L}_{p l a}=\sum_{n=1}^{N}\left[\mathcal{L}_{t r i}^{\prime}\left(I, I^{+}, I^{-}\right) \cdot \alpha_{t r i}\right]\end{array}</script><h2 id="网络框架"><a href="#网络框架" class="headerlink" title="网络框架"></a>网络框架</h2><h3 id="PS-Net总体框架"><a href="#PS-Net总体框架" class="headerlink" title="PS-Net总体框架"></a>PS-Net总体框架</h3><p><img src="https://github.com/benull/Resource/raw/master/psnet4.png" alt="pic4"></p><h3 id="Network-Backbone"><a href="#Network-Backbone" class="headerlink" title="Network Backbone"></a>Network Backbone</h3><p><strong>HR-Net提取图片的特征</strong></p><p>​    HR-Net 的多分辨率子网并行连接，使得每一个高分辨率到低分辨率的表征都从其它并行表示中反复接受信息，从而得到丰富的高分辨率表征</p><p>​    但HR-Net不是必须的，可以用ResNet、VGG-Net 等替代</p><h3 id="Landmark-Branch"><a href="#Landmark-Branch" class="headerlink" title="Landmark Branch"></a>Landmark Branch</h3><p>关键点估计分支，为划分区域做准备，通过反卷积进行上采样</p><h3 id="Retrieval-Branch"><a href="#Retrieval-Branch" class="headerlink" title="Retrieval Branch"></a>Retrieval Branch</h3><p>聚合局部区域的特征进行检索</p><p>根据 Landmark Branch 得到的关键点预测和 输出的热力图，得到特定局部区域在特征图上的位置</p><p>再根据特定区域在特征图上的位置，通过ROI pooling得到 Retrieval Branch 的特征图中该区域相应的局部特征图</p><h3 id="Plagiarized-Fashion-数据集"><a href="#Plagiarized-Fashion-数据集" class="headerlink" title="Plagiarized Fashion 数据集"></a>Plagiarized Fashion 数据集</h3><p>•总共60,000张图片,其中40,000用于训练 20,000用于测试</p><p>•包括4类服装：短袖T恤、长袖上衣、外套以及连衣裙</p><p>•图片从淘宝网爬取并经过专家标注</p><p><img src="https://github.com/benull/Resource/raw/master/psnet5.png" alt="pic5"></p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>•提出了一个新的抄袭服装检索问题</p><p>•建立了新的用于抄袭服装检索的数据集Plagiarism  Fashion</p><p>•提出了一种基于区域表示的多任务网络PS-Net且达到了SOTA</p><p>•PS-Net还可以用于传统的服装检索和关键点估计任务</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;Which-Is-Plagiarism-Fashion-Image-Retrieval-Based-on-Regional-Representation-for-Design-Protection&quot;&gt;&lt;a href=&quot;#Which-Is-Plagiarism-Fa
-      
-    
-    </summary>
-    
-    
-      <category term="Paper" scheme="http://yoursite.com/categories/Paper/"/>
-    
-    
-      <category term="Paper" scheme="http://yoursite.com/tags/Paper/"/>
-    
-      <category term="Retrieval" scheme="http://yoursite.com/tags/Retrieval/"/>
     
   </entry>
   

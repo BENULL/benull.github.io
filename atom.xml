@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-06-30T13:38:01.693Z</updated>
+  <updated>2021-07-27T14:35:04.812Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Test</title>
+    <link href="http://yoursite.com/2021/07/27/Test/"/>
+    <id>http://yoursite.com/2021/07/27/Test/</id>
+    <published>2021-07-27T12:58:22.000Z</published>
+    <updated>2021-07-27T14:35:04.812Z</updated>
+    
+    <content type="html"><![CDATA[<p><style type="text/css"><br>.book_label{<br>-webkit-text-size-adjust: 100%;<br>-webkit-tap-highlight-color: rgba(0,0,0,0);<br>—antd-wave-shadow-color: #25b864;<br>—scroll-bar: 0;<br>font-variant: tabular-nums;<br>font-feature-settings: “tnum”;<br>-webkit-font-smoothing: antialiased;<br>-webkit-box-direction: normal;<br>word-break: break-word;<br>word-wrap: break-word;<br>font-family: ‘Chinese Quote’, ‘Segoe UI’, Roboto, ‘PingFang SC’, ‘Hiragino Sans GB’, ‘Microsoft YaHei’, ‘Helvetica Neue’, Helvetica, Arial, sans-serif;<br>—link-color: #096DD9;<br>letter-spacing: normal;<br>text-indent: 0;<br>box-sizing: border-box;<br>white-space: nowrap;<br>border-radius: 4px;<br>overflow: hidden;<br>text-overflow: ellipsis;<br>font-size: 12px;<br>line-height: 14px;<br>padding: 0 3px;<br>border: 2px solid #fff;<br>background: rgb(255, 232, 230);<br>color: rgb(130, 0, 20);<br>opacity: 1;<br>}</style><br><span class="book_lable">挪威的森林</span><br><span class="label success">挪威的森林</span></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;style type=&quot;text/css&quot;&gt;&lt;br&gt;.book_label{&lt;br&gt;-webkit-text-size-adjust: 100%;&lt;br&gt;-webkit-tap-highlight-color: rgba(0,0,0,0);&lt;br&gt;—antd-wave-s
+      
+    
+    </summary>
+    
+    
+      <category term="Python" scheme="http://yoursite.com/categories/Python/"/>
+    
+    
+      <category term="Python" scheme="http://yoursite.com/tags/Python/"/>
+    
+  </entry>
   
   <entry>
     <title>记一次大数据挑战赛</title>
@@ -540,34 +566,6 @@
       <category term="AI" scheme="http://yoursite.com/tags/AI/"/>
     
       <category term="SVM" scheme="http://yoursite.com/tags/SVM/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>分类算法评估指标</title>
-    <link href="http://yoursite.com/2020/11/05/%E5%88%86%E7%B1%BB%E7%AE%97%E6%B3%95%E7%9A%84%E8%AF%84%E4%BB%B7/"/>
-    <id>http://yoursite.com/2020/11/05/%E5%88%86%E7%B1%BB%E7%AE%97%E6%B3%95%E7%9A%84%E8%AF%84%E4%BB%B7/</id>
-    <published>2020-11-05T06:26:23.000Z</published>
-    <updated>2020-11-05T06:26:03.282Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="分类算法评估指标"><a href="#分类算法评估指标" class="headerlink" title="分类算法评估指标"></a>分类算法评估指标</h1><h2 id="精度（Accuracy）"><a href="#精度（Accuracy）" class="headerlink" title="精度（Accuracy）"></a>精度（Accuracy）</h2><p>即正确预测的正反例数 /预测总数</p><p>对于样例集D,分类错误率定义为</p><script type="math/tex; mode=display">E(f ; D)=\frac{1}{m} \sum_{i=1}^{m} \mathbb{I}\left(f\left(\boldsymbol{x}_{i}\right) \neq y_{i}\right)</script><p>精度则定义为</p><script type="math/tex; mode=display">\begin{aligned}\operatorname{acc}(f ; D) &=\frac{1}{m} \sum_{i=1}^{m} \mathbb{I}\left(f\left(\boldsymbol{x}_{i}\right)=y_{i}\right) \\&=1-E(f ; D)\end{aligned}</script><ul><li><p>对于样本类别数量严重不均衡的情况（skewed)不能用精度指标来衡量</p><p>例如：有A类1000个，B类5个，如果我把这1005个样本都预测成A类，正确率=1000/1005=99.5%</p></li><li><p>对于有倾向性的问题，往往不能用精度指标来衡量</p><p>例如：判断这个病人是不是病危，如果不是病危错误判断为病危，那只是损失一点医务人员的时间和精力，如果是把病危的人判断为非病危状态，那损失的就是一条人命</p></li></ul><p>对于以上两种情况，单纯根据Accuracy来衡量算法的优劣已经失效，这个时候就需要对目标变量的真实值和预测值做更深入的分析</p><h2 id="混淆矩阵（confusion-matrix）"><a href="#混淆矩阵（confusion-matrix）" class="headerlink" title="混淆矩阵（confusion matrix）"></a>混淆矩阵（confusion matrix）</h2><p>对于二分类问题，可将样例根据其真实类别与学习器预测类别的组合划分为</p><ul><li><p>真正例（True Positive)</p></li><li><p>假正例（False Positive)</p></li><li>真反例（True Negative）</li><li>假反例（False Negative）</li></ul><p>分类结果的混淆矩阵如下</p><div class="table-container"><table><thead><tr><th></th><th>预测值0</th><th>预测值1</th></tr></thead><tbody><tr><td>真实值0</td><td>TN</td><td>FP</td></tr><tr><td>真实值1</td><td>FN</td><td>TP</td></tr></tbody></table></div><h2 id="精准率（precision）"><a href="#精准率（precision）" class="headerlink" title="精准率（precision）"></a>精准率（precision）</h2><script type="math/tex; mode=display">\text {precision}=\frac{T P}{T P+F P}</script><p>精准率就是预测为正例的那些数据里预测正确的数据个数</p><h2 id="召回率（recall）"><a href="#召回率（recall）" class="headerlink" title="召回率（recall）"></a>召回率（recall）</h2><script type="math/tex; mode=display">\text {recall}=\frac{T P}{T P+F N}</script><p>召回率就是真实为正例的那些数据里预测正确的数据个数</p><p>精准率和查全率是一对矛盾的度量，一般来说，精准率高时，召回率则偏低；而召回率高时，精准率则偏低</p><h2 id="F1-Score"><a href="#F1-Score" class="headerlink" title="F1 Score"></a>F1 Score</h2><p>F1 Score同时关注精准率和召回率，是precision 和 recall 的调和平均值</p><p>它的值更接近于Precision与Recall中较小的值</p><script type="math/tex; mode=display">\frac{1}{F 1}=\frac{1}{2}\left(\frac{1}{\text {precision}}+\frac{1}{\text {recall}}\right)</script><script type="math/tex; mode=display">F 1=\frac{2 \cdot \text {precision } \cdot \text { recall}}{\text {precision }+\text {recall}}</script><h2 id="PR曲线"><a href="#PR曲线" class="headerlink" title="PR曲线"></a>PR曲线</h2><p>根据学习器的预测结果对样例进行排序, 排在前面的是学习器认为“最可能”是正例的样本, 排在最后的则是学习器认为“最 不可能”是正例的样本. 按此顺序逐个把样本作为正例进行预测, 则每次可以计算出当前的精准率、召回率</p><p>以精准率为纵轴、召回率为横轴作图, 就得到了精准率-召回率曲线, 简称“P-R曲线”，显示该曲线的图称为“P-R图”</p><p><img src="https://github.com/benull/Resource/raw/master/ev1.png" alt="ev1"></p><p>与ROC曲线左上凸效果好不同的是，PR曲线是右上凸效果越好</p><p>若一个学习器的P-R曲线被另一个学习器的曲线完全包住，则可断言后者的性能优于前者</p><h2 id="ROC曲线"><a href="#ROC曲线" class="headerlink" title="ROC曲线"></a>ROC曲线</h2><p>ROC(Receiver Operating Characteristic)受试者工作特性曲线</p><p>True Postitve Rate(真正例率)：正样本中被预测对比例</p><script type="math/tex; mode=display">\text {TPR}=\frac{TP}{TP+FN}</script><p>False Positive Rate(假正例率)：负样本被预测错的比例</p><script type="math/tex; mode=display">\text {FPR}=\frac{FP}{TN+FP}</script><p>ROC是一个以TPR为纵坐标，FPR为横坐标构造出来的一幅图</p><p><img src="https://github.com/benull/Resource/raw/master/ev2.png" alt="ev2"></p><p>在ROC空间，ROC曲线越凸向左上方向效果越好，因为这说明精确率高且覆盖率大</p><p>进行学习器的比较时, 与 P-R 图相似, 若一个学习器的 ROC 曲线被另一 个学习器的曲线完全“包住”, 则可断言后者的性能优于前者; 若两个学习器的 ROC 曲线发生交叉, 则难以一般性地断言两者熟优熟劣. 此时如果一定要进行比较, 则较为合理的判据是比较 ROC曲线下的面积, 即 AUC</p><h2 id="AUC"><a href="#AUC" class="headerlink" title="AUC"></a>AUC</h2><p>AUC（Area Under Curve）是一种模型分类指标，且仅仅是二分类模型的评价指标</p><p>AUC 值为 ROC 曲线所覆盖的区域面积，显然，AUC越大，分类器分类效果越好</p><p>AUC的物理意义正样本的预测结果大于负样本的预测结果的概率。所以AUC反应的是分类器对样本的排序能力。另外值得注意的是，AUC对样本类别是否均衡并不敏感，这也是不均衡样本通常用AUC评价分类器性能的一个原因</p><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://zhuanlan.zhihu.com/p/36305931" target="_blank" rel="noopener">机器学习评估指标</a></p><p>机器学习-周志华</p><p><a href="https://blog.csdn.net/chocolate_chuqi/article/details/81162244" target="_blank" rel="noopener">回顾及总结—评价指标（分类指标)</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;分类算法评估指标&quot;&gt;&lt;a href=&quot;#分类算法评估指标&quot; class=&quot;headerlink&quot; title=&quot;分类算法评估指标&quot;&gt;&lt;/a&gt;分类算法评估指标&lt;/h1&gt;&lt;h2 id=&quot;精度（Accuracy）&quot;&gt;&lt;a href=&quot;#精度（Accuracy）&quot; cla
-      
-    
-    </summary>
-    
-    
-      <category term="AI" scheme="http://yoursite.com/categories/AI/"/>
-    
-    
-      <category term="AI" scheme="http://yoursite.com/tags/AI/"/>
-    
-      <category term="机器学习" scheme="http://yoursite.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   

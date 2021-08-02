@@ -410,6 +410,27 @@
   </url>
   
   <url>
+    <loc>http://yoursite.com/tags/MIX/</loc>
+    <lastmod>2021-08-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/tags/Paper/</loc>
+    <lastmod>2021-08-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/tags/ActionRecognition/</loc>
+    <lastmod>2021-08-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/tags/Algorithms/</loc>
     <lastmod>2021-08-02</lastmod>
     <changefreq>daily</changefreq>
@@ -431,20 +452,6 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/MIX/</loc>
-    <lastmod>2021-08-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/tags/Paper/</loc>
-    <lastmod>2021-08-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/tags/ImageInpainting/</loc>
     <lastmod>2021-08-02</lastmod>
     <changefreq>daily</changefreq>
@@ -460,27 +467,6 @@
   
   <url>
     <loc>http://yoursite.com/tags/MySQL/</loc>
-    <lastmod>2021-08-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/tags/ActionRecognition/</loc>
-    <lastmod>2021-08-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/tags/Hibernate/</loc>
-    <lastmod>2021-08-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/tags/Anotation/</loc>
     <lastmod>2021-08-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -515,6 +501,20 @@
   </url>
   
   <url>
+    <loc>http://yoursite.com/tags/Hibernate/</loc>
+    <lastmod>2021-08-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/tags/Anotation/</loc>
+    <lastmod>2021-08-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/tags/AI/</loc>
     <lastmod>2021-08-02</lastmod>
     <changefreq>daily</changefreq>
@@ -536,13 +536,6 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/Scala/</loc>
-    <lastmod>2021-08-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/tags/Project/</loc>
     <lastmod>2021-08-02</lastmod>
     <changefreq>daily</changefreq>
@@ -557,7 +550,7 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/Spark/</loc>
+    <loc>http://yoursite.com/tags/Scala/</loc>
     <lastmod>2021-08-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -578,7 +571,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/Ubuntu/</loc>
+    <loc>http://yoursite.com/tags/Spark/</loc>
+    <lastmod>2021-08-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/tags/Transformer/</loc>
     <lastmod>2021-08-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -586,6 +586,13 @@
   
   <url>
     <loc>http://yoursite.com/tags/KNN/</loc>
+    <lastmod>2021-08-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/tags/Ubuntu/</loc>
     <lastmod>2021-08-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -662,13 +669,6 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/%E5%93%88%E5%A4%AB%E6%9B%BC%E7%BC%96%E7%A0%81/</loc>
-    <lastmod>2021-08-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2021-08-02</lastmod>
     <changefreq>daily</changefreq>
@@ -677,6 +677,13 @@
   
   <url>
     <loc>http://yoursite.com/tags/Q-Learning/</loc>
+    <lastmod>2021-08-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/tags/%E5%93%88%E5%A4%AB%E6%9B%BC%E7%BC%96%E7%A0%81/</loc>
     <lastmod>2021-08-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -711,28 +718,7 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2021-08-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/</loc>
-    <lastmod>2021-08-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/tags/CNN/</loc>
-    <lastmod>2021-08-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/tags/Transformer/</loc>
     <lastmod>2021-08-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -745,17 +731,24 @@
     <priority>0.6</priority>
   </url>
   
-
-  
   <url>
-    <loc>http://yoursite.com/categories/Python/</loc>
+    <loc>http://yoursite.com/tags/%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2021-08-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://yoursite.com/categories/Algorithms/</loc>
+    <loc>http://yoursite.com/tags/CNN/</loc>
+    <lastmod>2021-08-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+
+  
+  <url>
+    <loc>http://yoursite.com/categories/Python/</loc>
     <lastmod>2021-08-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -776,6 +769,13 @@
   </url>
   
   <url>
+    <loc>http://yoursite.com/categories/Algorithms/</loc>
+    <lastmod>2021-08-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/categories/Linux/</loc>
     <lastmod>2021-08-02</lastmod>
     <changefreq>daily</changefreq>
@@ -783,14 +783,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/categories/Web/</loc>
+    <loc>http://yoursite.com/categories/BigData/</loc>
     <lastmod>2021-08-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://yoursite.com/categories/BigData/</loc>
+    <loc>http://yoursite.com/categories/Web/</loc>
     <lastmod>2021-08-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

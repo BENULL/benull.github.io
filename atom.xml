@@ -320,6 +320,34 @@
   </entry>
   
   <entry>
+    <title>读书笔记——如何有效阅读一本书</title>
+    <link href="http://yoursite.com/2021/02/15/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E5%A6%82%E4%BD%95%E6%9C%89%E6%95%88%E9%98%85%E8%AF%BB%E4%B8%80%E6%9C%AC%E4%B9%A6/"/>
+    <id>http://yoursite.com/2021/02/15/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E5%A6%82%E4%BD%95%E6%9C%89%E6%95%88%E9%98%85%E8%AF%BB%E4%B8%80%E6%9C%AC%E4%B9%A6/</id>
+    <published>2021-02-15T10:28:29.000Z</published>
+    <updated>2021-08-08T14:47:09.488Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="https://images-cn.ssl-images-amazon.cn/images/I/414i5iEux4L.jpg" align="center"></p><blockquote><p>作者: <a href="https://book.douban.com/author/1101026/" target="_blank" rel="noopener">[日本] 奥野宣之</a><br>出版社: 江西人民出版社<br>出品方: <a href="https://book.douban.com/series/39051?brand=1" target="_blank" rel="noopener">后浪</a><br>副标题: 超实用笔记读书法<br>原作名: 読書は1冊のノートにまとめなさい<br>译者: <a href="https://book.douban.com/search/张晶晶" target="_blank" rel="noopener">张晶晶</a><br>出版年: 2016-6<br>ISBN: 9787210082972</p></blockquote><div class="note info"><p>210215</p></div><blockquote class="blockquote-center"><p>读书时获得的感想正是原创思考的源泉。</p></blockquote><blockquote class="blockquote-center"><p>对比书评和自己的感想，可以让后者变得不那么绝对化。</p></blockquote><blockquote class="blockquote-center"><p>亚瑟·叔本华在《论读书》中写道：“如果你觉得读书就是为了模仿别人的想法，那么这是思想上的懒惰。请丢开书本自己思考。”</p></blockquote><blockquote class="blockquote-center"><p>积极输出促进思想内化，即使掌握再多信息，如果不去积极输出，也无法形成知识体系。</p></blockquote><blockquote class="blockquote-center"><p>漫无目的地与人说话时，虽然说的内容是支离破碎的，但在阐述的过程中，语言会不断得到整理，思维也会逐渐清晰。</p></blockquote><blockquote class="blockquote-center"><p>浪费时间不算什么，但请不要浪费人生。</p></blockquote><blockquote class="blockquote-center"><p>创意源自既有信息重组</p></blockquote><blockquote class="blockquote-center"><p>经得起时光洗礼的书一定有流芳百世的价值。</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;img src=&quot;https://images-cn.ssl-images-amazon.cn/images/I/414i5iEux4L.jpg&quot; align=&quot;center&quot;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者: &lt;a href=&quot;https://book.
+      
+    
+    </summary>
+    
+    
+      <category term="Reading" scheme="http://yoursite.com/categories/Reading/"/>
+    
+    
+      <category term="Reading" scheme="http://yoursite.com/tags/Reading/"/>
+    
+  </entry>
+  
+  <entry>
     <title>基于Q-Learning 的FlappyBird AI</title>
     <link href="http://yoursite.com/2020/12/27/%E5%9F%BA%E4%BA%8EQ-Learning%20%E7%9A%84FlappyBird%20AI/"/>
     <id>http://yoursite.com/2020/12/27/%E5%9F%BA%E4%BA%8EQ-Learning%20%E7%9A%84FlappyBird%20AI/</id>
@@ -540,32 +568,6 @@
       <category term="crawler" scheme="http://yoursite.com/tags/crawler/"/>
     
       <category term="Scrapy" scheme="http://yoursite.com/tags/Scrapy/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>使用crontab完成定时任务</title>
-    <link href="http://yoursite.com/2020/11/23/%E4%BD%BF%E7%94%A8crontab%E5%AE%8C%E6%88%90%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/"/>
-    <id>http://yoursite.com/2020/11/23/%E4%BD%BF%E7%94%A8crontab%E5%AE%8C%E6%88%90%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/</id>
-    <published>2020-11-22T17:34:39.000Z</published>
-    <updated>2020-11-22T17:34:11.383Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="使用crontab完成定时任务"><a href="#使用crontab完成定时任务" class="headerlink" title="使用crontab完成定时任务"></a>使用crontab完成定时任务</h1><p>crond是linux下用来周期性的执行某种任务或等待处理某些事件的一个守护进程，与windows下的计划任务类似，当安装完成操作系统后，默认会安装此服务工具，并且会自动启动crond进程，crond进程每分钟会定期检查是否有要执行的任务，如果有要执行的任务，则自动执行该任务</p><h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">usage:  crontab [-u user] file</span><br><span class="line">        crontab [-u user] [ -e | -l | -r ]</span><br><span class="line">        -e      (执行文字编辑器来设定时程表，内定的文字编辑器是 vi)</span><br><span class="line">        -l      (列出user的时间表)</span><br><span class="line">        -r      (删除user的时间表)</span><br></pre></td></tr></table></figure><p>root用户的任务调度操作可以通过<code>crontab –u root –e</code>来设置，也可以将调度任务直接写入<code>/etc/crontab</code>文件</p><h2 id="cron表达式"><a href="#cron表达式" class="headerlink" title="cron表达式"></a>cron表达式</h2><p>cron表达式是一个字符串，包含五个到七个由空格分隔的字段，表示一组时间，通常作为执行某个程序的时间表</p><p>minute  hour  day  month  week  command</p><p>minute： 表示分钟，可以是从0到59之间的任何整数</p><p>hour：表示小时，可以是从0到23之间的任何整数</p><p>day：表示日期，可以是从1到31之间的任何整数</p><p>month：表示月份，可以是从1到12之间的任何整数</p><p>week：表示星期几，可以是从0到7之间的任何整数，这里的0或7代表星期日</p><p>command：要执行的命令，可以是系统命令，也可以是自己编写的脚本文件</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">*    *    *    *    * <span class="built_in">command</span></span><br><span class="line">-    -    -    -    -</span><br><span class="line">|    |    |    |    |</span><br><span class="line">|    |    |    |    +----- 星期中星期几 (0 - 7) (星期天 为0)</span><br><span class="line">|    |    |    +---------- 月份 (1 - 12) </span><br><span class="line">|    |    +--------------- 一个月中的第几天 (1 - 31)</span><br><span class="line">|    +-------------------- 小时 (0 - 23)</span><br><span class="line">+------------------------- 分钟 (0 - 59)</span><br></pre></td></tr></table></figure><p>星号（*):代表所有可能的值，如month字段为星号，则表示每月都执行该命令操作</p><p>逗号（,):可以用逗号隔开的值指定一个列表范围，例如，“1,2,5,7,8,9”</p><p>中杠（-):可以用整数之间的中杠表示一个整数范围，例如“2-6”表示“2,3,4,5,6”</p><p>正斜线（/):可以用正斜线指定时间的间隔频率，例如“*/2”表示每两小时执行一次</p><h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><ol><li>每一分钟执行一次 /bin/ls</li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* * * * * /bin/ls</span><br></pre></td></tr></table></figure><ol><li>在 12 月内, 每天的早上 6 点到 12 点，每隔 3 个小时 0 分钟执行一次 <code>/usr/bin/backup</code></li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 6-12/3 * 12 * /usr/bin/backup</span><br></pre></td></tr></table></figure><ol><li>每天22：50关闭ssh服务</li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">50 22 * * * /sbin/service sshd stop</span><br></pre></td></tr></table></figure><ol><li>在 <code>/etc/crontab</code> 中添加环境变量，在可执行命令之前添加命令 <code>. /etc/profile;/bin/sh</code>，使得环境变量生效</li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">20 03 * * * . /etc/profile;/bin/sh test.sh</span><br></pre></td></tr></table></figure><h2 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h2><ol><li>crontab有2种编辑方式：直接编辑/etc/crontab文件与crontab –e，其中/etc/crontab里的计划任务是系统中的计划任务，而用户的计划任务需要通过crontab –e来编辑</li><li>crontab中的command尽量使用绝对路径，否则会经常因为路径错误导致任务无法执行</li><li>新创建的 cron 任务不会马上执行，至少要过 2 分钟后才可以，可以重启 cron 来马上执行</li><li>%在crontab文件中表示换行，因此假如脚本或命令含有%,需要使用\%来进行转义</li></ol><h3 id="Mac-下使用crontab遇到的问题"><a href="#Mac-下使用crontab遇到的问题" class="headerlink" title="Mac 下使用crontab遇到的问题"></a>Mac 下使用crontab遇到的问题</h3><p>我有一个Python爬虫脚本，在命令行时可以正常工作，但在crontab下报错</p><p><strong>can’t open file …  [Errno 1] Operation not permitted</strong></p><p>cron表达式如下</p><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">30</span> <span class="number">7</span> * * * /usr/local/bin/python3 script.py &gt;&gt; script.log <span class="number">2</span>&gt;&amp;<span class="number">1</span></span><br></pre></td></tr></table></figure><p>尝试了许多不同的方法，包括尝试过赋予文件权限，以root用户身份创建cron作业，不同的Python路径，都不能正常运行</p><p>最后在Stack Overflow找到解决方案</p><p>赋予<code>cron</code>全磁盘访问权限，方法如下</p><ol><li>系统偏好设置-&gt;安全和隐私-&gt;完整磁盘访问</li><li><p>解除锁定以允许更改</p></li><li><p>单击 +</p></li><li>单击Command + Shift + G输入<code>/ usr / sbin</code></li><li>找到<code>cron</code> 添加</li></ol><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.runoob.com/linux/linux-comm-crontab.html" target="_blank" rel="noopener">Linux crontab 命令</a></p><p><a href="https://www.linuxprobe.com/how-to-crontab.html" target="_blank" rel="noopener">crontab用法与实例</a></p><p><a href="https://www.cnblogs.com/ftl1012/p/crontab.html" target="_blank" rel="noopener">Linux crontab命令详解</a></p><p><a href="https://stackoverflow.com/questions/58844669/trying-to-run-a-python-script-with-cron-getting-errno-1-operation-not-permitt/62152555#62152555" target="_blank" rel="noopener">Trying to run a Python script with cron  Operation not permitted</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;使用crontab完成定时任务&quot;&gt;&lt;a href=&quot;#使用crontab完成定时任务&quot; class=&quot;headerlink&quot; title=&quot;使用crontab完成定时任务&quot;&gt;&lt;/a&gt;使用crontab完成定时任务&lt;/h1&gt;&lt;p&gt;crond是linux下用来周期性的
-      
-    
-    </summary>
-    
-    
-      <category term="Linux" scheme="http://yoursite.com/categories/Linux/"/>
-    
-    
-      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
     
   </entry>
   

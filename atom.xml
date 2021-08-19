@@ -67,9 +67,9 @@
       <category term="BigData" scheme="http://yoursite.com/categories/BigData/"/>
     
     
-      <category term="MIX" scheme="http://yoursite.com/tags/MIX/"/>
-    
       <category term="Python" scheme="http://yoursite.com/tags/Python/"/>
+    
+      <category term="MIX" scheme="http://yoursite.com/tags/MIX/"/>
     
       <category term="BigData" scheme="http://yoursite.com/tags/BigData/"/>
     

@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Python,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="BENULL" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="[Python] MQTT介绍与使用MQTT协议MQTT（Message Queuing Telemetry Transport，消息队列遥测传输协议），是一种基于发布/订阅（publish/subscribe）模式的”轻量级”通讯协议，该协议构建于TCP/IP协议上，由IBM在1999年发布。MQTT最大优点在于，可以以极少的代码和有限的带宽，为连接远程设备提供实时可靠的消息服务。作为一种低开销">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MQTT介绍与使用">
+<meta property="og:url" content="http://yoursite.com/2021/08/02/MQTT介绍与使用/index.html">
+<meta property="og:site_name" content="BENULL">
+<meta property="og:description" content="[Python] MQTT介绍与使用MQTT协议MQTT（Message Queuing Telemetry Transport，消息队列遥测传输协议），是一种基于发布/订阅（publish/subscribe）模式的”轻量级”通讯协议，该协议构建于TCP/IP协议上，由IBM在1999年发布。MQTT最大优点在于，可以以极少的代码和有限的带宽，为连接远程设备提供实时可靠的消息服务。作为一种低开销">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/49209688987244b0a8883dfbb5c171d7.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://static.emqx.net/images/mdt40vcf7ebdrxohghlzwpdyr4u9494l.png">
+<meta property="og:image" content="https://static.emqx.net/images/7be0606fdbb16f93359429dba0cc3e6e.png">
+<meta property="og:updated_time" content="2021-08-21T05:22:51.291Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MQTT介绍与使用">
+<meta name="twitter:description" content="[Python] MQTT介绍与使用MQTT协议MQTT（Message Queuing Telemetry Transport，消息队列遥测传输协议），是一种基于发布/订阅（publish/subscribe）模式的”轻量级”通讯协议，该协议构建于TCP/IP协议上，由IBM在1999年发布。MQTT最大优点在于，可以以极少的代码和有限的带宽，为连接远程设备提供实时可靠的消息服务。作为一种低开销">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/49209688987244b0a8883dfbb5c171d7.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2021/08/02/MQTT介绍与使用/">
+
+
+
+
+
+  <title>MQTT介绍与使用 | BENULL</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"><a href="https://github.com/BENULL" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">BENULL</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">tomorrow is another day</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-movies">
+          <a href="/movies/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-film"></i> <br>
+            
+            观影
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br>
+            
+            阅读
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/08/02/MQTT介绍与使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="BENULL">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BENULL">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">MQTT介绍与使用</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-02T13:22:25+08:00">
+                2021-08-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,272字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  9 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Python-MQTT介绍与使用"><a href="#Python-MQTT介绍与使用" class="headerlink" title="[Python] MQTT介绍与使用"></a>[Python] MQTT介绍与使用</h1><h2 id="MQTT协议"><a href="#MQTT协议" class="headerlink" title="MQTT协议"></a>MQTT协议</h2><p>MQTT（Message Queuing Telemetry Transport，消息队列遥测传输协议），是一种基于发布/订阅（publish/subscribe）模式的”轻量级”通讯协议，该协议构建于TCP/IP协议上，由IBM在1999年发布。MQTT最大优点在于，可以以极少的代码和有限的带宽，为连接远程设备提供实时可靠的消息服务。作为一种低开销、低带宽占用的即时通讯协议，使其在物联网、小型设备、移动应用等方面有较广泛的应用。</p>
+<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ul>
+<li>开放消息协议，简单易实现</li>
+<li>发布订阅模式，一对多消息发布</li>
+<li>基于TCP/IP网络连接,提供有序，无损，双向连接。</li>
+<li>1字节固定报头，2字节心跳报文，最小化传输开销和协议交换，有效减少网络流量。</li>
+<li>消息QoS支持，可靠传输保证</li>
+</ul>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>实现MQTT协议需要客户端和服务器端通讯完成，在通讯过程中，MQTT协议中有三种身份：发布者（Publish）、代理（Broker）（服务器）、订阅者（Subscribe）。其中，消息的发布者和订阅者都是客户端，消息代理是服务器，消息发布者可以同时是订阅者。</p>
+<p>MQTT传输的消息分为：主题（Topic）和负载（payload）两部分：</p>
+<ul>
+<li><p>（1）Topic，可以理解为消息的类型，订阅者订阅（Subscribe）后，就会收到该主题的消息内容（payload）</p>
+</li>
+<li><p>（2）payload，可以理解为消息的内容，是指订阅者具体要使用的内容。</p>
+</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/49209688987244b0a8883dfbb5c171d7.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="MQTT代理"><a href="#MQTT代理" class="headerlink" title="MQTT代理"></a>MQTT代理</h2><p><a href="https://mosquitto.org/download/" target="_blank" rel="noopener">mosquitto</a>是一款开源的MQTT消息代理（服务器）软件，提供轻量级的，支持可发布/可订阅的的消息推送模式，使设备对设备之间的短消息通信变得简单，比如现在应用广泛的低功耗传感器，手机、嵌入式计算机、微型控制器等移动设备。</p>
+<ul>
+<li>安装mosquitto</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install mosquitto -y</span><br></pre></td></tr></table></figure>
+<ul>
+<li>安装mosquitto命令行客户端</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install mosquitto-clients -y</span><br></pre></td></tr></table></figure>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>发布使用mosquitto_pub命令,订阅使用mosquitto_sub命令,常用参数如下</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">-h</td>
+<td style="text-align:center">服务器主机，默认localhost</td>
+</tr>
+<tr>
+<td style="text-align:center">-t</td>
+<td style="text-align:center">指定主题</td>
+</tr>
+<tr>
+<td style="text-align:center">-u</td>
+<td style="text-align:center">用户名</td>
+</tr>
+<tr>
+<td style="text-align:center">-P</td>
+<td style="text-align:center">密码</td>
+</tr>
+<tr>
+<td style="text-align:center">-i</td>
+<td style="text-align:center">客户端id，唯一</td>
+</tr>
+<tr>
+<td style="text-align:center">-m</td>
+<td style="text-align:center">发布的消息内容</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mosquitto_sub -h localhost -t "test/#" -u user2 -P 123456 -i "client1"</span><br></pre></td></tr></table></figure>
+<h4 id="订阅"><a href="#订阅" class="headerlink" title="订阅"></a>订阅</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mosquitto_pub -h localhost -t "test/abc" -u user1 -P 123456 -i "client3" -m "How are you?"</span><br></pre></td></tr></table></figure>
+<h2 id="MQTT使用"><a href="#MQTT使用" class="headerlink" title="MQTT使用"></a>MQTT使用</h2><h3 id="MQTT-客户端工具"><a href="#MQTT-客户端工具" class="headerlink" title="MQTT 客户端工具"></a>MQTT 客户端工具</h3><p>MQTT 客户端工具常用于建立与 MQTT 服务器 的连接，进行主题订阅、消息收发等操作</p>
+<ul>
+<li><p><a href="https://mqttx.app/zh" target="_blank" rel="noopener">MQTT X</a> 是由 <a href="https://www.emqx.com/zh" target="_blank" rel="noopener">EMQ</a> 开源的一款跨平台 <a href="https://www.emqx.com/zh/mqtt/mqtt5" target="_blank" rel="noopener">MQTT 5.0</a> 桌面测试客户端，支持 macOS，Linux，Windows</p>
+<p><img src="https://static.emqx.net/images/mdt40vcf7ebdrxohghlzwpdyr4u9494l.png" alt="MQTTX" style="zoom: 25%;"></p>
+<p><strong>项目地址：</strong> <a href="https://mqttx.app/zh" target="_blank" rel="noopener">MQTT X 官网</a></p>
+<p><strong>下载地址：</strong> <a href="https://github.com/emqx/MQTTX/releases" target="_blank" rel="noopener">MQTT X GitHub</a></p>
+</li>
+</ul>
+<ul>
+<li><p>mqtt-spy是 Eclipse Paho 和 Eclipse IoT 的一部分，它通过直接启动 JAR 文件在 Java 8 和 JavaFX 之上运行，mqtt-spy 有一种很好的交互方式来展现基本的 MQTT发布/订阅机制。</p>
+<p><strong>项目地址：</strong> <a href="https://github.com/eclipse/paho.mqtt-spy" target="_blank" rel="noopener">GitHub mqtt-spy</a></p>
+<p><strong>下载地址：</strong> <a href="https://github.com/eclipse/paho.mqtt-spy/releases" target="_blank" rel="noopener">https://github.com/eclipse/paho.mqtt-spy/releases</a></p>
+</li>
+</ul>
+<ul>
+<li><p>MQTT Explorer 是一个全面且易于使用的 MQTT 客户端，是目前比较流行的 MQTT 桌面测试客户端之一，基于它提供有关 MQTT Topics 的结构化预览展示，并使其在对 MQTT Broker 上的设备/服务的使用变得非常简单。目前基于 CC BY-NC-ND 4.0 协议开源，用户可随意查看源码和使用。</p>
+<p><img src="https://static.emqx.net/images/7be0606fdbb16f93359429dba0cc3e6e.png" alt="explorer" style="zoom:25%;"></p>
+<p><strong>项目地址：</strong> <a href="https://github.com/thomasnordquist/MQTT-Explorer" target="_blank" rel="noopener">Github MQTT-Explorer</a></p>
+<p><strong>下载地址：</strong> <a href="https://mqtt-explorer.com/" target="_blank" rel="noopener">https://mqtt-explorer.com/</a></p>
+</li>
+</ul>
+<h3 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h3><p>使用 <strong>paho-mqtt</strong> 库 ，实现客户端与 MQTT 服务器的连接、订阅、取消订阅、收发消息等功能</p>
+<ul>
+<li>使用connect()/connect_async() 连接MQTT代理</li>
+<li>频繁的调用loop()来维持与MQTT代理之间的流量或者使用loop_start()来设置一个线程为你调用loop()或者在一个阻塞的函数中调用loop_forever()来为你调用loop()</li>
+<li>使用subscribe()订阅一个主题（topic）并接受消息（messages）</li>
+<li>使用publish()来发送消息</li>
+<li>使用disconnect()来断开与MQTT代理的连接</li>
+</ul>
+<p><strong>详细见<a href="https://pypi.python.org/pypi/paho-mqtt" target="_blank" rel="noopener">paho-mqtt项目描述</a></strong></p>
+<h4 id="回调-Callbacks"><a href="#回调-Callbacks" class="headerlink" title="回调 Callbacks"></a>回调 Callbacks</h4><ul>
+<li>on_connect 当代理响应连接请求时调用</li>
+<li>on_disconnect   当与代理断开连接时调用</li>
+<li>on_message 当收到关于客户订阅的主题的消息时调用。</li>
+<li>on_publish 当使用publish()发送的消息已经传输到代理时被调用</li>
+<li>on_subscribe 当代理响应订阅请求时被调用。</li>
+<li>on_unsubscribe 当代理响应取消订阅请求时调用</li>
+<li>on_log 当客户端有日志信息时调用</li>
+</ul>
+<h4 id="Client"><a href="#Client" class="headerlink" title="Client"></a>Client</h4><ul>
+<li><p>构造函数<br><code>Client(client_id=&quot;&quot;, clean_session=True, userdata=None, protocol=MQTTv311, transport=&quot;tcp&quot;)</code></p>
+<p>| 参数          | 含义                                                         |<br>| ——————- | —————————————————————————————— |<br>| client_id     | 连接到代理时使用的唯一客户端ID字符串。 如果client_id长度为零或无，则会随机生成一个。 在这种情况下，clean_session参数必须为True。 |<br>| clean_session | 一个决定客户端类型的布尔值。 如果为True，那么代理将在其断开连接时删除有关此客户端的所有信息。 如果为False，则客户端是持久客户端，当客户端断开连接时，订阅信息和排队消息将被保留。 |<br>| userdata      | 用户定义的任何类型的数据作为userdata参数传递给回调函数。 它可能会在稍后使用user_data_set（）函数进行更新。 |<br>| protocol      | 用于此客户端的MQTT协议的版本。 可以是MQTTv31或MQTTv311或MQTT v5.0。 |<br>| transport     | 设置为“websockets”通过WebSockets发送MQTT。 保留默认的“tcp”使用原始TCP。 |</p>
+</li>
+<li><p>reinitialise</p>
+<p><code>reinitialise(client_id=&quot;&quot;, clean_session=True, userdata=None)</code></p>
+<p>reinitialise（）函数将客户端重置为其开始状态，就像它刚刚创建一样。 它采用与Client（）构造函数相同的参数。</p>
+</li>
+<li><p>connect<br>将客户端连接到代理。 这是一个阻塞函数。</p>
+<p><code>connect(host, port=1883, keepalive=60, bind_address=&quot;&quot;)</code></p>
+<p>| 参数         | 含义                                                         |<br>| —————— | —————————————————————————————— |<br>| host         | 远程代理的主机名或IP地址                                     |<br>| port         | 要连接的服务器主机的网络端口。 默认为1883                    |<br>| keepalive    | 与代理通信之间允许的最长时间段（以秒为单位）。 如果没有其他消息正在交换，则它将控制客户端向代理发送ping消息的速率 |<br>| bind_address | 假设存在多个接口，将绑定此客户端的本地网络接口的IP地址       |<br>|              |                                                              |</p>
+</li>
+</ul>
+<h4 id="Publish"><a href="#Publish" class="headerlink" title="Publish"></a>Publish</h4><p>从客户端发送消息给代理<br><code>publish(topic, payload=None, qos=0, retain=False)</code></p>
+<p>消息将会发送给代理，并随后从代理发送到订阅匹配主题的任何客户端</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>topic</td>
+<td>该消息发布的主题</td>
+</tr>
+<tr>
+<td>payload</td>
+<td>要发送的实际消息。如果没有给出，或设置为无，则将使用零长度消息。 传递int或float将导致有效负载转换为表示该数字的字符串。 如果你想发送一个真正的int / float，使用struct.pack（）来创建你需要的负载</td>
+</tr>
+<tr>
+<td>qos</td>
+<td>服务的质量级别</td>
+</tr>
+<tr>
+<td>retain</td>
+<td>如果设置为True，则该消息将被设置为该主题的“最后已知良好”/保留的消息</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>返回以下属性和方法的MQTTMessageInfo<br><strong>rc</strong>:发布的结果</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>内容</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MQTT_ERR_SUCCESS</td>
+<td>成功</td>
+</tr>
+<tr>
+<td>MQTT_ERR_NO_CONN</td>
+<td>客户端当前未连接</td>
+</tr>
+<tr>
+<td>MQTT_ERR_QUEUE_SIZE</td>
+<td>当使用max_queued_messages_set来指示消息既不排队也不发送。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>mid</strong>:发布请求的消息ID。<br>如果mid已定义，则可以通过检查on_publish（）回调中的mid来跟踪发布请求。<br><strong>wait_for_publish()</strong>:函数将阻塞，直到消息发布。 如果消息未排队（rc == MQTT_ERR_QUEUE_SIZE），它将引发ValueError。<br><strong>is_published</strong>:如果消息已发布，is_published返回True。 如果消息未排队（rc == MQTT_ERR_QUEUE_SIZE），它将引发ValueError。</p>
+<blockquote>
+<p>如果主题为无，长度为零或无效（包含通配符），qos不是0,1或2之一，或者有效负载长度大于268435455字节，则会引发ValueError。</p>
+</blockquote>
+<h4 id="Subscribe"><a href="#Subscribe" class="headerlink" title="Subscribe"></a>Subscribe</h4><p><strong>订阅一个或多个主题</strong></p>
+<p><code>subscribe(topic, qos=0</code></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>topic</td>
+<td>一个字符串，指定要订阅的订阅主题</td>
+</tr>
+<tr>
+<td>qos</td>
+<td>期望的服务质量等级。 默认为0。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> paho.mqtt.client <span class="keyword">as</span> mqtt</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line">CONN_CONFIG = &#123;</span><br><span class="line">    <span class="string">'product'</span>: &#123;</span><br><span class="line">        <span class="string">'host'</span>: <span class="string">'mqtt.broker.com'</span>,</span><br><span class="line">        <span class="string">'port'</span>: <span class="number">1883</span>,</span><br><span class="line">        <span class="string">'username'</span>: <span class="string">'username'</span>,</span><br><span class="line">        <span class="string">'password'</span>: <span class="string">'password'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">'dev'</span>: &#123;</span><br><span class="line">        <span class="string">'host'</span>: <span class="string">'127.0.0.1'</span>,</span><br><span class="line">        <span class="string">'port'</span>: <span class="number">1883</span>,</span><br><span class="line">        <span class="string">'username'</span>: <span class="string">'username'</span>,</span><br><span class="line">        <span class="string">'password'</span>: <span class="string">'password'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MQTTClient</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, client_id, profile=<span class="string">'dev'</span>, )</span>:</span></span><br><span class="line">        self.config = CONN_CONFIG[profile]</span><br><span class="line">        self.client_id = client_id</span><br><span class="line">        self.connect_flag = <span class="literal">False</span></span><br><span class="line">        self.client = self.__create_client(client_id)</span><br><span class="line">        self.__connect()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__create_client</span><span class="params">(self, client_id)</span>:</span></span><br><span class="line">        client = mqtt.Client(client_id=client_id)</span><br><span class="line">        client.username_pw_set(self.config[<span class="string">'username'</span>], self.config[<span class="string">'password'</span>])</span><br><span class="line">        client.on_connect = self.__on_connect</span><br><span class="line">        client.on_message = self.__on_message</span><br><span class="line">        client.on_publish = self.__on_publish</span><br><span class="line">        client.on_disconnect = self.__on_disconnect</span><br><span class="line">        <span class="keyword">return</span> client</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__connect</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.client.connect(self.config[<span class="string">'host'</span>], self.config[<span class="string">'port'</span>], <span class="number">60</span>)</span><br><span class="line">        self.client.loop_start()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">publish</span><span class="params">(self, msg)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> self.connect_flag:</span><br><span class="line">            self.__connect()</span><br><span class="line">        payload = dict(data=msg)</span><br><span class="line">        self.client.publish(<span class="string">f'topic'</span>, payload=json.dumps(payload), qos=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__on_connect</span><span class="params">(self, client, userdata, flags, rc)</span>:</span></span><br><span class="line">        self.connect_flag = <span class="literal">True</span></span><br><span class="line">        print(<span class="string">"connected with result code: "</span> + str(rc))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__on_message</span><span class="params">(self, client, userdata, msg)</span>:</span></span><br><span class="line">        print(msg.topic + <span class="string">" "</span> + str(msg.payload))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__on_subscribe</span><span class="params">(self, client, userdata, mid, granted_qos)</span>:</span></span><br><span class="line">        print(<span class="string">'on subscribe: mid='</span> + str(mid))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__on_publish</span><span class="params">(self, client, userdata, mid)</span>:</span></span><br><span class="line">        print(<span class="string">"on publish: mid="</span> + str(mid))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__on_disconnect</span><span class="params">(self, client, userdata, rc)</span>:</span></span><br><span class="line">        self.connect_flag = <span class="literal">False</span></span><br><span class="line">        print(<span class="string">'disconnecting reason '</span> + str(rc))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__del__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.client.disconnect()</span><br></pre></td></tr></table></figure>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.runoob.com/w3cnote/mqtt-intro.html" target="_blank" rel="noopener">MQTT 入门介绍</a><br><a href="http://mqtt.p2hp.com/" target="_blank" rel="noopener">MQTT中文网</a><br><a href="https://www.cnblogs.com/guyk/p/12405938.html" target="_blank" rel="noopener">ubuntu下Mosquitto安装及配置</a><br><a href="https://www.emqx.com/zh/blog/mqtt-client-tools" target="_blank" rel="noopener">常见MQTT 客户端工具比较</a><br><a href="https://blog.csdn.net/weixin_41656968/article/details/80848542#3onmessage" target="_blank" rel="noopener">Python paho-mqtt 模块使用和API分析</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/07/25/读书笔记——消失的13级台阶/" rel="next" title="读书笔记——消失的13级台阶">
+                <i class="fa fa-chevron-left"></i> 读书笔记——消失的13级台阶
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMTE2Ny83NzE2"></div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="BENULL">
+            
+              <p class="site-author-name" itemprop="name">BENULL</p>
+              <p class="site-description motion-element" itemprop="description">tomorrow is another day</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/benull" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:ltobenull@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/u/3169828502" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="ltobenull" target="_blank" title="WeChat">
+                    
+                      <i class="fa fa-fw fa-wechat"></i>WeChat</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://haoyue.pro" title="皓月的BLOG" target="_blank">皓月的BLOG</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.jianshu.com/u/4b8da0db00bf" title="HaloZhang" target="_blank">HaloZhang</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://xz8090.com/" title="xz8090" target="_blank">xz8090</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blog.csdn.net/qq_37054755" title="小鑫-Chen" target="_blank">小鑫-Chen</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Python-MQTT介绍与使用"><span class="nav-number">1.</span> <span class="nav-text">[Python] MQTT介绍与使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#MQTT协议"><span class="nav-number">1.1.</span> <span class="nav-text">MQTT协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#特点"><span class="nav-number">1.1.1.</span> <span class="nav-text">特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原理"><span class="nav-number">1.1.2.</span> <span class="nav-text">原理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MQTT代理"><span class="nav-number">1.2.</span> <span class="nav-text">MQTT代理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用"><span class="nav-number">1.2.1.</span> <span class="nav-text">使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#发布"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">发布</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#订阅"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">订阅</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MQTT使用"><span class="nav-number">1.3.</span> <span class="nav-text">MQTT使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MQTT-客户端工具"><span class="nav-number">1.3.1.</span> <span class="nav-text">MQTT 客户端工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python"><span class="nav-number">1.3.2.</span> <span class="nav-text">Python</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#回调-Callbacks"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">回调 Callbacks</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Client"><span class="nav-number">1.3.2.2.</span> <span class="nav-text">Client</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Publish"><span class="nav-number">1.3.2.3.</span> <span class="nav-text">Publish</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Subscribe"><span class="nav-number">1.3.2.4.</span> <span class="nav-text">Subscribe</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Example"><span class="nav-number">1.3.2.5.</span> <span class="nav-text">Example</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">1.4.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">BENULL</span>
+</div>
+<div class="powered-by">
+</div>
+<!--
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+
+-->
+
+
+  <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+  <span class="post-meta-divider">|</span>
+  <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.json";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

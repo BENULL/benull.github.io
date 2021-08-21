@@ -92,7 +92,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/49209688987244b0a8883dfbb5c171d7.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://static.emqx.net/images/mdt40vcf7ebdrxohghlzwpdyr4u9494l.png">
 <meta property="og:image" content="https://static.emqx.net/images/7be0606fdbb16f93359429dba0cc3e6e.png">
-<meta property="og:updated_time" content="2021-08-21T05:22:51.291Z">
+<meta property="og:updated_time" content="2021-08-21T05:26:12.011Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MQTT介绍与使用">
 <meta name="twitter:description" content="[Python] MQTT介绍与使用MQTT协议MQTT（Message Queuing Telemetry Transport，消息队列遥测传输协议），是一种基于发布/订阅（publish/subscribe）模式的”轻量级”通讯协议，该协议构建于TCP/IP协议上，由IBM在1999年发布。MQTT最大优点在于，可以以极少的代码和有限的带宽，为连接远程设备提供实时可靠的消息服务。作为一种低开销">
@@ -404,7 +404,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2,272字
+                  2,269字
                 </span>
               
 
@@ -546,16 +546,48 @@
 <li>on_log 当客户端有日志信息时调用</li>
 </ul>
 <h4 id="Client"><a href="#Client" class="headerlink" title="Client"></a>Client</h4><ul>
-<li><p>构造函数<br><code>Client(client_id=&quot;&quot;, clean_session=True, userdata=None, protocol=MQTTv311, transport=&quot;tcp&quot;)</code></p>
-<p>| 参数          | 含义                                                         |<br>| ——————- | —————————————————————————————— |<br>| client_id     | 连接到代理时使用的唯一客户端ID字符串。 如果client_id长度为零或无，则会随机生成一个。 在这种情况下，clean_session参数必须为True。 |<br>| clean_session | 一个决定客户端类型的布尔值。 如果为True，那么代理将在其断开连接时删除有关此客户端的所有信息。 如果为False，则客户端是持久客户端，当客户端断开连接时，订阅信息和排队消息将被保留。 |<br>| userdata      | 用户定义的任何类型的数据作为userdata参数传递给回调函数。 它可能会在稍后使用user_data_set（）函数进行更新。 |<br>| protocol      | 用于此客户端的MQTT协议的版本。 可以是MQTTv31或MQTTv311或MQTT v5.0。 |<br>| transport     | 设置为“websockets”通过WebSockets发送MQTT。 保留默认的“tcp”使用原始TCP。 |</p>
-</li>
+<li>构造函数<br><code>Client(client_id=&quot;&quot;, clean_session=True, userdata=None, protocol=MQTTv311, transport=&quot;tcp&quot;)</code></li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>client_id</td>
+<td>连接到代理时使用的唯一客户端ID字符串。 如果client_id长度为零或无，则会随机生成一个。 在这种情况下，clean_session参数必须为True。</td>
+</tr>
+<tr>
+<td>clean_session</td>
+<td>一个决定客户端类型的布尔值。 如果为True，那么代理将在其断开连接时删除有关此客户端的所有信息。 如果为False，则客户端是持久客户端，当客户端断开连接时，订阅信息和排队消息将被保留。</td>
+</tr>
+<tr>
+<td>userdata</td>
+<td>用户定义的任何类型的数据作为userdata参数传递给回调函数。 它可能会在稍后使用user_data_set（）函数进行更新。</td>
+</tr>
+<tr>
+<td>protocol</td>
+<td>用于此客户端的MQTT协议的版本。 可以是MQTTv31或MQTTv311或MQTT v5.0。</td>
+</tr>
+<tr>
+<td>transport</td>
+<td>设置为“websockets”通过WebSockets发送MQTT。 保留默认的“tcp”使用原始TCP。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
 <li><p>reinitialise</p>
 <p><code>reinitialise(client_id=&quot;&quot;, clean_session=True, userdata=None)</code></p>
 <p>reinitialise（）函数将客户端重置为其开始状态，就像它刚刚创建一样。 它采用与Client（）构造函数相同的参数。</p>
 </li>
 <li><p>connect<br>将客户端连接到代理。 这是一个阻塞函数。</p>
 <p><code>connect(host, port=1883, keepalive=60, bind_address=&quot;&quot;)</code></p>
-<p>| 参数         | 含义                                                         |<br>| —————— | —————————————————————————————— |<br>| host         | 远程代理的主机名或IP地址                                     |<br>| port         | 要连接的服务器主机的网络端口。 默认为1883                    |<br>| keepalive    | 与代理通信之间允许的最长时间段（以秒为单位）。 如果没有其他消息正在交换，则它将控制客户端向代理发送ping消息的速率 |<br>| bind_address | 假设存在多个接口，将绑定此客户端的本地网络接口的IP地址       |<br>|              |                                                              |</p>
+<p>| 参数         | 含义                                                         |<br>| —————— | —————————————————————————————— |<br>| host         | 远程代理的主机名或IP地址                                     |<br>| port         | 要连接的服务器主机的网络端口。 默认为1883                    |<br>| keepalive    | 与代理通信之间允许的最长时间段（以秒为单位）。 如果没有其他消息正在交换，则它将控制客户端向代理发送ping消息的速率 |<br>| bind_address | 假设存在多个接口，将绑定此客户端的本地网络接口的IP地址       |</p>
 </li>
 </ul>
 <h4 id="Publish"><a href="#Publish" class="headerlink" title="Publish"></a>Publish</h4><p>从客户端发送消息给代理<br><code>publish(topic, payload=None, qos=0, retain=False)</code></p>

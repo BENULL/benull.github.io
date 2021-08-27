@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="Python,">
 
 
 
@@ -81,16 +81,18 @@
 
 
 
-<meta name="description" content="tomorrow is another day">
-<meta property="og:type" content="website">
-<meta property="og:title" content="BENULL">
-<meta property="og:url" content="http://yoursite.com/archives/page/3/index.html">
+<meta name="description" content="[python] ffmpeg-python读取rtsp(tcp方式)问题描述在多路无线摄像头同时接入时，网络不稳定，经常出现雪花屏的问题。参考网上资料，怀疑是网络摄像头默认使用RTSP协议，RTSP下层默认使用UDP传输，而UDP传输是不可靠的，会丢包，所以导致雪花屏。 RTSP使用TCP或者UDP传输，使用TCP还是UDP取决于客户端的SETUP请求。所以尝试将由UDP改为TCP取流。 ope">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ffmpeg-python读取rtsp(tcp方式)">
+<meta property="og:url" content="http://yoursite.com/2021/08/27/ffmpeg-python读取rtsp(tcp方式)/index.html">
 <meta property="og:site_name" content="BENULL">
-<meta property="og:description" content="tomorrow is another day">
+<meta property="og:description" content="[python] ffmpeg-python读取rtsp(tcp方式)问题描述在多路无线摄像头同时接入时，网络不稳定，经常出现雪花屏的问题。参考网上资料，怀疑是网络摄像头默认使用RTSP协议，RTSP下层默认使用UDP传输，而UDP传输是不可靠的，会丢包，所以导致雪花屏。 RTSP使用TCP或者UDP传输，使用TCP还是UDP取决于客户端的SETUP请求。所以尝试将由UDP改为TCP取流。 ope">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-08-27T11:32:58.526Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="BENULL">
-<meta name="twitter:description" content="tomorrow is another day">
+<meta name="twitter:title" content="ffmpeg-python读取rtsp(tcp方式)">
+<meta name="twitter:description" content="[python] ffmpeg-python读取rtsp(tcp方式)问题描述在多路无线摄像头同时接入时，网络不稳定，经常出现雪花屏的问题。参考网上资料，怀疑是网络摄像头默认使用RTSP协议，RTSP下层默认使用UDP传输，而UDP传输是不可靠的，会丢包，所以导致雪花屏。 RTSP使用TCP或者UDP传输，使用TCP还是UDP取决于客户端的SETUP请求。所以尝试将由UDP改为TCP取流。 ope">
 
 
 
@@ -120,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/page/3/">
+  <link rel="canonical" href="http://yoursite.com/2021/08/27/ffmpeg-python读取rtsp(tcp方式)/">
 
 
 
 
 
-  <title>归档 | BENULL</title>
+  <title>ffmpeg-python读取rtsp(tcp方式) | BENULL</title>
   
 
 
@@ -145,7 +147,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"><a href="https://github.com/BENULL" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -301,390 +303,221 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/08/27/ffmpeg-python读取rtsp(tcp方式)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="BENULL">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BENULL">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
-         
+          <h1 class="post-title" itemprop="name headline">ffmpeg-python读取rtsp(tcp方式)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-27T19:32:25+08:00">
+                2021-08-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        好! 目前共计 59 篇日志。 继续努力。
-      </span>
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2020">2020</h1>
-          </div>
-        
-        
 
-        
+          
+            
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/12/09/CRA _for_image_inpanting/" itemprop="url">
+          
+
+          
+            <div class="post-wordcount">
               
-                <span itemprop="name">Contextual Residual Aggregation for Ultra High-Resolution Image Inpainting</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  361字
+                </span>
               
-            </a>
-        
-      </h2>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2020-12-09T18:02:22+08:00" content="2020-12-09">
-          12-09
-        </time>
-      </div>
+              
+                <span class="post-meta-divider">|</span>
+              
 
-    </header>
-  </article>
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2 分钟
+                </span>
+              
+            </div>
+          
 
+          
 
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/11/25/K-means聚类算法/" itemprop="url">
-              
-                <span itemprop="name">K-means聚类算法</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2020-11-25T18:34:22+08:00" content="2020-11-25">
-          11-25
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/11/23/Scrapy豆瓣搜索页爬虫/" itemprop="url">
-              
-                <span itemprop="name">Scrapy豆瓣搜索页爬虫</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2020-11-23T18:07:22+08:00" content="2020-11-23">
-          11-23
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <h1 id="python-ffmpeg-python读取rtsp-tcp方式"><a href="#python-ffmpeg-python读取rtsp-tcp方式" class="headerlink" title="[python] ffmpeg-python读取rtsp(tcp方式)"></a>[python] ffmpeg-python读取rtsp(tcp方式)</h1><h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>在多路无线摄像头同时接入时，网络不稳定，经常出现雪花屏的问题。参考网上资料，怀疑是网络摄像头默认使用RTSP协议，RTSP下层默认使用UDP传输，而UDP传输是不可靠的，会丢包，所以导致雪花屏。</p>
+<p>RTSP使用TCP或者UDP传输，使用TCP还是UDP取决于客户端的SETUP请求。所以尝试将由UDP改为TCP取流。</p>
+<p>opencv-python的videocapture获取rtsp只支持UDP方式，改为用FFmpeg-python以tcp方式获取流</p>
+<p>两种库和方式取流的速度、延迟和稳定性还待测试</p>
+<h2 id="FFmpeg-python"><a href="#FFmpeg-python" class="headerlink" title="FFmpeg-python"></a>FFmpeg-python</h2><p><strong>安装</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install ffmpeg-python</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><a href="https://github.com/kkroening/ffmpeg-python" target="_blank" rel="noopener">Github仓库地址</a></p>
+</li>
+<li><p><a href="https://kkroening.github.io/ffmpeg-python/" target="_blank" rel="noopener">API 文档</a></p>
+</li>
+<li><p><a href="https://github.com/kkroening/ffmpeg-python/tree/master/examples" target="_blank" rel="noopener">使用样例</a></p>
+</li>
+</ul>
+<p><strong>ffmpeg学习资源</strong></p>
+<ul>
+<li><a href="https://ffmpeg.org/" target="_blank" rel="noopener">FFmpeg Homepage</a></li>
+<li><a href="https://ffmpeg.org/ffmpeg.html" target="_blank" rel="noopener">FFmpeg Documentation</a></li>
+<li><a href="https://ffmpeg.org/ffmpeg-filters.html" target="_blank" rel="noopener">FFmpeg Filters Documentation</a></li>
+</ul>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> ffmpeg</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line">camera = <span class="string">'rtsp://admin:1234abcd@192.168.1.64/h264/ch1/main/av_stream'</span></span><br><span class="line"></span><br><span class="line">probe = ffmpeg.probe(camera)</span><br><span class="line">video_stream = next((stream <span class="keyword">for</span> stream <span class="keyword">in</span> probe[<span class="string">'streams'</span>] <span class="keyword">if</span> stream[<span class="string">'codec_type'</span>] == <span class="string">'video'</span>), <span class="literal">None</span>)</span><br><span class="line">width = int(video_stream[<span class="string">'width'</span>])</span><br><span class="line">height = int(video_stream[<span class="string">'height'</span>])</span><br><span class="line"></span><br><span class="line">out = (</span><br><span class="line">    ffmpeg</span><br><span class="line">        .input(camera, rtsp_transport=<span class="string">'tcp'</span>)</span><br><span class="line">        .output(<span class="string">'pipe:'</span>, format=<span class="string">'rawvideo'</span>, pix_fmt=<span class="string">'bgr24'</span>, loglevel=<span class="string">"quiet"</span>, r=<span class="number">25</span>)</span><br><span class="line">        .run_async(pipe_stdout=<span class="literal">True</span>)</span><br><span class="line">)</span><br><span class="line">cnt_empty = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    in_bytes = out.stdout.read(height * width * <span class="number">3</span>)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> in_bytes:</span><br><span class="line">        cnt_empty += <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> cnt_empty &gt; <span class="number">10</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    cnt_empty = <span class="number">0</span></span><br><span class="line">    frame = np.frombuffer(in_bytes, dtype=np.uint8).reshape(height, width, <span class="number">3</span>)</span><br><span class="line">    <span class="comment"># to process frame</span></span><br><span class="line">    cv2.imshow(<span class="string">'test'</span>, frame)</span><br><span class="line">    <span class="keyword">if</span> cv2.waitKey(<span class="number">1</span>) &amp; <span class="number">0xFF</span> == ord(<span class="string">'q'</span>):</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://blog.csdn.net/weixin_39970103/article/details/102484708" target="_blank" rel="noopener">解决摄像头花屏问题</a></p>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/11/23/使用crontab完成定时任务/" itemprop="url">
-              
-                <span itemprop="name">使用crontab完成定时任务</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2020-11-23T01:34:39+08:00" content="2020-11-23">
-          11-23
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/11/17/DDGCN笔记/" itemprop="url">
-              
-                <span itemprop="name">A Dynamic Directed Graph Convolutional Network for Action Recognition(DDGCN)</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2020-11-17T21:12:35+08:00" content="2020-11-17">
-          11-17
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/11/06/支持向量机(SVM)/" itemprop="url">
-              
-                <span itemprop="name">支持向量机(SVM)</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2020-11-06T16:39:23+08:00" content="2020-11-06">
-          11-06
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/11/05/分类算法的评价/" itemprop="url">
-              
-                <span itemprop="name">分类算法评估指标</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2020-11-05T14:26:23+08:00" content="2020-11-05">
-          11-05
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/11/03/PsNet/" itemprop="url">
-              
-                <span itemprop="name">Fashion Image Retrieval Based on Regional Representation for Design Protection</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2020-11-03T21:20:32+08:00" content="2020-11-03">
-          11-03
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/10/30/集成学习/" itemprop="url">
-              
-                <span itemprop="name">集成学习</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2020-10-30T13:01:23+08:00" content="2020-10-30">
-          10-30
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/10/28/决策树/" itemprop="url">
-              
-                <span itemprop="name">决策树</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2020-10-28T23:20:29+08:00" content="2020-10-28">
-          10-28
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/08/15/读书笔记——悉达多/" rel="next" title="读书笔记——悉达多">
+                <i class="fa fa-chevron-left"></i> 读书笔记——悉达多
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/archives/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/6/">6</a><a class="extend next" rel="next" href="/archives/page/4/"><i class="fa fa-angle-right"></i></a>
-  </nav>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -692,6 +525,12 @@
 
 
           
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMTE2Ny83NzE2"></div>
+    </div>
+  
+
 
         </div>
         
@@ -712,8 +551,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -836,6 +684,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#python-ffmpeg-python读取rtsp-tcp方式"><span class="nav-number">1.</span> <span class="nav-text">[python] ffmpeg-python读取rtsp(tcp方式)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题描述"><span class="nav-number">1.1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FFmpeg-python"><span class="nav-number">1.2.</span> <span class="nav-text">FFmpeg-python</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">1.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">2.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -973,6 +837,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
 
   
 
@@ -1001,6 +869,17 @@
 
 
 
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
   
 
 
@@ -1340,26 +1219,6 @@
   
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 

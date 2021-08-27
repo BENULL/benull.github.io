@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-08-22T02:14:43.914Z</updated>
+  <updated>2021-08-27T11:32:58.526Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ffmpeg-python读取rtsp(tcp方式)</title>
+    <link href="http://yoursite.com/2021/08/27/ffmpeg-python%E8%AF%BB%E5%8F%96rtsp(tcp%E6%96%B9%E5%BC%8F)/"/>
+    <id>http://yoursite.com/2021/08/27/ffmpeg-python%E8%AF%BB%E5%8F%96rtsp(tcp%E6%96%B9%E5%BC%8F)/</id>
+    <published>2021-08-27T11:32:25.000Z</published>
+    <updated>2021-08-27T11:32:58.526Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="python-ffmpeg-python读取rtsp-tcp方式"><a href="#python-ffmpeg-python读取rtsp-tcp方式" class="headerlink" title="[python] ffmpeg-python读取rtsp(tcp方式)"></a>[python] ffmpeg-python读取rtsp(tcp方式)</h1><h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>在多路无线摄像头同时接入时，网络不稳定，经常出现雪花屏的问题。参考网上资料，怀疑是网络摄像头默认使用RTSP协议，RTSP下层默认使用UDP传输，而UDP传输是不可靠的，会丢包，所以导致雪花屏。</p><p>RTSP使用TCP或者UDP传输，使用TCP还是UDP取决于客户端的SETUP请求。所以尝试将由UDP改为TCP取流。</p><p>opencv-python的videocapture获取rtsp只支持UDP方式，改为用FFmpeg-python以tcp方式获取流</p><p>两种库和方式取流的速度、延迟和稳定性还待测试</p><h2 id="FFmpeg-python"><a href="#FFmpeg-python" class="headerlink" title="FFmpeg-python"></a>FFmpeg-python</h2><p><strong>安装</strong></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install ffmpeg-python</span><br></pre></td></tr></table></figure><ul><li><p><a href="https://github.com/kkroening/ffmpeg-python" target="_blank" rel="noopener">Github仓库地址</a></p></li><li><p><a href="https://kkroening.github.io/ffmpeg-python/" target="_blank" rel="noopener">API 文档</a></p></li><li><p><a href="https://github.com/kkroening/ffmpeg-python/tree/master/examples" target="_blank" rel="noopener">使用样例</a></p></li></ul><p><strong>ffmpeg学习资源</strong></p><ul><li><a href="https://ffmpeg.org/" target="_blank" rel="noopener">FFmpeg Homepage</a></li><li><a href="https://ffmpeg.org/ffmpeg.html" target="_blank" rel="noopener">FFmpeg Documentation</a></li><li><a href="https://ffmpeg.org/ffmpeg-filters.html" target="_blank" rel="noopener">FFmpeg Filters Documentation</a></li></ul><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> ffmpeg</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line">camera = <span class="string">'rtsp://admin:1234abcd@192.168.1.64/h264/ch1/main/av_stream'</span></span><br><span class="line"></span><br><span class="line">probe = ffmpeg.probe(camera)</span><br><span class="line">video_stream = next((stream <span class="keyword">for</span> stream <span class="keyword">in</span> probe[<span class="string">'streams'</span>] <span class="keyword">if</span> stream[<span class="string">'codec_type'</span>] == <span class="string">'video'</span>), <span class="literal">None</span>)</span><br><span class="line">width = int(video_stream[<span class="string">'width'</span>])</span><br><span class="line">height = int(video_stream[<span class="string">'height'</span>])</span><br><span class="line"></span><br><span class="line">out = (</span><br><span class="line">    ffmpeg</span><br><span class="line">        .input(camera, rtsp_transport=<span class="string">'tcp'</span>)</span><br><span class="line">        .output(<span class="string">'pipe:'</span>, format=<span class="string">'rawvideo'</span>, pix_fmt=<span class="string">'bgr24'</span>, loglevel=<span class="string">"quiet"</span>, r=<span class="number">25</span>)</span><br><span class="line">        .run_async(pipe_stdout=<span class="literal">True</span>)</span><br><span class="line">)</span><br><span class="line">cnt_empty = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    in_bytes = out.stdout.read(height * width * <span class="number">3</span>)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> in_bytes:</span><br><span class="line">        cnt_empty += <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> cnt_empty &gt; <span class="number">10</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    cnt_empty = <span class="number">0</span></span><br><span class="line">    frame = np.frombuffer(in_bytes, dtype=np.uint8).reshape(height, width, <span class="number">3</span>)</span><br><span class="line">    <span class="comment"># to process frame</span></span><br><span class="line">    cv2.imshow(<span class="string">'test'</span>, frame)</span><br><span class="line">    <span class="keyword">if</span> cv2.waitKey(<span class="number">1</span>) &amp; <span class="number">0xFF</span> == ord(<span class="string">'q'</span>):</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://blog.csdn.net/weixin_39970103/article/details/102484708" target="_blank" rel="noopener">解决摄像头花屏问题</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;python-ffmpeg-python读取rtsp-tcp方式&quot;&gt;&lt;a href=&quot;#python-ffmpeg-python读取rtsp-tcp方式&quot; class=&quot;headerlink&quot; title=&quot;[python] ffmpeg-python读取rtsp
+      
+    
+    </summary>
+    
+    
+      <category term="Python" scheme="http://yoursite.com/categories/Python/"/>
+    
+    
+      <category term="Python" scheme="http://yoursite.com/tags/Python/"/>
+    
+  </entry>
   
   <entry>
     <title>读书笔记——悉达多</title>
@@ -121,9 +147,9 @@
       <category term="BigData" scheme="http://yoursite.com/categories/BigData/"/>
     
     
-      <category term="Python" scheme="http://yoursite.com/tags/Python/"/>
-    
       <category term="MIX" scheme="http://yoursite.com/tags/MIX/"/>
+    
+      <category term="Python" scheme="http://yoursite.com/tags/Python/"/>
     
       <category term="BigData" scheme="http://yoursite.com/tags/BigData/"/>
     
@@ -534,34 +560,6 @@
       <category term="Paper" scheme="http://yoursite.com/tags/Paper/"/>
     
       <category term="ActionRecognition" scheme="http://yoursite.com/tags/ActionRecognition/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Contextual Residual Aggregation for Ultra High-Resolution Image Inpainting</title>
-    <link href="http://yoursite.com/2020/12/09/CRA%20_for_image_inpanting/"/>
-    <id>http://yoursite.com/2020/12/09/CRA%20_for_image_inpanting/</id>
-    <published>2020-12-09T10:02:22.000Z</published>
-    <updated>2020-12-09T10:02:22.948Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Contextual-Residual-Aggregation-for-Ultra-High-Resolution-Image-Inpainting"><a href="#Contextual-Residual-Aggregation-for-Ultra-High-Resolution-Image-Inpainting" class="headerlink" title="Contextual Residual Aggregation for Ultra High-Resolution Image Inpainting"></a>Contextual Residual Aggregation for Ultra High-Resolution Image Inpainting</h1><blockquote><p>作者 | Zili Yi, Qiang Tang, Shekoofeh Azizi, Daesik Jang, Zhan Xu<br>单位 | 华为技术有限公司（加拿大）<br>代码 | <a href="https://github.com/Ascend-Huawei/Ascend-Canada/tree/master/Models/Research_HiFIll_Model" target="_blank" rel="noopener">https://github.com/Ascend-Huawei/Ascend-Canada/tree/master/Models/Research_HiFIll_Model</a><br>论文地址｜<a href="https://arxiv.org/abs/2005.09704" target="_blank" rel="noopener">https://arxiv.org/abs/2005.09704</a><br>备注 | CVPR 2020 Oral </p></blockquote><h2 id="图像修复"><a href="#图像修复" class="headerlink" title="图像修复"></a>图像修复</h2><p>自动填充图像中缺失部分</p><h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><ul><li>调整目标位置</li><li>移除不想要的元素</li><li>修复损坏的图像</li></ul><p><img src="https://img-blog.csdnimg.cn/2020120917523752.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><h3 id="当前的方法"><a href="#当前的方法" class="headerlink" title="当前的方法"></a>当前的方法</h3><ol><li><p>通过复制来填充</p><ul><li><p>从缺失部分附近“借”像素来进行填充</p></li><li><p>e.g., PatchMatch, diffusion-based</p></li></ul></li><li>通过建模来填充<ul><li>数据驱动的方式来学习缺失的像素</li><li>e.g., PixelRNN,FCN</li></ul></li><li>结合上面两种<ul><li>e.g., DeepFill, Patch-Swap</li><li>这篇文章的方法</li></ul></li></ol><h4 id="当前基于学习的方法的不足"><a href="#当前基于学习的方法的不足" class="headerlink" title="当前基于学习的方法的不足"></a>当前基于学习的方法的不足</h4><ul><li>不能够去处理高分辨率图像<ul><li>训练困难</li><li>GPU/NPU内存的限制</li><li>缺少高分辨率的训练数据集</li></ul></li></ul><p><img src="https://img-blog.csdnimg.cn/20201209175251686.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><h2 id="论文方法"><a href="#论文方法" class="headerlink" title="论文方法"></a>论文方法</h2><p>提出了一种上下文残差聚合（CRA）机制，该机制可以通过对上下文补丁中的残差进行加权聚合来生成丢失内容的高频残差，因此网络的训练仅需要低分辨率即可</p><p>由于神经网络的卷积层仅需要在低分辨率的输入和输出上进行操作，因此降低了内存和计算能力的成本</p><p>此外，还减轻了对高分辨率训练数据集的需求</p><p><strong>通过3阶段的pipeline实现高分辨率图像的修复</strong></p><ol><li><p>由生成器（Generator）得到低分辨率的修补好的图像</p></li><li><p>通过残差聚合模块得到高频残差</p></li><li><p>合并高频残差和低分辨率修补结果得到高分辨率修补图像</p></li></ol><h3 id="网络结构"><a href="#网络结构" class="headerlink" title="网络结构"></a>网络结构</h3><p><img src="https://img-blog.csdnimg.cn/20201209175306706.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><h4 id="生成器（Generator）"><a href="#生成器（Generator）" class="headerlink" title="生成器（Generator）"></a>生成器（Generator）</h4><p><strong>两阶段的coarse-to-fine网络</strong></p><p>coarse network输入下采样到256×256的带mask图像，会产生粗略的缺失内容</p><p>fine network 通过<strong>Attention Computing Module (ACM)</strong>和<strong>Attention Transfer Module (ATM)</strong>得到缺失部分内外的关系得分，输出512×512的修复结果</p><h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p><img src="https://img-blog.csdnimg.cn/20201209175321384.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><p><strong>这篇论文的方法在图片分辨率大于1K的情况下修复效率和质量达到了最好</strong></p><p><img src="https://img-blog.csdnimg.cn/20201209175343504.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><h4 id="使用预训练好模型的测试结果"><a href="#使用预训练好模型的测试结果" class="headerlink" title="使用预训练好模型的测试结果"></a>使用预训练好模型的测试结果</h4><p>结果在缺失部分很大，且上下文环境复杂的情况下，效果看起来并没有很好</p><p>在背景单一的风景照中效果很不错<br><img src="https://img-blog.csdnimg.cn/20201209175353108.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyODE1ODA3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul><li><p>提出了一种新颖的上下文残留聚合技术，可对超高分辨率图像进行更高效和高质量的修复</p></li><li><p>把大图下采样到 512×512 ，在分辨率为512×512的小图像上进行图像修复，然后在高分辨率图像上进行推理得到修复效果良好的大图</p></li><li>与其他数据驱动方法不同，分辨率和孔尺寸的增加不会降低修补质量，也不会显着增加我们框架中的处理时间</li><li>到目前为止，是唯一能够在超高分辨率图像(4K至8K)上进行端到端修复的基于学习的技术</li></ul><p>  </p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;Contextual-Residual-Aggregation-for-Ultra-High-Resolution-Image-Inpainting&quot;&gt;&lt;a href=&quot;#Contextual-Residual-Aggregation-for-Ultra-High
-      
-    
-    </summary>
-    
-    
-      <category term="Paper" scheme="http://yoursite.com/categories/Paper/"/>
-    
-    
-      <category term="Paper" scheme="http://yoursite.com/tags/Paper/"/>
-    
-      <category term="ImageInpainting" scheme="http://yoursite.com/tags/ImageInpainting/"/>
     
   </entry>
   

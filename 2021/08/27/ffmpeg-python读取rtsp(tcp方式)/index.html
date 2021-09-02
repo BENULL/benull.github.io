@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="BENULL">
 <meta property="og:description" content="[python] ffmpeg-python读取rtsp(tcp方式)问题描述在多路无线摄像头同时接入时，网络不稳定，经常出现雪花屏的问题。参考网上资料，怀疑是网络摄像头默认使用RTSP协议，RTSP下层默认使用UDP传输，而UDP传输是不可靠的，会丢包，所以导致雪花屏。 RTSP使用TCP或者UDP传输，使用TCP还是UDP取决于客户端的SETUP请求。所以尝试将由UDP改为TCP取流。 ope">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-08-27T11:32:58.526Z">
+<meta property="og:updated_time" content="2021-09-02T06:36:28.595Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ffmpeg-python读取rtsp(tcp方式)">
 <meta name="twitter:description" content="[python] ffmpeg-python读取rtsp(tcp方式)问题描述在多路无线摄像头同时接入时，网络不稳定，经常出现雪花屏的问题。参考网上资料，怀疑是网络摄像头默认使用RTSP协议，RTSP下层默认使用UDP传输，而UDP传输是不可靠的，会丢包，所以导致雪花屏。 RTSP使用TCP或者UDP传输，使用TCP还是UDP取决于客户端的SETUP请求。所以尝试将由UDP改为TCP取流。 ope">
@@ -458,7 +458,7 @@
 <li><a href="https://ffmpeg.org/ffmpeg-filters.html" target="_blank" rel="noopener">FFmpeg Filters Documentation</a></li>
 </ul>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> ffmpeg</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line">camera = <span class="string">'rtsp://admin:1234abcd@192.168.1.64/h264/ch1/main/av_stream'</span></span><br><span class="line"></span><br><span class="line">probe = ffmpeg.probe(camera)</span><br><span class="line">video_stream = next((stream <span class="keyword">for</span> stream <span class="keyword">in</span> probe[<span class="string">'streams'</span>] <span class="keyword">if</span> stream[<span class="string">'codec_type'</span>] == <span class="string">'video'</span>), <span class="literal">None</span>)</span><br><span class="line">width = int(video_stream[<span class="string">'width'</span>])</span><br><span class="line">height = int(video_stream[<span class="string">'height'</span>])</span><br><span class="line"></span><br><span class="line">out = (</span><br><span class="line">    ffmpeg</span><br><span class="line">        .input(camera, rtsp_transport=<span class="string">'tcp'</span>)</span><br><span class="line">        .output(<span class="string">'pipe:'</span>, format=<span class="string">'rawvideo'</span>, pix_fmt=<span class="string">'bgr24'</span>, loglevel=<span class="string">"quiet"</span>, r=<span class="number">25</span>)</span><br><span class="line">        .run_async(pipe_stdout=<span class="literal">True</span>)</span><br><span class="line">)</span><br><span class="line">cnt_empty = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    in_bytes = out.stdout.read(height * width * <span class="number">3</span>)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> in_bytes:</span><br><span class="line">        cnt_empty += <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> cnt_empty &gt; <span class="number">10</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    cnt_empty = <span class="number">0</span></span><br><span class="line">    frame = np.frombuffer(in_bytes, dtype=np.uint8).reshape(height, width, <span class="number">3</span>)</span><br><span class="line">    <span class="comment"># to process frame</span></span><br><span class="line">    cv2.imshow(<span class="string">'test'</span>, frame)</span><br><span class="line">    <span class="keyword">if</span> cv2.waitKey(<span class="number">1</span>) &amp; <span class="number">0xFF</span> == ord(<span class="string">'q'</span>):</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://blog.csdn.net/weixin_39970103/article/details/102484708" target="_blank" rel="noopener">解决摄像头花屏问题</a></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://blog.csdn.net/weixin_39970103/article/details/102484708" target="_blank" rel="noopener">解决摄像头花屏问题</a>,/</p>
 
       
     </div>
@@ -498,6 +498,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/09/02/10路监控视频行为识别——前端界面/" rel="prev" title="10路监控视频行为识别——前端界面">
+                10路监控视频行为识别——前端界面 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -578,7 +582,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

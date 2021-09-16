@@ -93,7 +93,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/85adb2356c7c49c58e7626f68eaf6614.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAQkVOVUxM,size_20,color_FFFFFF,t_70,g_se,x_16">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/a2299830cce34bc7a29a52bbb246fcfb.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAQkVOVUxM,size_20,color_FFFFFF,t_70,g_se,x_16">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/3c86c50086044571b9630ed24e41925e.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAQkVOVUxM,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:updated_time" content="2021-09-16T09:52:44.207Z">
+<meta property="og:updated_time" content="2021-09-16T09:58:53.556Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="推荐系统模型之DIN">
 <meta name="twitter:description" content="推荐系统模型之DINDeep Interest Network(DIN)由阿里妈妈的精准定向检索及基础算法团队在2017年6月提出。 它针对电子商务领域(e-commerce industry)的CTR预估，重点在于充分利用/挖掘用户历史行为数据中的信息。 论文地址 主要思路针对问题第一个问题是目前很多推荐系统模型，都是以 Embedding &amp;amp; MLP 的方法结合，这种方法相对传统机器学">
@@ -465,7 +465,7 @@
 <p>DIN模型模仿了注意力机制的过程，即以给定的广告为出发点，关注相关联的历史行为，在此基础上，DIN会自适应地计算用户兴趣的表示向量，这使得在不同的广告上，这个表达向量也会不同</p>
 <p>用户的兴趣表示计算如下</p>
 <script type="math/tex; mode=display">
-v_{U}(A)=f\left(v_{A}, e_{1}, e_{2}, \ldots, e_{H}\right)=\sum_{j=1}^{H} a\left(e_{j}, v_{A}\right) e_{j}=\sum_{j=1}^{H} w_{j} e_{j}</script><p>其中，$f\left(v<em>{A}, e</em>{1}, e<em>{2}, \ldots, e</em>{H}\right)$表示长度为H的用户U的用户行为嵌入向</p>
+v_{U}(A)=f\left(v_{A}, e_{1}, e_{2}, \ldots, e_{H}\right)=\sum_{j=1}^{H} a\left(e_{j}, v_{A}\right) e_{j}=\sum_{j=1}^{H} w_{j} e_{j}</script><p>其中$f\left(v<em>{A}, e</em>{1}, e<em>{2}, \ldots, e</em>{H}\right)$表示长度为H的用户U的用户行为嵌入向</p>
 <p>$V_A$ 是广告A的embedding vector，这样$V_u(A)$ 随着广告的不同而变化（长度不变，依旧为H)</p>
 <p>传统的attention需要对所有的分数通过softmax做归一化，这样做有两个好处，一是保证权重非负，二是保证权重之和为1。但是在DIN中不对点击序列的attention分数做归一化，直接将分数与对应商品的embedding向量做加权和，目的在于保留用户的兴趣强度。例如，用户的点击序列中90%是衣服，10%是电子产品，有一件T恤和一部手机需要预测CTR，那么T恤会激活大部分的用户行为，使得根据T恤计算出来的用户行为向量在数值上相对手机而言更大。</p>
 <h2 id="训练手段"><a href="#训练手段" class="headerlink" title="训练手段"></a>训练手段</h2><h3 id="Mini-batch-感知正则化"><a href="#Mini-batch-感知正则化" class="headerlink" title="Mini-batch 感知正则化"></a>Mini-batch 感知正则化</h3><p>CTR中输入稀疏而且维度高，通常的做法是加入L1、L2防止过拟合，但这种正则方式对于工业级CTR数据不适用，结合其稀疏性及上亿级的参数，以L2正则化为例，需要计算每个mini-batch下所有参数的L2，计算量太大，不可接受。</p>

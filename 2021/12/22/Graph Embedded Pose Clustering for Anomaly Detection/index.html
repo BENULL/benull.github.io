@@ -95,7 +95,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/9c2f14e7222ce863276286c78ecd700f.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/a2f17cb1cbe8eaf30fbc784973920986.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/0b12e9240e5efc19fff3f8868d6edff7.png">
-<meta property="og:updated_time" content="2021-12-22T12:49:42.762Z">
+<meta property="og:updated_time" content="2021-12-22T13:03:18.516Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Graph Embedded Pose Clustering for Anomaly Detection">
 <meta name="twitter:description" content="Graph Embedded Pose Clustering for Anomaly Detection会议：CVPR 2020 单位：Tel-Aviv University,  Alibaba Group 论文：arxiv 代码：code 创新从输入视频序列计算得到人体姿态图，之后通过时空图卷积自编码器和聚类将这些姿态图映射到隐空间 提出了两种粒度的异常检测  粗粒度，指定某类行为是正常其余为异">
@@ -407,7 +407,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  563字
+                  566字
                 </span>
               
 
@@ -471,7 +471,7 @@
 </li>
 </ul>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/b8760b3ccb5e9681523774adf6c4fe39.png" alt="img"></p>
-<h3 id="聚类"><a href="#聚类" class="headerlink" title="聚类"></a>聚类</h3><p>对于每个输入样本$\mathbf{x}<em>{i}$用$\mathbf{z}</em>{i}$表示编码器的隐向量，$\mathbf{y}<em>{i}$计算软聚类，$\Theta$表示聚类层参数，$p</em>{i k}$表示第$i$个样本分配到第$k$簇的概率</p>
+<h3 id="聚类"><a href="#聚类" class="headerlink" title="聚类"></a>聚类</h3><p>对于每个输入样本$\mathbf{x}_{i}$用$\mathbf{z}_{i}$表示编码器的隐向量，$\mathbf{y}_{i}$计算软聚类，$\Theta$表示聚类层参数，$p_{i k}$表示第$i$个样本分配到第$k$簇的概率</p>
 <script type="math/tex; mode=display">p_{i k}=\operatorname{Pr}\left(y_{i}=k \mid \mathbf{z}_{i}, \Theta\right)=\frac{\exp \left(\boldsymbol{\theta}_{k}^{T} \mathbf{z}_{i}\right)}{\sum_{k^{\prime}=1}^{K} \exp \left(\boldsymbol{\theta}_{k^{\prime}}^{T} \mathbf{z}_{i}\right)}</script><p>聚类的目标函数是最小化当前模型预测分布P和目标分布Q之间的KL散度</p>
 <script type="math/tex; mode=display">L_{c l u s t e r}=K L(Q \| P)=\sum_{i} \sum_{k} q_{i k} \log \frac{q_{i k}}{p_{i k}}</script><p>其中</p>
 <script type="math/tex; mode=display">q_{i k}=\frac{p_{i k} /\left(\sum_{i^{\prime}} p_{i^{\prime} k}\right)^{\frac{1}{2}}}{\sum_{k^{\prime}} p_{i k^{\prime}} /\left(\sum_{i^{\prime}} p_{i^{\prime} k^{\prime}}\right)^{\frac{1}{2}}}</script><h3 id="Normality-Scoring"><a href="#Normality-Scoring" class="headerlink" title="Normality Scoring"></a>Normality Scoring</h3><p>狄利克雷过程混合模型（Dirichlet Process Mixture Model, DPMM）是一种非参数贝叶斯模型，它可以理解为一种聚类方法，但是不需要指定类别数量，它可以从数据中推断簇的数量</p>

@@ -513,14 +513,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/categories/index.html</loc>
+    <loc>http://yoursite.com/tags/index.html</loc>
     
     <lastmod>2018-03-16</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/index.html</loc>
+    <loc>http://yoursite.com/categories/index.html</loc>
     
     <lastmod>2018-03-16</lastmod>
     
@@ -543,27 +543,6 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/Algorithms/</loc>
-    <lastmod>2021-12-22</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/tags/BFPRT/</loc>
-    <lastmod>2021-12-22</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/tags/TOP-K%E9%97%AE%E9%A2%98/</loc>
-    <lastmod>2021-12-22</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/tags/MIX/</loc>
     <lastmod>2021-12-22</lastmod>
     <changefreq>daily</changefreq>
@@ -579,6 +558,27 @@
   
   <url>
     <loc>http://yoursite.com/tags/ActionRecognition/</loc>
+    <lastmod>2021-12-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/tags/Algorithms/</loc>
+    <lastmod>2021-12-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/tags/BFPRT/</loc>
+    <lastmod>2021-12-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/tags/TOP-K%E9%97%AE%E9%A2%98/</loc>
     <lastmod>2021-12-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -613,20 +613,6 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/Hibernate/</loc>
-    <lastmod>2021-12-22</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/tags/Anotation/</loc>
-    <lastmod>2021-12-22</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/tags/BigData/</loc>
     <lastmod>2021-12-22</lastmod>
     <changefreq>daily</changefreq>
@@ -649,6 +635,20 @@
   
   <url>
     <loc>http://yoursite.com/tags/Hadoop/</loc>
+    <lastmod>2021-12-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/tags/Hibernate/</loc>
+    <lastmod>2021-12-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/tags/Anotation/</loc>
     <lastmod>2021-12-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -697,13 +697,6 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/Spark/</loc>
-    <lastmod>2021-12-22</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/tags/crawler/</loc>
     <lastmod>2021-12-22</lastmod>
     <changefreq>daily</changefreq>
@@ -718,6 +711,13 @@
   </url>
   
   <url>
+    <loc>http://yoursite.com/tags/Spark/</loc>
+    <lastmod>2021-12-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/tags/vue/</loc>
     <lastmod>2021-12-22</lastmod>
     <changefreq>daily</changefreq>
@@ -726,13 +726,6 @@
   
   <url>
     <loc>http://yoursite.com/tags/Transformer/</loc>
-    <lastmod>2021-12-22</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/tags/Ubuntu/</loc>
     <lastmod>2021-12-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -754,6 +747,13 @@
   
   <url>
     <loc>http://yoursite.com/tags/Docker/</loc>
+    <lastmod>2021-12-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/tags/Ubuntu/</loc>
     <lastmod>2021-12-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -802,14 +802,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/PyTorch/</loc>
+    <loc>http://yoursite.com/tags/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/</loc>
     <lastmod>2021-12-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/</loc>
+    <loc>http://yoursite.com/tags/PyTorch/</loc>
     <lastmod>2021-12-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -872,14 +872,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/Reading/</loc>
+    <loc>http://yoursite.com/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/</loc>
     <lastmod>2021-12-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/</loc>
+    <loc>http://yoursite.com/tags/Reading/</loc>
     <lastmod>2021-12-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -909,13 +909,6 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/categories/Algorithms/</loc>
-    <lastmod>2021-12-22</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/categories/MIX/</loc>
     <lastmod>2021-12-22</lastmod>
     <changefreq>daily</changefreq>
@@ -930,6 +923,13 @@
   </url>
   
   <url>
+    <loc>http://yoursite.com/categories/Algorithms/</loc>
+    <lastmod>2021-12-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/categories/Linux/</loc>
     <lastmod>2021-12-22</lastmod>
     <changefreq>daily</changefreq>
@@ -937,14 +937,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/categories/Web/</loc>
+    <loc>http://yoursite.com/categories/BigData/</loc>
     <lastmod>2021-12-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://yoursite.com/categories/BigData/</loc>
+    <loc>http://yoursite.com/categories/Web/</loc>
     <lastmod>2021-12-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-12-21T11:02:57.996Z</updated>
+  <updated>2021-12-22T12:49:42.762Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,39 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Graph Embedded Pose Clustering for Anomaly Detection</title>
+    <link href="http://yoursite.com/2021/12/22/Graph%20Embedded%20Pose%20Clustering%20for%20Anomaly%20Detection/"/>
+    <id>http://yoursite.com/2021/12/22/Graph%20Embedded%20Pose%20Clustering%20for%20Anomaly%20Detection/</id>
+    <published>2021-12-22T12:48:54.000Z</published>
+    <updated>2021-12-22T12:49:42.762Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Graph-Embedded-Pose-Clustering-for-Anomaly-Detection"><a href="#Graph-Embedded-Pose-Clustering-for-Anomaly-Detection" class="headerlink" title="Graph Embedded Pose Clustering for Anomaly Detection"></a>Graph Embedded Pose Clustering for Anomaly Detection</h1><p>会议：CVPR 2020</p><p>单位：Tel-Aviv University,  Alibaba Group</p><p>论文：<a href="https://arxiv.org/abs/1912.11850" target="_blank" rel="noopener">arxiv</a></p><p>代码：<a href="https://github.com/amirmk89/gepc" target="_blank" rel="noopener">code</a></p><h2 id="创新"><a href="#创新" class="headerlink" title="创新"></a>创新</h2><p>从输入视频序列计算得到<strong>人体姿态图</strong>，之后通过<strong>时空图卷积自编码器</strong>和<strong>聚类</strong>将这些姿态图映射到隐空间</p><p>提出了两种粒度的异常检测</p><ul><li>粗粒度，指定某类行为是正常其余为异常行为（ShanghaiTech Campus数据集上）</li><li>细粒度，指定某类行为为异常其余非异常行为 （NTU-RGB+D、Kinetics 400数据集上）</li></ul><p>人体姿态图的好处</p><ol><li>使得问题更抽象，算法只关注人体姿态不受无关特征的影响比如光照，视角</li><li>人体姿态图更紧凑，使得推理、训练和测试更快</li></ol><h2 id="网络结构"><a href="#网络结构" class="headerlink" title="网络结构"></a>网络结构</h2><p><img src="https://img-blog.csdnimg.cn/img_convert/7cf783ed55d3a64cb6f8e6a6f4ce7477.png" alt="img"></p><h3 id="时空图卷积自编码"><a href="#时空图卷积自编码" class="headerlink" title="时空图卷积自编码"></a>时空图卷积自编码</h3><p>使用ST-GCN块(GCN算子由空间注意力图卷积替换)来构造时空图卷积自编码器（ST-GCAE）</p><p><img src="https://img-blog.csdnimg.cn/img_convert/01be79475736651c9f517eb2220eb280.png" alt="img"></p><p>三种类型的邻接矩阵</p><ul><li>身体部位物理邻接矩阵</li><li><p>数据集相关的关键点关系（训练中学习得到）</p></li><li><p>自注意力模块推理得到（特定于样本）</p></li></ul><p><img src="https://img-blog.csdnimg.cn/img_convert/b8760b3ccb5e9681523774adf6c4fe39.png" alt="img"></p><h3 id="聚类"><a href="#聚类" class="headerlink" title="聚类"></a>聚类</h3><p>对于每个输入样本$\mathbf{x}<em>{i}$用$\mathbf{z}</em>{i}$表示编码器的隐向量，$\mathbf{y}<em>{i}$计算软聚类，$\Theta$表示聚类层参数，$p</em>{i k}$表示第$i$个样本分配到第$k$簇的概率</p><script type="math/tex; mode=display">p_{i k}=\operatorname{Pr}\left(y_{i}=k \mid \mathbf{z}_{i}, \Theta\right)=\frac{\exp \left(\boldsymbol{\theta}_{k}^{T} \mathbf{z}_{i}\right)}{\sum_{k^{\prime}=1}^{K} \exp \left(\boldsymbol{\theta}_{k^{\prime}}^{T} \mathbf{z}_{i}\right)}</script><p>聚类的目标函数是最小化当前模型预测分布P和目标分布Q之间的KL散度</p><script type="math/tex; mode=display">L_{c l u s t e r}=K L(Q \| P)=\sum_{i} \sum_{k} q_{i k} \log \frac{q_{i k}}{p_{i k}}</script><p>其中</p><script type="math/tex; mode=display">q_{i k}=\frac{p_{i k} /\left(\sum_{i^{\prime}} p_{i^{\prime} k}\right)^{\frac{1}{2}}}{\sum_{k^{\prime}} p_{i k^{\prime}} /\left(\sum_{i^{\prime}} p_{i^{\prime} k^{\prime}}\right)^{\frac{1}{2}}}</script><h3 id="Normality-Scoring"><a href="#Normality-Scoring" class="headerlink" title="Normality Scoring"></a>Normality Scoring</h3><p>狄利克雷过程混合模型（Dirichlet Process Mixture Model, DPMM）是一种非参数贝叶斯模型，它可以理解为一种聚类方法，但是不需要指定类别数量，它可以从数据中推断簇的数量</p><p><a href="http://www.datalearner.com/blog/1051471599181249" target="_blank" rel="noopener"> 狄利克雷过程混合模型</a></p><h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><h3 id="ShangHaiTech数据集-细粒度异常检测"><a href="#ShangHaiTech数据集-细粒度异常检测" class="headerlink" title="ShangHaiTech数据集 细粒度异常检测"></a>ShangHaiTech数据集 细粒度异常检测</h3><p><strong>关节点坐标作为输入特征没有关节点小图做特征效果好</strong></p><p><img src="https://img-blog.csdnimg.cn/img_convert/9c2f14e7222ce863276286c78ecd700f.png" alt="img"></p><h3 id="NTU-RGB-D、Kinetics-400-粗粒度异常检测"><a href="#NTU-RGB-D、Kinetics-400-粗粒度异常检测" class="headerlink" title="NTU-RGB+D、Kinetics 400 粗粒度异常检测"></a>NTU-RGB+D、Kinetics 400 粗粒度异常检测</h3><p>使用10个随机和10个有意义的分割来评估每个数据集</p><p> <img src="https://img-blog.csdnimg.cn/img_convert/a2f17cb1cbe8eaf30fbc784973920986.png" alt="img"></p><h3 id="消融实验"><a href="#消融实验" class="headerlink" title="消融实验"></a>消融实验</h3><p>评估模型对噪声的鲁棒性，即在训练集中存在一定百分比的异常动作</p><p><img src="https://img-blog.csdnimg.cn/img_convert/0b12e9240e5efc19fff3f8868d6edff7.png" alt="img"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Graph-Embedded-Pose-Clustering-for-Anomaly-Detection&quot;&gt;&lt;a href=&quot;#Graph-Embedded-Pose-Clustering-for-Anomaly-Detection&quot; class=&quot;headerl
+      
+    
+    </summary>
+    
+    
+      <category term="Paper" scheme="http://yoursite.com/categories/Paper/"/>
+    
+    
+      <category term="Paper" scheme="http://yoursite.com/tags/Paper/"/>
+    
+      <category term="AnomalyDetection" scheme="http://yoursite.com/tags/AnomalyDetection/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Learning Regularity in Skeleton Trajectories for Anomaly Detection in Videos</title>
     <link href="http://yoursite.com/2021/12/21/Learning-Regularity-in-Skeleton-Trajectories-for-Anomaly-Detection-in-Videos/"/>
     <id>http://yoursite.com/2021/12/21/Learning-Regularity-in-Skeleton-Trajectories-for-Anomaly-Detection-in-Videos/</id>
     <published>2021-12-21T11:02:54.000Z</published>
-    <updated>2021-12-21T11:02:57.996Z</updated>
+    <updated>2021-12-22T12:48:55.095Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Learning-Regularity-in-Skeleton-Trajectories-for-Anomaly-Detection-in-Videos"><a href="#Learning-Regularity-in-Skeleton-Trajectories-for-Anomaly-Detection-in-Videos" class="headerlink" title="Learning Regularity in Skeleton Trajectories for Anomaly Detection in Videos"></a>Learning Regularity in Skeleton Trajectories for Anomaly Detection in Videos</h1><blockquote><p>单位: Deakin University<br>会议: CVPR 2019<br>论文地址: <a href="https://arxiv.org/abs/1903.03295" target="_blank" rel="noopener">arxiv</a><br>代码: <a href="https://github.com/RomeroBarata/skeleton_based_anomaly_detection" target="_blank" rel="noopener">skeleton_based_anomaly_detection</a></p></blockquote><p><img src="https://img-blog.csdnimg.cn/38293201ddc54ecc868b7d9940f292fb.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQkVOVUxM,size_20,color_FFFFFF,t_70,g_se,x_16" alt="请添加图片描述"></p><h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>该问题的挑战性在于缺乏人的监督和视频事件中人类可感知异常的定义很模糊。其中基于像素的特征受噪音影响大，掩盖了场景中的重要信息，更进一步，这些特征中存在的冗余信息增加了训练模型去分辨噪声和特征的负担。同时当前的方法由于视觉特征和事件真实意义之间存在语义差异，缺乏可解释性。这种局限性又因为深度神经网络放大了。</p><h2 id="创新"><a href="#创新" class="headerlink" title="创新"></a>创新</h2><p>提出了一种新的方法来建模监控视频中人体运动的正常模式，使用动态的骨架特征进行异常检测，将骨架运动分解为两个子部分：整体身体运动和局部身体姿势。与传统的基于外观的模型相比，该方法具有更好的异常检测性能，同时提供了语义上可理解的特征和支持可解释性的网络架构，提供决策影响因素的权重和这些因素的可视化，支持对其内部推理的开箱解释。</p><p><strong>为什么使用骨架特征？</strong></p><p>相比于基于外观的特征，骨架特征紧凑、具有结构性，语义丰富，对人类行为和运动具有高度描述性</p><p><strong>为什么将骨架运动分解为全局和局部两部分？</strong></p><p>在真实的监控视频中，人体骨骼的大小在很大程度上取决于它们的位置和动作。对于近处的骨骼，观测到的运动主要受局部因素的影响。同时，对于远处的骨骼，其运动主要由整体运动控制，而局部变形则被忽略</p><p><strong>为什么将包围盒作为全局运动特征的一部分</strong>？</p><p>在2D图像空间中，因为缺少深度信息，仅xy坐标无法很好地反映场景中的真实位置。但是，骨架边界框的大小与骨架在场景中的深度相关。</p><p><img src="https://img-blog.csdnimg.cn/img_convert/74d38ee786f6905f7c707ce2a4d76811.png" alt="img"></p><h2 id="网络结构"><a href="#网络结构" class="headerlink" title="网络结构"></a>网络结构</h2><p> <img src="https://img-blog.csdnimg.cn/img_convert/1b3e40e8dec8709c3b5edf39a40bdc49.png" alt="img"></p><h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>ShanghaiTech数据集中的大多数异常事件都与人类有关，剔除了6个异常事件与人类无关的测试视频，并将其他101个视频作为Human-related (HR) ShanghaiTech</p><p><img src="https://img-blog.csdnimg.cn/img_convert/0908b3e65c2ca925dc3f5b3e83185fc0.png" alt="img"></p><h3 id="错误模式分析"><a href="#错误模式分析" class="headerlink" title="错误模式分析"></a>错误模式分析</h3><p><img src="https://img-blog.csdnimg.cn/img_convert/cc67566c127aea12046ceb5eae79e4af.png" alt="img"></p><ul><li>最主要的原因在于骨架的检测和跟踪的不准确率</li><li>异常主体的骨架和正常主体的骨架相似</li></ul><h2 id="总结与展望"><a href="#总结与展望" class="headerlink" title="总结与展望"></a>总结与展望</h2><p>骨架特征平均每帧不到100维仍然提供与当前最先进方法相同或更好的性能。显然，MPED-RNN的性能仍然取决于骨架检测和跟踪的质量。这个问题在低分辨率视频的情况下更为严重。对于骨架不可用的情况，基于外观的特征可以提供补充信息。虽然在大多数情况下，单个的运动和姿势可以反映异常情况，但是不包括事件中多人之间以及人与物体之间的交互信息。</p>]]></content>
     
@@ -40,7 +68,7 @@
     
       <category term="Paper" scheme="http://yoursite.com/tags/Paper/"/>
     
-      <category term="Transformer" scheme="http://yoursite.com/tags/Transformer/"/>
+      <category term="AnomalyDetection" scheme="http://yoursite.com/tags/AnomalyDetection/"/>
     
   </entry>
   
@@ -543,34 +571,6 @@
     
     
       <category term="Scala" scheme="http://yoursite.com/tags/Scala/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>读书笔记——寻路中国</title>
-    <link href="http://yoursite.com/2021/05/10/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E5%AF%BB%E8%B7%AF%E4%B8%AD%E5%9B%BD/"/>
-    <id>http://yoursite.com/2021/05/10/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E5%AF%BB%E8%B7%AF%E4%B8%AD%E5%9B%BD/</id>
-    <published>2021-05-10T04:45:45.000Z</published>
-    <updated>2021-09-06T04:56:10.835Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="https://images-cn.ssl-images-amazon.cn/images/I/41nf7PByt0L.jpg" align="center"></p><blockquote><p>作者: <a href="https://book.douban.com/author/1091380/" target="_blank" rel="noopener">[美国] 彼得·海斯勒</a><br>出版社: 上海译文出版社<br>副标题: 从乡村到工厂的自驾之旅<br>原作名: Country Driving: A Journey Through China from Farm to Factory<br>译者: <a href="https://book.douban.com/search/李雪顺" target="_blank" rel="noopener">李雪顺</a><br>出版年: 2011-1<br>ISBN: 9787532752805</p></blockquote><div class="note info"><p>210502</p></div><p><strong>⭕️“在中国，生活中很多事情都要打制度的擦边球”</strong></p><p><strong>⭕️  “中国的政府部门对数字十分痴迷，一贯如此。”</strong></p><div class="note info"><p>210504</p></div><p><strong>⭕️  “最后的小镇，最后的乡村少年，也许还有最后的家庭，兄弟姐妹俱全的大家庭。乡下人特有的诚实与信任，不会随着迁居入城而继续存在。在世界上，陌生人受到毫不迟疑的欢迎，赢得孩子们的信任，这样的地方并不多见。驾车离开安寺村的时候，我有些伤心。”</strong></p><p><strong>⭕️  “魏嘉很老实，”他的爸爸妈妈会这样说，那就是他们非常近乎于表扬的话语了。”</strong></p><div class="note info"><p>210505</p></div><p><strong>⭕️  “魏嘉的父母谁也没有读到过高中一年级。然而，他们都觉得，他们的儿子会在飞速变化的社会中获得机会，因此，他们逼着他去刻苦学习。这种思维在中国十分常见，孔庙也许早就荡然无存，但重视教育的传统依然得以保留。即便是最贫困的人也对书本有一种信奉之情”</strong></p><p><strong>⭕️  “他们想方设法地囊括进一些新的课程，但却没有改革学习的基本策略以及课堂模式。所有的东西都围绕着背诵和重复来进行——这正是中国教育制度的奠基石。形成这样的传统，部分原因在于那些汉字太难书写，小孩子只有通过反复抄写的方式加以学习。”</strong></p><p><strong>⭕️  “很少注意分析性和创造性”</strong></p><div class="note info"><p>210506</p></div><p><strong>⭕️  “有时候，他们似乎是本能地抓住了两个世界里最糟糕的东西，最糟糕的现代生活，最糟糕的传统观念。”</strong></p><p><strong>⭕️  “政治被提炼得只剩下最纯粹的核心成分——尽可能地动用村子里的一切关系。”</strong></p><div class="note info"><p>210508</p></div><p><strong>⭕️“还在于中国的各个公司能否超越低利润率的产品，发展起对创造力和创新性提出要求的相关产业。到头来，这才是中国的快速发展和西方工业革命之间的最大差异。”</strong></p><div class="note info"><p>210509</p></div><p><strong>⭕️“这就是永恒的乐观主义：新的一天从现在开始！”</strong></p><p><strong>⭕️“面临着这么多选择与流动，跟领导们去打一场注定没有结果的战争，实在没有什么意思。”</strong></p><div class="note info"><p>210510</p></div><p><strong>⭕️“不过，他们也会耐心等待——这是他们所具有的一种古老的品德，跟这个国家一样历史悠久。”</strong></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;&lt;img src=&quot;https://images-cn.ssl-images-amazon.cn/images/I/41nf7PByt0L.jpg&quot; align=&quot;center&quot;&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;作者: &lt;a href=&quot;https://book.
-      
-    
-    </summary>
-    
-    
-      <category term="Reading" scheme="http://yoursite.com/categories/Reading/"/>
-    
-    
-      <category term="Reading" scheme="http://yoursite.com/tags/Reading/"/>
     
   </entry>
   

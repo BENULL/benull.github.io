@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://yoursite.com/2021/12/21/Learning%20Regularity%20in%20Skeleton%20Trajectories%20for%20Anomaly%20Detection%20in%20Videos/</loc>
+    <loc>http://yoursite.com/2021/12/21/A%20Hierarchical%20Spatio-Temporal%20Graph%20Convolutional%20Neural%20Network%20for%20Anomaly%20Detection%20in%20Videos/</loc>
     
     <lastmod>2021-12-27</lastmod>
     
@@ -520,14 +520,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/index.html</loc>
+    <loc>http://yoursite.com/categories/index.html</loc>
     
     <lastmod>2018-03-16</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/categories/index.html</loc>
+    <loc>http://yoursite.com/tags/index.html</loc>
     
     <lastmod>2018-03-16</lastmod>
     
@@ -550,6 +550,13 @@
   </url>
   
   <url>
+    <loc>http://yoursite.com/tags/MIX/</loc>
+    <lastmod>2021-12-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/tags/Paper/</loc>
     <lastmod>2021-12-27</lastmod>
     <changefreq>daily</changefreq>
@@ -564,7 +571,7 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/MIX/</loc>
+    <loc>http://yoursite.com/tags/AnomalyDetection/</loc>
     <lastmod>2021-12-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -634,13 +641,6 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/AnomalyDetection/</loc>
-    <lastmod>2021-12-27</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/tags/Hadoop/</loc>
     <lastmod>2021-12-27</lastmod>
     <changefreq>daily</changefreq>
@@ -704,13 +704,6 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/Spark/</loc>
-    <lastmod>2021-12-27</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/tags/crawler/</loc>
     <lastmod>2021-12-27</lastmod>
     <changefreq>daily</changefreq>
@@ -725,6 +718,13 @@
   </url>
   
   <url>
+    <loc>http://yoursite.com/tags/Spark/</loc>
+    <lastmod>2021-12-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/tags/vue/</loc>
     <lastmod>2021-12-27</lastmod>
     <changefreq>daily</changefreq>
@@ -733,6 +733,13 @@
   
   <url>
     <loc>http://yoursite.com/tags/Transformer/</loc>
+    <lastmod>2021-12-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/tags/KNN/</loc>
     <lastmod>2021-12-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -754,13 +761,6 @@
   
   <url>
     <loc>http://yoursite.com/tags/Docker/</loc>
-    <lastmod>2021-12-27</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/tags/KNN/</loc>
     <lastmod>2021-12-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -795,14 +795,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/</loc>
+    <loc>http://yoursite.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2021-12-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
+    <loc>http://yoursite.com/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/</loc>
     <lastmod>2021-12-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -823,13 +823,6 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/%E5%93%88%E5%A4%AB%E6%9B%BC%E7%BC%96%E7%A0%81/</loc>
-    <lastmod>2021-12-27</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2021-12-27</lastmod>
     <changefreq>daily</changefreq>
@@ -838,6 +831,13 @@
   
   <url>
     <loc>http://yoursite.com/tags/Q-Learning/</loc>
+    <lastmod>2021-12-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/tags/%E5%93%88%E5%A4%AB%E6%9B%BC%E7%BC%96%E7%A0%81/</loc>
     <lastmod>2021-12-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -879,14 +879,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/Reading/</loc>
+    <loc>http://yoursite.com/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/</loc>
     <lastmod>2021-12-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/</loc>
+    <loc>http://yoursite.com/tags/Reading/</loc>
     <lastmod>2021-12-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -916,14 +916,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/categories/Paper/</loc>
+    <loc>http://yoursite.com/categories/MIX/</loc>
     <lastmod>2021-12-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://yoursite.com/categories/MIX/</loc>
+    <loc>http://yoursite.com/categories/Paper/</loc>
     <lastmod>2021-12-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

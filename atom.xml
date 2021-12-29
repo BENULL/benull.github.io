@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-12-28T13:58:36.889Z</updated>
+  <updated>2021-12-29T13:18:25.256Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Regularity Learning via Explicit Distribution Modeling for Skeletal Video Anomaly Detection</title>
+    <link href="http://yoursite.com/2021/12/29/Regularity%20Learning%20via%20Explicit%20Distribution%20Modeling%20for%20Skeletal%20Video%20Anomaly%20Detection/"/>
+    <id>http://yoursite.com/2021/12/29/Regularity%20Learning%20via%20Explicit%20Distribution%20Modeling%20for%20Skeletal%20Video%20Anomaly%20Detection/</id>
+    <published>2021-12-29T13:18:25.000Z</published>
+    <updated>2021-12-29T13:18:25.256Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Regularity-Learning-via-Explicit-Distribution-Modeling-for-Skeletal-Video-Anomaly-Detection"><a href="#Regularity-Learning-via-Explicit-Distribution-Modeling-for-Skeletal-Video-Anomaly-Detection" class="headerlink" title="Regularity Learning via Explicit Distribution Modeling for Skeletal Video Anomaly Detection"></a>Regularity Learning via Explicit Distribution Modeling for Skeletal Video Anomaly Detection</h1><blockquote><p>单位： 上海交通大学、商汤、上海AI Lab<br>论文地址：<a href="https://arxiv.org/abs/2112.03649" target="_blank" rel="noopener">https://arxiv.org/abs/2112.03649</a></p></blockquote><p>基于像素的方法可以直接利用显式运动特征比如光流，但基于姿态的方法缺乏运动表示。本文提出了一种新的<strong>Motion Embedder (ME）</strong>，从概率角度提供姿态的运动表示。此外，还采用了一种新的特定任务的<strong>Spatial-Temporal Transformer（STT）</strong>来进行自监督的姿态序列重构。然后将这两个模块集成到一个统一的姿态规则学习框架中，称为<strong>Motion Prior Regularity Learner （MoPRL）</strong><img src="https://img-blog.csdnimg.cn/img_convert/acbf99003603cefb033e6210bdeef0af.png" alt="img"></p><h2 id="解决的问题"><a href="#解决的问题" class="headerlink" title="解决的问题"></a>解决的问题</h2><p>有效的运动表示是视频异常检测中学习正常模式的关键。在之前的基于姿态的方法中，研究人员通常利用单人关节编码视觉特征，缺乏直观的运动表示。在这种情况下模型无法同时学习运动和正常模式，从而影响其性能。</p><p><img src="https://img-blog.csdnimg.cn/img_convert/2cf74bc50f8fedc617ab377f13578679.png" alt="img"></p><h2 id="模型结构"><a href="#模型结构" class="headerlink" title="模型结构"></a>模型结构</h2><p>MoPRL由两个子模块组成Motion Embedder (ME)和Temporal Transformer（STT）。首先利用一个姿态估计来获取姿态轨迹，MoPRL根据统计将基于姿势的运动表示建模为概率分布，并通过ME融合空间和时间表示。然后STT被用于通过自监督重构任务学习时空规律。通过这种方法，模型学习正态样本的分布，最后可以根据帧异常分数检测异常</p><p><img src="https://img-blog.csdnimg.cn/img_convert/007995c5dc95973432986282b2040516.png" alt="img"></p><h3 id="Motion-Embedder"><a href="#Motion-Embedder" class="headerlink" title="Motion Embedder"></a>Motion Embedder</h3><p>ME旨在从概率角度提取输入姿态的时空表示。受基于像素的方法中常用的帧梯度的启发，提出基于相邻帧之间姿态中心点之间的位移对姿态运动进行建模。然而，直接应用位移作为运动表示过于简化。假设异常很少发生，进一步提出将这种运动表示转化到概率域，为其规律性学习提供了有效的姿态运动表示。</p><p><img src="https://img-blog.csdnimg.cn/img_convert/87b7977975f32fd292c97be4497b4319.png" alt="img"></p><p>首先通过计算训练集中正常模式来获得位移的统计信息。直观地说，我们使用一个预定义的分布函数来拟合这个离散化的数据分布，通过它我们可以得到一个连续的分布。称这种连续分布为Motion Prior。<strong>将概率作为比例因子，</strong>如图所示，如果出现频率较低，可以获得更大尺寸的姿态</p><h3 id="Spatial-Temporal-Transformer"><a href="#Spatial-Temporal-Transformer" class="headerlink" title="Spatial-Temporal Transformer"></a>Spatial-Temporal Transformer</h3><p>与以前基于RNN或CNN的框架不同，transformer采用了自监督和序列输入结构，适合姿态的规则性学习。</p><p>然而，正常的Transformer模型计算复杂度随着关节数和姿态数增加呈指数增长。本文将注意力机制划分为空间和时间两部分以减少计算复杂度。称这种变型为Spatial-Temporal Transformer (STT)。</p><h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p><img src="https://img-blog.csdnimg.cn/img_convert/6cafa6f84f22deea70bfb8ab25dd3312.png" alt="img"></p><p>本文还观察到，序列建模使用RNN在应用ME时实际上会导致性能下降（-3.84%）。说明基于RNN的模型实际上限制了此类运动表示的性能增益。与STT相比，RNN模型重建姿态时，即使是正常样本，也会出现较大偏差。而这样的偏差实际上掩盖了由运动先验带来的正常和异常之间的区别。总之，运动表示和有效的序列建模对于基于姿态的视频异常检测来说都是重要且不可或缺的。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Regularity-Learning-via-Explicit-Distribution-Modeling-for-Skeletal-Video-Anomaly-Detection&quot;&gt;&lt;a href=&quot;#Regularity-Learning-via-Expli
+      
+    
+    </summary>
+    
+    
+      <category term="Paper" scheme="http://yoursite.com/categories/Paper/"/>
+    
+    
+      <category term="Paper" scheme="http://yoursite.com/tags/Paper/"/>
+    
+      <category term="AnomalyDetection" scheme="http://yoursite.com/tags/AnomalyDetection/"/>
+    
+  </entry>
   
   <entry>
     <title>Learning Memory-guided Normality for Anomaly Detection</title>
@@ -544,34 +572,6 @@
       <category term="MIX" scheme="http://yoursite.com/tags/MIX/"/>
     
       <category term="BigData" scheme="http://yoursite.com/tags/BigData/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>读书笔记——被讨厌的勇气</title>
-    <link href="http://yoursite.com/2021/05/28/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E8%A2%AB%E8%AE%A8%E5%8E%8C%E7%9A%84%E5%8B%87%E6%B0%94/"/>
-    <id>http://yoursite.com/2021/05/28/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E8%A2%AB%E8%AE%A8%E5%8E%8C%E7%9A%84%E5%8B%87%E6%B0%94/</id>
-    <published>2021-05-28T08:38:22.000Z</published>
-    <updated>2021-08-03T08:17:13.691Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="https://m.media-amazon.com/images/I/41BuHsbPZBL.jpg" align="center"></p><blockquote><p>作者: <a href="https://book.douban.com/search/岸见一郎" target="_blank" rel="noopener">岸见一郎</a> / <a href="https://book.douban.com/search/古贺史健" target="_blank" rel="noopener">古贺史健</a><br>出版社: 机械工业出版社<br>副标题: “自我启发之父”阿德勒的哲学课<br>原作名: 嫌われる勇気：自己啓発の源流「アドラー」の教え<br>译者: <a href="https://book.douban.com/search/渠海霞" target="_blank" rel="noopener">渠海霞</a><br>出版年: 2015-3-1<br>ISBN: 9787111495482</p></blockquote><div class="note info"><p>210515</p></div><p><strong>⭕️ “生活给我们各种束缚，表面上看起来，这些束缚是时间的、金钱的、人际关系的，但实际上，这些束缚是心灵的。阿德勒的整个理论体系，都在试图把人从这种束缚中解脱出来，让人重获心灵自由”</strong></p><p><strong>⭕️ 保持年轻的心态，令人生“只若初见”</strong></p><p><strong>⭕️  “人并不是住在客观的世界，而是住在自己营造的主观世界里”</strong></p><div class="note info"><p>210516</p></div><p><strong>⭕️ 阿德勒心理学考虑的不是过去的“原因”，而是现在的“目的”。</strong></p><p><strong>⭕️ 我们给过去的经历“赋予了什么样的意义”，这直接决定了我们的生活。人生不是由别人赋予的，而是由自己选择的，是自己选择自己如何生活。</strong></p><div class="note info"><p>210519</p></div><p><strong>⭕️ “人的烦恼皆源于人际关系。”这是阿德勒心理学的一个基本概念。如果这个世界没有人际关系，如果这个宇宙中没有他人只有自己，那么一切烦恼也都将消失”</strong></p><p><strong>⭕️ “自卑情结是指把自己的自卑感当作某种借口使用的状态。具体就像“我因为学历低所以无法成功”或者“我因为长得不漂亮所以结不了婚”之类的想法。”</strong></p><p><strong>⭕️ “健全的自卑感不是来自与别人的比较，而是来自与“理想的自己”的比较。”</strong></p><p><strong>⭕️ “行为方面的目标有“自立”和“与社会和谐共处”这两点。”</strong></p><p><strong>⭕️ “工作上的人际关系可以说门槛最低。工作上的人际关系因为有着成果这一简单易懂的共通目标，即使有些不投缘也可以合作或者说必须合作；而且，因“工作”这一点结成的关系，在下班或者转行后就又可以变回他人关系”</strong></p><p><strong>⭕️ “请你这样想，如果在一起感到苦闷或者紧张，那即使是恋爱关系也不能称之为爱。当人能够感觉到“与这个人在一起可以无拘无束”的时候，才能够体会到爱。既没有自卑感也不必炫耀优越性，能够保持一种平静而自然的状态。真正的爱应该是这样的。”</strong></p><div class="note info"><p>210523</p></div><p><strong>⭕️ “认可欲求”，人际关系的烦恼都集中在这一点上。我们在活着时常需要得到他人的认可。正因为对方不是令人讨厌的“敌人”，所以才想要得到那个人的认可！对，我就是想要得到父母的认可！”</strong></p><p><strong>⭕️ “在犹太教教义中有这么一句话：“倘若自己都不为自己活出自己的人生，那还有谁会为自己而活呢？”</strong></p><p><strong>⭕️ “我的建议是这样。首先要思考一下“这是谁的课题”。然后进行课题分离——哪些是自己的课题，哪些是别人的课题，要冷静地划清界限。”</strong></p><p><strong>⭕️ “阿德勒心理学中有反常识的方面”</strong></p><p><strong>⭕️ “选择了不自由生活方式的大人看着自由活在当下的年轻人就会批判其“享乐主义”。当然，这其实是为了让自己接受不自由生活而捏造出的一种人生谎言。选择了真正自由的大人就不会说这样的话，相反还会鼓励年轻人要勇于争取自由。”</strong></p><p><strong>⭕️“不畏惧被人讨厌而是勇往直前，不随波逐流而是激流勇进，这才是对人而言的自由。”</strong></p><div class="note info"><p>210524</p></div><p><strong>⭕️ “把他人看作伙伴并能够从中感到“自己有位置”的状态，就叫共同体感觉”</strong></p><p><strong>⭕️ “共同体感觉是幸福的人际关系的最重要的指标”</strong></p><p><strong>⭕️ “请你考虑一下认可欲求的实质——他人如何关注自己、如何评价自己？又在多大程度上满足自己的欲求？受这种认可欲求束缚的人看似在看着他人，但实际上眼里却只有自己。失去了对他人的关心而只关心“我”，也就是以自我为中心。”</strong></p><p><strong>⭕️ “抱着自己位于世界中心这种信念的人很快就会失去“朋友”</strong></p><p><strong>⭕️ “例如，人怎样才能够获得“勇气”？阿德勒的见解是：人只有在能够感觉自己有价值的时候才可以获得勇气”</strong></p><div class="note info"><p>210527</p></div><p><strong>⭕️ “自我意识总是牵绊着自己、严重束缚着自己的言行。我的自我意识根本不允许自己无拘无束地行动。”</strong></p><p><strong>⭕️ “首先，真诚地接受不能交换的“这个我”，这就是自我接纳。同时，对他人寄予无条件的信赖即他者信赖。”</strong></p><p><strong>⭕️ 行为方面的目标</strong></p><ul><li><strong>自立</strong></li><li><strong>与社会和谐共处</strong></li></ul><p><strong>⭕️ 支撑这种行为的心理方面的目标</strong></p><ul><li><strong>“我有能力”的意识。</strong></li><li><strong>“人人都是我的伙伴”的意识。”</strong></li></ul><p><strong>⭕️ “具有神经质生活方式的人常常使用“大家”“总是”或者“一切”之类的词语。“大家都讨厌自己”“总是只有自己受损失”或者“一切都不对”等。如果你常常说这种一般化的词语，那就需要注意了。”</strong></p><p><strong>⭕️ “缺乏人生和谐的人就会只关注讨厌自己的那个人来判断“世界”。”</strong></p><p><strong>⭕️ “口吃为什么会很痛苦呢？阿德勒心理学认为苦恼于口吃的人只关心“自己的说话方式”，从而感到自卑和痛苦。因此，自我意识就会变得过剩，说话也会更加不顺畅。”</strong></p><p><strong>⭕️ “是的。笑话别人口吃的人只是极少数。用刚才的话说，充其量就是“10人中的1人”。并且，采取这种嘲笑态度的愚蠢的人，我们可以主动与其切断关系。但是，如果缺乏人生和谐，那就会只关注这1个人，并认为“大家都嘲笑我”。”</strong></p><p><strong>⭕️ “只考虑公司的工作，那是一种缺乏人生和谐的生活方式。”</strong></p><p><strong>⭕️ “获得贡献感的手段一旦成了“被他人认可”，最终就不得不按照他人的愿望来过自己的人生。通过认可欲求获得的贡献感没有自由。但我们人类是在选择自由的同时也在追求幸福。”</strong></p><p><strong>⭕️ “无论是希望特别优秀还是希望特别差劲，其目的都一样——引起他人的关注、脱离“普通”状态、成为“特别的存在”。这就是他们的目的。”</strong></p><p><strong>⭕️ “自我接纳就是其中的重要一步。如果你能够拥有“甘于平凡的勇气”，那么对世界的看法也会截然不同。”</strong></p><p><strong>⭕️ “想要到达目的地的人生可以称为“潜在性的人生”。与此相对，我所说的像跳舞一样的人生则可以称为“现实性的人生”。”</strong></p><p><strong>⭕️ “最重要的是“此时此刻”</strong></p><div class="note info"><p>210528</p></div><p>⭕️ <strong>“人生并不存在可以作为常识来讲的意义”</strong></p><p><strong>⭕️ “哲学真正的意义不在于“知识”而在于“热爱知识”，想要了解不了解的事物以及获得知识的过程非常重要。”</strong></p><p><strong>⭕️ “如果有人认为难以接纳阿德勒思想，那是因为这种思想是反常识观点的集大成者，而且要想理解它也需要日常生活中的实践；”</strong></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;&lt;img src=&quot;https://m.media-amazon.com/images/I/41BuHsbPZBL.jpg&quot; align=&quot;center&quot;&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;作者: &lt;a href=&quot;https://book.douban.com/s
-      
-    
-    </summary>
-    
-    
-      <category term="Reading" scheme="http://yoursite.com/categories/Reading/"/>
-    
-    
-      <category term="Reading" scheme="http://yoursite.com/tags/Reading/"/>
     
   </entry>
   
